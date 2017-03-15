@@ -166,6 +166,37 @@
 \makeatother
 
 \makeatletter
+\newcommand{\fswideflex}[4][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{#4}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
 \newcommand{\fswider}[3][]{
   \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
     \def\height{1.75}
@@ -703,7 +734,7 @@ that is, $e^{iλπ}$ is an eigenvalues of $U_p$. We have the following result.
 
 
 
-\section{Abelian anyons}
+\section{Abelian anyons}\label{sec:statistical repulsion abelian ayons}
 
 Although non-Abelian anyons are the main focus of this thesis, we give a quick overview of the the case of Abelian anyons. For more details, see \cite{lundholm-solovej}
 % In full generality for abelian anyons we have the following.
@@ -997,7 +1028,7 @@ We can thus think of the basis as consisting TODO: Clarify. of a tuples of possi
   (b_1, b_2, \ldots, b_{n-2}).
 \end{align*}
 
-TODO: Mention explicitly that we are representing all this with $\mathbb{C}^n$ matrices and how to map back and forth, and then ignore it.
+TODO: Mention explicitly that we are representing all this with $\mathbb{C}^n$ matrices and how to map back and forth.
 
 The real advantage of writing fusions states with fusion diagrams is that braiding is much easier to represent. This will be extremely useful now as we proceed in developing the abstract model for anyons, and characterize braiding.
 
@@ -1098,10 +1129,12 @@ We shall now consider braiding on the standard fusion states. This can be realiz
   &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \fsfused{a}{b}{c}{d}{f} \\
   &= \sum_g \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg} \fs{b,c}{a,g,d}.
 \end{align*}
-From this we define the $B$-matrix as
-\begin{align*}
-  \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg}.
-\end{align*}
+From this we define the $B$-matrix
+\begin{definition}\label{def:B}
+  \begin{align*}
+    \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg}.
+  \end{align*}
+\end{definition}
 Symbolically we write this as
 \begin{align*}
   B = F^{-1} R F.
@@ -1648,33 +1681,26 @@ Thus, we have the following theorem.
 
 
 
-\section{Abelian anyons}
+\section{Abelian anyons in the framework of abstract anyon models}
 
-General Abelian anyons can be modeled in the framework of abstract anyon models by letting the fusion rule be given by
+In this section we show how Abelian anyons are modeled in the framework of abstract anyon models. First, note that Abelian anyons are characterized by that each fusion has a unique result, i.e.\ fusion of $a$ with $b$ results in a unique label $c$ for all $a$ and $b$,
 \begin{align*}
-  [α] × [β] = [α+β]
+  a \times b = c.
 \end{align*}
-where $[α]$ TODO.
+As a consequence of this we have that any fusion space of Abelian anyons is trivial and one-dimensional. All intermediate charges are uniquely determined by the simple fusion rules.
 
+As a first example we shall see how fermions fit in the framework of abstract anyon models. In the computations, recall that $R_{ab}^c = R_{ba}^c$. In this section we deviate from our convention and denote the trivial particle by $0$ while $1$ denotes a non-trivial label.
+
+\begin{example}[Fermions as an Abelian abstract anyon model]
+  Let the set of anyonic charges be $\mathbb{Z}_2 = \{0, 1\}$, the trivial vacuum particle $0$ and one non-trivial particle $1$, with corresponding fusion corresponding to addition in $\mathbb{Z}_2$, in particular
   \begin{align*}
-    R_{ab}^{a+b} = e^{i(a+b)π}
+    1 × 1 = 0.
   \end{align*}
-
-TODO: Show $F \equiv 1$.
-
-As an example we shall see how fermions fit in the framework of abstract anyon models.
- 
-\begin{example}[Fermins as an Abelian abstract anyon model]
-  Let the set of anyonic charges be $\mathbb{Z}_2 = \{[0], [1]\}$, the trivial vacuum particle $[0]$ and one non-trivial particle $[1]$, with corresponding fusion rules
-  \begin{align*}
-    [1] × [1] = [0].
-  \end{align*}
-  For simplicity, we drop the $[\cdot]$ brackets.
-  As we've seen $F_{abc}^{a+b+c} = 1$ for all $a, b$ and $c$. Thus, the pentagon equation \cref{eq:pentagon} is trival and the hexagon equation \cref{eq:hexagon} reduces to
+  Since the fusion spaces are trivial, we take $F_{abc}^{a+b+c} = 1$ for all $a, b$ and $c$. Thus, the pentagon equation \cref{eq:pentagon} is trivial and the hexagon equation \cref{eq:hexagon} reduces to
   \begin{align*}
     % R_{ab}^{a+b} R_{ac}^{a+c} = \sum_d R_{ad}^{b+c}.
-    R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e &= \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e
-    \iff \\
+    R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e &= \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e \\
+    \iff
     R_{ac}^{a+c} R_{ab}^{a+b} &= \sum_{f} R_{af}^{a+b+c}.
   \end{align*}
   We have $d = a + b + c$ from the $F$ symbol $\left(F_{bac}^d\right)$, this gives $a + f = a + b + c$, i.e.\ $f = b + c$. The hexagon equation is thus reduced to
@@ -1685,21 +1711,105 @@ As an example we shall see how fermions fit in the framework of abstract anyon m
   \begin{align*}
     R_{11}^{0} R_{11}^{0} = 1 \quad \iff \quad R_{11}^{0} = ±1.
   \end{align*}
+  Thus, the chosen model, i.e.\ charges and fusion modeled by $\mathbb{Z}_2$ gives two distinct abelian anyon models which we parametrize by $n = 0, 1$ so that we have
+  \begin{align*}
+    R_{11}^0 = e^{inπ}.
+  \end{align*}
+  We denote these two models by $\mathbb{Z}_2^{(n)}$ for $n = 0, 1$. In conclusion, we see that fermions are modeled by $\mathbb{Z}_2^{(1)}$.
 \end{example}
 
-$c = pα$
+In the above example we considered fusion modeled by $\mathbb{Z}_2$ and saw that this gives rise to two distinct models. Before stating the general result, we first extend the example to see more clearly how the hexagon equation determines the $R$ matrices.
+
+\begin{example}[$\mathbb{Z}_3^{(n)}$]
+  Let fusion be modeled on $\mathbb{Z}_3$, so that the the charge label set is $\mathbb{Z}_3 = \{0, 1, 2\}$ and fusion is given by addition modulo 3,
+  \begin{align*}
+    a \times b = [a + b]_3.
+  \end{align*}
+  The only non-trivial instances of the hexagon equation are
+  \begin{align*}
+    \left( R_{11}^2 \right)^2 &= R_{12}^0 \\
+    \left( R_{12}^2 \right)^2 &= R_{11}^2 \\
+    \left( R_{22}^1 \right)^2 &= R_{12}^2 \\
+    R_{11}^2 R_{12}^0 &= 1 \\
+    R_{12}^0 R_{22}^1 &= 1.
+  \end{align*}
+  The first two equations combined give $\left( R_{11}^2 \right)^3 = 1 \iff R_{11}^2 = e^{i2πn/3}$. Each of the three solutions for $R_{11}^2$, corresponding to $n = 0, 1, 2$ give a solution for $R_{12}^2$ and $R_{22}^1$. This gives rise to three distinct models:
+  \begin{itemize}
+    \item $\mathbb{Z}_3^{(0)}$: The trivial solution $R_{ab}^{a+b} \equiv 1$ for all $a, b$.
+    \item $\mathbb{Z}_3^{(1)}$: Take $R_{11}^2 = e^{i2π/3}$, the fourth equation gives $R_{12}^0 = e^{i4π/3}$ and the fifth equation gives $R_{22}^1 = e^{i2π/3}$.
+    \item $\mathbb{Z}_3^{(2)}$: Take $R_{11}^2 = e^{i4π/3}$, the fourth equation gives $R_{12}^0 = e^{i2π/3}$ and the fifth equation gives $R_{22}^1 = e^{i2π/3}$.
+  \end{itemize}
+  The possible solutions can be compactly written as
+  \begin{align*}
+    R_{ab}^{a+b} = e^{i\frac{2πn}{3}ab}
+  \end{align*}
+\end{example}
+
+Indeed, the more general result holds, discussed further in \cite{bonderson}, motivating the following definition.
+
+\begin{definition}
+  The Abelian model $\mathbb{Z}_N^{(n)}$ is given by taking the charge label set to be $\mathbb{Z}_N$ and fusion given by addition modulo $N$,
+  \begin{align*}
+    a \times b = [a + b]_N.
+  \end{align*}
+  In this model we have
+  \begin{align}
+    \label{eq:abelian F}
+    F_{abc}^{a+b+c} &\equiv 1 \\
+    \label{eq:abelian R}
+    R_{ab}^{a+b} &= e^{i\frac{2πn}{N}ab}.
+  \end{align}
+  By \cref{def:B} we thus have
+  \begin{align}\label{eq:abelian B}
+    B_{abc}^{a+b+c} = R_{bc}^{b+c},
+  \end{align}
+  note that the left charge $a$ does not enter the expression.
+\end{definition}
+
+Consider $\mathbb{Z}_N^{(n)}$ and the fusion space $\widetilde{V}_{1^m}$ which now is one-dimensional containing one standard fusion state
 \begin{align*}
-  \fswide{α,c,α}{1,α,(p+1)α,(p+2)α}
+  \fswideflex{1,1}{a,a+1,a+2}{3} \ldots \fswideflex{1,1}{a+m-1,a+m,a+m+1}{5}
 \end{align*}
+where $a$ is any charge in $\mathbb{Z}_N$ representing the fact that the $m$ considered anyons may be part of a larger set of anyons. In \cref{res:sigma j is B} we showed
+\begin{align}
+  ρ(σ_j) = B_{b_{j-2} a_j a_{j+1}}^{b_j}.
+\end{align}
+\Cref{eq:abelian B,eq:abelian R} reduces this to
+\begin{align}
+  ρ(σ_j) = R_{11}^2 = e^{i\frac{2πn}{N}}
+\end{align}
+for all $j$. This precisely models Abelian anyons with anyonic phase $α = \frac{2n}{N}$, i.e.\ any fractional phase. What we have obtained here precisely corresponds to the discussion of Abelian anyons in \cref{sec:statistical repulsion abelian ayons} which was treated before we had the general framework of abstract anyon models.
 
-
-\begin{align*}
-  U_p = (2p+1)α
-\end{align*}
-
-
-
-
+Furthermore, in the fusion space $\widetilde{V}_{1^m}$ of the $\mathbb{Z}_N^{(n)}$ model, the exchange operator $U_p$ is
+\begin{equation}
+  \begin{aligned}
+    U_p &=
+    ρ(σ_1) ρ(σ_2) \cdots ρ(σ_p) ρ(σ_{p+1}) ρ(σ_p) \cdots ρ(σ_2) ρ(σ_1) \\
+    &= \left( ρ(σ_1) \right)^{2p+1} = e^{i(2p+1)α}.
+  \end{aligned}
+\end{equation}
+\Cref{thm:general Up} is clearly not needed in the Abelian case, we instantly have all information of $U_p$. However, \cref{thm:general Up} still applies, first change basis to the fused basis
+\begin{gather*}
+  \fswideflex{1,1}{a,a+1,a+2}{3} \cdots \fswideflex{1,1}{a+p+1,a+p+2,a+p+3}{5} \\
+  \xmapsto{F}
+  \fswideflex{1,p,1}{a,a+1,a+p+1,a+p+2}{5}
+\end{gather*}
+and \cref{thm:general Up} gives
+\begin{align}
+  U_p \left( \fs{1,c,1}{a,b,d,e} \right) =
+  \sum_{f} \left( B_{act}^d \right)_{bf}
+  \sum_{g} \left( B_{ftt}^e \right)_{dg}
+  \sum_{h} \left( B_{at c}^g \right)_{fh}
+  \fs{1,c,1}{a,h,g,e}.
+\end{align}
+As we've seen, the intermediate charges play no role, indeed the fusion space is one dimensional. In the $\mathbb{Z}_N^{(n)}$model this expression for $U_p$ immediately reduces to
+\begin{align}
+  U_p =
+  R_{c1} R_{11} R_{1c} =
+  e^{ipαπ} e^{iαπ} e^{ipαπ} =
+  e^{i(2p+1)απ}
+\end{align}
+as expected.
 
 
 
