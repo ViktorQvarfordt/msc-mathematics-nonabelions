@@ -1,0 +1,3225 @@
+\documentclass[a4paper,10pt,oneside]{book}
+
+%% Packages order is important
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[left=3.175cm, marginparwidth=2.825cm, marginparsep=3mm]{geometry}
+%\usepackage{marginnote}
+%\reversemarginpar
+\usepackage{lastpage}
+
+\usepackage[hidelinks,unicode=true]{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathdots}
+\usepackage{bbm}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{braids}
+\usepackage{xifthen}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{cleveref}
+
+
+\setlength{\marginparwidth}{3.5cm}
+
+% \usepackage{showkeys}
+% Enable showkeys for \cref and \Cref
+% tex.stackexchange.com/questions/139698/usiong-showkes-and-cleveref-together
+% \makeatletter
+%   \SK@def\cref#1{\SK@\SK@@ref{#1}\SK@cref{#1}}%
+%   \SK@def\Cref#1{\SK@\SK@@ref{#1}\SK@Cref{#1}}%
+% \makeatother
+% \renewcommand*\showkeyslabelformat[1]{%
+%   \parbox[t]{\marginparwidth}{\raggedright\normalfont\footnotesize\ttfamily#1}}
+
+% \usepackage{showlabels}
+% \showlabels{cite}
+% \showlabels{eqref}
+% \showlabels{cref}
+% \showlabels{bibitem}
+% \renewcommand*\showlabelsetlabel[1]{%
+%   \parbox[t]{\marginparwidth}{\raggedright\normalfont\footnotesize\ttfamily#1}}
+
+
+
+%% Theorems
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+
+%% Macros
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\bm}[1]{\boldsymbol{\mathbf{#1}}}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+
+\usepackage{newunicodechar}
+
+\newunicodechar{α}{\alpha}
+\newunicodechar{β}{\beta}
+\newunicodechar{ρ}{\rho}
+\newunicodechar{σ}{\sigma}
+\newunicodechar{τ}{\tau}
+\newunicodechar{π}{\pi}
+\newunicodechar{θ}{\theta}
+\newunicodechar{λ}{\lambda}
+\newunicodechar{₁}{_1}
+\newunicodechar{ⱼ}{_j}
+\newunicodechar{ₙ}{_n}
+\newunicodechar{ₚ}{_p}
+\newunicodechar{ⁿ}{^n}
+\newunicodechar{×}{\times}
+\newunicodechar{±}{\pm}
+\newunicodechar{⊕}{\oplus}
+
+
+
+\DeclareMathOperator{\Fib}{Fib}
+
+\newcommand*\centermathcell[1]{\omit\hfil$\displaystyle#1$\hfil\ignorespaces}
+\newcommand{\centermath}[1]{\par\centerline{\begin{minipage}{\linewidth}#1\end{minipage}}\par}
+
+% BEGIN FUSION STATE DIAGRAM \fs
+\makeatletter
+\newcounter{mycounter}
+\newcommand{\fs}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.5}
+    \def\offset{0.5}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid at (\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\value{mycounter}, \height) to (\value{mycounter}, 0);
+        }
+      }
+      \node at (\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\value{mycounter}+1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\value{mycounter}+0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
+\newcommand{\fswide}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{2}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
+\newcommand{\fswider}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{3}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\newcommand{\fsfused}[5]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \draw (0.5, 0) to (2.5, 0);
+    \draw (1, \height) to [bend left=-30] (1.5, 1);
+    \draw (2, \height) to [bend left=30] (1.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \node at (0.75, -0.6) {$#1$};
+    \node at (2.25, -0.6) {$#4$};
+    \node at (2, 0.7) {$#5$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfusedUp}[9]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \node at (0, 1.5+0.5) {$#1$};
+    \node at (1, 2.5+0.5) {$#2$};
+    \node at (2, 2.5+0.5) {$#3$};
+    \node at (3, 1.5+0.5) {$#4$};
+    \draw (-1, 0) to (4, 0); % horizontal
+    \draw (1, 2.5) to [bend left=-30] (1.5, 1.5);
+    \draw (2, 2.5) to [bend left=30]  (1.5, 1.5);
+    \draw (1.5, 1.5) to (1.5, 0); % vertical under bend
+    \draw (0,   1.5) to (0,   0); % vertical non-bend
+    \draw (3,   1.5) to (3,   0); % vertical non-bend
+    \node at (-0.75, -0.6) {$#5$};
+    \node at (0.75, -0.6) {$#6$};
+    \node at (2, 0.7) {$#7$};
+    \node at (2.25, -0.6) {$#8$};
+    \node at (3.75, -0.6) {$#9$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfuseddouble}[9]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \node at (3, \height+\offset) {$#6$};
+    \node at (4, \height+\offset) {$#7$};
+    \draw (0.5, 0) to (4.5, 0);
+    \draw (1, \height) to [bend left=-30] (1.5, 1);
+    \draw (2, \height) to [bend left=30]  (1.5, 1);
+    \draw (3, \height) to [bend left=-30] (3.5, 1);
+    \draw (4, \height) to [bend left=30]  (3.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \draw (3.5, 1) to (3.5, 0);
+    \node at (2,     0.5) {$#4$};
+    \node at (0.75, -0.6) {$#1$};
+    \node at (2.5,    -0.6) {$#5$};
+    \node at (4,     0.5) {$#8$};
+    \node at (4.25, -0.6) {$#9$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfusedbraided}[5]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{3}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \braid at (1, \height) s_1^{-1};
+    \draw (0.5, 0) to (2.5, 0);
+    \draw (1, 1.5) to [bend left=-30] (1.5, 1);
+    \draw (2, 1.5) to [bend left=30] (1.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \node at (0.5, -0.6) {$#1$};
+    \node at (2.5, -0.6) {$#4$};
+    \node at (2, 0.7) {$#5$};
+  \end{tikzpicture}
+}
+
+% END FUSION STATE DIAGRAM
+
+\begin{document}
+
+\title{Non-Abelian Anyons:\\Statistical Repulsion and\\Topological Quantum Computation}
+\author{Viktor Qvarfordt}
+\newdateformat{isodate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
+\date{\isodate\today\ \currenttime}
+\maketitle
+\tableofcontents
+\newpage
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Introduction}
+
+\chapter{How anyons arise}\label{chap:how anyons arise}
+
+\section{Particle statistics}
+
+\section{The braid group}\label{sec:braid group}
+
+The braid group $B_n$ (representing braids on $n$ strands) is the group with generators $σ_1, \ldots, σ_{n-1}$ and relations
+\begin{subequations}
+\label{eq:braid relations}
+  \begin{align}
+    \label{eq:braid relation 1}
+    σ_i σ_j &= σ_j σ_i \quad\text{if}\quad |i-j| \ge 2, \\
+    \label{eq:braid relation 2}
+    σ_i σ_{i+1} σ_i &= σ_{i+1} σ_i σ_{i+1}.
+  \end{align}
+\end{subequations}
+
+\begin{lemma}\label{res:braid generator conjugate}
+  All generators of the braid group are conjugate.
+\end{lemma}
+\begin{proof}
+  First, $σ_i$ is conjugate to $σ_{i+1}$ for all $i$, as seen by
+  \begin{align*}
+    (σ_i σ_{i+1}) σ_i (σ_i σ_{i+1})^{-1}
+    &= (σ_i σ_{i+1} σ_i) σ_{i+1}^{-1} σ_i^{-1} \\
+    [\text{\cref{eq:braid relation 2}}] &= (σ_{i+1} σ_i σ_{i+1}) σ_{i+1}^{-1} σ_i^{-1} \\
+    &= σ_{i+1} σ_i σ_i^{-1} \\
+    &= σ_{i+1}.
+  \end{align*}
+  Finally, conjugation is transitive, thus all braid generators are conjugate.
+\end{proof}
+
+\begin{definition}
+  TODO
+  \begin{align*}
+    U_p = σ_1 σ_2 \cdots σ_p σ_{p+1} σ_p \cdots σ_2 σ_1,
+  \end{align*}
+\end{definition}
+
+\section{Representation theory}
+
+\section{Physical realizability}
+
+\section{Anyons with or without quantum kinetic energy}
+
+Interferometry Bonderson.
+
+Wavefunction density Lundholm.
+
+
+
+% { % Parsa intro knots
+% Non-trivial knots exist only in three dimensions. If the number of dimensions are fewer it is impossible to form a knot on a strand
+
+% ``Any fewer dimensions, and it is impossible to form a knot in a strand, since there is no “under” or “over,” just “next to.” Any more dimensions and there is too much spatial freedom, which will make knots unravel, since one can always move one strand past another by pushing it into one of the extra dimensions, where it may pass unhindered.''
+% }
+
+% \vspace{0.5cm}
+% \hrule
+% \vspace{0.5cm}
+% Statistics in two (and three) dimensions
+% \vspace{0.5cm}
+
+
+% { % Parsa intro config space
+% Consider $n$ identical quantum mechanical particles on a spatial manifold $M$.
+% % If the particles are allowed to occupy the same point in space the exchange statistics is trivial, such particles are called Bosons.
+% The corresponding configuration space is defined as
+% \begin{align*}
+%   \mathcal{C}_n = \frac{M^n - \Delta_n}{S_n}.
+% \end{align*}
+% By removing the set
+% \begin{align*}
+%   \Delta_n = \{(x_1,\ldots,x_n) \in M^n \mid x_i = x_j \text{ for some } i, j\}
+% \end{align*}
+% of configurations where particles occupy the same point in space (known as a ``hard-core'' condition) we allow for non-trivial exchange statistics (as we shall shortly see). Without this condition we get bosons. To model the fact that the particles are identical, we form the quotient of $M^n - \Delta_n$ by the symmetric group $S_n$, in this way all permutations of the $n$ particles are considered to be the same configuration.
+
+% \vspace{0.5cm}
+% \hrule
+% \vspace{0.5cm}
+
+% \textbf{Motivering för att studera fundamentalgruppen} The state of a quantum system is described by a wave function $\psi$ defined as a section of the vector bundle with fiber $h$ over the configuration space $\mathcal{C}$, where $h$ is a Hilbert space over $\mathbb{C}$. We take $h$ to be finite dimensional, i.e. $h = \mathbb{C}^k$, where $k$ can be seen as the number internal degrees of freedom of the quantum system.
+% % Example of infinite dimensional is the landau states; free electron in constant magnetic field.
+% Locally, the wave function is a function $\mathcal{C} \to \mathbb{C}^k$.
+
+% Evolution of a quantum system is described by unitary transformations.
+
+% \vspace{0.5cm}
+% \hrule
+% \vspace{0.5cm}
+
+
+% Consider an exchange of particles, that is, take $n$ identical particles on $M$ with given positions and move them around until they are back at some permutation of the original positions. Such an exchange is described by a loop in the configuration space $\mathcal{C}^n$. More precisely, a loop $\alpha(t)$ in $\mathcal{C}^n\times[0,1]$, where $t \in [0,1]$ is considered as the time parameter, corresponds to world-lines of particle trajectories in $M\times[0,1]$. The corresponding world-lines are constructed by choosing a representative of $\alpha(t)$ in $M^n\times[0,1]$ and then projecting the coordinates of each particle into $M\times[0,1]$.
+
+% In this way, each loop in $\mathcal{C}^n$ corresponds a classical motion of the particles along world-lines starting and ending in the same configuration. The corresponding quantum mechanical dynamics is obtained by quantizing the system via the path integral formulation \cite{feynmann path integral,nakahara}. In this model, the contributions can be split into homotopically inequivalent ... \cite{feynmann path integrals indistinguishable particles}
+
+% \hrule
+
+% ... Proofs of these results can be found in \cite{oskar} and \cite{configuration spaces}
+
+
+% \subsection{Example: Exchange of two identical particles in a flat geometry}
+
+% The configuration space of $n = 2$ identical particles (with hard-core condition) in $\mathbb{R}^m$ is given by
+% \begin{align*}
+%   \mathcal{C} = \frac{(\R^m)^2 - \Delta}{S_2}.
+% \end{align*}
+% The space $(\R^m)^2$ can be factored as $\R^m_\text{cm} \times \R^m_\text{rel}$ where $\R^m_\text{cm}$ gives the coordinates of the center of mass for the two particles and $\R^m_\text{rel}$ gives the relative coordinate of the two particles. Let $x_1, x_2 \in \R^m$ be the (absolute) coordinates of the two particles, so that $x = (x_1, x_2) \in \mathcal{C}$. We then define
+% \begin{align*}
+%   x_\text{cm} = \frac{1}{2}(x_1 + x_2), \quad
+%   x_\text{rel} = \frac{1}{2}(x_1 - x_2).
+% \end{align*}
+% Now, $\Delta = \{(x_1, x_2) \in (\R^m)^2 \mid x_1 = x_2\}$ is precisely the origin of $\R^m_\text{rel}$.
+% Furthermore, quotiening with $S_2$ corresponds to quotiening with the equivalence relation $x_\text{rel} \sim x_\text{rel}' \iff x_\text{rel} = - x_\text{rel}'$. Thus we have
+% \begin{align*}
+%   \mathcal{C} = \R^m_\text{cm} \times \underbrace{(\R^m_\text{rel} - \{0\}) / \sim}_{\mathcal{C}_\text{rel}}
+% \end{align*}
+% where we see that the center of mass enters as a gauge freedom, it contributes trivially to the topology of the configuration space.
+
+% The real projective $m$-space is defined as
+% \begin{align*}
+%   \R\mathbb{P}^m = (\R^{m+1}-\{0\})/\sim_\text{proj}, \quad x \sim_\text{proj} y \iff \exists λ \ne 0 : x = λ y,
+% \end{align*}
+% thus we have
+% \begin{align*}
+%   \mathcal{C}_\text{rel} \cong \R_+ \times \R\mathbb{P}^{m-1}.
+% \end{align*}
+% Since the fundamental group has the property that $π_1(X\times Y) \cong π_1(X) \times π_1(Y)$ for path connected spaces $X$ and $Y$ we have
+% \begin{align*}
+%   π_1(\mathcal{C}) = π_1(\R\mathbb{P}^{m-1}) =
+%   \begin{cases}
+%     \Z & m = 2 \\
+%     \Z_2 & m \ge 3
+%   \end{cases}
+% \end{align*}
+
+% In two dimensions $m=2$, the space $\mathcal{C}_\text{rel}$ can be though of as the half plane $\R^2_{y \ge 0} - \{ 0 \}$ with $x$ and $-x$ identified, or geometrically as a punctured cone.
+
+
+
+
+% \vspace{0.5cm}
+% \hrule
+% \vspace{0.5cm}
+
+% \textbf{Higher dimensional representations of $S_n$}
+
+% Higher-dimensional realizations of $S_n$ give rise to particles called plektons. \cite{fröhlich} avsnitt 1.6 och mer ingående i avsnitt 3.
+
+
+% \vspace{0.5cm}
+% \hrule
+% \vspace{0.5cm}
+
+
+
+% TODO: Describe with $\ket{\psi_1}\ket{\psi_2} = e^{i\theta} \ket{\psi_2}\ket{\psi_1}$
+
+
+% ...to study properties of anyons, more specifically non-abelian anyons. We shall presently describe precisely what exactly an anyon is.
+
+% ..the focus is twofold; anyons localized and trapped in a potential allowing us to move the anyons in a controlled manner. and consider how quantum computation and quantum memory can be realized in the topological properties of anyons. Free anyons give rise to an exclusion principle, similar to that of fermions.
+
+% Let us now define exactly what is meant by an anyon. We begin with the simplest case, abelian anyons
+
+
+% \section{Gauge invariance of the anyonic phase}
+
+% All that can be observed is the difference in phase when two particles have been winded around each other. How the phase is affected before the particles meet is non-physical, we are free to choose this so long as the choice respects the result of a complete winding of particles; this is a gauge invarianve.
+
+
+% \section{The Aharonov-Bohm effect}
+
+% Electron beam split around a localized magnetic field (a solenoid) gives rise to interference of the merged beams, showing that the split beams acquire different phases as they pass around the magnetic field.
+
+% \url{http://mafija.fmf.uni-lj.si/seminar/files/2010_2011/seminar_aharonov.pdf}
+
+% \begin{itemize}
+%   \item 2D vs 3D, the point of view that quantum mechanics shows ``what information is available''. Particles are fundamentally 3D...
+% \end{itemize}
+
+
+% \section{Global and relative phase of quantum states} % OK
+
+% The two quantum states $\ket{\psi}$ and $e^{i\varphi}\ket{\psi}$ represent the same physical state. The phase $\varphi$ of the second state is not physical, it is not measurable, it cannot influence any phenomenon, such a phase is called a global phase. A common misconception is that the global phase can be measured by forming a superposition state: Consider the two states $\ket{\psi_1}$ and $e^{i\varphi}\ket{\psi_2}$ and form the superposition state of these two states, $\ket{\psi_1} + e^{i\varphi}\ket{\psi_2}$. It appears as though the global phase $\varphi$ is a relative phase of the superposition, a relative phase is physical and can be measured (by an interference experiment). However, this is not the case, the relative phase $\varphi$ cannot be identified with the global phase of $\ket{\psi_2}$. To see this, consider the state $e^{i\theta}\ket{\psi_1} + e^{i(\theta+\varphi)}\ket{\psi_2}$ which has the same relative phase $\varphi$ for any $\theta$, it thus manifests exactly like the state $\ket{\psi_1} + e^{i\varphi}\ket{\psi_2}$. With $\theta=-\varphi$ the relative phase is ostensibly associated with $\ket{\psi_1}$ instead. The conclusion is that the relative phase $\varphi$ cannot be identified with a global phase of either $\ket{\psi_1}$ or $\ket{\psi_2}$, it is a property of the superposition state state $\ket{\psi_1}$ superposed with $\ket{\psi_2}$.
+
+
+% \section{$SU(2)$}
+
+% The unitary group of degree $n$, denoted $U(n)$, is the group of $n \times n$ unitary matrices. The special unitary group of degree $n$, denoted $SU(n)$ is the subgroup of $U(n)$ given by requiring the matrices to have determinant 1.
+
+
+% \section{An additional internal degree of freedom}
+
+% Some particles have an internal degree of freedom, spin. Similar to this, anyons have an internal degree of freedom that gets evolved by a unitary matrix when anyons are braided.
+
+
+
+% \section{Representation theory}
+
+% \section{Particle statistics}
+
+% \section{$Uₚ$}
+
+
+
+% \section{Abelian vs non-abelian}
+
+% \url{http://arxiv.org/pdf/0910.2974v1.pdf} section B. Anyons and their properties.
+
+% \begin{align*}
+%   \psi(r,π) &= e^{iπ\alpha} \psi(r, 0) \quad\text{abelian} \\
+%   \vec{\psi}(r,π) &= U \vec{\psi}(r, 0) \quad\text{non-abelian, where $U$ is unitary}
+% \end{align*}
+% the fact that the wave function is a vector rather than scalar, can be seen as the wave function having additional internal degrees of freedom (similar to spin, which is also an internal degrees of freedom).
+
+
+
+
+
+
+
+
+% \section{Physical realizability}
+
+% Conjectured that non-abelian states in FQH liquids at filling fraction $\nu = 5/2$ and $\nu = 12/5$. \cite{TODO} \cite{wang book}
+
+% ``Braid Matrices and Quantum Gates for Ising Anyons Topological Quantum Computation'': \url{https://arxiv.org/abs/1003.1253}
+% ``The most promising non-abelian anyon is the Ising $σ$ anyon in $\nu = 5/2$ FQH liquids.'' -- \cite[sec. 7.2]{wang book}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \chapter{Exclusion principle for (non-abelian) anyons: Lieb-Thirring inequalities and lower bound for the kinetic energy}\label{chap:kinetic energy}
+\chapter{Lower bound for the kinetic energy in a gas of anyons}\label{chap:kinetic energy}
+
+This chapter gives an outline of a method to estimate lower bounds for the kinetic energy of a gas of anyons, more generally known as Lieb-Thirring inequalities. This chapter is base on \cite{lundholm-solovej}.
+
+\section{Preliminaries}
+
+Consider $N$ anyons in $\mathbb{R}^2$, with coordinate $x_1, \ldots, x_N$. This collection of anyons are described by an $N$-particle wave function $\psi \in L^2(\mathbb{R}^{2N})$, i.e. a square-integrable complex-valued function. The kinetic energy $T$ of the system of $N$ anyons is by definition
+\begin{align*} % \cite{lundholm-solovej} (3)
+  T \coloneqq \sum_{j=1}^N \int_{\mathbb{R}^{2N}} \abs{\Delta_j \psi}^2 dx
+\end{align*}
+where $\Delta_j$ acts on $x_j$.
+In order to give bounds for the kinetic energy we shall determine the kinetic energy for pairs of anyons, by factoring out the dynamics of two anyons from the system of $N$ anyons.
+
+Among the $N$ anyons, let all except two of them be fixed. Let $x_j, x_k \in \mathbb{R}^2$ denote the coordinates for the two free anyons and define
+\begin{align*}
+  x_\text{cm} = \frac{1}{2}(x_j + x_k), \quad
+  x_\text{rel} = \frac{1}{2}(x_j - x_k).
+\end{align*}
+Consider a frame of reference where the center of mass is at the origin, i.e.\ $x_\text{cm} = 0$. Let $(r, \varphi)$ be the polar coordinates for the relative coordinates $x_\text{rel}$. The $N$-particle wave function can thus be parametrized as
+\begin{align*}
+  \psi = \psi(x', r, \varphi),
+\end{align*}
+where $x'$ is the coordinates for the anyons that we considered to be fixed. If we also freeze out the radial dependence by fixing $r$, we factor out the angle-dependence from the wave function and write
+\begin{align*}
+  \psi(\varphi) \coloneqq \psi(x', r, \varphi).
+\end{align*}
+
+We shall consider the angular dynamics of the two free anyons. As the free anyons circle each other, i.e.\ as $\varphi$ increases from $0$ to $π$, a number of fixed anyons may be enclosed. As we shall see, the number of encircled anyons will play a crucial role, therefore we separate the state space $\mathbb{R}^2$ as follows.
+
+Separate the state space into open annuli (regions between two concentric circles) such that none of the fixed $N-2$ anyons are at the interior of an annulus, cf.\ \cref{fig:annuli}. This gives a separation of $\mathbb{R}^2$ into regions with increasing number $p$ of the $N-2$ fixed anyons. More explicitly, each annulus is centered in $x_\text{cm}$. Furthermore, let $r_1 \le r_2 \le \ldots \le r_{N-2}$ be the radii of the $N-2$ fixed anyons. The innermost annulus is an open disc (degenerate annulus) with radius $r_1$, the second innermost annulus is the region between circles of radius $r_1$ and $r_2$, etc. Note that the circles with radii $r_1, r_2, \ldots, r_{N-2}$ are not contained in any annuli, since the anyons cannot pass through each other, and we are considering angular motion. If the radii of two fixed anyons coincide, then there is clearly no annulus separating them.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-3.75,0) -- (3.75,0) node[below] {$x$};
+    \draw[->] (0,-3.75) -- (0,3.75) node[right] {$y$};
+    \draw (0,0) circle (1.25);
+    \draw (0,0) circle (2);
+    \draw (0,0) circle (3);
+    \node at (0.5, 0.35) {$p = 0$};
+    \node at (0.5, 1.5) {$p = 1$};
+    \node at (0.5, 2.375) {$p = 2$};
+    \node at (0.5, 3.25) {$p = 3$};
+    \node[font=\Large] at ({1.25*cos(220)}, {1.25*sin(220)}) {$\bullet$};
+    \node[font=\Large] at ({2*cos(130)}, {2*sin(130)}) {$\bullet$};
+    \node[font=\Large] at ({3*cos(-55)}, {3*sin(-55)}) {$\bullet$};
+    \node at (1.5, -0.2) {$r_1$};
+    \node at (2.25, -0.2) {$r_2$};
+    \node at (3.25, -0.2) {$r_3$};
+  \end{tikzpicture}
+  \caption{Illustration of annuli separating $\mathbb{R}^2$ into regions with increasing number $p$ of contained anyons. A blob ($\bullet$) denotes a fixed anyon. In each annulus, exchange of the two free anyons, i.e.\ as $\varphi$ increases from $0$ to $\pi$, a given number $p$ of fixed anyons will be enclosed.}
+  \label{fig:annuli}
+\end{figure}
+
+In the general case, exchange of a pair of anyons introduces an anyonic phase $U_p \in U(n)$ as discussed in \cref{chap:how anyons arise}. The exchange operator $U_p$ may depend on the number $p$ of anyons that get encircled in the exchange loop. With the wave function $\psi = \psi(\varphi)$ parametrized by the relative angular coordinate, we thus get the boundary condition
+% \begin{alignat*}{3}
+%   \psi(-r) &= U_p \psi(r), && \quad \text{at the innermost annulus, containing no fixed anyons} \\
+%   \psi(-r) &= U_p \psi(r), && \quad \text{at an annulus enclosing $p$ fixed anyons.}
+% \end{alignat*}
+% \begin{equation*}
+%   \psi(-r) = U_p \psi(r)
+% \end{equation*}
+% at an annulus enclosing $p$ anyons.
+\begin{equation}\label{U_p boundary condition}
+  \psi(π) = U_p \psi(0).
+\end{equation}
+This essentially alters the geometry of the space, splitting it in half. It suffices to consider the region $0 \le \varphi \le π$, i.e.\ it suffices to consider half annuli.
+
+We have set out to estimate the energy of the system, this amounts to solving the Schrödinger equation, in particular solving for the lowest energy $λ$,
+\begin{align*}
+  H \psi = λ \psi
+\end{align*}
+where $H = -\nabla^2 = -\frac{\partial^2}{\partial\varphi^2}$ is the Hamiltonian of the system.
+So far we have just one boundary condition, \cref{U_p boundary condition}, while the Schrödinger equation is a second order differential equation, requiring two boundary conditions to give a unique solution.
+However, since we are primarily interested the energies of the system, it suffices to compute the spectrum of $H$. With this in mind, we write the Hamiltonian $H = -\nabla^2$ as a square $H = D^2$, where
+\begin{align*}
+  D = -i\partial_\varphi, \quad 0 \le \varphi \le π, \text{ subject to boundary conditions given by $U_p$,}
+\end{align*}
+and use the spectral theorem to compute the spectrum of $H$ as the squared spectrum of $D$, i.e.
+\begin{align*}
+  σ(H) = \{λ^2 : λ \in σ(D)\}.
+\end{align*}
+Similarly, we have that the ground state energy is the infimum of $σ(H)$, i.e.
+\begin{align*}
+  λ_0 = \inf σ(H) = \inf \{λ^2 : λ \in σ(D)\}.
+\end{align*}
+The spectrum of $D$ is straight forward to compute and we present the result as a lemma.
+
+\begin{lemma}
+  % Consider a pair of anyons subject to the boundary condition \cref{U_p boundary condition}.
+  The eigenfunctions $u$ and eigenvalues $λ$ of $D$ are such that
+  \begin{align*}
+    D u = λ u \quad \iff \quad -iu'(\varphi) = λ u(\varphi),
+  \end{align*}
+  having general solution
+  \begin{align*}
+    u(\varphi) = C e^{iλ\varphi}
+  \end{align*}
+  for some constant $C \in \mathbb{C}^n$.
+\end{lemma}
+
+We seek an expression for the spectrum of $D$, the above lemma and the boundary condition \cref{U_p boundary condition} gives
+\begin{align*}
+  u(π) = U_p u(0) \implies
+  C e^{iλπ} = U_p C,
+\end{align*}
+that is, $e^{iλπ}$ is an eigenvalues of $U_p$. We have the following result.
+
+\begin{lemma}\label{D spectrum}
+  The spectrum of $D$ (and by extension the spectrum of $H$) is given by
+  \begin{align*}
+    σ(D) &= \big\{λ : e^{iλπ} \text{ is an eigenvalue of } U_p\big\}.
+  \end{align*}
+\end{lemma}
+
+\begin{remark}
+  Recall that $U_p$ is unitary, so all eigenvalues of $U_p$ are on the complex unit circle. Hence, each eigenvalue $e^{iλπ}$ of $U_p$ with $0 \le λ < 2$, gives a family of possible energy levels $\big\{(λ + 2n)^2 \mid n \in \Z\big\}$ to the system.
+\end{remark}
+
+
+
+
+\section{Abelian anyons}
+
+Although non-Abelian anyons are the main focus of this thesis, we give a quick overview of the the case of Abelian anyons. For more details, see \cite{lundholm-solovej}
+% In full generality for abelian anyons we have the following.
+
+Abelian anyons are characterized by the fact that the exchange operator is one dimensional, i.e.\ an element of $U(1)$, hence it is of the form $e^{i\alpha\pi}$. Take this to be $U_0$, i.e.\ simple exchange of a pair of Abelian anyons, with the exchange loop enclosing no other anyons. It is then easy to realize that
+\begin{align}\label{eq:abelian Up}
+  U_p = e^{iα(1+2p)π}
+\end{align}
+because the left anyon performs an exchange with the $p$ inner anyons, likewise for the right anyon, finally the two anyons undergoing exchange are exchanged with each other, resulting in $1+2p$ exchanges of $α$-type anyons, as illustrated in \cref{fig:abelian Up}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{img/interchange_loop_p.pdf}
+  \caption{Exchange of a pair of Abelian $α$ anyons around $p$ fixed $α$ anyons. Figure taken from \cite{lundholm-solovej}.}
+  \label{fig:abelian Up}
+\end{figure}
+
+
+\begin{proposition}[Ground state energy for a pair of abelian anyons]
+  Consider a pair of Abelian anyons with anyonic phase $\alpha$ enclosing $p$ fixed anyons (also with anyonic phase $\alpha$).
+  The ground state energy is bound from below by
+    \begin{gather*}
+      \inf_{p,q\in\mathbb{Z}} \left(\alpha(1+2p)+2q\right)^2 =\\
+      = \begin{cases}
+        \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
+        0, & \text{otherwise}
+      \end{cases}
+    \end{gather*}
+\end{proposition}
+
+\begin{proof}
+  By \cref{eq:abelian Up} we have the anyonic exchange operator as
+  \begin{align*}
+    U_p = e^{i\alpha(1+2p)π}.
+  \end{align*}
+  By \cref{D spectrum} we have that the boundary condition gives
+  \begin{align*}
+    &u(π) = e^{i\alpha(1+2p)π} u(0) \\
+    \iff\;\; &e^{iλ π} = e^{i\alpha(1+2p)π} \\
+    \iff\;\; &λ = \alpha(1+2p) + 2q, \quad q \in \mathbb{Z}.
+  \end{align*}
+  Thus we see that the spectrum for $D$ and $H = D^2$, respectively, is
+  \begin{align*}
+    σ(D) &= \{ \alpha(1+2p) + 2q : q \in \mathbb{Z}\}, \\
+    σ(H) &= \{ (\alpha(1+2p) + 2q)^2 : q \in \mathbb{Z}\}.
+  \end{align*}
+  Hence, the energy $λ^2$ is minimized for
+  \begin{align*}
+    E_0 = \inf_{p,q\in\mathbb{Z}} (\alpha(1+2p)+2q)^2.
+  \end{align*}
+  A number-theoretic result, found as proposition 5 in \cite{lundholm-solovej}, shows that this can be written as
+  \begin{align*}
+    E_0 =
+    \begin{cases}
+      \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
+      0, & \text{otherwise}.
+    \end{cases}
+  \end{align*}
+\end{proof}
+
+From this we have an immediate corollary for bosons ($\alpha = 0$) and fermions ($\alpha = 1$).
+
+\begin{corollary}
+  With $\alpha = 0$, the anyonic phase reads
+  \begin{align*}
+    U_p = e^{i\alpha(1+2p)π} = 1
+  \end{align*}
+  for all $p$, i.e. bosons do not ``see'' each other, and they have a zero ground state energy.
+
+  With $\alpha = 1$, the anyonic phase reads
+  \begin{align*}
+    U_p = e^{i\alpha(1+2p)π} = e^{i(1+2p)π},
+  \end{align*}
+  giving us the boundary condition
+  \begin{align*}
+    e^{iλ π} = e^{i(1+2p)π} &\iff λ = 1 + 2p + 2q, \quad q \in \mathbb{Z}
+  \end{align*}
+  Since $p$ is an integer, this shows that also fermions do not ``see'' the enclosed $p$ anyons.
+  However, the anyons in the pair do ``see'' each other, in the sense that the their wave-function changes sign after they have been exchanged, as expected. Finally, this also shows that fermions have a non-zero ground state energy $E_0 = 1$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Non-Abelian anyons}
+
+Consider the same setting as above, with the distinction that the anyons are now non-Abelian. That is, consider a pair of non-Abelian anyons, with wave-function $\psi \in L^2(\mathbb{R}; \mathbb{C}^n)$ parametrized by the relative angle $\varphi$, such that the pair of anyons encloses $p$ fixed anyons as $\varphi$ increases from $0$ to $π$, giving rise to an anyonic phase $U_p \in U(n)$.
+
+% From \cref{D spectrum} the boundary condition reads
+% \begin{align*}
+%   u(π) = U_p u(0) \iff C e^{iλπ} = U_p C.
+% \end{align*}
+% This is precisely the condition that $e^{iλπ}$ is an eigenvalue of $U_p$.
+
+
+% \hrule
+
+% Consider first the case $n=2$, then $U_p \in U(2)$ can be parametrized as follows.
+
+% \begin{lemma}[Characterization of $U(2)$ matrices]
+%   Let $U \in U(2)$, then
+%   \begin{align*}
+%     U = \begin{pmatrix} a & b \\ -e^{i\thetaπ}\overline{b} & e^{i\thetaπ} \overline{a} \end{pmatrix}, \quad \operatorname{det} U = e^{i\thetaπ}.
+%   \end{align*}
+%   for $a,b,\theta \in \mathbb{R}$ such that $\abs{a}^2 + \abs{b}^2 = 1$ and $0 \le \theta < 2$.
+%   The parameter $\theta$ corresponds to the Abelian phase in the factorization $U(2) = U(1)\times SU(2)$, where $\theta = 0$ gives $SU(2)$.
+% \end{lemma}
+
+% \hrule
+
+A standard characterization of unitary matrices is as follows.
+
+\begin{lemma}
+  Let $U \in U(n)$, the $n$ eigenvalues (counted with multiplicity) of $U$ are on the form $e^{i\beta_jπ}$ for $j = 1,2,\ldots,n$. Furthermore, $e^{i\alpha\pi}$ where $\alpha = \frac{1}{n}\sum_j \beta_j$ is referred to as the Abelian phase of $U_p$. It is the Abelian part in the factorization of $U(n) = U(1) \times SU(n)$. Note that if $\det U = e^{iθπ}$ we have $α = θ/n$.
+\end{lemma}
+
+\begin{proof}
+  We only show the $U(n) = U(1) \times SU(n)$ decomposition.
+  Rewrite $U$ as $U = e^{i\alpha}\left( e^{-i\alpha} U \right)$ where $e^{i\alpha}$ is the Abelian part and $e^{-i\alpha} U$ is the $SU(n)$ part. It suffices to show that $\det \left( e^{-iαπ} U \right) = 1$,
+  \begin{align*}
+    \det \left( e^{-iαπ} U \right)
+    &= \left(e^{-iαπ}\right)^n e^{i\left(\sum_j \beta_j\right)π} \\
+    &= \left(e^{-i\left(\sum_j \beta_j\right)π/n}\right)^n e^{i\left(\sum_j \beta_j\right)π} = 1.
+  \end{align*}
+  On the other hand, $1 = \det \left( e^{-iαπ} U \right) = e^{-iαπn} e^{iθπ} = e^{i(-αn+θ)π}$, thus $α = θ/n$ (modulo $2$).
+\end{proof}
+
+Next, we show that the Abelian phase shifts the eigenvalues uniformly along the complex unit circle.
+
+\begin{proposition}
+  Consider non-Abelian anyons with arbitrary (unitary) $U_p \in U(n)$ exchange operator. The Abelian part of of the non-Abelian anyonic phase $U_p$ can always be chosen so that the ground state has zero energy.
+\end{proposition}
+
+\begin{proof}
+  By changing the Abelian phase, each eigenvalue is shifted. This is obvious if we diagonalize $U_p$. In particular, adding $-\beta_j$ to the Abelian phase, the $j$:th eigenvalue is shifted to $e^{i(\beta_j-\beta_j)} = 1$, corresponding to zero energy.
+\end{proof}
+
+% From this, the Abelian part $e^{iαπ}$ of the anyonic phase $U_p \in U(n)$ can be seen as a shift of the eigenvalues $e^{iλπ}$ of $U_p$ along the complex unit circle, where $λ^2$ gives the energy of the system, as shown in figure \cref{fig: abelian phase shift}.
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=0.5\linewidth]{img/abelian-phase-shift.jpg}
+%   \caption{The shift of energy levels due to an Abelian phase $\alpha$ TODO it says theta.}
+%   \label{fig: abelian phase shift}
+% \end{figure}
+
+As we shall see in the following chapter, the exchange operator $U_p$ has a rather involved dependence on the particular type of non-Abelian anyons that are considered. In order to characterize the energy bound, via the eigenvalues of $U_p$, we must first dive into the framework of abstract anyon models in order to characterize $U_p$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Abstract anyon models}\label{anyon models}
+
+In this chapter we shall present the framework of abstract anyon models, culminating in a characterization of anyon braiding. That is, we will show how the braid group representation is computed for a given anyon model.
+
+Anyon models can be modeled by unitary braided tensor categories, see \cite{kitaev}. However, setting up this framework in full generality is redundant for our purposes and we take a more straight forward approach, which is also most common in the literature. The benefit of the categorical approach is that consistency of braiding and fusion is most naturally shown this way. We shall see the ties between the straight forward approach and the categorical model in when discussing the consistency conditions in \cref{sec:pentagon hexagon}.
+
+This chapter is in part based on \cite{preskill,kitaev,bonderson}. We shall be using the notation that is standard in the literature, and when possible make use of and extend the fusion diagram notation, which greatly clarifies braiding of fusion states.
+
+Starting with \cref{sec:anyonic braid representations} we show how a given abstract anyon model gives rise to representations of the braid group.
+
+\section{Preliminaries}
+
+An abstract anyon model consists of a set of labels representing different types of anyons. These labels are known as anyonic charge, topological charge or superselection labels. Anyons can be combined, or fused, to give an anyon of some charge, possibly in different ways. This is modeled by a fusion algebra
+\begin{align*}
+  a \times b = \sum_c N_{ab}^c c
+\end{align*}
+representing the possible outcomes from fusion of anyons of type $a$ and $b$. The fusion multiplicities $N_{ab}^c$ are non-negative integers denoting the number of distinct ways $a$ and $b$ can fuse to $c$. In each anyon model there is the trivial label $1$, representing the vacuum, with the property $N_{a1}^b = N_{1a}^b = \delta_{ab}$, i.e. $1$ fuses trivially with every other charge. Furthermore, to each charge $a$ there is a corresponding conjugate charge $\bar{a}$ representing the antiparticle of $a$, with the property $N_{ab}^1 = \delta_{b\bar{a}}$, i.e. $a$ fuses to the vacuum only with its antiparticle.
+
+% Fusion of $a$ and $b$ is given by $a \times b = \sum_c N_{ab}^c c$
+
+% The state space of anyons resulting from fusion of anyons $a_1, \ldots, a_n$ is denoted by $V_{a_1 \ldots a_n}$ and can be decomposed as
+% \begin{align*}
+%   V_{a_1 \ldots a_n} = \bigoplus_b = V_{a_1 \ldots a_n}^b
+% \end{align*}
+% where $V_{a_1 \ldots a_n}^b$ denotes the state space of anyons of type $b$ resulting from fusion of $a_1, \ldots, a_n$.
+
+The $N_{ab}^c$ distinguishable ways in which $a$ and $b$ can fuse to $c$ can be regarded as an orthonormal basis of a Hilbert space $V_{ab}^c$. This is the state space, or fusion space, of anyons of type $c$ resulting from fusion of $a$ and $b$. The states of $V_{ab}^c$ are called fusion states and we denote the basis for $V_{ab}^c$ by
+\begin{align*}
+  \{ \ket{ab;c,\mu}, \quad \mu = 1,2,\ldots,N_{ab}^c \}
+\end{align*}
+where $\ket{ab;c\mu}$ represents the $\mu$:th way in which $a$ and $b$ can fuse to $c$.
+
+The splitting space $V_c^{ab}$ is the dual space of the fusion space $V_{ab}^c$, it is the state space of particles with anyonic charge $a$ and $b$ that can be split from an anyon of charge $c$.
+
+More generally, the fusion space of anyons of type $c$ resulting from fusion of anyons of type $a_1, \ldots, a_n$ is denoted by $V_{a_1 a_2 \cdots a_n}^c$. This space has a canonical decomposition
+\begin{align*}
+  V_{a_1 a_2 \cdots a_n}^c \cong \bigoplus_{b_1,b_2,\ldots,b_{n-2}} V_{a_1a_2}^{b_1} \otimes V_{b_1 a_3}^{b_2} \otimes V_{b_2 a_4}^{b_3} \ldots \otimes V_{b_{n-2} a_n}^c
+\end{align*}
+with an associated canonical orthonormal basis with elements being the fusion states
+\begin{align*}
+  \ket{a_1 a_2; b_1, \mu_1} \otimes \ket{b_1 a_3; b_2, \mu_2} \otimes \cdots \otimes \ket{b_{n-3} a_{n-1}; b_{n-2}, \mu_{n-2}} \otimes \ket{b_{n-2} a_n; c, \mu_{n-1}}
+\end{align*}
+for all possible $b_j$ and $\mu_j$. For convenience we write $b_{0} = a_1$ and $b_{-1} = 1$.
+
+Many anyon models of interest have the property that $N_{ab}^c \le 1$ for all particle types $a, b$ and $c$. When this is the case, such as for the Fibonacci anyons that we shall consider in \cref{fibonacci anyons}, the multiplicity label $\mu$ can be ignored. This makes the model easier to handle, and we introduce the fusion diagram notation.
+
+
+\section{Fusion diagrams}
+
+Consider an abstract anyon model with $N_{ab}^c \le 1$. That is, if fusion of $a$ and $b$ to $c$ is possible, this happens in exactly one way. Then, the multiplicity label $\mu$ in $\ket{ab;c,\mu}$ can be ignored, because the only possibility is $\mu = 1$, if $\mu=0$ the state is not valid. In this case we introduce the fusion diagram notation for fusion states and write
+\begin{align*}
+  \ket{ab;c;\mu} \eqqcolon \ket{ab;c} \eqqcolon \fs{b}{a,c}.
+\end{align*}
+The diagram should be read left/top to right/bottom, i.e. $a$ fuses with $b$ resulting in $c$. The diagram notation is primarily useful when considering fusion of several anyons and extends in a natural way;
+\begin{align*}
+  \fs{b,c}{a,e,d}
+\end{align*}
+denotes fusion of $a,b,c$ to $d$ such that $a$ fuses with $b$ resulting in the intermediate charge $e$, finally $e$ fuses with $c$ to give the resulting charge $d$.
+
+The canonical basis for the fusion space $V_{a_1a_2\cdots a_n}^c$ with canonical decomposition
+\begin{align*}
+  V_{a_1 \cdots a_n}^c \cong \bigoplus_{b_1,b_2,\ldots,b_{n-2}} V_{a_1a_2}^{b_1} \otimes V_{b_1 a_3}^{b_2} \otimes V_{b_2 a_4}^{b_3} \ldots \otimes V_{b_{n-2} a_n}^c
+\end{align*}
+can thus be written in terms of fusion diagrams, assuming trivial fusion multiplicities, as
+\begin{align*}
+  \left\{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \node at (0, -0.6) {$a_1$};
+    \node at (1, 2) {$a_2$};
+    \node at (3, 2) {$a_3$};
+    \node at (10, 2) {$a_{n-1}$};
+    \node at (13, 2) {$a_n$};
+%
+    \draw (1, 0) to (1, 1.5);
+    \draw (3, 0) to (3, 1.5);
+%
+    \draw (10, 0) to (10, 1.5);
+    \draw (13, 0) to (13, 1.5);
+%
+    \draw (-1, 0) to (5, 0);
+    \draw (7, 0) to (15, 0);
+%
+    \node at (2, -0.7) {$b_1$};
+    \node at (4, -0.7) {$b_2$};
+    \node at (6, 0.2) {$\cdots$};
+%
+    \node at (8.5, -0.7) {$b_{n-3}$};
+    \node at (11.5, -0.7) {$b_{n-2}$};
+    \node at (14, -0.7) {$c$};
+  \end{tikzpicture}
+  \;\;\;\bigg|\; \begin{array}{c}\text{for all possible intermediate} \\ \text{charges $b_1, b_2, \ldots, b_{n-2}$}\end{array}
+  \right\}.
+\end{align*}
+We can thus think of the basis as consisting TODO: Clarify. of a tuples of possible intermediate charges
+\begin{align*}
+  (b_1, b_2, \ldots, b_{n-2}).
+\end{align*}
+
+TODO: Mention explicitly that we are representing all this with $\mathbb{C}^n$ matrices and how to map back and forth, and then ignore it.
+
+The real advantage of writing fusions states with fusion diagrams is that braiding is much easier to represent. This will be extremely useful now as we proceed in developing the abstract model for anyons, and characterize braiding.
+
+
+\section{The $R$-matrix: Commutativity of fusion}
+
+The result of fusing $a$ with $b$ must be the same as fusing $b$ with $a$. That is, fusion is commutative,
+\begin{align*}
+  a \times b = b \times a.
+\end{align*}
+This gives rise to a natural isomorphism
+\begin{align*}
+  R : V_{ba}^c \to V_{ab}^c
+\end{align*}
+between the corresponding fusion spaces % $V_{ab}^c \cong V_{ba}^c$,
+which can be represented by a unitary matrix $R_{ab}^c$ in the canonical basis
+\begin{align*}
+  \ket{ba,c,\mu} = \sum_{\mu'} (R_{ab}^c)_{\mu}^{\mu'} \ket{ab,c,\mu'}.
+\end{align*}
+As we have seen, if the fusion multiplicities $N_{ab}^c \le 1$ for all labels $a,b,c$, we can disregard explicit mention of the fusion multiplicities. From now on we shall do so, and note that it is straight forward to add these indices back if needed. In the diagrammatic notation we then have
+\begin{equation}\label{R-matrix}
+  \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}.
+\end{equation}
+In this case it is clear that $R$-matrix $R_{ab}$ is diagonal in the canonical basis and we have
+\begin{align*}
+  (R_{ab})_{ij} = \delta_{ij} R_{ab}^i.
+\end{align*}
+
+\section{The $F$-matrix: Associativity of fusion}
+
+The result of fusing multiple anyons must be independent of which anyons are fused first. That is, fusion is associative,
+\begin{align*}
+  (a \times b) \times c = a \times (b \times c)
+\end{align*}
+This gives rise to a natural isomorphism between the two decompositions of the fusion space
+\begin{align*}
+  V_{abc}^d \cong
+  \bigoplus_f V_{ab}^f \otimes V_{fc}^d
+  \cong
+  \bigoplus_e V_{bc}^e \otimes V_{ae}^d
+  .
+\end{align*}
+The first decomposition should be understood as first fusing $a$ with $b$ in all possible ways giving an intermediate charge $f$, followed by fusing $c$ with $f$ to give the final charge $d$.
+The second decomposition should be understood as first fusing $b$ with $c$ in all possible ways giving an intermediate charge $e$, followed by fusing $a$ with $e$ to give the final charge $d$.
+
+The first of these two decompositions is referred to as the standard decomposition and the second is the fusion decomposition. We denote this isomorphism by
+\begin{align*}
+  F : \bigoplus_f V_{ab}^f \otimes V_{fc}^d \to \bigoplus_e V_{bc}^e \otimes V_{ae}^d
+\end{align*}
+and it can be represented by the matrix $F_{abc}^c$, satisfying the equation
+\begin{equation}\label{F-matrix}
+  \sum_f \left(F_{abc}^d\right)_{ef} \fs{b,c}{a,f,d} = \fsfused{a}{b}{c}{d}{e}.
+\end{equation}
+That is, the $F$-matrix is the change of basis matrix from the standard basis to the fusion basis of the fusion space $V_{abc}^d$.
+
+The following lemma will be useful when computing the $F$-matrix.
+
+\begin{lemma}\label{res:F1}
+  Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e. $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$ and the corresponding $F$-matrix $F_{abc}^d$ is trivial. More explicitly we have
+  \begin{align*}
+    F_{1bc}^d &= \left( F_{1bc}^d \right)_{db} = 1, \\
+    F_{a1c}^d &= \left( F_{a1c}^d \right)_{ca} = 1, \\
+    F_{ab1}^d &= \left( F_{ab1}^d \right)_{bd} = 1, \\
+    F_{abc}^1 &= \left( F_{abc}^1 \right)_{\overline{a}\,\overline{c}} = 1.
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  With $a = 1$ we have, by definition of the $F$-matrix,
+  \begin{align*}
+     \fsfused{1}{b}{c}{d}{e} = \sum_f \left(F_{1bc}^d \right)_{ef} \fs{b,c}{1,f,d}.
+  \end{align*}
+  From the fusion diagram on the right hand side we read out $1 \times b = f$ from the first fusion, this is valid only for $b = f$.
+  Similarly, on the left hand side the final fusion reads $1 \times e = d$, implying $e = d$. Since the indices $e$ and $f$ are forced, this implicitly shows that the corresponding fusion spaces is one-dimensional. The other results follow analogously,
+  \begin{align*}
+    % \fs{b,c}{a,e,d} &= \sum_f \left(F_{abc}^d \right)_{ef} \fsfused{a}{b}{c}{d}{f} \\
+    \fsfused{a}{1}{c}{d}{e} &= \sum_f \left(F_{a1c}^d \right)_{ef} \fs{1,c}{a,f,d} \implies e = c, f = a, \\
+    \fsfused{a}{b}{1}{d}{e} &= \sum_f \left(F_{ab1}^d \right)_{ef} \fs{b,1}{a,f,d} \implies e = b, f = d, \\
+    \fsfused{a}{b}{c}{1}{e} &= \sum_f \left(F_{abc}^1 \right)_{ef} \fs{b,c}{a,f,1} \implies e = \overline{a}, f = \overline{c}.
+  \end{align*}
+  The result can also be realized by noting that three anyons of type $a, b$ and $c$, where one of them is the trivial type $1$, is uniquely determined by their total charge. Indeed, these three anyons are really just two, since the trivial particle $q$ fuses trivially, it can be added or removed in the representation without changing anything. Thus, the corresponding $F$ matrix must be trivial in this case.
+\end{proof}
+
+
+
+\section{The $B$-matrix: Braiding of standard fusion states}
+
+We shall now consider braiding on the standard fusion states. This can be realized by applying the $F$-matrix to put the state in a basis where the $R$ matrix can be applied immediately, followed by reverting back to the standard basis via $F^{-1}$. That is, using the $F$ and $R$-matrix we obtain the relation
+% \begin{align*}
+%   \fs[1]{b,c}{a,e,d}
+%   &= \sum_f \left(F_{acb}^d\right)_{ef} \fsfusedbraided{a}{b}{c}{d}{f} \\
+%   &= \sum_f \left(F_{acb}^d\right)_{ef} R_{bc}^f \fsfused{a}{b}{c}{d}{f} \\
+%   &= \sum_g \sum_f \left(F_{acb}^d\right)_{ef} R_{bc}^f \left((F^{-1})_{abc}^d\right)_{fg} \fs{b,c}{a,g,d}.
+% \end{align*}
+\begin{align*}
+  \fs[1]{b,c}{a,e,d}
+  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} \fsfusedbraided{a}{b}{c}{d}{f} \\
+  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \fsfused{a}{b}{c}{d}{f} \\
+  &= \sum_g \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg} \fs{b,c}{a,g,d}.
+\end{align*}
+From this we define the $B$-matrix as
+\begin{align*}
+  \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg}.
+\end{align*}
+Symbolically we write this as
+\begin{align*}
+  B = F^{-1} R F.
+\end{align*}
+To sum up, the $B$-matrix braids the standard fusion states according to
+\begin{align*}
+  \fs[1]{b,c}{a,e,d} = \sum_g \left(B_{abc}^d\right)_{eg} \fs{b,c}{a,g,d}.
+\end{align*}
+
+As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have the following lemma, which will be useful when computing the $B$-matrix.
+
+\begin{lemma}\label{res:B1}
+  Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e. $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$ and the corresponding $B$-matrix $B_{abc}^d$ is one-dimensional,
+  \begin{align*}
+    B_{1bc}^d &= \left( B_{1bc}^d \right)_{c b} = R_{bc}^d, \\
+    B_{a1c}^d &= \left( B_{a1c}^d \right)_{d a} = R_{1c}^c = 1, \\
+    B_{ab1}^d &= \left( B_{ab1}^d \right)_{a d} = R_{b1}^b = 1, \\
+    B_{abc}^1 &= \left( B_{abc}^1 \right)_{\overline{b} \overline{c}} = R_{bc}^{\overline{a}}.
+  \end{align*}
+\end{lemma}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{The pentagon and hexagon equations}\label{sec:pentagon hexagon}
+
+When considering an anyon model, it is ultimately the $B$-matrix that determines the properties of interest. The $B$-matrix gives the phase change introduced when braiding anyons. In the previous section we saw how the $B$-matrix determine the braid group representation. This is the relevant property both for the study the dynamics of anyons, but also for developing methods for quantum computation with anyons, known as topological quantum computation.
+
+We have seen that the $B$-matrix is computed from the $F$ and $R$-matrices. These matrices are in turn determined by what is known as the pentagon equation
+\begin{equation}\label{eq:pentagon}
+  \left(F_{12c}^5\right)^d_a \left(F_{a34}^5\right)^c_b = \left(F_{234}^d\right)_c^c \left( F_{1e4}^5 \right)^d_b \left( F_{123}^b \right)^e_a
+\end{equation}
+and hexagon equation
+\begin{equation}\label{eq:hexagon}
+  % R_{13}^c \left(F_{213}^4\right)^c_a R_{12}^a = \sum_{b} \left(F_{231}^4\right)^c_b R_{1b}^4 \left(F_{123}^4\right)^b_a.
+  R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e = \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e.
+\end{equation}
+In these equations, all indices are taken as arbitrary particle labels.
+
+These equations are known as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_space} and \cref{fig:pentagon_space,fig:hexagon_space} make the point clearer, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
+\begin{align*}
+  (a \times b) \times c = a \times (b \times c).
+\end{align*}
+As previously hinted, anyon models can be described by braided tensor categories. In this setting, the pentagon and hexagon equations are precisely Mac Lane's coherence theorem \cite{mac lane}, showing that no further conditions are required for consistent fusion and braiding. Further details can be found in \cite{kitaev,preskill}.
+
+Solving the pentagon and hexagon equations is in general highly non-trivial. The equations are multivariate polynomial equations and require elaborate techniques to be solved. First one must fix the gague freedom that comes from the choice of basis for the fusion space, next an appropriate Gröbner basis can be used to solve the system. See \cite{bonderson} for more details.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{img/pentagon_diagram.pdf}
+  \caption{The pentagon equation in terms of fusion diagrams. Figure take from \cite{kitaev}. Note that the $F$-matrix have super- and sub-scripts reversed.}
+  \label{fig:pentagon_diagram}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{img/pentagon_space.pdf}
+  \caption{The pentagon equation in terms of fusion spaces. Figure take from \cite{kitaev}. Note that the fusion spaces and the $F$-matrix have super- and sub-scripts reversed.}
+  \label{fig:pentagon_space}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{img/hexagon_diagram.pdf}
+  \caption{The hexagon equation in terms of fusion diagrams. Figure take from \cite{kitaev}.}
+  \label{fig:hexagon_diagram}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1\linewidth]{img/hexagon_space.pdf}
+  \caption{The hexagon equation in terms of fusion spaces. Figure take from \cite{kitaev}. Note that the fusion spaces, $F$-matrix and $R$-matrix have super- and sub-scripts reversed.}
+  \label{fig:hexagon_space}
+\end{figure}
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Representations of the braid group}\label{sec:anyonic braid representations}
+
+TODO: Representations of the braid group in abstract anyon models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \section{Braid group representations \texorpdfstring{$ρ(σ_j)$}{ρ(σⱼ)}: Braiding of general fusion states}\label{sec:general braiding}
+\section{Braid group representations $ρ(σⱼ)$: Braiding of general fusion states}\label{sec:general braiding}
+
+Consider the fusion space $V_{a_1 \cdots a_n}^c$ in a given anyon model, the representation $ρ(σ_j)$ gives the anyonic phase introduced to the total wave function when particles $a_j$ and $a_j+1$ are exchanged (counter)clockwise. Recall from \cref{chap:how anyons arise} that the braid group is generated by $σ_1, \ldots, σ_n$, thus it suffices to give expressions for $ρ(σ_j)$ in order to be able to compute any braid in a given anyon model.
+% Computing the representations $ρ(σ_j)$ of the generators in the general case will thus be of paramount importance.
+
+Before showing how $ρ(σ_j)$ is computed, we begin by making our notation slightly more flexible. Consider the fusion space $V_{a_1\ldots a_n}^c$. As we have seen, the fusion states are on the form
+\begin{align*}
+  \fswide{a_2,a_3}{a_1,b_1,b_2} \ldots \fswider{a_{n-1},a_n}{b_{n-3},b_{n-2},c}.
+\end{align*}
+We shall sometimes write such states on the form of the standard basis states of $V_{1a_1\ldots a_n}^c$, i.e. as
+\begin{align*}
+  \fswide{a_1,a_2}{1,a_1,b_1} \ldots \fswider{a_{n-1},a_n}{b_{n-3},b_{n-2},c}.
+\end{align*}
+The reason being that it is then simpler to represent braiding of $a_1$ with $a_2$. This observation allows us to extend the fusion diagrams with trivial charges when convenient.
+
+\begin{lemma}\label{res:sigma 1 is R}
+  In a general anyon model, in the standard basis of the fusion space $V_{a_1\cdots a_n}^c$ we have
+  \begin{align*}
+    ρ(σ_1)_{ij} = \delta_{ij} R_{a_1 a_2}^{j} \quad \iff \quad ρ(σ_1) = R_{a_1 a_2}.
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  In the general case, the representation $ρ(σ_1)$ for the first generator $σ_1$ that braids $a_1$ with $a_2$, is given by
+  \begin{align*}
+    ρ(σ_1) \left( \fswide{a_1,a_2}{1,a_1,b_1} \ldots \right) = \left( \fswide[1]{a_1,a_2}{1,a_2,b_1} \ldots \right) = \sum_g \left[ \left(B_{1 a_1 a_2}^{b_1}\right)_{a_2 g} \left( \fswide{a_1,a_2}{1,g,b_1} \ldots \right)\right]
+  \end{align*}
+  Since $1$ fuses trivially we must have $g = a_1$ and thus $ρ(σ_1)$ is one-dimensional with
+  \begin{align*}
+    ρ(σ_1) = \left( B_{1 a_1 a_2}^{b_1} \right)_{a_2, a_1} = \sum_f \left( \left(F^{-1}\right)_{1 a_2 a_1}^{b_1} \right)_{a_2 f} R_{a_1 a_2}^{f} \left( F_{1 a_1 a_2}^{b_1} \right)_{f a_1} = R_{a_1 a_2}^{b_1},
+  \end{align*}
+  where the last equality follows from \cref{res:F1}.
+\end{proof}
+
+\begin{remark}\label{remark:abuse notation}
+  Above, $ρ(σ_1)$ is expressed in the basis for the reduced space $V_{a_1 a_2} = \bigoplus_{b_1} V_{a_1 a_2}^{b_1}$, having basis determined by the possible anyonic labels $b_1$. The full space $V_{a_1 \cdots a_n}^c$ has basis states $(b_1,\ldots,b_{n-2})$ and we implicitly used the operator on the space reduced to fusion states $(b_1)$.
+
+  Extending $ρ(σ_1)$ to the full space is straight forward: In order to determine the action of $ρ(σ_1)$ on a given fusion state in the basis of the full fusion space it suffices to consider the action of $ρ(σ_1)$ on the labels $a_1$ and $a_2$ in the given fusion state. This information is precisely captured in the representation of $ρ(σ_1)$ in the reduced basis. This results in repeating blocks in the matrix representing $ρ(σ_1)$ when considering the basis of the full fusion space. This motivates the slight abuse of notation.
+
+  This discussion applies to any braiding operator, and we shall often use this abuse of notation, it should always be clear what part of the space that the operator acts on.
+\end{remark}
+
+\begin{lemma}\label{res:sigma j is B}
+  In a general anyon model, consider the fusion space $V_{a_1\cdots a_n}^c$ with the standard basis $(b_1,\ldots,b_{n-1})$, then
+  \begin{align*}
+    ρ(σ_j) = B_{b_{j-2} a_j a_{j+1}}^{b_j},
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  Note that $ρ(σ_j)$ is precisely the $B$-matrix applied appropriately,
+  \begin{align*}
+    \left( \ldots \fswider[1]{a_j,a_{j+1}}{b_{j-2},e,b_{j}} \ldots \right) = \sum_{b_{j-1}} \left[ \left(B_{b_{j-2} a_j a_{j+1}}^{b_{j}}\right)_{e, b_{j-1}} \left( \ldots \fswider{a_j,a_{j+1}}{b_{j-2},b_{j-1},b_{j}} \ldots \right) \right],
+  \end{align*}
+  thus the result follows.
+\end{proof}
+
+With the convention $b_{0} = a_1$ and $b_{-1} = 1$, \cref{res:sigma j is B} subsumes \cref{res:sigma 1 is R}, and also the following result, which we state explicitly for convenience. Recall that $\overline{a}$ denotes the antiparticle of $a$.
+
+\begin{lemma}\label{res:sigma n-1 is R}
+  In a general anyon model, consider the fusion space $V_{a_1\cdots a_n}^1$ with its standard basis $(b_1, \ldots, b_{n-3})$ (note that $c=1$ forces $b_{n-2} = \overline{a_n}$), then
+  \begin{align*}
+    ρ(σ_{n-1})_{ij} = \delta_{ij} R_{a_{n-1} a_n}^{\overline{j}},
+  \end{align*}
+  acting on the $b_{n-3}$-part of the space.
+\end{lemma}
+
+\begin{proof}
+  Since the result of the fusion is assumed to be the trivial particle $1$, we must have the indices as follows,
+  \begin{gather*}
+    ρ(σ_{n-1}) \left( \ldots \fswider{a_{n-1},a_n}{b_{n-3},\overline{a_n},1} \right)
+    = \left( \ldots \fswider[1]{a_{n-1},a_n}{b_{n-3},\overline{a_{n-1}},1} \right) \\
+    = \sum_g \left[ \left(B_{b_{n-3} a_{n-1} a_n}^{1}\right)_{\overline{a_{n-1}}, g} \left( \ldots \fswider{a_{n-1},a_n}{b_{n-3},g,1} \right) \right].
+  \end{gather*}
+  Since the last fusion reads $g \times a_n = 1$ we must have $g = \overline{a_n}$ and thus
+  \begin{align*}
+    ρ(σ_{n-1}) &= \left( B_{b_{n-3} a_{n-1} a_n}^{1} \right)_{\overline{a_{n-1}}, \overline{a_n}} \\
+    &= \sum_f \left( \left(F^{-1}\right)_{b_{n-3} a_n a_{n-1}}^1 \right)_{\overline{a_{n-1}} f} R_{a_{n-1} a_n}^f \left( F_{b_{n-3} a_{n-1} a_n}^1 \right)_{f,\overline{a_n}} \\
+    &= R_{a_{n-1} a_n}^{\overline{b_{n-3}}}
+  \end{align*}
+  where the last equality follows from \cref{res:F1}.
+\end{proof}
+
+\begin{remark}
+  Note that $ρ(σ_1)$ and $ρ(σ_{n-1})$ are equal in the restricted basis, up to charge conjugation of the basis. Furthermore, note that if time is reversed, the roles of $ρ(σ_1)$ and $ρ(σ_j)$ are interchanged. Reversing the fusion in time means reading the fusion diagram from right/bottom to left/top. This is an example of time reversal symmetry; time reversal corresponds to charge conjugation, see \cite{nayak}.
+\end{remark}
+
+Time reversal as charge conjugation is also simply manifested in the following lemma, as a result of \cref{res:sigma 1 is R} and \ref{res:sigma n-1 is R}.
+\begin{lemma}
+  In the standard basis the $R$ matrix can be written as
+  \begin{align*}
+    \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}
+    \quad \iff \quad
+    \fs[1]{a,b}{1,b,c} = R_{ab}^c \fs{a,b}{1,a,c}
+    \quad \iff \quad
+    \fs[1]{a,b}{c,\overline{a},1} = R_{ab}^{\overline{c}} \fs{a,b}{c,\overline{b},1}.
+  \end{align*}
+\end{lemma}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Charge sectors}\label{sec:charge sectors}
+
+Consider any abstract anyon model with a non-trivial particle label $t$. When considering braiding of two intermediate $t$ anyons in $V_{t^n}^1$, label them $t_1$ TODO and $t_2$, it suffices to work with the basis of $V_{t^n}^1$ restricted to the intermediate charge labels $a,b$ and $c$ in
+\begin{align*}
+  \fs{t,t}{a,b,c}.
+\end{align*}
+The reason for this is that only these labels are part of the $B$ matrix describing braiding of $t_1$ and $t_1$.
+Note that we cannot make any assumptions for the total charge $c$, it is not forced to be $1$ since we are considering intermediate anyons in the fusion space, only the total charge of the fusion space is $1$. The different possible values for $c$ is referred to as different right charge sector. Similarly, also the $a$ is unknown, because we are not considering the leftmost particle, there are really more anyons to the left, that fuse to different resulting charges $a$. This results in different left charge sectors.
+
+If we fix the both the left and right charge sectors to be trivial, we are really considering braiding of
+\begin{align*}
+  \fs{t,t}{1,b,1}
+\end{align*}
+in $V_{tt}^1$, a different fusion space, with much smaller dimension than $V_{t^n}^1$. There is just one free intermediate charge label here, compared to three free charge labels when not fixing the charge sectors.
+
+Note that having trivial total charge, as in $V_{t^n}^1$ represents the fact that we have exactly $n$ anyons of type $t$. If the total charge would be $t$, there would really be $n+1$ anyons of type $t$ available.
+
+As an example of the importance of the charge sectors, considering braiding of the last pair of anyons. Then, the charge sector is known, it must be $1$, the total charge of the fusion space $V_{t^n}^1$. This allows for a straight-forward computation of $ρ(σ_{n-1})$, as shown in \cref{res:sigma n-1 is R}. Similarly, the left charge sector of $ρ(σ₁)$ is $1$, c.f.\ \cref{res:sigma 1 is R}.
+
+Since we seek to characterize general braiding in $V_{t^n}^1$, including intermediate anyons where both the left and right charge sector are unfixed, we introduce the following definition for convenience.
+
+\begin{definition}\label{def:full fusion space}
+  The fusion space $\widetilde{V}_{t^n}$ has basis elements on the form
+  \begin{align*}
+    \fswide{t,t}{b_1,b_2,b_3}
+    \cdots
+    \fswide{t,t}{b_{n-1},b_n,b_{n+1}}
+  \end{align*}
+  where the charge labels $b_1, b_2, \ldots, b_{n+1}$ range over all values allowed by the fusion rules. The space $\widetilde{V}_{t^n}$ should be thought of as the space $V_{t^n}^1$ but including all possible left and right charge sectors. That is, the space of $n$ anyons of type $t$ with unfixed charge sectors.
+\end{definition}
+
+\begin{remark}
+  Recall the notation $V_{t^n} = \bigoplus_c V_{t^n}^c$, this is the space of $n$ anyons of type $t$ with free right charge sector.
+\end{remark}
+
+In the space $\widetilde{V}_{t^n}$ with standard basis we naturally have $n-1$ braid group generators, we introduce the following notation.
+
+\begin{definition}\label{def:rho_n sigma_j}
+  The representation of the $j$:th braid group generator $σ_j$ in $\widetilde{V}_{t^n}$ is denoted $ρ_n(σ_j)$.
+\end{definition}
+
+
+
+
+\section{Anyonic exchange operator $Uₚ$}\label{sec:general Up}
+
+Given any abstract anyon model, single out a non-trivial anyonic charge $t$ and consider exchange of a pair of anyons around $p$ enclosed anyons. That is consider the fusion space $\widetilde{V}_{t^{p+2}}$.
+
+In the standard basis of $\widetilde{V}_{t^n}$, we can compute the braid group generators $ρ_n(σ_j)$ for $j = 1, 2, \ldots, n-1$ as shown in \cref{sec:general braiding}. The exchange operator $U_p$ (\cref{braid group}) is then
+\begin{align*}
+  U_p = σ_1 σ_2 \cdots σ_p σ_{p+1} σ_p \cdots σ_2 σ_1,
+\end{align*}
+c.f.\ \cref{fig:abelian Up}. However, working in the standard basis is rather problematic for computing $U_p$, instead we change basis.
+
+With the $F$ matrix we change basis from the standard basis to a basis where the enclosed $p$ anyons are fused. If $p = 2$ we have
+\begin{align*}
+  \fsfusedUp{t}{t}{t}{t}{a}{b}{c}{d}{e}
+  =
+  \sum_{f} \left( F_{btt}^d \right)_{cf}
+  \fs{t,t,t,t}{a,b,f,d,e}.
+\end{align*}
+This extends to arbitrary number $p$ of enclosed particles by repeated application of the $F$ matrix. For any $p \ge 2$ we can thus change basis from the standard basis to the fused basis
+\begin{align*}
+  \fs{t,c,t}{a,b,d,e}
+\end{align*}
+where $c$ is the resulting charge of the fused enclosed $p$ particles. More explicitly that is
+\begin{equation}\label{eq:F U_p basis}
+  % \begin{tikzpicture}[scale=0.15,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+  \begin{tikzpicture}[scale=0.18,font=\footnotesize,anchor=mid]
+    \draw (-27, -1) to (-27, -3); % vertical
+    \node at (-27, 0) {$t$};
+    \draw (-24, -1) to (-24, -3); % vertical
+    \node at (-24, 0) {$t$};
+    \node at (-21, -1.5) {$\cdots$};
+    \draw (-18, -1) to (-18, -3); % vertical
+    \node at (-18, 0) {$t$};
+    \draw (-15, -1) to (-15, -3); % vertical
+    \node at (-15, 0) {$t$};
+    \draw (-30, -3) to (-12, -3); % horizontal
+    \node[font=\large] at (-8, -1.5) {$\xmapsto{F}$};
+    \draw (2, 6) to [bend left=-30] (3, 4);
+    \draw (4, 6) to [bend left=30]  (3, 4);
+    \draw (1, 4) to [bend left=-30] (2, 2);
+    \draw (3, 4) to [bend left=30]  (2, 2);
+    \draw (0, 2) to [bend left=-30] (1, 0);
+    \draw (2, 2) to [bend left=30]  (1, 0);
+    \draw (1, 0) to (1, -3); % vertical under bend
+    \node at (1+0.75, -0.75) {$c$};
+    \node[font=\scriptsize] at (3, 1.5) {$c_1$};
+    \node[font=\scriptsize] at (4, 3.5) {$c_2$};
+    \node[font=\scriptsize] at (5, 5.5) {$c_3$};
+    \node at (0, 2+1) {$t$};
+    \node at (1, 4+1) {$t$};
+    \node at (2, 6+1) {$t$};
+    \node[rotate=-20] at (4.25, 6+1.25) {$\vdots$};
+    \draw (-5, -3) to (7, -3); % horizontal
+    \draw (-2.5, 0) to (-2.5, -3); % vertical left of bend
+    \draw (4.5, 0) to (4.5, -3); % vertical right of bend
+    \node at (-2.5+0.75, -0.75) {$t$};
+    \node at (4.5+0.75, -0.75) {$t$};
+    %
+    \node[font=\normalsize] at (11, -1.5) {$\eqqcolon$};
+    \draw (17, -1) to (17, -3); % vertical
+    \draw (20, -1) to (20, -3); % vertical
+    \draw (23, -1) to (23, -3); % vertical
+    \node at (17, 0) {$t$};
+    \node at (20, 0) {$c$};
+    \node at (23, 0) {$t$};
+    \draw (15, -3) to (25, -3); % horizontal
+  \end{tikzpicture}
+\end{equation}
+The intermediate charge $c$ depends on $p$ as follows,
+\begin{align*}
+  p &= 0 \implies c = 1 \\
+  p &= 1 \implies c = t \\
+  p &= 2 \implies c \text{ is a possible result of the fusion } t \times t \\
+  p &= 3 \implies c \text{ is a possible result of the fusion } t \times t \times t \\
+  & \vdotswithin{=}
+\end{align*}
+Note that the braid corresponding to $U_p$ does not depend on the intermediate charges $c_1, c_2, \ldots, c_{p-2}$. We are now ready to compute $U_p$ for general $p$,
+\begin{equation}\label{eq:U_p braid}
+  \begin{aligned}
+    U_p \left( \fs{t,c,t}{a,b,d,e} \right) &=
+    \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \braid s_1^{-1} s_2^{-1} s_1^{-1};
+      \node at (1, 0.5) {$t$};
+      \node at (2, 0.5) {$c$};
+      \node at (3, 0.5) {$t$};
+      \draw (0, -3.5) to (4, -3.5);
+      \node at (0.5, -4.25) {$a$};
+      \node at (1.5, -4.25) {$b$};
+      \node at (2.5, -4.25) {$d$};
+      \node at (3.5, -4.25) {$e$};
+    \end{tikzpicture} \\
+    &=
+    \sum_{f} \left( B_{act}^d \right)_{bf}
+    \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \braid s_1^{-1} s_2^{-1};
+      \node at (1, 0.5) {$t$};
+      \node at (2, 0.5) {$c$};
+      \node at (3, 0.5) {$t$};
+      \draw (0, -2.5) to (4, -2.5);
+      \node at (0.5, -3.25) {$a$};
+      \node at (1.5, -3.25) {$f$};
+      \node at (2.5, -3.25) {$d$};
+      \node at (3.5, -3.25) {$e$};
+    \end{tikzpicture} \\
+    &=
+    \sum_{f} \left( B_{act}^d \right)_{bf}
+    \sum_{g} \left( B_{ftt}^e \right)_{dg}
+    \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \braid s_1^{-1};
+      \draw (3, 0) to (3, -1.5);
+      \node at (1, 0.5) {$t$};
+      \node at (2, 0.5) {$c$};
+      \node at (3, 0.5) {$t$};
+      \draw (0, -1.5) to (4, -1.5);
+      \node at (0.5, -2.25) {$a$};
+      \node at (1.5, -2.25) {$f$};
+      \node at (2.5, -2.25) {$g$};
+      \node at (3.5, -2.25) {$e$};
+    \end{tikzpicture} \\
+    &=
+    \sum_{f} \left( B_{act}^d \right)_{bf}
+    \sum_{g} \left( B_{ftt}^e \right)_{dg}
+    \sum_{h} \left( B_{at c}^g \right)_{fh}
+    \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \draw (1, 0) to (1, -1);
+      \draw (2, 0) to (2, -1);
+      \draw (3, 0) to (3, -1);
+      \node at (1, 0.5) {$t$};
+      \node at (2, 0.5) {$c$};
+      \node at (3, 0.5) {$t$};
+      \draw (0, -1) to (4, -1);
+      \node at (0.5, -1.75) {$a$};
+      \node at (1.5, -1.75) {$h$};
+      \node at (2.5, -1.75) {$g$};
+      \node at (3.5, -1.75) {$e$};
+    \end{tikzpicture}.
+  \end{aligned}
+\end{equation}
+Thus, we have the following theorem.
+\begin{theorem}\label{thm:general Up}
+  In a given abstract anyon model, exchange of a pair of $t$-anyons around $p$ enclosed $t$-anyons is described by the exchange operator $U_p$ given by
+  \begin{align*}
+    U_p \left( \fs{t,c,t}{a,b,d,e} \right) =
+    \sum_{f} \left( B_{act}^d \right)_{bf}
+    \sum_{g} \left( B_{ftt}^e \right)_{dg}
+    \sum_{h} \left( B_{at c}^g \right)_{fh}
+    \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \draw (1, 0) to (1, -1);
+      \draw (2, 0) to (2, -1);
+      \draw (3, 0) to (3, -1);
+      \node at (1, 0.5) {$t$};
+      \node at (2, 0.5) {$c$};
+      \node at (3, 0.5) {$t$};
+      \draw (0, -1) to (4, -1);
+      \node at (0.5, -1.75) {$a$};
+      \node at (1.5, -1.75) {$h$};
+      \node at (2.5, -1.75) {$g$};
+      \node at (3.5, -1.75) {$e$};
+    \end{tikzpicture}.
+  \end{align*}
+\end{theorem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Abelian anyons}
+
+General Abelian anyons can be modeled in the framework of abstract anyon models by letting the fusion rule be given by
+\begin{align*}
+  [α] × [β] = [α+β]
+\end{align*}
+where $[α]$ TODO.
+
+  \begin{align*}
+    R_{ab}^{a+b} = e^{i(a+b)π}
+  \end{align*}
+
+TODO: Show $F \equiv 1$.
+
+As an example we shall see how fermions fit in the framework of abstract anyon models.
+ 
+\begin{example}[Fermins as an Abelian abstract anyon model]
+  Let the set of anyonic charges be $\mathbb{Z}_2 = \{[0], [1]\}$, the trivial vacuum particle $[0]$ and one non-trivial particle $[1]$, with corresponding fusion rules
+  \begin{align*}
+    [1] × [1] = [0].
+  \end{align*}
+  For simplicity, we drop the $[\cdot]$ brackets.
+  As we've seen $F_{abc}^{a+b+c} = 1$ for all $a, b$ and $c$. Thus, the pentagon equation \cref{eq:pentagon} is trival and the hexagon equation \cref{eq:hexagon} reduces to
+  \begin{align*}
+    % R_{ab}^{a+b} R_{ac}^{a+c} = \sum_d R_{ad}^{b+c}.
+    R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e &= \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e
+    \iff \\
+    R_{ac}^{a+c} R_{ab}^{a+b} &= \sum_{f} R_{af}^{a+b+c}.
+  \end{align*}
+  We have $d = a + b + c$ from the $F$ symbol $\left(F_{bac}^d\right)$, this gives $a + f = a + b + c$, i.e.\ $f = b + c$. The hexagon equation is thus reduced to
+  \begin{align*}
+    R_{ac}^{a+c} R_{ab}^{a+b} = R_{a,(b+c)}^{a+b+c}.
+  \end{align*}
+  Since $R_{ab}^{a+b} = 1$ if $a$ or $b$ equals $0$. The only non-trivial case is
+  \begin{align*}
+    R_{11}^{0} R_{11}^{0} = 1 \quad \iff \quad R_{11}^{0} = ±1.
+  \end{align*}
+\end{example}
+
+$c = pα$
+\begin{align*}
+  \fswide{α,c,α}{1,α,(p+1)α,(p+2)α}
+\end{align*}
+
+
+\begin{align*}
+  U_p = (2p+1)α
+\end{align*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Fibonacci anyons}\label{fibonacci anyons}
+
+The Fibonacci anyon model is the simples non-Abelian anyon model, yet containing all the interesting features of non-Abelian anyons. Another common model is the Ising model, however Ising anyons cannot be used for general quantum computation.
+
+This chapter is partly based on \cite{preskill} and \cite{topological quantum compiling}. The literature is rather vague on deriving the properties of Fibonacci anyons, in this chapter we spelled out the details more clearly.
+
+\section{Preliminaries}\label{sec:fibonacci fusion space examples}
+
+The Fibonacci anyon model consists of two particle types, $1$ (the mandatory trivial particle type) and $τ$ (non-trivial) with the corresponding fusion rules
+\begin{align*}
+  1 \times 1 = 1, \quad
+  1 \times τ = τ, \quad
+  τ \times τ = 1 + τ
+\end{align*}
+where $\tau$
+
+The following observation motivates the name of the model. Consider the fusion spaces $V_{τ^n}^1$, where $τ^n$ denotes $n$ repetitions of $τ$. This is the space of possible fusions of $n$ Fibonacci anyons, having total charge $1$. Writing out the canonical basis for these spaces we find
+\begin{align*}
+  V_{ττ}^1 &:
+    \left\{
+      \fs{τ,τ}{1,τ,1}
+    \right\} \\
+  V_{τττ}^1 &:
+    \left\{
+      \fs{τ,τ,τ}{1,τ,τ,1}
+    \right\} \\
+  V_{ττττ}^1 &:
+    \left\{
+      \fs{τ,τ,τ,τ}{1,τ,\boldsymbol{1},τ,1},
+      \fs{τ,τ,τ,τ}{1,τ,\boldsymbol{τ},τ,1}
+    \right\} \\
+  V_{τττττ}^1 &:
+    \left\{
+      \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},τ,1},
+      \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{1},τ,1},
+      \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ},τ,1}
+    \right\} \\
+  V_{ττττττ}^1 &:
+    \left\{
+      \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},\boldsymbol{1},τ,1},
+      \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},\boldsymbol{τ},τ,1},
+      \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ},\boldsymbol{1},τ,1}
+      \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{1},\boldsymbol{τ},τ,1},
+      \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ},\boldsymbol{τ},τ,1}
+    \right\}.
+\end{align*}
+The reader can continue this list. Note that the bottom line in the fusion diagrams of the fusion states in the bases can be seen as strings of $τ$ and $1$, having $1τ$ at the start and $τ 1$ at the end. Furthermore, the string is subject to the condition that $1$ may not be followed by $1$. Indeed, $1$ on the bottom row, fuses with $τ$ from the top, to give $τ$. It is thus clear that TODO: Clarify, recursion leads to Fib def.
+\begin{align*}
+  \dim V_{τ^n}^1 = \operatorname{Fib}(n-1)
+\end{align*}
+where $\operatorname{Fib}(n)$ denotes the $n$:th Fibonacci number. That is, the dimension of the fusion space grows with increasing number of $τ$s as the Fibonacci series.
+
+As we have seen in \label{anyon models}, an anyon model is determined by the corresponding $F$- and $R$-matrices. We continue by computing these matrices.
+
+
+% By the product rule for quantum dimensions \eqref{eq:quantum dimension product rule} we have
+% \begin{align*}
+%   d_1^2 &= d_1 \implies d_1 = 1 \\
+%   d_τ^2 &= τ + d_τ \implies d_τ = \varphi
+% \end{align*}
+% where $\varphi = \frac{1+\sqrt{5}}{2}$ is the golden ratio. Furthermore, the series $(d_1(n))_n$ is the Fibonacci series.
+
+
+
+
+\section{Determining the model: Computing the $F$ and $R$ matrices}
+
+TODO: Write down computation.
+
+TODO: Discuss the free parameter in F that is fixed by gauge fixing. Preskill p. 60.
+
+% The $F$-matrix is determined by solving the pentagon equation. This is in general highly non-trivial, but for the case of Fibonacci anyons this is rather straight forward. In order to simplify the calculations we make the observation that $F_{abc}^d = 1$, i.e. fusion acts trivially when there is just two non-trivial charges involved in the fusion. Thus, it remains to determine $F_{τττ}^1$ and $F_{τττ}^τ$. We make a second observation, namely
+% \begin{align*}
+%   (F_{τττ}^1)_{ab} = \delta_{aτ}\delta_{bτ},
+% \end{align*}
+% since $τ$ is the only allowed intermediate charge when three Fibonacci anyons fuse to the vacuum. Next
+
+% \cite[p. 389-390]{short intro fib} argues that the only non-trivial $F$-matrix is $F^{τττ}_τ \eqqcolon F$.
+% Since $F$ is unitary, $FF^* = I$, it can be written on the form
+% \begin{equation*}
+%   F = \begin{pmatrix} a & b \\ -e^{i\theta}b^* & e^{i\theta}a^* \end{pmatrix}
+% \end{equation*}
+% for $\theta \in [0, 2π)$ and $a, b \in \mathbb{C}$ such that $|a|^2 + |b|^2 = 1$.
+% Furthermore, $F$ is its own inverse. (This is clear from the diagrammatic representation of $F$, since reversing the order of fusion twice takes us back to the initial order of fusion. TODO: Show this from nPOV). Thus
+% \begin{equation*}
+%   F = F^*
+%   \iff
+%   \begin{pmatrix} a & b \\ -e^{i\theta}b^* & e^{i\theta}a^* \end{pmatrix}
+%   =
+%   \begin{pmatrix} a^* & -e^{-i\theta}b \\ b^* & e^{-i\theta}a^* \end{pmatrix}.
+% \end{equation*}
+% Equality for the first element shows that $a \in R$, equality for the second and third element give the same condition, namely $-e^{i\theta} = 1$, that is $\theta = π$. Finally, equality for the fourth element gives no more information. Thus,
+% \begin{equation*}
+%   F = \begin{pmatrix} a & b \\ b^* & -a \end{pmatrix}.
+% \end{equation*}
+% Let $F$ be expressed in the $\{1, τ\}$ basis, The pentagon equation then reduces to
+% \begin{equation*}
+%   F_{1,1} = F_{1,τ} F_{τ,1} \iff a = |b|^2 \quad (\implies a \ge 0).
+% \end{equation*}
+% The unitarity condition $|a|^2 + |b|^2 = 1$ thus reduces to
+% \begin{equation*}
+%   a^2 + a = 1, a \ge 0 \iff a = \varphi^{-1}
+% \end{equation*}
+% where $\varphi = \frac{1+\sqrt{5}}{2}$ is the golden ratio. Finally, $a = |b|^2 \implies b = e^{i\phi}\varphi^{-1/2}$, where the phase $\phi$ is arbitrary and by a suitable phase convention can be set to zero TODO: Why?. Hence
+% \begin{equation*}
+%   F = \begin{pmatrix} \varphi^{-1} & \varphi^{-1/2} \\ \varphi^{-1/2} & -\varphi^{-1} \end{pmatrix}
+% \end{equation*}
+
+
+% \hrule
+
+% The only non-trivial $F$-matrix is $F_{τττ}^τ$, which is two-dimensional. By considering the valid fusion channels for $F_{τττ}^1$,
+% \begin{align*}
+%   \fs{τ,τ}{τ,e,1} = \sum_f \left(F_{τττ}^1\right)_e^f \fsfused{τ}{τ}{τ}{1}{f}
+% \end{align*}
+% we see that only $e=f=τ$ correspond to valid fusions, thus $\left(F_{τττ}^1\right)_τ^τ$ acts trivially. With the same argument applied to the remaining $F$-matrices we obtain
+% \begin{alignat*}{100}
+%   % 1 =
+%   \left(F_{1ττ}^τ\right)_τ^τ &{}={}&
+%   \left(F_{τ1τ}^τ\right)_τ^τ &{}={}&
+%   \left(F_{ττ1}^τ\right)_τ^τ &{}=
+%   \\
+%   \left(F_{11τ}^τ\right)_1^τ &{}={}&
+%   \left(F_{1τ1}^τ\right)_τ^τ &{}={}&
+%   \left(F_{τ11}^τ\right)_τ^1 &{}=
+%   \\
+%   \left(F_{1ττ}^1\right)_τ^1 &{}={}&
+%   \left(F_{τ1τ}^1\right)_τ^τ &{}={}&
+%   \left(F_{ττ1}^1\right)_1^τ &{}=
+%   \\
+%   \left(F_{τττ}^1\right)_τ^τ &{}={}&
+%   \left(F_{111}^1\right)_1^1&=1\hspace{-2em}
+% \end{alignat*}
+% Other indices correspond to invalid fusions, and the corresponding $F$-matrices never show up in computations since there is no fusion state on which they act.
+
+\begin{equation*}
+  \begin{array}{r @{{}={}} c @{{}={}} c}
+    R_{ττ} &
+    \begin{pmatrix}
+      R_{ττ}^1 & 0 \\[0.5em]
+      0 & R_{ττ}^τ
+    \end{pmatrix}
+    &
+    \begin{pmatrix}
+      e^{4π i/5} & 0 \\[0.5em]
+      0 & e^{-3π i/5}
+    \end{pmatrix},
+    \\[1.5em]
+    F_{τττ} &
+    \begin{pmatrix}
+      F_{τττ}^{11} & F_{τττ}^{1τ} \\[0.5em]
+      F_{τττ}^{τ1} & F_{τττ}^{ττ}
+    \end{pmatrix}
+    &
+    \begin{pmatrix}
+      \varphi^{-1} & \varphi^{-1/2} \\[0.5em]
+      \varphi^{-1/2} & -\varphi^{-1}
+    \end{pmatrix}.
+  \end{array}
+\end{equation*}
+
+For convenience, when discussing Fibonacci anyons, let
+\begin{align*}
+  F \coloneqq F_{τττ}^τ, &&
+  R \coloneqq R_{ττ}, &&
+  B \coloneqq F^{-1} R F.
+\end{align*}
+
+
+
+\section{Braiding of Fibonacci anyons}
+
+In this section we shall compute the braid group generators for various number of Fibonacci anyons. Ultimately, we shall compute $ρ(σ_j)$ for $V_{τ^n}^1$. Having trivial total charge represents the fact that we have exactly $n$ Fibonacci anyons. If the total charge would be $τ$, there would really be $n+1$ Fibonacci anyons available. As we shall see, there will be some subtleties regarding different charge sectors, i.e. different total charge, when considering braiding of intermediate $τ$ anyons in $V_{τ^n}^1$. We begin with some elementary examples.
+
+Recall the decomposition
+\begin{align*}
+  V_{a_1\cdots a_n} = \bigoplus_{c} V_{a_1 \cdots a_n}^c,
+\end{align*}
+in particular
+\begin{align*}
+  V_{τ^n} = V_{τ^n}^1 \oplus V_{τ^n}^τ.
+\end{align*}
+
+
+\subsection{Prototypical examples}
+
+\begin{example}[Braiding in $V_{τ^2}$]
+  The two charge sectors of $V_{τ^2}$ have the standard basis
+  \begin{align*}
+    V_{ττ}^1    = \operatorname{span} \left\{ \fs{τ,τ}{1,τ,\boldsymbol{1}} \right\}, \quad
+    V_{ττ}^τ = \operatorname{span} \left\{ \fs{τ,τ}{1,τ,\boldsymbol{τ}} \right\}.
+  \end{align*}
+  That is, the fusion space $V_{τ^2}$ is two-dimensional and we denote the ordered basis by $\{1, τ\}$. Since there is only two $τ$-anyons, there are only one generator for the braid group, $σ_1$. We compute $ρ(σ_1)$ by considering its action on the standard fusion states,
+  \begin{align*}
+    ρ(σ_1) \fs{τ,τ}{1,τ,1}    &= \fs[1]{τ,τ}{1,τ,1}    = R_{ττ}^1    \fs{τ,τ}{1,τ,1} \\
+    ρ(σ_1) \fs{τ,τ}{1,τ,τ} &= \fs[1]{τ,τ}{1,τ,τ} = R_{ττ}^τ \fs{τ,τ}{1,τ,τ}.
+  \end{align*}
+  Thus we have
+  \begin{align*}
+    \left.\begin{aligned}
+      ρ(σ_1)_{11} &= R_{ττ}^1 \\
+      ρ(σ_1)_{1τ} &= 0 \\
+      ρ(σ_1)_{ττ} &= R_{ττ}^τ \\
+      ρ(σ_1)_{τ1} &= 0
+    \end{aligned}\right\}
+    \quad\iff\quad
+    ρ(σ_1) =
+    \begin{pmatrix}
+      R_{ττ}^1 & 0 \\
+      0 & R_{ττ}^τ
+    \end{pmatrix}.
+  \end{align*}
+  This also follows immediately from \cref{res:sigma 1 is R}.
+\end{example}
+
+
+\begin{example}[Braiding in $V_{τ^3}$]
+  The two charge sectors of $V_{τ^3}$ have the standard basis
+  \begin{align*}
+    V_{τττ}^1    = \operatorname{span} \left\{ \fs{τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{1}} \right\}, \quad
+    V_{τττ}^τ = \operatorname{span} \left\{ \fs{τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ}}, \fs{τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ}} \right\}.
+  \end{align*}
+  That is, the fusion space $V_{τ^3}$ is three-dimensional, and we denote the ordered basis by $\{τ1, 1τ, ττ\}$. Since there are three $τ$-anyons, there are two generators for the braid group, $σ_1$ and $σ_2$.
+  \Cref{res:sigma 1 is R} gives
+  \begin{align*}
+    ρ(σ_1)_{(τ1),(τ1)} &= R_{ττ}^τ \\
+    ρ(σ_1)_{(1τ),(1τ)} &= R_{ττ}^1 \\
+    ρ(σ_1)_{(ττ),(ττ)} &= R_{ττ}^τ \\
+    ρ(σ_1)_{i,j} &= 0 \text{ for } i \ne j.
+  \end{align*}
+  In matrix form that is
+  \begin{align*}
+    ρ(σ_1) =
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & R_{ττ}^1 \\
+      & & R_{ττ}^τ
+    \end{pmatrix}
+    = R_{ττ}^τ \oplus R.
+  \end{align*}
+  \Cref{res:sigma n-1 is R} gives
+  \begin{align*}
+    ρ(σ_2)_{(τ1),(τ1)} &= R_{ττ}^τ.
+  \end{align*}
+  We compute $ρ(σ_2)$ for the $τ$-charge sector by considering its action on the standard fusion states
+  \begin{align*}
+    ρ(σ_2) \fs{τ,τ,τ}{1,τ,1,τ}    &= \fs[2]{τ,τ,τ}{1,τ,1,τ}    = \left( B_{τττ}^τ \right)_{11} \fs{τ,τ,τ}{1,τ,1,τ} + \left( B_{τττ}^τ \right)_{1τ} \fs{τ,τ,τ}{1,τ,τ,τ}, \\
+    ρ(σ_2) \fs{τ,τ,τ}{1,τ,τ,τ} &= \fs[2]{τ,τ,τ}{1,τ,τ,τ} = \left( B_{τττ}^τ \right)_{τ1} \fs{τ,τ,τ}{1,τ,1,τ} + \left( B_{τττ}^τ \right)_{ττ} \fs{τ,τ,τ}{1,τ,τ,τ}.
+  \end{align*}
+  Thus we have
+  \begin{align*}
+    ρ(σ_2)_{(1τ),(1τ)} &= \left(B_{τττ}^τ\right)_{11} \\
+    ρ(σ_2)_{(1τ),(ττ)} &= \left(B_{τττ}^τ\right)_{1τ} \\
+    ρ(σ_2)_{(ττ),(1τ)} &= \left(B_{τττ}^τ\right)_{τ1} \\
+    ρ(σ_2)_{(ττ),(ττ)} &= \left(B_{τττ}^τ\right)_{ττ}.
+  \end{align*}
+  In matrix form that is
+  \begin{align*}
+    ρ(σ_2) =
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & B_{11} & B_{1τ} \\
+      & B_{τ1} & B_{ττ}
+    \end{pmatrix}
+    = R_{ττ}^τ \oplus B.
+  \end{align*}
+\end{example}
+
+
+\begin{example}[Braiding in $V_{τ^4}^1$]
+  Consider $V_{τ^4}^1$, this is the smallest non-trivial proper fusion space having dimension two. The fusion space is proper in the sense that the there is only one charge sector and it is the trivial (vacuum) charge sector. That is, there are really only $4$ Fibonacci anyons. We shall compute the corresponding braid group representation determined by exchange of Fibonacci anyons in the standard basis of $V_{τ^4}^1$.
+
+  \begin{proposition}
+    The representation of the braid group generators determined by $V_{τ^4}^1$, i.e. four Fibonacci anyons of trivial total charge, is
+    \begin{align*}
+      ρ(σ_1) = R,\quad
+      ρ(σ_2) = B,\quad
+      ρ(σ_3) = R.
+    \end{align*}
+  \end{proposition}
+
+  \begin{proof}
+    \Cref{res:sigma 1 is R} gives
+    \begin{align*}
+      ρ(σ_1) = B_{1ττ}^{τ} = R_{ττ} =
+      \begin{pmatrix}
+        R_{ττ}^1 & 0 \\
+        0 & R_{ττ}^τ
+      \end{pmatrix}.
+    \end{align*}
+    \Cref{res:sigma j is B} gives
+    \begin{align*}
+      ρ(σ_2)_{ij} = \left( B^τ_{τττ} \right)_{ij} = \sum_f \left( \left(F^{-1}\right)_{τττ}^τ \right)_{if} R_{ττ}^f \left( F_{τττ}^τ \right)_{fj}
+    \end{align*}
+    i.e.
+    \begin{align*}
+      ρ(σ_2) = F^{-1} R F \eqqcolon B.
+    \end{align*}
+    Finally, \cref{res:sigma n-1 is R} gives
+    \begin{align*}
+      ρ(σ_3)_{ij} = \delta_{ij} R_{ττ}^{\overline{j}}
+      \implies
+      ρ(σ_3) = R_{ττ}
+    \end{align*}
+    since $τ$ is its own antiparticle, $\overline{τ} = τ$.
+  \end{proof}
+\end{example}
+
+
+
+
+
+
+\subsection{General braiding in \texorpdfstring{$\widetilde{V}_{τ^n}$}{V\~_(τⁿ)}}
+
+Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we cannot, in general, restrict the fusion space to a fixed charge sector, we shall compute the braid group generators in all charge sectors for two, three and four $τ$ anyons. That is, we shall compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for $n=2,3,4$. (The notation was introduced in \cref{def:full fusion space,def:rho_n sigma_j}.) These examples give important insights of how the braid representation grows with the number of anyons, but most importantly these braids shall later be crucial when determining $U_p$ in \cref{thm:fibonacci U_p}.
+
+\begin{example}[Braiding of 2 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 2}
+  Consider $V_{τ^n}^1$ with the standard basis. Restrict attention to a pair of neighbouring $τ$ anyons. That is, we restrict attention to a part of the space with basis
+  \begin{align*}
+    \left\{
+      \text{valid intermediate charges $abc$ in } \fs{τ,τ}{a,b,c}
+    \right\}
+    \equiv
+    \left\{
+      1τ1, \,\, 1ττ, \,\, ττ1,
+      \begin{array}{c}
+        τ1τ,\\τττ
+      \end{array}
+    \right\}.
+  \end{align*}
+  From \cref{res:sigma j is B} we have
+  \begin{align*}
+    ρ_2(σ_1) = B_{aττ}^c \quad\iff\quad ρ_2(σ_1)_{ij} = \left( B_{aττ}^c \right)_{ij}
+  \end{align*}
+  where the indices $i$ and $j$ run over the given basis element. In the above given order of the basis fusion states the $B$-matrix is block diagonal. That is, in the obvious identification of the fusion space with $\mathbb{C}^{5}$ we have
+  \begin{align*}
+    ρ_2(σ_1) &=
+    \begin{pmatrix}
+      (B_{1ττ}^1)_{ττ} & & & & \\
+      & (B_{1ττ}^τ)_{ττ} & & & \\
+      & & (B_{τττ}^1)_{ττ} & & \\
+      & & & (B_{τττ}^τ)_{11} & (B_{τττ}^τ)_{1τ} \\
+      & & & (B_{τττ}^τ)_{τ1} & (B_{τττ}^τ)_{ττ}
+    \end{pmatrix} \\
+    &=
+    \begin{pmatrix}
+      R_{ττ}^1 & & & & \\
+      & R_{ττ}^τ & & & \\
+      & & R_{ττ}^τ & \\
+      & & & B_{1 1} & B_{1 τ} \\
+      & & & B_{τ 1} & B_{τ τ}
+    \end{pmatrix} \\
+    &= R \oplus R_{ττ}^τ \oplus B.
+  \end{align*}
+\end{example}
+
+
+\begin{example}[Braiding of 3 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 3}
+  Next, taking a third Fibonacci anyon $τ$ into account and choosing the basis ordered as follows
+  \begin{align*}
+    \left\{
+      \begin{array}{c}
+        \text{valid intermediate charges} \\
+        \text{$abcd$ in } \fs{τ,τ,τ}{a,b,c,d}
+      \end{array}
+    \right\}
+    \equiv
+    \left\{
+        1 ττ  1 ,
+      \begin{array}{c}
+          1 τ  1 τ, \\
+          1 τττ,
+      \end{array}
+      \begin{array}{c}
+        τ  1 τ  1 ,\\
+        τττ  1 ,
+      \end{array}
+      \begin{array}{c}
+        τ  1 ττ,\\
+        ττ  1 τ,\\
+        ττττ
+      \end{array}
+    \right\}
+  \end{align*}
+  we have
+  % \begin{alignat*}{10}
+  %   ρ(σ_1) &= R_{ττ}^τ &{}\oplus{}& R &{}\oplus{}& FRF^{-1} &{}\oplus{}& FRF^{-1} &{}\oplus{}& R_{ττ}^τ \\
+  %   ρ(σ_2) &= R_{ττ}^τ &{}\oplus{}& FRF^{-1} &{}\oplus{}& R &{}\oplus{}& R_{ττ}^τ &{}\oplus{}& J_2 FRF^{-1} J_2
+  % \end{alignat*}
+  \begin{alignat*}{10}
+    ρ_3(σ_1) &= R_{ττ}^τ &{}\oplus{}& \centermathcell{R}  &{}\oplus{}& B           &{}\oplus{}&
+    \begin{pmatrix}
+      B_{11} & & B_{12} \\
+      & R_{ττ}^{τ} \\
+      B_{21} & & B_{22}
+    \end{pmatrix} \\
+    ρ_3(σ_2) &= R_{ττ}^τ &{}\oplus{}& B            &{}\oplus{}& \centermathcell{R} &{}\oplus{}&
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & B_{11} & B_{1τ} \\
+      & B_{τ1} & B_{ττ}
+    \end{pmatrix}
+  \end{alignat*}
+  % where $J_n$ is the exchange matrix
+  % \begin{align*}
+  %   J_2 =
+  %   \begin{pmatrix}
+  %     0 & 1 \\
+  %     1 & 0
+  %   \end{pmatrix},
+  %   \quad
+  %   J_3 =
+  %   \begin{pmatrix}
+  %     0 & 0 & 1 \\
+  %     0 & 1 & 0 \\
+  %     1 & 0 & 0
+  %   \end{pmatrix}, \quad\ldots
+  % \end{align*}
+
+  % Note that $ρ(σ_2) = Pρ(σ_1)P^{-1}$ where $P$ is the permutation matrix
+  % \begin{align*}
+  %   P = I_2 \oplus J_2^{\oplus 3} =
+  %   \begin{pmatrix}
+  %     1 &   &   &   &   &   &   &   \\
+  %       & 1 &   &   &   &   &   &   \\
+  %       &   & 0 & 1 &   &   &   &   \\
+  %       &   & 1 & 0 &   &   &   &   \\
+  %       &   &   &   & 0 & 1 &   &   \\
+  %       &   &   &   & 1 & 0 &   &   \\
+  %       &   &   &   &   &   &   &   \\
+  %       &   &   &   &   &   & 0 & 1 \\
+  %       &   &   &   &   &   & 1 & 0
+  %   \end{pmatrix}
+  % \end{align*}
+  % which satisfies $P^{-1} = P$.
+
+
+
+  % \vspace{1cm}\hrule\vspace{1cm}
+
+  % OLD: USES BAD ORDER OF BASIS
+
+  % From this we easily conclude that, in the basis
+  % \begin{align*}
+  %   \left\{ \fs{τ,τ,τ}{a,b,c,d} \text{ for possible } a,b,c,d \right\} \equiv
+  %   \{
+  %     1τ1τ,
+  %     1ττ1,
+  %     1τττ,
+  %     τ1τ1,
+  %     τ1ττ,
+  %     ττ1τ,
+  %     τττ1,
+  %     ττττ
+  %   \}
+  % \end{align*}
+  % the braid generators
+  % \begin{align*}
+  %   ρ(σ_1) \fs{τ,τ,τ}{a,b,c,d} &= \fs[1]{τ,τ,τ}{a,b,c,d}, \\
+  %   ρ(σ_2) \fs{τ,τ,τ}{a,b,c,d} &= \fs[2]{τ,τ,τ}{a,b,c,d}
+  % \end{align*}
+  % are given by
+  % \begin{align*}
+  %   ρ(σ_1) &=
+  %   \begin{pmatrix}
+  %     R_{ττ}^1 \\
+  %     & R_{ττ}^τ \\
+  %     & & R_{ττ}^τ \\
+  %     & & & B_1^1 & & & B_1^τ \\
+  %     & & & & B_1^1 & & & B_1^τ \\
+  %     & & & & & R_{ττ}^τ \\
+  %     & & & B_τ^1 & & & B_τ^τ \\
+  %     & & & & B_τ^1 & & & B_τ^τ
+  %   \end{pmatrix} \\
+  %   ρ(σ_2) &=
+  %   \begin{pmatrix}
+  %     B_1^1 & & B_1^τ \\
+  %     & R_{ττ}^τ \\
+  %     B_τ^1 & & B_τ^τ \\
+  %     & & & R_{ττ}^1 \\
+  %     & & & & R_{ττ}^τ \\
+  %     & & & & & B_1^1 & & B_1^τ \\
+  %     & & & & & & R_{ττ}^τ \\
+  %     & & & & & B_τ^1 & & B_τ^τ
+  %   \end{pmatrix}
+  % \end{align*}
+\end{example}
+
+
+\begin{example}[Braiding of 4 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 4}
+  In the ordered basis
+  \centermath{\begin{align*}
+    \left\{
+      \begin{array}{c}
+        \text{valid intermediate charges} \\
+        \text{$abcde$ in } \fs{τ,τ,τ,τ}{a,b,c,d,e}
+      \end{array}
+    \right\}
+    \equiv
+    \left\{
+      \begin{array}{c}
+        1τ1τ1, \\
+        1τττ1,
+      \end{array}
+      \begin{array}{c}
+        1τ1ττ, \\
+        1ττ1τ, \\
+        1ττττ,
+      \end{array}
+      \begin{array}{c}
+        τ1ττ1, \\
+        ττ1τ1, \\
+        ττττ1,
+      \end{array}
+      \begin{array}{c}
+        τ1τ1τ, \\
+        τ1τττ, \\
+        τττ1τ, \\
+        ττ1ττ, \\
+        τττττ
+      \end{array}
+    \right\}
+  \end{align*}}
+  we have
+  \centermath{\begin{align*}
+    ρ_4(σ_1) &=
+    \begin{pmatrix}
+      R_{ττ}^1 \\
+      & R_{ττ}^τ
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      R_{ττ}^1 \\
+      & R_{ττ}^τ \\
+      & & R_{ττ}^τ
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      B_{11} & & B_{1τ} \\
+      & R_{ττ}^τ \\
+      B_{τ1} & & B_{ττ}
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      B_{11} &                   &                   & B_{12} & \\
+             & B_{11}            &                   &        & B_{12} \\
+             &                   & R_{ττ}^τ \\
+      B_{21} &                   &                   & B_{22} & \\
+             & B_{21}            &                   &        & B_{22}
+    \end{pmatrix} \\
+    ρ_4(σ_2) &=
+    \begin{pmatrix}
+      B_{11} & B_{1τ} \\
+      B_{τ1} & B_{ττ}
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      B_{11} & & B_{1τ} \\
+      & R_{ττ}^τ \\
+      B_{τ1} & & B_{ττ}
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & B_{11} & B_{1τ} \\
+      & B_{τ1} & B_{ττ} \\
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      R_{ττ}^1 \\
+      & R_{ττ}^τ \\
+      & & R_{ττ}^τ \\
+      & & & B_{11} & B_{12} \\
+      & & & B_{21} & B_{22}
+    \end{pmatrix} \\
+    ρ_4(σ_3) &=
+    \begin{pmatrix}
+      R_{ττ}^1 \\
+      & R_{ττ}^τ
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & B_{11} & B_{1τ} \\
+      & B_{τ1} & B_{ττ} \\
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      R_{ττ}^τ \\
+      & R_{ττ}^1 \\
+      & & R_{ττ}^τ
+    \end{pmatrix}
+    \oplus
+    \begin{pmatrix}
+      B_{11} & B_{1τ} \\
+      B_{τ1} & B_{ττ} \\
+      & & B_{11} & & B_{1τ} \\
+      & & & R_{ττ}^τ \\
+      & & B_{τ1} & & B_{ττ}
+    \end{pmatrix}
+  \end{align*}}
+  Note that in this order of the basis, the last block of $ρ_{4}(σ_2)$ is precisely $ρ_2(σ_1)$. Indeed, basis elements in the $ττ$-sector is ordered by the internal charge sectors.
+\end{example}
+
+\begin{remark}\label{remark:fibonacci sigma dimension}
+  As is clearly manifested in the three examples, the representation of the braid group generators is always split into four blocks, one block for each two-sided charge sector, $11, 1τ, τ1$ and $ττ$. These blocks will always be disjoint since there is no way of transforming between them. Compare with the decomposition $V_{ab} = \bigoplus_c V_{ab}^c$. The dimension of each of these blocks grows as the Fibonacci numbers, simply because the basis states in each block are Fibonacci strings of $1$'s and $τ$'s. In general we have the dimension of the decomposition for $n$ Fibonacci anyons given by
+  \begin{align*}
+    \operatorname{dim} ρ_n (σ_j) = \underbrace{F_{n-2} + F_{n-1}}_{F_{n}} + \underbrace{F_{n-1} + F_{n}}_{F_{n+1}} = F_{n+2}.
+  \end{align*}
+\end{remark}
+
+% \begin{remark}
+%   This can be continued to construct the braid group represented by any number of $τ$ anyons. However, note that the action of braiding two $τ$ anyons around $p$ other $τ$ anyons of total charge $c$ is the same as braiding two $τ$ anyons around an anyon of charge $c$. The charge $c$ is either $1$ or $τ$, but how is it determined? By fusion, yes, but the outcome of the fusion is not deterministic (depends on the quantum dimension). A large number of $τ$ anyons fuse to a $τ$ anyon with about 72 \% probability, see below. Can the general case (of braiding around several anyons) be reduced to braiding around one anyon with given charge? Perhaps adding the two cases, weighted with the corresponding fusion probabilities?
+% \end{remark}
+
+
+
+
+
+
+\subsection{Spectrum of $ρₙ(σⱼ)$}
+
+\begin{theorem}
+  The spectrum without multiplicities of the representation of the braid group generator $ρ_n(σ_j)$ is independent of $n$ and $j$ and given by
+  \begin{align*}
+    \operatorname{spec}(ρ_n(σ_j)) = \big\{ R_{\tau\tau}^1, R_{\tau\tau}^\tau \big\}.
+  \end{align*}
+\end{theorem}
+
+\begin{proof}
+  From \cref{res:braid generator conjugate} we have that the all braid group generators $σ_j$ are conjugate, this translates to that the corresponding representations $ρ_n(σ_j)$ are similar for fixed $n$. That is, for fixed $n$ there exists an invertible matrix $S$ such that
+  \begin{align*}
+    ρ_n(σ_{j+1}) = S ρ_n(σ_j) S^{-1}.
+  \end{align*}
+  (In particular we have $S = ρ_n(σ_j) ρ_n(σ_{j+1})$ from the proof of \cref{res:braid generator conjugate}.) Thus, the eigenvalues of $ρ_n(σ_j)$ are independent of $j$. Fix $j = 1$, the representation $ρ_n(σ_1)$ of $σ_1$ acts on $\widetilde{V}_{τ^n}$ with basis elements
+  \begin{align*}
+    \fswide{\tau,\tau}{b_1,b_2,b_3} \cdots \fswide{\tau,\tau}{b_{n-1},b_n,b_{n+1}}.
+  \end{align*}
+  However, only the labels $b_1,b_2,b_3$ enter in the expression for $ρ_n(σ_1)$, thus it is really only the space $\widetilde{V}_{τ^2}$ with basis elements
+  \begin{align*}
+    \fswide{\tau,\tau}{b_1,b_2,b_3}
+  \end{align*}
+  that $ρ_n(σ_1)$ acts on. Thus, as discussed in \cref{remark:abuse notation}, as $n$ increases the matrix $ρ_n(σ_1)$ increases and gets repeated block. These repeated blocks give no new eigenvalues (but give increased multiplicity for the existing eigenvalues). Thus, the spectrum of $ρ_n(σ_1)$ is independent of $n$, not counting multiplicities.
+
+  To sum up, the spectrum of $ρ_n(σ_j)$, not counting multiplicities, is independent of both $n$ and $j$. Thus, we can compute the spectrum from the special case $ρ_2(σ_1)$, computed in \cref{res:general fibonaci braiding 2}.
+\end{proof}
+
+\begin{remark}
+  This theorem trivially generalizes to \emph{any} anyon model. However, the specific eigenvalues are of course different.
+\end{remark}
+
+
+
+
+
+
+\section{Exchange operator $Uₚ$}\label{sec:fibonacci Up}
+
+Consider the fusion space $V_{τ^n}^1$ and exchange of a pair of anyons, $j$ and $k$, around $p$ enclosed anyons, $j+1, j+2, \ldots, k-1$.
+We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. Instead of immediately applying \cref{thm:general Up}, which leads to tedious computation, we take a slightly different route in the proof.
+
+\begin{theorem}\label{thm:fibonacci U_p}
+  Exchange of a pair of anyons around $p$ enclosed anyons introduces a non-abelian anyonic phase $U_p$, given by
+  \begin{align*}
+    U_0 &= ρ_2(σ_1) \\
+    U_1 &= ρ_3(σ_1) ρ_3(σ_2) ρ_3(σ_1) \\
+    U_p &= F^{-1} ρ_4(σ_1) ρ_4(σ_2) ρ_4(σ_3) ρ_4(σ_2) ρ_4(σ_1) F, \quad p \ge 2
+  \end{align*}
+  expressed in the fused basis \cref{eq:F U_p basis}, $F$ is the corresponding change of basis matrix. The braid generators $ρ_m(σ_j)$ are computed in \cref{res:general fibonaci braiding 2,res:general fibonaci braiding 3,res:general fibonaci braiding 4}.
+
+  % Explicitly
+  % \begin{align*}
+  %   U_0 &= R_{ττ}^1 \oplus R_{ττ}^τ \oplus R_{ττ}^τ \oplus B \\
+  %   U_1 &= \left( R_{ττ}^τ \right)^3 \oplus \left( RBR \right) \oplus \left( BRB \right) \oplus
+  %   \begin{pmatrix}
+  %     B_{11} & & B_{12} \\
+  %     & R_{ττ}^τ \\
+  %     B_{21} & & B_{22}
+  %   \end{pmatrix}
+  %   \begin{pmatrix}
+  %     R_{ττ}^τ \\
+  %     & B_{11} & B_{12} \\
+  %     & B_{21} & B_{22}
+  %   \end{pmatrix}
+  %   \begin{pmatrix}
+  %     B_{11} & & B_{12} \\
+  %     & R_{ττ}^τ \\
+  %     B_{21} & & B_{22}
+  %   \end{pmatrix} \\
+  % \end{align*}
+\end{theorem}
+\begin{proof}
+  The braid corresponding to $U_0$ is given by \cref{thm:general Up} with $c = 1$. That is, (using \cref{res:B1})
+  \begin{align*}
+    \begin{tikzpicture}[scale=0.5,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \braid s_1^{-1} s_2^{-1} s_1^{-1};
+      \node at (1, 0.5) {$τ$};
+      \node at (2, 0.5) {$1$};
+      \node at (3, 0.5) {$τ$};
+      \draw (0, -3.5) to (4, -3.5);
+      \node at (0.5, -4) {$a$};
+      \node at (1.5, -4) {$b$};
+      \node at (2.5, -4) {$b$};
+      \node at (3.5, -4) {$e$};
+    \end{tikzpicture}
+    &=
+    \sum_{g} \left( B_{aττ}^e \right)_{bg}
+    \begin{tikzpicture}[scale=0.5,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \draw (1, 0) to (1, -1);
+      \draw (2, 0) to (2, -1);
+      \draw (3, 0) to (3, -1);
+      \node at (1, 0.5) {$τ$};
+      \node at (2, 0.5) {$1$};
+      \node at (3, 0.5) {$τ$};
+      \draw (0, -1) to (4, -1);
+      \node at (0.5, -1.5) {$a$};
+      \node at (1.5, -1.5) {$g$};
+      \node at (2.5, -1.5) {$g$};
+      \node at (3.5, -1.5) {$e$};
+    \end{tikzpicture} \\
+    \iff
+    \begin{tikzpicture}[scale=0.5,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \braid s_1^{-1};
+      \node at (1, 0.5) {$τ$};
+      \node at (2, 0.5) {$τ$};
+      \draw (0, -1.5) to (3, -1.5);
+      \node at (0.5, -2) {$a$};
+      \node at (1.5, -2) {$b$};
+      \node at (2.5, -2) {$e$};
+    \end{tikzpicture}
+    &=
+    \sum_{g} \left( B_{aττ}^e \right)_{bg}
+    \begin{tikzpicture}[scale=0.5,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \draw (1, 0) to (1, -1);
+      \draw (2, 0) to (2, -1);
+      \node at (1, 0.5) {$τ$};
+      \node at (2, 0.5) {$τ$};
+      \draw (0, -1) to (3, -1);
+      \node at (0.5, -1.5) {$a$};
+      \node at (1.5, -1.5) {$g$};
+      \node at (2.5, -1.5) {$e$};
+    \end{tikzpicture}
+  \end{align*}
+  This braid is computed in \cref{res:general fibonaci braiding 2}.
+
+  Similarly, the braid corresponding to $U_1$ is given by \cref{thm:general Up} with $c=τ$ and is computed in \cref{res:general fibonaci braiding 3}.
+
+  Finally, the braid corresponding to $U_p$ for $p \ge 2$ is given by \cref{thm:general Up} where the intermediate charge $c$ can be both $1$ and $τ$. The intermediate charges $c_1, c_2, \ldots, c_{p-2}$ in \cref{eq:F U_p basis} do not affect the braid $U_p$. Indeed these labels do not enter equation \cref{thm:general Up} determining $U_p$ Thus, it suffices to consider the subspace of the fusion space containing only the labels $a,b,c,d,e$. First, use the $F$ matrix to change basis as described in \cref{eq:F U_p basis} so that \cref{thm:general Up} can be used, finally, change back to the standard basis with $F^{-1}$.
+
+  To simplify the computation, note that the braid in the proof of \cref{thm:general Up} can be modeled by letting the intermediate charge $c$ be the intermediate charge of fusion of two $τ$-anyons. That is, this braid is same as the braid described in \cref{res:general fibonaci braiding 4}, up to change of basis by the $F$-matrix. Hence the result follows.
+\end{proof}
+
+\begin{remark}
+  Note that the case when $c$ is allowed to be both $1$ and $τ$ (i.e. when $p \ge 2$) is not the direct sum of the cases $c=1$ and $c=τ$ because transitions between fusion states with $c=1$ and $c=τ$ do occur.
+\end{remark}
+
+\begin{remark}
+  As stated in the theorem, the dimension of $U_p$ is not increasing with $p \ge 2$. This is simply due the abuse of notation, as discussed in \cref{remark:abuse notation}, in which the braid operator is represented in the part of the space containing only labels which enter into the expression for the braid operator. The dimension of of $U_p$ with increasing $p$ of course grows as the Fibonacci numbers, $\operatorname{dim} U_p = \operatorname{Fib}(p)$, cf.\ \cref{remark:fibonacci sigma dimension}. Representing $U_p$ in the full basis results in repeating blocks in the corresponding matrix. Indeed, each intermediate charge $c_j$ for $1 \le j \le p-2$ gives two additional fusion states (corresponding to $c_j = 1$ and $c_j = τ$), thus giving a copy of the block describing the action on the $abcde$-part of the fusion state. Note that the order of the fusion state in the bases generally permute the discussed blocks. Compare with \cref{sec:general braiding}.
+
+  The reason for working in the fused space \cref{eq:F U_p basis} is precisely that this allows for a simpler representation of $U_p$. If we would have worked in the standard basis, such repeating blocks would not occur for $U_p$, and the representation for $U_p$ would be much more involved. Indeed, it is in principle straight forward to transform between the two representations, in the fused basis and in the standard basis, by applying the $F$ matrix to change basis, as described in \cref{eq:F U_p basis}.
+
+  The fact that $U_p$ is independent of $p$ for $p \ge 2$ is due to the fact that fusion of $p$ anyons of type $τ$ always results in $1$ or $\tau$. However, if we consider an anyon model with fusion rules
+  \begin{align*}
+    t \times t = a, \quad
+    t \times a = t
+  \end{align*}
+  so that
+  \begin{align*}
+    t \times t \times t = t
+  \end{align*}
+  then clearly $U_2$ and $U_3$ are different, since the intermediate charge $c$ is different.
+\end{remark}
+
+We now have an explicit expression for the exchange operator $U_p$, straight forward computation gives its eigenvalues.
+
+\begin{corollary}
+  The eigenvalues of $U_p$ for Fibonacci anyons are
+  \begin{align*}
+    \sigma(U_0) &=
+    \{
+      R_{ττ}^1,
+      R_{ττ}^τ
+    \} \\
+    & =
+    \{
+      e^{4iπ/5},
+      e^{-3iπ/5}
+    \} \\
+    \sigma(U_1) &=
+    \{
+      R_{ττ}^1,
+      \left( R_{ττ}^τ \right)^3,
+      \left( R_{ττ}^τ \right)^7
+    \} \\
+    & =
+    \{
+      e^{4iπ/5},
+      e^{iπ/5},
+      e^{-iπ/5}
+    \} \\
+    \sigma(U_p) &=
+    \{
+      R_{ττ}^1,
+      \left( R_{ττ}^τ \right)^3,
+      \left( R_{ττ}^τ \right)^7,
+      R_{ττ}^τ
+    \} \quad\quad (p \ge 2) \\
+    & =
+    \{
+      e^{4 i π/5},
+      e^{i π/5},
+      e^{-i π/5},
+      e^{-3 i π/5}
+    \}.
+  \end{align*}
+
+  \begin{center}
+    \begin{tikzpicture}[scale=2]
+      \draw[->] (-1.25,0) -- (1.25,0) node[below] {Re};
+      \draw[->] (0,-1.25) -- (0,1.25) node[right] {Im};
+      \draw (0,0) circle (1);
+      \node[font=\large] at ({cos(deg(pi/5))}, {sin(deg(pi/5))}) {$\bullet$};
+      \node at ({cos(deg(pi/5))+0.3}, {sin(deg(pi/5))+0.15}) {$e^{iπ/5}$};
+      \node[font=\large] at ({cos(-deg(pi/5))}, {sin(-deg(pi/5))}) {$\bullet$};
+      \node at ({cos(-deg(pi/5))+0.3}, {sin(-deg(pi/5))-0.15}) {$e^{-iπ/5}$};
+      \node[font=\large] at ({cos(deg(4*pi/5))}, {sin(deg(4*pi/5))}) {$\bullet$};
+      \node at ({cos(deg(4*pi/5))-0.2}, {sin(deg(4*pi/5))+0.15}) {$e^{i4π /5}$};
+      \node[font=\large] at ({cos(-deg(3*pi/5))}, {sin(-deg(3*pi/5))}) {$\bullet$};
+      \node at ({cos(-deg(3*pi/5))-0.15}, {sin(-deg(3*pi/5))-0.25}) {$e^{-3iπ/5}$};
+    \end{tikzpicture}
+  \end{center}
+
+\end{corollary}
+
+In \cref{chap:kinetic energy} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle given the energy bounds. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$.
+
+We see that exchange of Fibonacci described by $U_p$ always corresponds to a non-zero kinetic energy, it is natural to ask if there are braids that do have zero energy. The following corollary positively answers this.
+
+\begin{corollary}[Zero energy braid for Fibonacci anyons]
+  With $U_p$ as in \cref{thm:fibonacci U_p} we have
+  \begin{align*}
+    \sigma\left( U_p^5 \right) = \{1,-1\}
+  \end{align*}
+  for all $p \ge 0$, by straight-forward computation. This shows that braiding a pair of Fibonacci anyons five times around any number of Fibonacci anyons behaves as both fermions and bosons simultaneously. In particular, the occurrence of the eigenvalue $1$ shows that the braid $U_p^5$ is a zero-energy braid, according to the discussion in \cref{chap:kinetic energy}.
+\end{corollary}
+
+This can be seen as a consequence of the fact that $\left( R_{ττ}^1 \right)^5 = 1$ and $\left( R_{ττ}^τ \right)^5 = -1$.
+
+
+
+
+
+
+
+
+
+
+\section{Quantum dimension and fusion probabilities}
+
+As explained in detail in \cite{preskill}, the quantum dimension $d_a$ of an anyon of type $a$ is the rate of growth in dimension of the fusion space $V_{a^n}^1$ as $n$ grows.
+Explicitly that is
+\begin{align*}
+  d_a = \lim_{n\to\infty} \frac{\operatorname{dim}\left( V_{a^{n+1}} \right)}{\operatorname{dim}\left( V_{a^{n}} \right)}.
+\end{align*}
+Recall that $a^n$ denotes $\underbrace{τ\cdotsτ}_{n}$ if $a$ is a particle label.
+The quantum dimension can be immediately computed from the fusion rules. For the Fibonacci anyons we have the fusion rule
+\begin{align*}
+  τ \times τ = 1 + τ
+\end{align*}
+which gives the quantum dimension
+\begin{align*}
+  d_τ^2 = 1 + d_τ
+  \, \iff \,
+  d_τ = \varphi
+\end{align*}
+note that only the positive solution is meaningful. Furthermore, the trivial particle $1$ has quantum dimension $d_1 = 1$. Indeed, the corresponding fusion space $V_{1^n}^1$ does not grow in dimension as $n$ increases.
+
+Using the quantum dimension, \cite{preskill} shows the following result.
+\begin{proposition}\label{fusion probability}
+  The probability $P(ab \to c)$ that anyons of type $a$ and $b$ fuse to an anyon of type $c$ is given by
+  \begin{align*}
+    P(ab \to c) = \frac{N_{ab}^c d_c}{d_a d_b}.
+  \end{align*}
+\end{proposition}
+
+Consider fusion of $n$ Fibonacci $τ$ anyons. \Cref{fusion probability} together with $d_τ = \varphi$ and $d_1 = 1$ gives
+\begin{align*}
+  P(ττ \to τ) = \varphi^{-1}, \quad P(ττ \to 1) = \varphi^{-2}.
+\end{align*}
+We then have the probability of $n$ Fibonacci $τ$ anyons fusing to charge $τ$ given by the recursion relation
+\begin{align*}
+  P(τ^n \to τ)
+  &= P(τ^{n-1} \to τ) P(τ τ \to τ) + P(τ^{n-1} \to 1) P(1τ \to τ) \\
+  &= \varphi^{-1} P(τ^{n-1} \to τ) + P(τ^{n-1} \to 1) \\
+  &= \varphi^{-1} P(τ^{n-1} \to τ) + P(τ^{n-2} \to τ) P(ττ \to 1) \\
+  &= \varphi^{-1} P(τ^{n-1} \to τ) + \varphi^{-2} P(τ^{n-2} \to τ).
+\end{align*}
+With initial values $P(τ \to τ) = 1$ and $P(ττ \to τ) = \varphi^{-1}$ we get
+\begin{align*}
+  P(τ^n \to τ) = \Fib(n) \varphi^{1-n}.
+\end{align*}
+Using the closed form expression
+\begin{align*}
+  \Fib(n) = \frac{\varphi^n-(-\varphi)^{-n}}{\sqrt{5}}
+\end{align*}
+we get the limit
+\begin{align*}
+  \lim_{n\to\infty} P(τ^n \to τ) = \frac{\varphi}{\sqrt{5}} \approx 0.72
+\end{align*}
+and thus
+\begin{align*}
+  \lim_{n\to\infty} P(τ^n \to 1) \approx 0.28.
+\end{align*}
+
+% julia
+% φ = (1+√5)/2
+% fib(n) = round(Int, φ^n/√5)
+% P(n) = fib(n)*φ^(1-n)
+% for n in 0:9 @printf("%s: %.4f\n", n, P(n)) end
+% @printf("∞: %.4f\n", φ/√5)
+
+
+TODO: Can this be used to say anything more abut the eigenvalues of $U_p$? Some eigenvalues correspond to $c=1$, some correspond to $c=τ$, as we've now seen the latter case is more probable.
+
+
+
+
+% \section{$SU(2)_3 \cong SO(3)$}
+
+% See ``Topological Quantum Compiling, Section II''.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{Topological Quantum Computation}
+
+
+
+
+
+% \section{Reading: Topological Quantum Computation}
+
+% \begin{enumerate}
+%   \item \url{http://users.physik.fu-berlin.de/~pelster/Anyon1/}
+%   \item Georgiev -- Topological Quantum Computation with non-Abelian anyons in fractional quantum Hall states \\
+%     \url{https://arxiv.org/pdf/1602.05035v1.pdf}
+%   \item A Short Introduction to Fibonacci Anyon Models \url{http://stationq.cnsi.ucsb.edu/~wang/Publications/34.pdf}
+%   \item Anyonic Quantum Walks \url{http://arxiv.org/pdf/0910.2974v1.pdf}
+%   \item Review: Why should anyone care about computing with anyons? \url{http://rspa.royalsocietypublishing.org/content/royprsa/464/2089/1.full.pdf}
+%   \item Kitaev, Anyons in an exactly solved model and beyond
+%   \item Preskill, Lecture Notes for Physics 219: Quantum Computation. Chap. 9 Topological quantum computation
+% \end{enumerate}
+
+
+% Witten-Chern-Simons theory $SU(2)_k$ level$=k$, braiding has been shown to be universal for $k\ge 3, k \ne 4$. \cite{freedman kitaev larsen wang}
+
+
+
+
+
+
+
+
+% \section{Quantum computation}
+
+% The reader is assumed to be familiar with the basics of quantum computation. A good introduction to the subject can be found in \cite{nielsen chuang}.
+
+% Recall that time evolution of a quantum state $\ket{\psi}$ is unitary. If the quantum system is described by a Hamiltonian $H$, time evolution of $\ket{\psi}$ is governed by the Schrödinger equation $i\frac{\partial\ket{\psi}}{\partial t} = H\ket{\psi}$. For finite-dimensional state-spaces we get the solution $\ket{\psi_t} = e^{-itH}\ket{\psi_0}$. Since the Hamiltonian is hermitian, the time evolution operator $e^{-itH}$ is unitary.
+
+% %  Since H is Hermitian, e
+% % unitary matrix. Therefore we will just say states evolve by unitary matrices.
+% % In quantum computation, we apply unitary transformations to state
+% % vectors |ψ> to process the information encoded in |ψ>. Hence information
+% % processing in quantum computation is multiplication by unitary matrices
+
+
+
+% Explain notation in \cite{topological quantum compiling} via diagrams, i.e.
+
+% \begin{align*}
+%   (\bullet,\bullet)_0 &= \fs{τ,τ}{1,τ,1} \\
+%   (\bullet,\bullet)_1 &= \fs{τ,τ}{1,τ,τ} \\
+%   ((\bullet, \bullet)_0 , (\bullet, \bullet)_0)_0 &= \fsfuseddouble{1}{τ}{τ}{1}{1}{τ}{τ}{1}{1} \\
+%   ((\bullet, \bullet)_1 , (\bullet, \bullet)_1)_0 &= \fsfuseddouble{1}{τ}{τ}{τ}{τ}{τ}{τ}{τ}{τ} \\
+%   ((\bullet, \bullet)_1 , \bullet)_0 &= \fs{τ,τ}{τ,τ,1} \\
+%   ((\bullet, \bullet)_0 , \bullet)_1 &= \fs{τ,τ}{τ,1,τ} \\
+%   ((\bullet, \bullet)_1 , \bullet)_1 &= \fs{τ,τ}{τ,τ,τ}
+% \end{align*}
+% \begin{align*}
+%   \left(\bullet,(\bullet,\bullet)_a\right)_c &= \sum_b F_{ab}^c \left((\bullet,\bullet)_b,\bullet\right)_c
+%   \iff \\
+%   \fsfused{τ}{τ}{τ}{c}{a} &= \sum_b \left( F_{τττ}^c \right)_{ab} \fs{τ,τ}{τ,b,c}
+% \end{align*}
+
+
+
+% \section{??}
+
+
+% ``One important problem is decoherence and systematic errors in unitary transformations which occur in real
+% quantum systems. From the purely theoretical point of view, this problem has been solved
+% due to Shor’s discovery of fault-tolerant quantum computation [2], with subsequent improvements
+% [3, 4, 5, 6]. An arbitrary quantum circuit can be simulated using imperfect gates, provided
+% these gates are close to the ideal ones up to a constant precision
+% $\delta$. Unfortunately, the threshold value of $\delta$ is rather small; it is very difficult to achieve this precision.'' \cite{kitaev fault-tolerant anyons} Started with \cite{shor fault-tolerant}, later improvements, discussed more in \cite{kitaev fault-tolerant anyons}.
+
+% ``In the Abelian case the braiding results in phase factors that are both geometrical and dynamical in nature and thus hard to distinguish. On the contrary, the non-Abelian anyons cause a change in the amplitude of the participating states, which is easily distinguished from spurious dynamical phase factors.'' -- Preskill?
+
+% Solovay-Kitaev theorem:
+% ``The Solovay-Kitaev (SK) theorem is one of the most important fundamental results in the
+% theory of quantum computation. In its simplest form the SK theorem shows that, roughly
+% speaking, if a set of single-qubit quantum gates generates a dense subset of SU(2), then that
+% set is guaranteed to fill SU(2) quickly, i.e., it is possible to obtain good approximations to
+% any desired gate using surprisingly short sequences of gates from the given generating set.'' -- \url{https://arxiv.org/pdf/quant-ph/0505030v2.pdf} see also \cite[Appendix 3]{nielsen chuang}
+
+
+% It is not known if there exists a braid that exactly represents the Pauli $x$-matrix up to a global phase. \cite[sec. 1.5]{wang book}
+
+% \begin{definition}{Quantum dimension $d_\alpha$}
+
+%   \cite{preskill}, and \cite[p. 388]{short intro fib}
+
+%   The number $d_\alpha(n)$ is the number of ways $n$ anyons of type $\alpha$ can be fused to yield an anyon of the same type $\alpha$. The quantum dimension $d_\alpha$ quantifies the rate of growth of the dimension $d_\alpha(n)$ of the Hilbert space of the fusion channels, in the sense that $d_\alpha(n) \to d_\alpha^n$ as $n\to\infty$. The quantum dimension satisfies the following product rule
+%   \begin{equation}\label{eq:quantum dimension product rule}
+%     d_a d_b = \sum_c N_{ab}^c.
+%   \end{equation}
+%   TODO Why?
+%   The number $d_\alpha$ is the unweighted probability that two $\alpha$ anyons fuse to an $\alpha$ anyon. TODO Why?
+% \end{definition}
+
+
+% ``$S_{\text{topo}} = \log D$ where $D = \log \sqrt{\sum_j d_j^2}$ is the total quantum dimension.''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \chapter{Quantum algorithms}
+
+% \begin{enumerate}
+%   \item \url{https://en.wikipedia.org/wiki/Deutsch%E2%80%93Jozsa_algorithm}
+%   \item Jan-Åke Larsson, Niklas Johansson - Efficient classical simulation of the Deutsch-Jozsa and Simon's algorithms, \url{http://arxiv.org/abs/1508.05027}
+% \end{enumerate}
+
+
+% \chapter{Category theory}
+
+% \url{http://research.microsoft.com/en-us/um/people/gurevich/opera/225.pdf} and reference 9 \url{http://www.cs.mcgill.ca/~prakash/Pubs/MTCanyons.pdf}
+
+% \begin{itemize}
+%   \item
+%     ``Category theory allows you to work on structures without the need first to pulverise them into set theoretic dust. To give an example from the field of architecture, when studying Notre Dame cathedral in Paris, you try to understand how the building relates to other cathedrals of the day, and then to earlier and later cathedrals, and other kinds of ecclesiastical building. What you don't do is begin by imagining it reduced to a pile of mineral fragments.'' -- Corfield, Towards a Philosophy of Real Mathematics p. 239.
+
+%   \item
+%     Any category with finite products give a monoidal category in which the unit object is the terminal object.
+
+%   \item
+%     TODO: Monoid in a category with finite products vs. monoid in a monoidal category?
+
+%   \item
+%     Fusion spaces as categories.
+
+%     Overview (good!) \url{http://www.cs.ox.ac.uk/bob.coecke/Eric.pdf}
+
+%     Appendix E in \url{https://arxiv.org/pdf/cond-mat/0506438v3.pdf} perhaps check this \url{https://arxiv.org/pdf/1307.8244v6.pdf} as well, and more general in the book Tensor Categories \url{http://www-math.mit.edu/~etingof/egnobookfinal.pdf}.
+
+%     \url{http://www.cs.mcgill.ca/~prakash/Pubs/MTCanyons.pdf}
+
+%     \url{http://mathoverflow.net/questions/243798/module-categories-for-fibonacci-anyons/243800}
+
+%     \url{http://physics.stackexchange.com/questions/27080/direct-sum-of-anyons}
+% \end{itemize}
+
+
+
+
+
+
+% \chapter{Möten}
+
+% \section{2016-12-08}
+
+% \subsection{Mail med sammanställning}
+
+% \begin{enumerate}
+%   \item Fundera på spektrumet för vinkeloperatorn med matris-randvillkor (t.ex. ta några konkreta exempel eller red ut för $U(2)$ med explicit parametrisering).
+%   \item Reda ut matrisen $U_p$ i ett konkret fall, t.ex. 2-6 anyoner i nån konkret icke-abelsk representation.
+%   \item Reda ut matrisen $U_p$ i allmännare fall, t.ex. alla N för Fibonacci eller Burau. Se om det finns nån speciell talteoretisk struktur som t.ex. udda heltal i den allmänna matrisens spektrum.
+%   \item Undersök konsekvenser för vinkeloperatorn, om dess spektrum är begränsat nedifrån för alla p. Förändras bilden mycket om man slänger på en extra abelsk fas?
+% \end{enumerate}
+
+% \section{2016-11-17}
+
+% Eddy email:
+% \begin{quote}
+%   Jag bifogar en avhandling av Parsa Bonderson och ett papper
+%   som handlar om hur man beskriver `anyon teorier'. I pappret (kitaev06.pdf)
+%   handlar det om appendix E, som man kan läsa separat.
+
+%   Två papper som använder anyoner för att bygga gates med är:
+%   \begin{itemize}
+%     \item \url{https://arxiv.org/abs/quant-ph/0610111}
+%     \item \url{https://arxiv.org/abs/0903.2239}
+%   \end{itemize}
+
+%   Till sist ett papper som använder (lite, i alla fall) Burau representationer
+%   för att optimera qubitar:
+%   \begin{itemize}
+%     \item \url{https://arxiv.org/abs/1102.5029}
+%   \end{itemize}
+
+%   Till sist ett papper om exclusion statistik, i det abelska fallet:
+%   \begin{itemize}
+%     \item \url{https://arxiv.org/abs/cond-mat/9801272}
+%   \end{itemize}
+% \end{quote}
+
+
+
+
+% \section{2016-10-08}
+
+% \emph{Hans Hansson, Eddy Ardonne, Douglas Lundholm.}
+
+% \begin{itemize}
+%   \item Douglas gick visade hans modell av anyoner från fermioner/bosoner av två typer; hav/bad-partiklar och spår(trace)-partiklar. Speciellt den statistiska repulsionen.
+%   \item Diskussionen fortsatte mot icke-abelska anyoner, kan man göra samma typ av utbyte av två partiklar runt $p$ partiklar om de är icke-abelska? Tydligen fanns problem med detta, vilka?!
+%   \item Efter att fusionskanaler togs upp frågade jag hur sannolikheterna vid fusion hör ihop med kvantdimensionen, Eddy gav ett mycket bra svar där han även redogjorde för ``$F$-modellen''. Svaret på frågan var helt enkelt att $F$ matrisen beror på kvantdimensionen för anyonerna och $F$ bestämmer sannolikheten.
+%   \item Även abelska anyoner ryms i denna modell och ges av att $N_{ab}^c$ är nollskilld endast för ett $c$ (verkligen $c$? iaf att två anyoner endast kan fusioneras till en annan anyon).
+%   \item Efteråt pratade jag kort med douglas och vi tyckte att man skulle titta explicit på ett exempel för hur $F$-modellen ger abelska anyoner, och sedan göra enkel utväxling med 2 anyoner runt $p$ anyoner i det icke-abelska fallet, för ett konkret val av $F$-modell, kanske både Ising och Fibonacci.
+% \end{itemize}
+
+
+
+% \section{2016-10-04}
+
+% Circling around $p$ particles is described by
+% \begin{align*}
+%   U_p &= σ_1 σ_2 \cdots σ_p σ_{p+1} σ_p \cdots σ_2 σ_1
+%   U_0 &= σ_1 \\
+%   U_1 &= σ_1 σ_2 σ_1
+% \end{align*}
+% The corresponding Schrödinger equation is then
+% \begin{align*}
+%   \psi''(\theta) &= -λ \psi(\theta) \\
+%   \psi(1) &= U_p \psi(0)
+% \end{align*}
+% and the question is: How does $λ$ depend on $p$?.
+
+% \textbf{Similarity transformation between braid generators}
+% \begin{align*}
+%   σ_1 = A σ_2 A^*, \quad \quad
+%   σ_i \mapsto A σ_i A^*
+% \end{align*}
+
+% \textbf{Berry phase} The Berry phase is similar to the anyonic phase. The Berry phase is the the holonomy of the state space manifold $M$. See Nakahara -- Geometry, Topology and Physics, chap. 10.
+
+% \textbf{Magnetism is a curvature}
+
+% \textbf{Curvature in a hole} There is no curvature outside the hole, but when circling the hole one sees curvature. That is, the space is a cone around the hole.
+
+
+
+
+% \chapter{Confusion}
+
+% Frågor till Eddy
+
+% \begin{itemize}
+%   \item Why must one distinguish between an anyon and its type? Mentioned in ``A short introduction to anyon models'', page 385. In the categorical perspective, anyons are objects and types are isomorphism classes of objects.
+%   \item Interference experiments for higher-dimensional phases (i.e. unitary matrices)?
+%   \item Leakage, 3 fib. anyons with unconstrained total charge, or 4 anyons with total charge constrained to 1.
+% \end{itemize}
+
+% Find the smallest anyon model giving qutrits.
+
+% \section{Misc.}
+
+% The three Pauli matrices span $SU(2)$, so do the two generators of $B_3$. How does this work? The generators of $B_3$ are fewer than the Pauli matrices. Is the span of the braid generators only dense in $SU(2)$?
+
+% \section{Representation theory}
+
+% \begin{itemize}
+%   \item 33: Charge $\leftrightarrow$ irreducible repr.
+%   \item \textbf{31-32}: $G = S_3$, why $D \times D = A + C + F + G + H$?
+%   \item How is the group $G$ chosen, TODO: REF the minimal finite group for classical computation.
+%   \item \textbf{42}: Concrete example in SU(3) (octet representation etc.)
+% \end{itemize}
+
+% Other:
+
+% \begin{itemize}
+%   \item Topological entropy: Dynamical systems: 3.4.
+%   \item Make reference to quark color in when comparing exotic quantum degrees of freedom TODO: REF
+%   \item Anyonic statistic vs spin: Anyonic spin-statistic theorem?
+%   \item Fusion: Betyder $a\otimes b = c \oplus d$ att både $c$ och $d$ genereras, eller att $c$ eller $d$ genereras? Borde vara att båda genereras eftersom $N_{ab}^c \in \mathbb{Z}$, annars skulle vi kunna har $N_{ab}^c \in \mathbb{R}$ och tolka dem som sannolikheter?
+%   \item Sida 7 i ``Why should anyone care about computing with anyons?'' Fibonacci anyon realisering av qbuit.
+%   \item How to create anyons from the vacuum (total charge 0) vs. anyons with full total charge?
+%   \item Fibonacci model is the simplest non-Abelian model that is capable of universal quantum computation. Argument for why Abelian anyons do not suffice.
+%   \item What if the underlying 2D space is not Euclidean, perhaps a torus, or any 2D manifold?
+% \end{itemize}
+
+
+
+
+\begin{thebibliography}{99}
+  \bibitem{nakahara} Nakahara: Geometry, Topology and Physics. En trevlig och koncis introduktion till homotopi-grupper finns i kap 4, kap 2-3 kan dock behövas som förkunskaper. Denna bok har tidigare funnits på kårbokhandeln och tycker jag är helt klart värd att investera i, annars kolla biblioteket eller kontakta mig. Observera att man kan hoppa över kap 1 för matematiken.
+  \bibitem{nayak} Nayak et al: En review om icke-abelska anyoner och kvantdatorer. Se section II.A.1
+  \bibitem{artin} Artin: En av de mest fundamentala artiklarna om braidgruppen. Obs: svår! förväntas inte läsas, detsamma gäller för tillfället följande:
+  \bibitem{mancarella} Mancarella et al: \verb|http://dx.doi.org/10.1016/j.nuclphysb.2012.10.020|
+  \bibitem{birman-brendle} Birman, Brendle: \verb|http://www.math.columbia.edu/~jb/Handbook-21.pdf|, kapitel 4
+  \bibitem{lundholm-solovej} Lundholm, Solovej: \verb|http://dx.doi.org/10.1007/s00220-013-1748-4|, Matematisk bakgrund samt exklusionsprincip för abelska anyoner.
+
+  \bibitem{nielsen chuang}
+    M. Nielsen, I. Chuang.
+    \textit{Quantum computation and quantum information.}
+    Cambridge university press (2010).
+
+  \bibitem{preskill}
+    J. Preskill.
+    \textit{Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological quantum computation}.
+    \\
+    \url{http://www.theory.caltech.edu/~preskill/ph219/topological.pdf}
+
+  \bibitem{short intro fib}
+    S. Trebst, M. Troyer, Z. Wang and A. W. W. Ludwig.
+    \textit{A Short Introduction to Fibonacci Anyon Models.}
+    Progress of Theoretical Physics Supplement No. 176, 2008.
+    \\
+    \url{http://stationq.cnsi.ucsb.edu/~wang/Publications/34.pdf}
+
+  \bibitem{kitaev}
+    A. Kitaev.
+    \textit{Anyons in an exactly solved model and beyond.}
+    Annals of Physics 321 (2006) 2.
+    (Revised version \href{https://arxiv.org/abs/cond-mat/0506438}{arXiv:cond-mat/0506438}.)
+    \\\relax
+    [One of the founding papers. See especially Appendix E.]
+
+  \bibitem{freedman kitaev larsen wang}
+    M. Freedman, A. Kitaev, M. Larsen and Z. Wang.
+    \textit{Topological quantum computation.}
+    American mathematical society, vol 40, p. 31–38.
+    \\
+    \url{http://dx.doi.org/10.1090/S0273-0979-02-00964-3}
+
+  \bibitem{shor fault-tolerant}
+    P. Shor.
+    \textit{Fault-tolerant quantum computation.}
+    \href{https://arxiv.org/abs/quant-ph/9605011}{arXiv:quant-ph/9605011}
+
+  \bibitem{kitaev fault-tolerant anyons}
+    A. Kitaev.
+    \textit{Fault-tolerant quantum computation by anyons.}
+    \\
+    \href{https://arxiv.org/abs/quant-ph/9707021}{arXiv:quant-ph/9707021}
+
+  \bibitem{topological quantum compiling}
+    L. Hormozi, G. Zikos, N. Bonesteel, S. Simon.
+    \textit{Topological quantum compiling.}
+    Phys. Rev. B 75, 165310 (2007), \href{https://arxiv.org/abs/quant-ph/0610111}{arXiv:quant-ph/0610111}
+    \\
+    \url{http://link.aps.org/doi/10.1103/PhysRevB.75.165310}
+
+  % The is the prequel to the above
+  \bibitem{}
+    N. Bonesteel, L. Hormozi, G. Zikos, and S. Simon.
+    \textit{Braid topologies for quantum computation.}
+    Phys. Rev. Lett. 95 (2005), 140503.
+
+  \bibitem{asymptotical top compl}
+    V. Kliuchnikov, A. Bocharov, K. Svore.
+    \textit{Asymptotically optimal topological quantum compiling.}
+    \\
+    \href{https://arxiv.org/abs/1310.4150}{arXiv:1310.4150}
+
+  \bibitem{pachos book}
+    J. Pachos.
+    \textit{Introduction to Topological Quantum Computation.}
+    Cambridge University Press.
+    \\
+    \url{http://quantum.leeds.ac.uk/jiannis-pachos/book.html}
+    \\
+    \url{http://quantum.leeds.ac.uk/fileadmin/user_upload/Jiannis/IntroTQC.pdf}
+
+  \bibitem{wang book}
+    Z. Wang.
+    \textit{Topological Quantum Computation.}
+    Microsoft Research Station Q, University of California.
+    AMS and CBMS.
+    \url{http://www.math.ucsb.edu/~zhenghwa/data/course/cbms.pdf}
+
+  \vspace{1cm}
+  \hrule
+  Possible references, perhaps not needed
+  \hrule
+
+  \bibitem{}
+    M. Freedman, M. Larsen, Z. Wang.
+    \textit{A modular functor which is universal for quantum computation.}
+    \\
+    \url{https://arxiv.org/pdf/quant-ph/0001108v2.pdf}
+
+  \bibitem{lundholm-rougerie}
+    D. Lundholm, N. Rougerie.
+    \textit{Emergence of Fractional Statistics for Tracer Particles in a Laughlin Liquid.}
+    PRL 116, 170401 (2016)
+
+  \bibitem{oskar}
+    O. Weinberger.
+    \textit{Bachelor's thesis: The braid group, representations and non-abelian anyons}
+
+  \bibitem{configuration spaces}
+    E. Fadell, L. Neuwirth.
+    \textit{Configuration spaces.}
+    Math. Scand. 10 (1962) 111–118
+
+  \bibitem{feynmann path integral}
+    R. P. Feynman.
+    \textit{Space-time approach to non-relativistic quantum mechanics.}
+    Rev. Mod. Phys. 20 (1948) 367–387.
+
+  \bibitem{feynmann path integrals indistinguishable particles}
+    M. G. G. Laidlaw, C. M. DeWitt.
+    \textit{Feynman functional integrals for systems of indistinguishable particles.}
+    Phys. Rev. D 3 (1971) 1375–1378.
+
+  \bibitem{fröhlich}
+    J. Fröhlich.
+    \textit{Quantum statistics and locality.}
+    Proceedings of the gibbs symposium,
+    Yale University, May 15-17, 1989
+
+  \bibitem{bonderson}
+    P. H. Bonderson
+    \textit{Non-Abelian Anyons and Interferometry.}
+    (2007) Ph.D Thesis
+
+  \bibitem{mac lane}
+    S. Mac Lane, Categories for the Working Mathematician, 2nd Edition, Graduate Texts in Mathematics, Springer-Verlag, New York, 1998.
+
+\end{thebibliography}
+
+\end{document}
