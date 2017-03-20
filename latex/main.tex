@@ -75,27 +75,25 @@
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 \DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
 
-
 \usepackage{newunicodechar}
 
-\newunicodechar{α}{\alpha}
-\newunicodechar{β}{\beta}
-\newunicodechar{ρ}{\rho}
-\newunicodechar{σ}{\sigma}
-\newunicodechar{τ}{\tau}
-\newunicodechar{π}{\pi}
-\newunicodechar{θ}{\theta}
-\newunicodechar{λ}{\lambda}
-\newunicodechar{μ}{\mu}
-\newunicodechar{₁}{_1}
-\newunicodechar{ⱼ}{_j}
-\newunicodechar{ₙ}{_n}
-\newunicodechar{ₚ}{_p}
-\newunicodechar{ⁿ}{^n}
-\newunicodechar{×}{\times}
-\newunicodechar{±}{\pm}
-\newunicodechar{⊕}{\oplus}
-
+\newunicodechar{ρ}{\ifmmode{\rho}\else{ρ}}
+\newunicodechar{σ}{\ifmmode{\sigma}\else{σ}}
+\newunicodechar{α}{\ifmmode{\alpha}\else{α}}
+\newunicodechar{β}{\ifmmode{\beta}\else{β}}
+\newunicodechar{τ}{\ifmmode{\tau}\else{τ}}
+\newunicodechar{π}{\ifmmode{\pi}\else{π}}
+\newunicodechar{θ}{\ifmmode{\theta}\else{θ}}
+\newunicodechar{λ}{\ifmmode{\lambda}\else{λ}}
+\newunicodechar{μ}{\ifmmode{\mu}\else{μ}}
+\newunicodechar{₁}{\ifmmode{_1}\else{₁}}
+\newunicodechar{ⱼ}{\ifmmode{_j}\else{ⱼ}}
+\newunicodechar{ₙ}{\ifmmode{_n}\else{ₙ}}
+\newunicodechar{ₚ}{\ifmmode{_p}\else{ₚ}}
+\newunicodechar{ⁿ}{\ifmmode{^n}\else{ⁿ}}
+\newunicodechar{×}{\ifmmode{\times}\else{×}}
+\newunicodechar{±}{\ifmmode{\pm}\else{±}}
+\newunicodechar{⊕}{\ifmmode{\oplus}\else{⊕}}
 
 
 \DeclareMathOperator{\Fib}{Fib}
@@ -2372,22 +2370,26 @@ in particular
 
 \subsection{General braiding in \texorpdfstring{$\widetilde{V}_{τ^n}$}{V\~_(τⁿ)}}
 
-Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we cannot, in general, restrict the fusion space to a fixed charge sector, we shall compute the braid group generators in all charge sectors for two, three and four $τ$ anyons. That is, we shall compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for $n=2,3,4$. (The notation was introduced in \cref{def:full fusion space,def:rho_n sigma_j}.) These examples give important insights of how the braid representation grows with the number of anyons, but most importantly these braids shall later be crucial when determining $U_p$ in \cref{thm:fibonacci U_p}.
+Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we cannot, in general, restrict the fusion space to a fixed charge sector, we shall compute the braid group generators in all charge sectors for two, three and four $τ$ anyons. That is, we shall compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for $n=2,3,4$. (This notation was introduced in \cref{def:full fusion space,def:rho_n sigma_j}.) These examples give important insights of how the braid representation grows with the number of anyons, but most importantly these braids shall later be crucial when determining $U_p$ in \cref{thm:fibonacci U_p}.
 
-\begin{example}[Braiding of 2 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 2}
-  Consider $V_{τ^n}^1$ with the standard basis. Restrict attention to a pair of neighbouring $τ$ anyons. That is, we restrict attention to a part of the space with basis
+\begin{example}[Braiding in $\widetilde{V}_{τ^2}$]\label{res:general fibonaci braiding 2}
+  % Consider $V_{τ^n}^1$ with the standard basis. Restrict attention to a pair of neighbouring $τ$ anyons. That is, we restrict attention to a part of the space with basis
+  The fusion space $\widetilde{V}_{τ^2}$ has standard
   \begin{align*}
     \left\{
       \text{valid intermediate charges $abc$ in } \fs{τ,τ}{a,b,c}
     \right\}
     \equiv
     \left\{
-      1τ1, \,\, 1ττ, \,\, ττ1,
+      1τ1, \,\,
+      1ττ, \,\,
+      ττ1,
       \begin{array}{c}
         τ1τ,\\τττ
       \end{array}
-    \right\}.
+    \right\},
   \end{align*}
+  grouped into the four charge sector, $11, 1τ, τ1$ and $ττ$, respectively.
   From \cref{res:sigma j is B} we have
   \begin{align*}
     ρ_2(σ_1) = B_{aττ}^c \quad\iff\quad ρ_2(σ_1)_{ij} = \left( B_{aττ}^c \right)_{ij}
@@ -2415,8 +2417,8 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
 \end{example}
 
 
-\begin{example}[Braiding of 3 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 3}
-  Next, taking a third Fibonacci anyon $τ$ into account and choosing the basis ordered as follows
+\begin{example}[Braiding in $\widetilde{V}_{τ^3}$]\label{res:general fibonaci braiding 3}
+  Next, taking a third Fibonacci anyon $τ$ into account gives the fusion space $\widetilde{V}_{τ^3}$ with standard basis
   \begin{align*}
     \left\{
       \begin{array}{c}
@@ -2440,9 +2442,9 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
         ττ  1 τ,\\
         ττττ
       \end{array}
-    \right\}
+    \right\}.
   \end{align*}
-  we have
+  In this order of the basis we have
   % \begin{alignat*}{10}
   %   ρ(σ_1) &= R_{ττ}^τ &{}\oplus{}& R &{}\oplus{}& FRF^{-1} &{}\oplus{}& FRF^{-1} &{}\oplus{}& R_{ττ}^τ \\
   %   ρ(σ_2) &= R_{ττ}^τ &{}\oplus{}& FRF^{-1} &{}\oplus{}& R &{}\oplus{}& R_{ττ}^τ &{}\oplus{}& J_2 FRF^{-1} J_2
@@ -2547,7 +2549,7 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
 \end{example}
 
 
-\begin{example}[Braiding of 4 anyons in $V_{τ^n}^1$]\label{res:general fibonaci braiding 4}
+\begin{example}[Braiding in $\widetilde{V}_{τ^4}$]\label{res:general fibonaci braiding 4}
   In the ordered basis
   \centermath{\begin{align*}
     \left\{
@@ -2669,9 +2671,14 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
   \end{align*}
 \end{remark}
 
+This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any $n$ and $j$. This is done programmatically in \cref{sec:code}.
+
 % \begin{remark}
 %   This can be continued to construct the braid group represented by any number of $τ$ anyons. However, note that the action of braiding two $τ$ anyons around $p$ other $τ$ anyons of total charge $c$ is the same as braiding two $τ$ anyons around an anyon of charge $c$. The charge $c$ is either $1$ or $τ$, but how is it determined? By fusion, yes, but the outcome of the fusion is not deterministic (depends on the quantum dimension). A large number of $τ$ anyons fuse to a $τ$ anyon with about 72 \% probability, see below. Can the general case (of braiding around several anyons) be reduced to braiding around one anyon with given charge? Perhaps adding the two cases, weighted with the corresponding fusion probabilities?
 % \end{remark}
+
+
+
 
 
 
@@ -3408,6 +3415,120 @@ TODO: Can this be used to say anything more abut the eigenvalues of $U_p$? Some 
 %   \item Fibonacci model is the simplest non-Abelian model that is capable of universal quantum computation. Argument for why Abelian anyons do not suffice.
 %   \item What if the underlying 2D space is not Euclidean, perhaps a torus, or any 2D manifold?
 % \end{itemize}
+
+
+
+% \appendix
+
+
+% \chapter{Code for computing braid group representations for Fibonacci anyons}\label{sec:code}
+
+% The following Mathematica code symbolically generates $ρ_n(σ_j)$ for any $n$ and $j$.
+
+% \begin{verbatim}
+% (* FibString[n] returns a list all Fibonacci strings
+%    of length n, sorted by charge sectors.
+%    A Fibonacci string is a list of 1's and 2's with no recurring 1's. *)
+
+% FibStringRecurse[1] := {{1}, {2}};
+% FibStringRecurse[n_] := Flatten[
+%     Map[
+%         If[
+%             Last[#] == 2,
+%             {Flatten[{#, 1}],
+%             Flatten[{#, 2}]}, {Flatten[{#, 2}]}
+%         ] &,
+%         FibString[n - 1]],
+%     1
+% ];
+
+% FibString[n_] := SortBy[FibStringRecurse[n], {First[#], Last[#]} &];
+
+% (* FibStringCS[n, csl, csr] returns FibString[n] restricted to left and right
+%    charge sectors given by csl and csr. *)
+% FibStringCS[n_, csl_, csr_] := Select[
+%     FibStringRecurse[n],
+%     First[#] == csl && Last[#] == csr &
+% ];
+
+% (* σ[n,j] returns the representation of the j:th braid group generator
+%    in the fusion space of n Fibonacci anyons, including all possible
+%    left and right charge sectors. *)
+% σMeta[n_, j_, fusionStates_] := Map[
+%     Module[{labels, row, idx, idx2, fusionStateCopy},
+%         fusionStateCopy = #;
+%         labels = Take[#, {j, j + 2}];
+%         row = ConstantArray[0, Length[fusionStates]];
+%         idx = Position[fusionStates, #][[1]][[1]];
+%         Switch[labels,
+%             {1, 2, 1}, row[[idx]] = R1,
+%             {1, 2, 2}, row[[idx]] = Rτ,
+%             {2, 2, 1}, row[[idx]] = Rτ,
+%             {2, 1, 2}, (
+%                 row[[idx]] = B11;
+%                 fusionStateCopy[[j + 1]] = 2;
+%                 idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
+%                 row[[idx2]] = B12
+%             ),
+%             {2, 2, 2}, (
+%                 row[[idx]] = B22;
+%                 fusionStateCopy[[j + 1]] = 1;
+%                 idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
+%                 row[[idx2]] = B21;
+%             )
+%         ];
+%         row
+%     ] &, fusionStates];
+
+% σ[n_, j_] := σMeta[n, j, FibString[n + 1]];
+
+% σ[n_, j_, csl_, csr_] := σMeta[n, j, FibStringCS[n + 1, csl, csr]];
+
+% (* U[p] returns σ₁σ₂⋯σₚσₚ₊₁σₚ⋯σ₂σ₁ on p+2 Fibonacci anyons. *)
+% U[p_] := Dot @@ Flatten[{
+%     Table[σ[p + 2, j], {j, 1, p + 1}],
+%     Table[σ[p + 2, j], {j, p, 1, -1}]
+% }, 1];
+% U[p_, csl_, csr_] := Dot @@ Flatten[{
+%     Table[σ[p + 2, j, csl, csr], {j, 1, p + 1}],
+%     Table[σ[p + 2, j, csl, csr], {j, p, 1, -1}]
+% }, 1];
+
+% (* Demo *)
+% Print[MatrixForm[σ[3, 1]]];
+% Print[σ[3, 1].σ[3, 2].σ[3, 1] == U[1]];
+% \end{verbatim}
+
+% With the following code we get numerical values
+
+% \begin{verbatim}
+% (* Plug in values for the parameters. *)
+% R1 = Exp[4 Pi I/5];
+% Rτ = Exp[-3 Pi I/5];
+% R = ({
+%     {R1, 0},
+%     {0,  Rτ}
+% });
+% φ = GoldenRatio;
+% F = ({
+%     {φ^-1,      φ^(-1/2)},
+%     {φ^(-1/2), -φ^-1}
+% });
+% B = Inverse[F].R.F;
+% B11 = B[[1, 1]];
+% B12 = B[[1, 2]];
+% B21 = B[[2, 1]];
+% B22 = B[[2, 2]];
+
+% (* Compute argument of eigenvalues. Performance boos by computing using N[..],
+%    then convert back by Rationalize[../Pi]. *)
+% EigenvaluesArg[data_] := Sort[Rationalize[Arg[Eigenvalues[N[data]]]/Pi]Pi];
+
+% (* Demo *)
+% Print[EigenvaluesArg[σ[3, 1]]];
+% \end{verbatim}
+
+
 
 
 
