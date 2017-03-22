@@ -77,23 +77,23 @@
 
 \usepackage{newunicodechar}
 
-\newunicodechar{ρ}{\ifmmode{\rho}\else{ρ}}
-\newunicodechar{σ}{\ifmmode{\sigma}\else{σ}}
-\newunicodechar{α}{\ifmmode{\alpha}\else{α}}
-\newunicodechar{β}{\ifmmode{\beta}\else{β}}
-\newunicodechar{τ}{\ifmmode{\tau}\else{τ}}
-\newunicodechar{π}{\ifmmode{\pi}\else{π}}
-\newunicodechar{θ}{\ifmmode{\theta}\else{θ}}
-\newunicodechar{λ}{\ifmmode{\lambda}\else{λ}}
-\newunicodechar{μ}{\ifmmode{\mu}\else{μ}}
-\newunicodechar{₁}{\ifmmode{_1}\else{₁}}
-\newunicodechar{ⱼ}{\ifmmode{_j}\else{ⱼ}}
-\newunicodechar{ₙ}{\ifmmode{_n}\else{ₙ}}
-\newunicodechar{ₚ}{\ifmmode{_p}\else{ₚ}}
-\newunicodechar{ⁿ}{\ifmmode{^n}\else{ⁿ}}
-\newunicodechar{×}{\ifmmode{\times}\else{×}}
-\newunicodechar{±}{\ifmmode{\pm}\else{±}}
-\newunicodechar{⊕}{\ifmmode{\oplus}\else{⊕}}
+\newunicodechar{ρ}{\ifmmode{\rho}\else{ρ}\fi}
+\newunicodechar{σ}{\ifmmode{\sigma}\else{σ}\fi}
+\newunicodechar{α}{\ifmmode{\alpha}\else{α}\fi}
+\newunicodechar{β}{\ifmmode{\beta}\else{β}\fi}
+\newunicodechar{τ}{\ifmmode{\tau}\else{τ}\fi}
+\newunicodechar{π}{\ifmmode{\pi}\else{π}\fi}
+\newunicodechar{θ}{\ifmmode{\theta}\else{θ}\fi}
+\newunicodechar{λ}{\ifmmode{\lambda}\else{λ}\fi}
+\newunicodechar{μ}{\ifmmode{\mu}\else{μ}\fi}
+\newunicodechar{₁}{\ifmmode{_1}\else{₁}\fi}
+\newunicodechar{ⱼ}{\ifmmode{_j}\else{ⱼ}\fi}
+\newunicodechar{ₙ}{\ifmmode{_n}\else{ₙ}\fi}
+\newunicodechar{ₚ}{\ifmmode{_p}\else{ₚ}\fi}
+\newunicodechar{ⁿ}{\ifmmode{^n}\else{ⁿ}\fi}
+\newunicodechar{×}{\ifmmode{\times}\else{×}\fi}
+\newunicodechar{±}{\ifmmode{\pm}\else{±}\fi}
+\newunicodechar{⊕}{\ifmmode{\oplus}\else{⊕}\fi}
 
 
 \DeclareMathOperator{\Fib}{Fib}
@@ -386,6 +386,7 @@ The braid group $B_n$ (representing braids on $n$ strands) is the group with gen
 Interferometry Bonderson.
 
 Wavefunction density Lundholm.
+
 
 
 
@@ -733,6 +734,7 @@ that is, $e^{iλπ}$ is an eigenvalues of $U_p$. We have the following result.
 
 
 
+
 \section{Abelian anyons}\label{sec:statistical repulsion abelian ayons}
 
 Although non-Abelian anyons are the main focus of this thesis, we give a quick overview of the the case of Abelian anyons. For more details, see \cite{lundholm-solovej}
@@ -937,7 +939,7 @@ Anyon models can be modeled by unitary braided tensor categories, see \cite{kita
 
 This chapter is in part based on \cite{preskill,kitaev,bonderson}. We shall be using the notation that is standard in the literature, and when possible make use of and extend the fusion diagram notation, which greatly clarifies braiding of fusion states.
 
-Starting with \cref{sec:anyonic braid representations} we show how a given abstract anyon model gives rise to representations of the braid group.
+Starting with \cref{sec:anyonic braid representations in fusion space} we show how a given abstract anyon model gives rise to representations of the braid group.
 
 \section{Preliminaries}
 
@@ -1113,7 +1115,7 @@ and it can be represented by the matrix $F_{abc}^c$, satisfying the equation
 \begin{equation}\label{F-matrix}
   \sum_f \left(F_{abc}^d\right)_{ef} \fs{b,c}{a,f,d} = \fsfused{a}{b}{c}{d}{e}.
 \end{equation}
-That is, the $F$-matrix is the change of basis matrix from the standard basis to the fusion basis of the fusion space $V_{abc}^d$.
+That is, the $F$-matrix is the change of basis matrix from the standard basis to the fusion basis of the fusion space $V_{abc}^d$. Note that this definition looks reversed to how \cite{preskill} defines the $F$ operator, however it seems \cite{preskill} defines the inverse. All following results in this thesis are in agreement with \cite{preskill}.
 
 \begin{remark}[Implicit range for the index of summation]\label{rem:sum index range}
   In \cref{F-matrix} the summation index $f$ implicitly ranges over all possible labels in the given anyon model, with the obvious restriction that the corresponding fusion state in the summand is valid. That is, the summation index $f$ must be such that
@@ -1444,7 +1446,7 @@ Since we seek to characterize general braiding in $V_{t^n}^1$, including interme
 
 
 
-\section{Braid group representations in \texorpdfstring{$\widetilde{V}_{t^n}$}{V\~_(τⁿ)}}\label{sec:anyonic braid representations}
+\section{Braid group representations in \texorpdfstring{$\widetilde{V}_{t^n}$}{V\~_(τⁿ)}}\label{sec:anyonic braid representations in fusion space}
 
 Each anyon model gives rise to representations of the braid group, the representations depend on the number of considered anyons and the possible charges sectors. In this and the following sections we give a detailed account of how braid group representations comes about in the framework of abstract anyon models. An account of the general theory of braid group representations, not necessarily arising from abstract anyon models, can be found in \cite{oskar}.
 
@@ -1610,7 +1612,7 @@ The reason being that it is then simpler to represent braiding of $a_1$ with $a_
 
   Extending $ρ(σ_1)$ to the full space is straight forward: In order to determine the action of $ρ(σ_1)$ on a given fusion state in the basis of the full fusion space it suffices to consider the action of $ρ(σ_1)$ on the labels $a_1$ and $a_2$ in the given fusion state. This information is precisely captured in the representation of $ρ(σ_1)$ in the reduced basis. This results in repeating blocks in the matrix representing $ρ(σ_1)$ when considering the basis of the full fusion space. This motivates the slight abuse of notation.
 
-  This discussion applies to any braiding operator, and we shall often use this abuse of notation, it should always be clear what part of the space that the operator acts on. See \cref{sec:anyonic braid representations} for further discussion of the braid group representation.
+  This discussion applies to any braiding operator, and we shall often use this abuse of notation, it should always be clear what part of the space that the operator acts on. See \cref{sec:anyonic braid representations in fusion space} for further discussion of the braid group representation.
 \end{remark}
 
 \begin{lemma}\label{res:sigma j is B}
@@ -2057,7 +2059,7 @@ as expected.
 
 \chapter{Fibonacci anyons}\label{fibonacci anyons}
 
-The Fibonacci anyon model is the simples non-Abelian anyon model, yet containing all the interesting features of non-Abelian anyons. Another common model is the Ising model, however Ising anyons cannot be used for general quantum computation.
+The Fibonacci anyon model is the one of the simples non-Abelian anyon model containing all the interesting features of non-Abelian anyons. It is commonly studied as a prototypical example of non-Abelian anyons. Another common model is the Ising model, however Ising anyons cannot be used for general quantum computation.
 
 This chapter is partly based on \cite{preskill} and \cite{topological quantum compiling}. The literature is rather vague on deriving the properties of Fibonacci anyons, in this chapter we spelled out the details more clearly.
 
@@ -2069,30 +2071,30 @@ The Fibonacci anyon model consists of two particle types, $1$ (the mandatory tri
   1 \times τ = τ, \quad
   τ \times τ = 1 + τ
 \end{align*}
-where $\tau$
+such that $\tau$ is its own anti-particle $\overline{τ}$. We shall refer to the $τ$ anyon as Fibonacci anyons.
 
-The following observation motivates the name of the model. Consider the fusion spaces $V_{τ^n}^1$, where $τ^n$ denotes $n$ repetitions of $τ$. This is the space of possible fusions of $n$ Fibonacci anyons, having total charge $1$. Writing out the canonical basis for these spaces we find
+As we shall now see, the dimension of the fusion space of $n$ Fibonacci anyons grows as the Fibonacci numbers as $n$ increases. Thus motivating the name of the model. Consider the fusion spaces $V_{τ^n}^1$, where $τ^n$ denotes $n$ repetitions of $τ$. This is the space of possible fusions of $n$ Fibonacci anyons, having total charge $1$. Writing out the canonical basis for these spaces we find
 \begin{align*}
-  V_{ττ}^1 &:
+  V_{τ^2}^1 &:
     \left\{
       \fs{τ,τ}{1,τ,1}
     \right\} \\
-  V_{τττ}^1 &:
+  V_{τ^3}^1 &:
     \left\{
       \fs{τ,τ,τ}{1,τ,τ,1}
     \right\} \\
-  V_{ττττ}^1 &:
+  V_{τ^4}^1 &:
     \left\{
       \fs{τ,τ,τ,τ}{1,τ,\boldsymbol{1},τ,1},
       \fs{τ,τ,τ,τ}{1,τ,\boldsymbol{τ},τ,1}
     \right\} \\
-  V_{τττττ}^1 &:
+  V_{τ^5}^1 \simeq \widetilde{V}_{τ} &:
     \left\{
       \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},τ,1},
       \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{1},τ,1},
       \fs{τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ},τ,1}
     \right\} \\
-  V_{ττττττ}^1 &:
+  V_{τ^6}^1 \simeq \widetilde{V}_{τ^2} &:
     \left\{
       \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},\boldsymbol{1},τ,1},
       \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{1},\boldsymbol{τ},\boldsymbol{τ},τ,1},
@@ -2101,11 +2103,63 @@ The following observation motivates the name of the model. Consider the fusion s
       \fs{τ,τ,τ,τ,τ,τ}{1,τ,\boldsymbol{τ},\boldsymbol{τ},\boldsymbol{τ},τ,1}
     \right\}.
 \end{align*}
-The reader can continue this list. Note that the bottom line in the fusion diagrams of the fusion states in the bases can be seen as strings of $τ$ and $1$, having $1τ$ at the start and $τ 1$ at the end. Furthermore, the string is subject to the condition that $1$ may not be followed by $1$. Indeed, $1$ on the bottom row, fuses with $τ$ from the top, to give $τ$. It is thus clear that TODO: Clarify, recursion leads to Fib def.
-\begin{align*}
-  \dim V_{τ^n}^1 = \operatorname{Fib}(n-1)
-\end{align*}
-where $\operatorname{Fib}(n)$ denotes the $n$:th Fibonacci number. That is, the dimension of the fusion space grows with increasing number of $τ$s as the Fibonacci series.
+Continuing this list is straight forward. Note that the bottom line in the fusion diagrams of the fusion states in the bases can be seen as strings of $τ$ and $1$, having $1τ$ at the start and $τ1$ at the end. Furthermore, the string is subject to the condition that $1$ may not be followed by $1$. Indeed, $1$ on the bottom row fuses with $τ$ from the top, to give $τ$. We now make this more precise.
+
+\begin{definition}\label{def:fibonacci strings}
+  A Fibonacci string of length $n$ on two symbols, say $1$ and $τ$, is a string of length $n$ on the symbols $1$ and $τ$ subject to the condition that $1$ may not be followed by $1$.
+\end{definition}
+
+There are two Fibonacci string of length one, namely $1$ and $τ$, of length two we have three Fibonacci strings, $1τ, τ1, ττ$, etc. Note that the free charge labels, marked in bold in the above fusion states, are precisely Fibonacci strings. Thus, the dimension of $V_{τ^n}^1$ is the number of Fibonacci strings of length $n-3$. Alternatively, the dimension of $\widetilde{V}_{τ^n}$ is the number of Fibonacci strings of length $n+1$.
+
+\begin{lemma}\label{lemma:fibonacci string length}
+  The number of Fibonacci strings of length $n$ is $\Fib(n + 2)$, where $\Fib(n)$ denotes the $n$:th Fibonacci number given by
+  \begin{align*}
+    \Fib(0) &= 0 \\
+    \Fib(1) &= 1 \\
+    \Fib(n+1) &= \Fib(n) + \Fib(n-1).
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  Let $\#_n$ denote the length number of Fibonacci strings of length $n$, and let $\#^a_n$ denote the number of Fibonacci strings of length $n$ ending with $a$, where $a = 1, τ$. We then have $\#_n = \#^1_n + \#^τ_n$. This, together with the definition of Fibonacci strings gives
+  \begin{align*}
+    \#_{n+1}
+    &= \#^1_{n+1} + \#^τ_{n+1} \\
+    &= \#^τ_n + \left(\#^1_n + \#^τ_n\right) \\
+    &= \left(\#^τ_n + \#^1_n\right) + \left(\#^1_{n-1} + \#^τ_{n-1}\right) \\
+    &= \#_n + \#_{n-1}.
+  \end{align*}
+  This is precisely the recursion relation for the Fibonacci numbers. Finally, initial values $\#_1 = 2, \#_2 = 3$ shows that
+  \begin{align*}
+    \#_n = \Fib(n+2).
+  \end{align*}
+\end{proof}
+
+Finally, we can use this to characterize the dimension of fusion spaces.
+
+\begin{lemma}\label{lemma:fibonacci fusion space dimension}
+  The dimension of the fusion space with $n$ Fibonacci, with different charge sectors, is given by
+  \begin{align*}
+    \dim V_{τ^n}^1 &= \Fib(n-1) \\
+    \dim V_{τ^n}^τ &= \Fib(n) \\
+    \dim \widetilde{V}_{τ^n} &= \Fib(n+1)
+  \end{align*}
+\end{lemma}
+
+\begin{proof}
+  The first equality follows from
+  \begin{align*}
+    \dim V_{τ^n}^1 = \#_{n-3} = \Fib((n-3)+2) = \Fib(n-1).
+  \end{align*}
+  Next,
+  \begin{align*}
+    \dim V_{τ^n}^τ = \dim V_{τ^{n+1}}^1 = \Fib(n).
+  \end{align*}
+  Finally,
+  \begin{align*}
+    \dim \widetilde{V}_{τ^n} = \#_{n+1} = \Fib((n+1)+1) = \Fib(n+1).
+  \end{align*}
+\end{proof}
 
 As we have seen in \label{anyon models}, an anyon model is determined by the corresponding $F$- and $R$-matrices. We continue by computing these matrices.
 
@@ -2604,11 +2658,11 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
     \end{pmatrix}
     \oplus
     \begin{pmatrix}
-      B_{11} &                   &                   & B_{12} & \\
-             & B_{11}            &                   &        & B_{12} \\
-             &                   & R_{ττ}^τ \\
-      B_{21} &                   &                   & B_{22} & \\
-             & B_{21}            &                   &        & B_{22}
+      B_{11} &        &          & B_{12} & \\
+             & B_{11} &          &        & B_{12} \\
+             &        & R_{ττ}^τ \\
+      B_{21} &        &          & B_{22} & \\
+             & B_{21} &          &        & B_{22}
     \end{pmatrix} \\
     ρ_4(σ_2) &=
     \begin{pmatrix}
@@ -2661,13 +2715,14 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
       & & B_{τ1} & & B_{ττ}
     \end{pmatrix}
   \end{align*}}
+
   Note that in this order of the basis, the last block of $ρ_{4}(σ_2)$ is precisely $ρ_2(σ_1)$. Indeed, basis elements in the $ττ$-sector is ordered by the internal charge sectors.
 \end{example}
 
 \begin{remark}\label{remark:fibonacci sigma dimension}
-  As is clearly manifested in the three examples, the representation of the braid group generators is always split into four blocks, one block for each two-sided charge sector, $11, 1τ, τ1$ and $ττ$. These blocks will always be disjoint since there is no way of transforming between them. Compare with the decomposition $V_{ab} = \bigoplus_c V_{ab}^c$. The dimension of each of these blocks grows as the Fibonacci numbers, simply because the basis states in each block are Fibonacci strings of $1$'s and $τ$'s. In general we have the dimension of the decomposition for $n$ Fibonacci anyons given by
+  As is clearly manifested in the three examples, the representation of the braid group generators is always split into four blocks, one block for each two-sided charge sector, $11, 1τ, τ1$ and $ττ$. These blocks will always be disjoint since there is no way of transforming between them. Compare with the decomposition $V_{ab} = \bigoplus_c V_{ab}^c$. The dimension of each of these blocks grows as the Fibonacci numbers because the basis states in each block are Fibonacci strings of $1$'s and $τ$'s, essentially of length $n-3, n-2, n-2, n-1$ respectively (disregarding the fixed labels due to charge sectors). Thus, by \cref{lemma:fibonacci string length} we have that the dimension of $ρ_n(σ_j)$ for $n$ Fibonacci anyons is given by
   \begin{align*}
-    \operatorname{dim} ρ_n (σ_j) = \underbrace{F_{n-2} + F_{n-1}}_{F_{n}} + \underbrace{F_{n-1} + F_{n}}_{F_{n+1}} = F_{n+2}.
+    \operatorname{dim} ρ_n (σ_j) = \underbrace{F_{n-1} + F_{n}}_{F_{n+1}} + \underbrace{F_{n} + F_{n+1}}_{F_{n+2}} = F_{n+3}.
   \end{align*}
 \end{remark}
 
@@ -2723,41 +2778,29 @@ This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any 
 
 \section{Exchange operator $Uₚ$}\label{sec:fibonacci Up}
 
-Consider the fusion space $V_{τ^n}^1$ and exchange of a pair of anyons, $j$ and $k$, around $p$ enclosed anyons, $j+1, j+2, \ldots, k-1$.
-We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. Instead of immediately applying \cref{thm:general Up}, which leads to tedious computation, we take a slightly different route in the proof.
-
-TODO: Fix representation dimension etc, exact number of eigenvalues based on counting charge sectors.
+Consider the fusion space $\widetilde{V}_{τ^n}$ and exchange of a pair of anyons, $j$ and $k$, around $p$ enclosed anyons, $j+1, j+2, \ldots, k-1$.
+We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. As discussed in \cref{sec:anyonic braid representations in fusion space}, the dimension of the representation of the braid group depends on the number of considered anyons, in the case of Fibonacci anyons we we saw in \cref{remark:fibonacci sigma dimension} that the dimension of $\widetilde{V}_{τ^n}$ increases as the Fibonacci numbers as $n$ increases. If considering a fusion space with more particles than what enters the represented braid, the braid operator will simply get repeated block. Thus, we shall represent $U_p$ in the fusion space $\widetilde{V}_{p+2}$. This is sufficient to compute the spectrum. Furthermore, representing $U_p$ in a higher-dimensional fusion space is in principle straight forward and described in full generality in \cref{sec:anyonic braid representations in fusion space}.
 
 \begin{theorem}\label{thm:fibonacci U_p}
-  Exchange of a pair of anyons around $p$ enclosed anyons introduces a non-Abelian anyonic phase $U_p$, given by
+  Exchange of a pair of $τ$ anyons around $p$ enclosed $τ$ anyons introduces a non-Abelian anyonic phase $U_p$, given by
   \begin{align*}
     U_0 &= ρ_2(σ_1) \\
     U_1 &= ρ_3(σ_1) ρ_3(σ_2) ρ_3(σ_1) \\
-    U_p &= F^{-1} ρ_4(σ_1) ρ_4(σ_2) ρ_4(σ_3) ρ_4(σ_2) ρ_4(σ_1) F, \quad p \ge 2
+    U_p &= U_0^{\oplus\Fib(p-1)} \oplus U_1^{\oplus\Fib(p)}, \quad p \ge 2
   \end{align*}
-  expressed in the fused basis \cref{eq:F U_p basis}, $F$ is the corresponding change of basis matrix. The braid generators $ρ_m(σ_j)$ are computed in \cref{res:general fibonaci braiding 2,res:general fibonaci braiding 3,res:general fibonaci braiding 4}.
-
-  % Explicitly
-  % \begin{align*}
-  %   U_0 &= R_{ττ}^1 \oplus R_{ττ}^τ \oplus R_{ττ}^τ \oplus B \\
-  %   U_1 &= \left( R_{ττ}^τ \right)^3 \oplus \left( RBR \right) \oplus \left( BRB \right) \oplus
-  %   \begin{pmatrix}
-  %     B_{11} & & B_{12} \\
-  %     & R_{ττ}^τ \\
-  %     B_{21} & & B_{22}
-  %   \end{pmatrix}
-  %   \begin{pmatrix}
-  %     R_{ττ}^τ \\
-  %     & B_{11} & B_{12} \\
-  %     & B_{21} & B_{22}
-  %   \end{pmatrix}
-  %   \begin{pmatrix}
-  %     B_{11} & & B_{12} \\
-  %     & R_{ττ}^τ \\
-  %     B_{21} & & B_{22}
-  %   \end{pmatrix} \\
-  % \end{align*}
+  expressed in the fused basis \cref{eq:F U_p basis}, and the expression for $U_p$ is written in a basis ordered so that all repeating blocks align nicely. The braid generators $ρ_n(σ_j)$ are computed in \cref{res:general fibonaci braiding 2,res:general fibonaci braiding 3}.
+  Explicitly that is
+  \begin{align*}
+    U_0 &= R_{ττ}^1 \oplus R_{ττ}^τ \oplus R_{ττ}^τ \oplus B \\
+    U_1 &= \left( R_{ττ}^τ \right)^3 \oplus \left( RBR \right) \oplus \left( BRB \right) \oplus
+    \begin{pmatrix}
+      R_{\tau\tau}^\tau \left(B_{11}\right)^2+B_{12} B_{21} B_{22} & B_{12} B_{21} R_{\tau\tau}^\tau & B_{12} \left(B_{22}\right)^2+B_{11} B_{12} R_{\tau\tau}^\tau \\
+      B_{12} B_{21} R_{\tau\tau}^\tau & B_{11} \left(R_{\tau\tau}^\tau\right)^2 & B_{12} B_{22} R_{\tau\tau}^\tau \\
+      B_{21} \left(B_{22}\right)^2+B_{11} B_{21} R_{\tau\tau}^\tau & B_{21} B_{22} R_{\tau\tau}^\tau & \left(B_{22}\right)^3+B_{12} B_{21} R_{\tau\tau}^\tau \\
+    \end{pmatrix}
+  \end{align*}
 \end{theorem}
+
 \begin{proof}
   The braid corresponding to $U_0$ is given by \cref{thm:general Up} with $c = 1$. That is, (using \cref{res:B1})
   \begin{align*}
@@ -2810,25 +2853,38 @@ TODO: Fix representation dimension etc, exact number of eigenvalues based on cou
       \node at (2.5, -1.5) {$e$};
     \end{tikzpicture}
   \end{align*}
-  This braid is computed in \cref{res:general fibonaci braiding 2}.
+  This braid is computed as $ρ_2(σ_1)$ in \cref{res:general fibonaci braiding 2}.
 
-  Similarly, the braid corresponding to $U_1$ is given by \cref{thm:general Up} with $c=τ$ and is computed in \cref{res:general fibonaci braiding 3}.
+  Similarly, the braid corresponding to $U_1$ is given by \cref{thm:general Up} with $c=τ$ and is computed as $ρ_3(σ_1) ρ_3(σ_2) ρ_3(σ_1)$ in \cref{res:general fibonaci braiding 3}.
 
-  Finally, the braid corresponding to $U_p$ for $p \ge 2$ is given by \cref{thm:general Up} where the intermediate charge $c$ can be both $1$ and $τ$. The intermediate charges $c_1, c_2, \ldots, c_{p-2}$ in \cref{eq:F U_p basis} do not affect the braid $U_p$. Indeed these labels do not enter equation \cref{thm:general Up} determining $U_p$ Thus, it suffices to consider the subspace of the fusion space containing only the labels $a,b,c,d,e$. First, use the $F$ matrix to change basis as described in \cref{eq:F U_p basis} so that \cref{thm:general Up} can be used, finally, change back to the standard basis with $F^{-1}$.
+  Finally, for $p \ge 2$ the possible values for $c$, i.e.\ the possible results from fusion of $p$ Fibonacci anyons, are $1$ and $τ$. Furthermore, in the fused basis \cref{eq:F U_p basis} the exchange operator $U_p$ does not mix $c$, only the intermediate charges may be mixed when braiding. Since the two possible values for $c$ are accounted for in $U_0$ and $U_1$, we conclude that $U_2 = U_0 \oplus U_1$. Next, \cref{lemma:fibonacci fusion space dimension} shows that fusion of $p$ anyons result in $1$ in $\Fib(p-1)$ ways and $τ$ in $\Fib(p)$ ways. Thus, we conclude
+  \begin{align*}
+    U_p = U_0^{\oplus\Fib(p-1)} \oplus U_1^{\oplus\Fib(p)}.
+  \end{align*}
+  From this we have
+  \begin{align*}
+    \dim U_p
+    &= \dim(U_0) \Fib(p-1) + \dim(U_1) \Fib(p) \\
+    &= 5 \Fib(p-1) + 8 \Fib(p) \\
+    &= 5 \left(\Fib(p-1) + \Fib(p) \right) + 3 \Fib(p) \\
+    &= 5 \Fib(p+1) + 3 \Fib(p) \\
+    &= 3 \left(\Fib(p+1)+\Fib(p)\right) + 2 \Fib(p+1) \\
+    &= 3 \Fib(p+2) + 2 \Fib(p+1) \\
+    &= 2 \left(\Fib(p+1)+\Fib(p+2)\right) + \Fib(p+2) \\
+    &= 2 \Fib(p+3) + \Fib(p+2) \\
+    &=   \left(\Fib(p+2) + \Fib(p+3)\right) + \Fib(p+3) \\
+    &=   \Fib(p+4) + \Fib(p+3) \\
+    &=   \Fib(p+5)
+  \end{align*}
+  in agreement with \cref{remark:fibonacci sigma dimension}, since $n = p + 2$.
 
-  To simplify the computation, note that the braid in the proof of \cref{thm:general Up} can be modeled by letting the intermediate charge $c$ be the intermediate charge of fusion of two $τ$-anyons. That is, this braid is same as the braid described in \cref{res:general fibonaci braiding 4}, up to change of basis by the $F$-matrix. Hence the result follows.
+  % Finally, the braid corresponding to $U_p$ for $p \ge 2$ is given by \cref{thm:general Up} where the intermediate charge $c$ can be both $1$ and $τ$. The intermediate charges $c_1, c_2, \ldots, c_{p-2}$ in \cref{eq:F U_p basis} do not affect the braid $U_p$. Indeed these labels do not enter equation \cref{thm:general Up} determining $U_p$ Thus, it suffices to consider the subspace of the fusion space containing only the labels $a,b,c,d,e$. First, use the $F$ matrix to change basis as described in \cref{eq:F U_p basis} so that \cref{thm:general Up} can be used, finally, change back to the standard basis with $F^{-1}$.
+
+  % To simplify the computation, note that the braid in the proof of \cref{thm:general Up} can be modeled by letting the intermediate charge $c$ be the intermediate charge of fusion of two $τ$-anyons. That is, this braid is same as the braid described in \cref{res:general fibonaci braiding 4}, up to change of basis by the $F$-matrix. Hence the result follows.
 \end{proof}
 
 \begin{remark}
-  Note that the case when $c$ is allowed to be both $1$ and $τ$ (i.e. when $p \ge 2$) is not the direct sum of the cases $c=1$ and $c=τ$ because transitions between fusion states with $c=1$ and $c=τ$ do occur.
-\end{remark}
-
-\begin{remark}
-  As stated in the theorem, the dimension of $U_p$ is not increasing with $p \ge 2$. This is simply due the abuse of notation, as discussed in \cref{remark:abuse notation}, in which the braid operator is represented in the part of the space containing only labels which enter into the expression for the braid operator. The dimension of of $U_p$ with increasing $p$ of course grows as the Fibonacci numbers, $\operatorname{dim} U_p = \operatorname{Fib}(p)$, cf.\ \cref{remark:fibonacci sigma dimension}. Representing $U_p$ in the full basis results in repeating blocks in the corresponding matrix. Indeed, each intermediate charge $c_j$ for $1 \le j \le p-2$ gives two additional fusion states (corresponding to $c_j = 1$ and $c_j = τ$), thus giving a copy of the block describing the action on the $abcde$-part of the fusion state. Note that the order of the fusion state in the bases generally permute the discussed blocks. Compare with \cref{sec:general braiding}.
-
-  The reason for working in the fused space \cref{eq:F U_p basis} is precisely that this allows for a simpler representation of $U_p$. If we would have worked in the standard basis, such repeating blocks would not occur for $U_p$, and the representation for $U_p$ would be much more involved. Indeed, it is in principle straight forward to transform between the two representations, in the fused basis and in the standard basis, by applying the $F$ matrix to change basis, as described in \cref{eq:F U_p basis}.
-
-  The fact that $U_p$ is independent of $p$ for $p \ge 2$ is due to the fact that fusion of $p$ anyons of type $τ$ always results in $1$ or $\tau$. However, if we consider an anyon model with fusion rules
+  The fact that $U_p$ only gets repeated blocks for $p$ for $p \ge 2$ is due to the fact that fusion of $p$ anyons of type $τ$ always results in $1$ or $τ$. However, if we consider an anyon model with fusion rules
   \begin{align*}
     t \times t = a, \quad
     t \times a = t
@@ -2837,51 +2893,61 @@ TODO: Fix representation dimension etc, exact number of eigenvalues based on cou
   \begin{align*}
     t \times t \times t = t
   \end{align*}
-  then clearly $U_2$ and $U_3$ are different, since the intermediate charge $c$ is different.
+  then $U_2$ and $U_3$ are different, since the intermediate charge $c$ is different.
 \end{remark}
 
-We now have an explicit expression for the exchange operator $U_p$, straight forward computation gives its eigenvalues.
+We now have an explicit expression for the exchange operator $U_p$, allowing us to compute the spectrum for $U_p$.
 
 \begin{corollary}
   The eigenvalues of $U_p$ for Fibonacci anyons are
   \begin{align*}
-    \sigma(U_0) &=
-    \{
-      R_{ττ}^1,
-      R_{ττ}^τ
-    \} \\
-    & =
-    \{
-      e^{4iπ/5},
-      e^{-3iπ/5}
-    \} \\
-    \sigma(U_1) &=
-    \{
-      R_{ττ}^1,
-      \left( R_{ττ}^τ \right)^3,
-      \left( R_{ττ}^τ \right)^7
-    \} \\
-    & =
-    \{
-      e^{4iπ/5},
-      e^{iπ/5},
-      e^{-iπ/5}
-    \} \\
-    \sigma(U_p) &=
-    \{
-      R_{ττ}^1,
-      \left( R_{ττ}^τ \right)^3,
-      \left( R_{ττ}^τ \right)^7,
-      R_{ττ}^τ
-    \} \quad\quad (p \ge 2) \\
-    & =
-    \{
-      e^{4 i π/5},
-      e^{i π/5},
-      e^{-i π/5},
-      e^{-3 i π/5}
-    \}.
+    % \sigma(U_0) &=
+    % \{
+    %   R_{ττ}^1 × 2,
+    %   R_{ττ}^τ × 3
+    % \} \\
+    % & =
+    % \{
+    %   e^{4iπ/5} × 2,
+    %   e^{-3iπ/5} × 3
+    % \} \\
+    % \sigma(U_1) &=
+    % \{
+    %   R_{ττ}^1 × 3,
+    %   \left( R_{ττ}^τ \right)^3 × 2,
+    %   \left( R_{ττ}^τ \right)^7 × 3
+    % \} \\
+    % & =
+    % \{
+    %   e^{4iπ/5} × 3,
+    %   e^{iπ/5} × 2,
+    %   e^{-iπ/5} × 3
+    % \} \\
+    % \sigma(U_p) &=
+    % \{
+    %   R_{ττ}^1,
+    %   \left( R_{ττ}^τ \right)^3,
+    %   \left( R_{ττ}^τ \right)^7,
+    %   R_{ττ}^τ
+    % \} \quad\quad (p \ge 2) \\
+    % & =
+    % \{
+    %   e^{4 i π/5},
+    %   e^{i π/5},
+    %   e^{-i π/5},
+    %   e^{-3 i π/5}
+    % \} \\
+      \sigma(U_p) =
+      \left\{
+      \begin{array}{rl}
+        e^{i4π/5}  &\!\!\!×\;\; \Fib(p+3), \\
+        e^{iπ/5}   &\!\!\!×\;\; 2\Fib(p),\\
+        e^{-iπ/5}  &\!\!\!×\;\; 3\Fib(p), \\
+        e^{-i3π/5} &\!\!\!×\;\; 3\Fib(p-1)
+      \end{array}
+      \right\},
   \end{align*}
+  where $a×n$ denotes that $a$ occurs with multiplicity $n$.
 
   \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -2901,19 +2967,23 @@ We now have an explicit expression for the exchange operator $U_p$, straight for
 
 \end{corollary}
 
-In \cref{chap:kinetic energy} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle given the energy bounds. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$.
+\begin{proof}
+  Since $U_p$ consists of repeated block, it suffices to compute the eigenvalues for each block, multiplied by the number of occurrences for each block to get the multiplicities. Note that $B = F^{-1}R F$ is similar to $R$. The multiplicity for $e^{i4π/5}$ is $2\Fib(p-1) + 3\Fib(p) = \Fib(p+3)$, the other multiplicities are straight forward.
+\end{proof}
 
-We see that exchange of Fibonacci described by $U_p$ always corresponds to a non-zero kinetic energy, it is natural to ask if there are braids that do have zero energy. The following corollary positively answers this.
+In \cref{chap:kinetic energy} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle gives the energy bounds. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$, corresponding to kinetic energy $λ = 1/5$.
 
-\begin{corollary}[Zero energy braid for Fibonacci anyons]
-  With $U_p$ as in \cref{thm:fibonacci U_p} we have
-  \begin{align*}
-    \sigma\left( U_p^5 \right) = \{1,-1\}
-  \end{align*}
-  for all $p \ge 0$, by straight-forward computation. This shows that braiding a pair of Fibonacci anyons five times around any number of Fibonacci anyons behaves as both fermions and bosons simultaneously. In particular, the occurrence of the eigenvalue $1$ shows that the braid $U_p^5$ is a zero-energy braid, according to the discussion in \cref{chap:kinetic energy}.
-\end{corollary}
+% We see that exchange of Fibonacci described by $U_p$ always corresponds to a non-zero kinetic energy, it is natural to ask if there are braids that do have zero energy. The following corollary positively answers this.
 
-This can be seen as a consequence of the fact that $\left( R_{ττ}^1 \right)^5 = 1$ and $\left( R_{ττ}^τ \right)^5 = -1$.
+% \begin{corollary}[Zero energy braid for Fibonacci anyons]
+%   With $U_p$ as in \cref{thm:fibonacci U_p} we have
+%   \begin{align*}
+%     \sigma\left( U_p^5 \right) = \{1,-1\}
+%   \end{align*}
+%   for all $p \ge 0$, by straight-forward computation. This shows that braiding a pair of Fibonacci anyons five times around any number of Fibonacci anyons behaves as both fermions and bosons simultaneously. In particular, the occurrence of the eigenvalue $1$ shows that the braid $U_p^5$ is a zero-energy braid, according to the discussion in \cref{chap:kinetic energy}.
+% \end{corollary}
+
+% This can be seen as a consequence of the fact that $\left( R_{ττ}^1 \right)^5 = 1$ and $\left( R_{ττ}^τ \right)^5 = -1$.
 
 
 
@@ -3418,116 +3488,129 @@ TODO: Can this be used to say anything more abut the eigenvalues of $U_p$? Some 
 
 
 
-% \appendix
+\appendix
 
 
-% \chapter{Code for computing braid group representations for Fibonacci anyons}\label{sec:code}
+\chapter{Computing \texorpdfstring{$\rho_n(\sigma_j)$}{ρₙ(σⱼ)} for Fibonacci anyons programmatically}\label{sec:code}
+\chaptermark{Computing $\rho_n(\sigma_j)$ programmatically}
 
-% The following Mathematica code symbolically generates $ρ_n(σ_j)$ for any $n$ and $j$.
+In this appendix we compute the representation for the braid group generators $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$, for any $2 \ge n$ and $1 \ge j \ge n-1$.
 
-% \begin{verbatim}
-% (* FibString[n] returns a list all Fibonacci strings
-%    of length n, sorted by charge sectors.
-%    A Fibonacci string is a list of 1's and 2's with no recurring 1's. *)
+\section{Symbolic computation}
 
-% FibStringRecurse[1] := {{1}, {2}};
-% FibStringRecurse[n_] := Flatten[
-%     Map[
-%         If[
-%             Last[#] == 2,
-%             {Flatten[{#, 1}],
-%             Flatten[{#, 2}]}, {Flatten[{#, 2}]}
-%         ] &,
-%         FibString[n - 1]],
-%     1
-% ];
+The following Mathematica code symbolically generates $ρ_n(σ_j)$ for any $n$ and $j$.
 
-% FibString[n_] := SortBy[FibStringRecurse[n], {First[#], Last[#]} &];
+\begin{verbatim}
+(* FibString[n] returns a list all Fibonacci strings
+   of length n, sorted by charge sectors.
+   A Fibonacci string is a list of 1's and 2's with no recurring 1's. *)
 
-% (* FibStringCS[n, csl, csr] returns FibString[n] restricted to left and right
-%    charge sectors given by csl and csr. *)
-% FibStringCS[n_, csl_, csr_] := Select[
-%     FibStringRecurse[n],
-%     First[#] == csl && Last[#] == csr &
-% ];
+FibStringRecurse[1] := {{1}, {2}};
+FibStringRecurse[n_] := Flatten[
+    Map[
+        If[
+            Last[#] == 2,
+            {Flatten[{#, 1}],
+            Flatten[{#, 2}]}, {Flatten[{#, 2}]}
+        ] &,
+        FibString[n - 1]],
+    1
+];
 
-% (* σ[n,j] returns the representation of the j:th braid group generator
-%    in the fusion space of n Fibonacci anyons, including all possible
-%    left and right charge sectors. *)
-% σMeta[n_, j_, fusionStates_] := Map[
-%     Module[{labels, row, idx, idx2, fusionStateCopy},
-%         fusionStateCopy = #;
-%         labels = Take[#, {j, j + 2}];
-%         row = ConstantArray[0, Length[fusionStates]];
-%         idx = Position[fusionStates, #][[1]][[1]];
-%         Switch[labels,
-%             {1, 2, 1}, row[[idx]] = R1,
-%             {1, 2, 2}, row[[idx]] = Rτ,
-%             {2, 2, 1}, row[[idx]] = Rτ,
-%             {2, 1, 2}, (
-%                 row[[idx]] = B11;
-%                 fusionStateCopy[[j + 1]] = 2;
-%                 idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
-%                 row[[idx2]] = B12
-%             ),
-%             {2, 2, 2}, (
-%                 row[[idx]] = B22;
-%                 fusionStateCopy[[j + 1]] = 1;
-%                 idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
-%                 row[[idx2]] = B21;
-%             )
-%         ];
-%         row
-%     ] &, fusionStates];
+FibString[n_] := SortBy[FibStringRecurse[n], {First[#], Last[#]} &];
 
-% σ[n_, j_] := σMeta[n, j, FibString[n + 1]];
+(* FibStringCS[n, csl, csr] returns FibString[n] restricted to left and right
+   charge sectors given by csl and csr. *)
+FibStringCS[n_, csl_, csr_] := Select[
+    FibStringRecurse[n],
+    First[#] == csl && Last[#] == csr &
+];
 
-% σ[n_, j_, csl_, csr_] := σMeta[n, j, FibStringCS[n + 1, csl, csr]];
+(* σ[n,j] returns the representation of the j:th braid group generator
+   in the fusion space of n Fibonacci anyons, including all possible
+   left and right charge sectors. *)
+σMeta[n_, j_, fusionStates_] := Map[
+    Module[{labels, row, idx, idx2, fusionStateCopy},
+        fusionStateCopy = #;
+        labels = Take[#, {j, j + 2}];
+        row = ConstantArray[0, Length[fusionStates]];
+        idx = Position[fusionStates, #][[1]][[1]];
+        Switch[labels,
+            {1, 2, 1}, row[[idx]] = R1,
+            {1, 2, 2}, row[[idx]] = Rτ,
+            {2, 2, 1}, row[[idx]] = Rτ,
+            {2, 1, 2}, (
+                row[[idx]] = B11;
+                fusionStateCopy[[j + 1]] = 2;
+                idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
+                row[[idx2]] = B12
+            ),
+            {2, 2, 2}, (
+                row[[idx]] = B22;
+                fusionStateCopy[[j + 1]] = 1;
+                idx2 = Position[fusionStates, fusionStateCopy][[1]][[1]];
+                row[[idx2]] = B21;
+            )
+        ];
+        row
+    ] &, fusionStates];
 
-% (* U[p] returns σ₁σ₂⋯σₚσₚ₊₁σₚ⋯σ₂σ₁ on p+2 Fibonacci anyons. *)
-% U[p_] := Dot @@ Flatten[{
-%     Table[σ[p + 2, j], {j, 1, p + 1}],
-%     Table[σ[p + 2, j], {j, p, 1, -1}]
-% }, 1];
-% U[p_, csl_, csr_] := Dot @@ Flatten[{
-%     Table[σ[p + 2, j, csl, csr], {j, 1, p + 1}],
-%     Table[σ[p + 2, j, csl, csr], {j, p, 1, -1}]
-% }, 1];
+σ[n_, j_] := σMeta[n, j, FibString[n + 1]];
 
-% (* Demo *)
-% Print[MatrixForm[σ[3, 1]]];
-% Print[σ[3, 1].σ[3, 2].σ[3, 1] == U[1]];
-% \end{verbatim}
+σ[n_, j_, csl_, csr_] := σMeta[n, j, FibStringCS[n + 1, csl, csr]];
 
-% With the following code we get numerical values
+(* U[p] returns σ₁σ₂⋯σₚσₚ₊₁σₚ⋯σ₂σ₁ on p+2 Fibonacci anyons. *)
+U[p_] := Dot @@ Flatten[{
+    Table[σ[p + 2, j], {j, 1, p + 1}],
+    Table[σ[p + 2, j], {j, p, 1, -1}]
+}, 1];
+U[p_, csl_, csr_] := Dot @@ Flatten[{
+    Table[σ[p + 2, j, csl, csr], {j, 1, p + 1}],
+    Table[σ[p + 2, j, csl, csr], {j, p, 1, -1}]
+}, 1];
 
-% \begin{verbatim}
-% (* Plug in values for the parameters. *)
-% R1 = Exp[4 Pi I/5];
-% Rτ = Exp[-3 Pi I/5];
-% R = ({
-%     {R1, 0},
-%     {0,  Rτ}
-% });
-% φ = GoldenRatio;
-% F = ({
-%     {φ^-1,      φ^(-1/2)},
-%     {φ^(-1/2), -φ^-1}
-% });
-% B = Inverse[F].R.F;
-% B11 = B[[1, 1]];
-% B12 = B[[1, 2]];
-% B21 = B[[2, 1]];
-% B22 = B[[2, 2]];
+(* Demo *)
+Print[MatrixForm[σ[3, 1]]];
+Print[σ[3, 1].σ[3, 2].σ[3, 1] == U[1]];
+\end{verbatim}
 
-% (* Compute argument of eigenvalues. Performance boos by computing using N[..],
-%    then convert back by Rationalize[../Pi]. *)
-% EigenvaluesArg[data_] := Sort[Rationalize[Arg[Eigenvalues[N[data]]]/Pi]Pi];
 
-% (* Demo *)
-% Print[EigenvaluesArg[σ[3, 1]]];
-% \end{verbatim}
+\section{Numeric computation}
 
+The following code builds on the code in the previous section to give numerical values for the braid group generators.
+
+\begin{verbatim}
+(* Plug in values for the parameters. *)
+R1 = Exp[4 Pi I/5];
+Rτ = Exp[-3 Pi I/5];
+R = ({
+    {R1, 0},
+    {0,  Rτ}
+});
+φ = GoldenRatio;
+F = ({
+    {φ^-1,      φ^(-1/2)},
+    {φ^(-1/2), -φ^-1}
+});
+B = Inverse[F].R.F;
+B11 = B[[1, 1]];
+B12 = B[[1, 2]];
+B21 = B[[2, 1]];
+B22 = B[[2, 2]];
+
+(* Compute argument of eigenvalues. Performance boos by computing using N[..],
+   then convert back by Rationalize[../Pi]. *)
+EigenvaluesArg[data_] := Sort[Rationalize[Arg[Eigenvalues[N[data]]]/Pi]Pi];
+
+(* Demo *)
+Print[EigenvaluesArg[σ[3, 1]]];
+\end{verbatim}
+
+
+
+
+
+\backmatter
 
 
 
