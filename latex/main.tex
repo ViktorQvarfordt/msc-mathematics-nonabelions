@@ -1,3 +1,4 @@
+%!TEX program = xelatex
 \documentclass[a4paper,10pt,oneside]{book}
 
 %% Packages order is important
@@ -22,7 +23,9 @@
 \usepackage{graphicx}
 \usepackage{cleveref}
 
-
+% For unicode in verbatim
+\usepackage{mathspec}
+\setmonofont{DejaVu Sans Mono}
 \setlength{\marginparwidth}{3.5cm}
 
 % \usepackage{showkeys}
@@ -67,7 +70,6 @@
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\M}{\mathcal{M}}
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
@@ -347,6 +349,8 @@
 \chapter{Introduction}
 
 \chapter{How anyons arise}\label{chap:how anyons arise}
+
+% TODO: Douglas: Titta på två partiklar för att illustrera hur anyoner uppstår.
 
 \section{Particle statistics}
 
@@ -998,7 +1002,7 @@ The $N_{ab}^c$ distinguishable ways in which $a$ and $b$ can fuse to $c$ can be 
 \begin{align*}
   \{ \ket{ab;c,\mu}, \quad \mu = 1,2,\ldots,N_{ab}^c \}
 \end{align*}
-where $\ket{ab;c,\mu}$ represents the $\mu$:th way in which $a$ and $b$ can fuse to $c$.
+where $\ket{ab;c,\mu}$ represents the $\mu$:th way in which $a$ and $b$ can fuse to $c$. This is the notation used by \cite{preskill}.
 
 The splitting space $V_c^{ab}$ is the dual space of the fusion space $V_{ab}^c$, it is the state space of particles with anyonic charge $a$ and $b$ that can be split from an anyon of charge $c$.
 
@@ -1093,39 +1097,31 @@ can thus be written in terms of fusion diagrams, assuming trivial fusion multipl
   \;\;\;\bigg|\; \begin{array}{c}\text{for all possible intermediate} \\ \text{charges $b_1, b_2, \ldots, b_{n-2}$}\end{array}
   \right\}.
 \end{align*}
-We can thus represent the basis states as a vector of the possible intermediate charges
-\begin{align*}
-  (b_1, b_2, \ldots, b_{n-2}).
-\end{align*}
-
-TODO: Mention explicitly that we are representing all this with $\mathbb{C}^n$ matrices and how to map back and forth.
+It is thus clear that for given anyons $a_1, \ldots, a_n$ the fusion states are really determined by the intermediate charges $b_j$.
 
 The real advantage of writing fusions states with fusion diagrams is that braiding is much easier to represent. This will be extremely useful now as we proceed in developing the abstract model for anyons, and characterize braiding.
 
-
-\section{The $R$ operator: Commutativity of fusion}
-
-The result of fusing $a$ with $b$ must be the same as fusing $b$ with $a$. That is, fusion is commutative,
-\begin{align*}
-  a \times b = b \times a.
-\end{align*}
-This gives rise to a natural isomorphism
-\begin{align*}
-  R : V_{ba}^c \to V_{ab}^c
-\end{align*}
-between the corresponding fusion spaces % $V_{ab}^c \cong V_{ba}^c$,
-which can be represented by a unitary matrix $R_{ab}^c$ in the canonical basis
-\begin{align*}
-  \ket{ba,c,\mu} = \sum_{\mu'} (R_{ab}^c)_{\mu}^{\mu'} \ket{ab,c,\mu'}.
-\end{align*}
-As we have seen, if the fusion multiplicities $N_{ab}^c \le 1$ for all labels $a,b,c$, we can disregard explicit mention of the fusion multiplicities. From now on we shall do so, and note that it is straight forward to add these indices back if needed. In the diagrammatic notation we then have
-\begin{equation}\label{R-matrix}
-  \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}.
+Consider an arbitrary fusion state $\ket{\psi} = \sum_k c_k \ket{k}$ where $\ket{k}$ denotes the $k$:th basis fusion states. Let $A$ be a linear operator on the fusion space. The basis fusion states are transformed according to
+\begin{equation}\label{eq:linear op on basis state}
+  A\ket{k} = \sum_j A_{jk} \ket{j}
 \end{equation}
-In this case it is clear that $R$-matrix $R_{ab}$ is diagonal in the canonical basis and we have
-\begin{align*}
-  (R_{ab})_{ij} = \delta_{ij} R_{ab}^i.
-\end{align*}
+The action of a linear operator $A$ acting on $\ket{\psi}$ is then given by
+\begin{equation}
+  A \ket{\psi} = \sum_k c_k A \ket{k} = \sum_{k} c_k \sum_j A_{jk} \ket{j} = \sum_j \sum_k c_k A_{jk} \ket{j}.
+\end{equation}
+
+In what follows, we shall define some important linear operators. We shall define the operators in terms of their action on the on the standard fusion states, as in \cref{eq:linear op on basis state}.
+
+
+
+
+
+
+
+
+
+
+
 
 \section{The $F$ operator: Associativity of fusion}
 
@@ -1148,11 +1144,16 @@ The first of these two decompositions is referred to as the standard decompositi
 \begin{align*}
   F : \bigoplus_f V_{ab}^f \otimes V_{fc}^d \to \bigoplus_e V_{bc}^e \otimes V_{ae}^d
 \end{align*}
-and it can be represented by the matrix $F_{abc}^c$, satisfying the equation
-\begin{equation}\label{F-matrix}
-  \sum_f \left(F_{abc}^d\right)_{ef} \fs{b,c}{a,f,d} = \fsfused{a}{b}{c}{d}{e}.
-\end{equation}
-That is, the $F$-matrix is the change of basis matrix from the standard basis to the fusion basis of the fusion space $V_{abc}^d$. Note that this definition looks reversed to how \cite{preskill} defines the $F$ operator, however it seems \cite{preskill} defines the inverse. All following results in this thesis are in agreement with \cite{preskill}.
+and it can be represented by the $F$ matrix.
+
+\begin{definition}
+  The $F$ matrix $F_{abc}^c$ is given by
+  \begin{equation}\label{F-matrix}
+    F : \fs{b,c}{a,e,d} \mapsto \fsfused{a}{b}{c}{d}{e} = \sum_f \left(F_{abc}^d\right)_{fe} \fs{b,c}{a,f,d}.
+  \end{equation}
+\end{definition}
+
+That is, the $F$-matrix is the change of basis matrix from the standard basis to the fused basis in the fusion space $V_{abc}^d$.
 
 \begin{remark}[Implicit range for the index of summation]\label{rem:sum index range}
   In \cref{F-matrix} the summation index $f$ implicitly ranges over all possible labels in the given anyon model, with the obvious restriction that the corresponding fusion state in the summand is valid. That is, the summation index $f$ must be such that
@@ -1165,7 +1166,7 @@ That is, the $F$-matrix is the change of basis matrix from the standard basis to
     b \times c &= e \\
     a \times e &= d.
   \end{align*}
-  We shall use this convention for all sums with fusion states as summands.
+  In what follows we shall let the summation index be implicit in all sums with fusion states as summands.
 \end{remark}
 
 The following lemma will be useful when computing the $F$-matrix.
@@ -1173,28 +1174,81 @@ The following lemma will be useful when computing the $F$-matrix.
 \begin{lemma}\label{res:F1}
   Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e. $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$ and the corresponding $F$-matrix $F_{abc}^d$ is trivial. More explicitly we have
   \begin{align*}
-    F_{1bc}^d &= \left( F_{1bc}^d \right)_{db} = 1, \\
-    F_{a1c}^d &= \left( F_{a1c}^d \right)_{ca} = 1, \\
-    F_{ab1}^d &= \left( F_{ab1}^d \right)_{bd} = 1, \\
-    F_{abc}^1 &= \left( F_{abc}^1 \right)_{\overline{a}\,\overline{c}} = 1.
+    F_{1bc}^d &= \left( F_{1bc}^d \right)_{bd} = 1, \\
+    F_{a1c}^d &= \left( F_{a1c}^d \right)_{ac} = 1, \\
+    F_{ab1}^d &= \left( F_{ab1}^d \right)_{db} = 1, \\
+    F_{abc}^1 &= \left( F_{abc}^1 \right)_{\overline{c}\,\overline{a}} = 1.
   \end{align*}
 \end{lemma}
 
 \begin{proof}
   With $a = 1$ we have, by definition of the $F$-matrix,
   \begin{align*}
-     \fsfused{1}{b}{c}{d}{e} = \sum_f \left(F_{1bc}^d \right)_{ef} \fs{b,c}{1,f,d}.
+     \fsfused{1}{b}{c}{d}{e} = \sum_f \left(F_{1bc}^d \right)_{fe} \fs{b,c}{1,f,d}.
   \end{align*}
-  From the fusion diagram on the right hand side we read out $1 \times b = f$ from the first fusion, this is valid only for $b = f$.
+  From the fusion diagram on the right hand side we read out $1 \times b = f$ from the first fusion, this is valid only for $f = b$.
   Similarly, on the left hand side the final fusion reads $1 \times e = d$, implying $e = d$. Since the indices $e$ and $f$ are forced, this implicitly shows that the corresponding fusion spaces is one-dimensional. The other results follow analogously,
   \begin{align*}
     % \fs{b,c}{a,e,d} &= \sum_f \left(F_{abc}^d \right)_{ef} \fsfused{a}{b}{c}{d}{f} \\
-    \fsfused{a}{1}{c}{d}{e} &= \sum_f \left(F_{a1c}^d \right)_{ef} \fs{1,c}{a,f,d} \implies e = c, f = a, \\
-    \fsfused{a}{b}{1}{d}{e} &= \sum_f \left(F_{ab1}^d \right)_{ef} \fs{b,1}{a,f,d} \implies e = b, f = d, \\
-    \fsfused{a}{b}{c}{1}{e} &= \sum_f \left(F_{abc}^1 \right)_{ef} \fs{b,c}{a,f,1} \implies e = \overline{a}, f = \overline{c}.
+    \fsfused{a}{1}{c}{d}{e} &= \sum_f \left(F_{a1c}^d \right)_{fe} \fs{1,c}{a,f,d} \implies e = c, f = a, \\
+    \fsfused{a}{b}{1}{d}{e} &= \sum_f \left(F_{ab1}^d \right)_{fe} \fs{b,1}{a,f,d} \implies e = b, f = d, \\
+    \fsfused{a}{b}{c}{1}{e} &= \sum_f \left(F_{abc}^1 \right)_{fe} \fs{b,c}{a,f,1} \implies e = \overline{a}, f = \overline{c}.
   \end{align*}
-  The result can also be realized by noting that three anyons of type $a, b$ and $c$, where one of them is the trivial type $1$, is uniquely determined by their total charge. Indeed, these three anyons are really just two, since the trivial particle $q$ fuses trivially, it can be added or removed in the representation without changing anything. Thus, the corresponding $F$ matrix must be trivial in this case.
+  The result can also be realized by noting that three anyons of type $a, b$ and $c$, where one of them is the trivial type $1$, is uniquely determined by their total charge. Indeed, these three anyons are really just two, since the trivial particle $1$ fuses trivially, it can be added or removed in the representation without changing anything. Thus, the corresponding $F$ matrix must be trivial in this case. This is particularly clear if $b$ or $c$ equals $1$, we then have
+  \begin{align*}
+    \fsfused{a}{1}{c}{d}{e} = \fsfused{a}{1}{c}{d}{c} = \fs{c}{a,d}
+  \end{align*}
+  and it is clear that no fusion can occur.
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{The $R$ operator: Commutativity of fusion}
+
+The result of fusing $a$ with $b$ must be the same as fusing $b$ with $a$. That is, fusion is commutative,
+\begin{align*}
+  a \times b = b \times a.
+\end{align*}
+This gives rise to a natural isomorphism
+\begin{align*}
+  R : V_{ba}^c \to V_{ab}^c
+\end{align*}
+between the corresponding fusion spaces which can be represented by a unitary matrix $R_{ab}^c$ acting on the fused basis states
+\begin{align*}
+  \fsfused{}{a}{b}{}{c}.
+\end{align*}
+\begin{definition}
+  The $R$ matrix $R_{ab}$ is given by
+  \begin{equation}\label{R-matrix}
+    R : \fsfused{}{a}{b}{}{c} \mapsto \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}.
+  \end{equation}
+\end{definition}
+It is clear that $R$-matrix $R_{ab}$ is diagonal and we can denote this as
+\begin{align*}
+  (R_{ab})_{ij} = \delta_{ij} R_{ab}^i.
+\end{align*}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1209,24 +1263,25 @@ We shall now consider braiding on the standard fusion states. This can be realiz
 % \end{align*}
 \begin{align*}
   \fs[1]{b,c}{a,e,d}
-  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} \fsfusedbraided{a}{b}{c}{d}{f} \\
-  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \fsfused{a}{b}{c}{d}{f} \\
-  &= \sum_g \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg} \fs{b,c}{a,g,d}.
+  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{fe} \fsfusedbraided{a}{b}{c}{d}{f} \\
+  &= \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{fe} R_{bc}^f \fsfused{a}{b}{c}{d}{f} \\
+  &= \sum_g \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{fe} R_{bc}^f \left(F_{abc}^d\right)_{gf} \fs{b,c}{a,g,d}.
 \end{align*}
 Recall the implicit summation index convention described in \cref{rem:sum index range}.
 From this we define the $B$-matrix.
 \begin{definition}\label{def:B}
+  The $B$ matrix $B_{abc}^d$ is given by
   \begin{align*}
     \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg}.
   \end{align*}
+  Symbolically we write this as
+  \begin{align*}
+    B = F^{-1} R F.
+  \end{align*}
 \end{definition}
-Symbolically we write this as
-\begin{align*}
-  B = F^{-1} R F.
-\end{align*}
 To sum up, the $B$-matrix braids the standard fusion states according to
 \begin{align*}
-  \fs[1]{b,c}{a,e,d} = \sum_g \left(B_{abc}^d\right)_{eg} \fs{b,c}{a,g,d}.
+  \fs[1]{b,c}{a,e,d} = \sum_g \left(B_{abc}^d\right)_{ge} \fs{b,c}{a,g,d}.
 \end{align*}
 
 As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have the following lemma, which will be useful when computing the $B$-matrix.
@@ -1234,10 +1289,10 @@ As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have t
 \begin{lemma}\label{res:B1}
   Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e. $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$ and the corresponding $B$-matrix $B_{abc}^d$ is one-dimensional,
   \begin{align*}
-    B_{1bc}^d &= \left( B_{1bc}^d \right)_{c b} = R_{bc}^d, \\
-    B_{a1c}^d &= \left( B_{a1c}^d \right)_{d a} = R_{1c}^c = 1, \\
-    B_{ab1}^d &= \left( B_{ab1}^d \right)_{a d} = R_{b1}^b = 1, \\
-    B_{abc}^1 &= \left( B_{abc}^1 \right)_{\overline{b} \overline{c}} = R_{bc}^{\overline{a}}.
+    B_{1bc}^d &= \left( B_{1bc}^d \right)_{bc} = R_{bc}^d, \\
+    B_{a1c}^d &= \left( B_{a1c}^d \right)_{ad} = R_{1c}^c = 1, \\
+    B_{ab1}^d &= \left( B_{ab1}^d \right)_{da} = R_{b1}^b = 1, \\
+    B_{abc}^1 &= \left( B_{abc}^1 \right)_{\overline{c}\,\overline{b}} = R_{bc}^{\overline{a}}.
   \end{align*}
 \end{lemma}
 
@@ -1289,7 +1344,7 @@ As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have t
 
 \section{The pentagon and hexagon equations}\label{sec:pentagon hexagon}
 
-When considering an anyon model, it is ultimately the $B$-matrix that determines the properties of interest. The $B$-matrix gives the phase change introduced when braiding anyons. In the previous section we saw how the $B$-matrix determine the braid group representation. This is the relevant property both for the study the dynamics of anyons, but also for developing methods for quantum computation with anyons, known as topological quantum computation.
+When considering an anyon model, it is ultimately the $B$ operator (braid operator) that describes how braiding affects the anyons. The $B$ operator gives the phase change introduced when braiding anyons. In the next chapter we shall explicitly see how the $B$ operator is used to characterize the braid group representation for anyon models. It is the braid group representation that is the relevant property both for the study the dynamics of anyons, but also for developing methods for quantum computation with anyons, known as topological quantum computation.
 
 We have seen that the $B$-matrix is computed from the $F$ and $R$-matrices. These matrices are in turn determined by what is known as the pentagon equation
 \begin{equation}\label{eq:pentagon}
@@ -1302,13 +1357,13 @@ and hexagon equation
 \end{equation}
 In these equations, all indices are taken as arbitrary particle labels.
 
-These equations are known as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_space} and \cref{fig:pentagon_space,fig:hexagon_space} make the point clearer, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
+These equations should be understood as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_space} and \cref{fig:pentagon_space,fig:hexagon_space} make the point clear, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
 \begin{align*}
   (a \times b) \times c = a \times (b \times c).
 \end{align*}
 As previously hinted, anyon models can be described by braided tensor categories. In this setting, the pentagon and hexagon equations are precisely Mac Lane's coherence theorem \cite{mac lane}, showing that no further conditions are required for consistent fusion and braiding. Further details can be found in \cite{kitaev,preskill}.
 
-Solving the pentagon and hexagon equations is in general highly non-trivial. The equations are multivariate polynomial equations and require elaborate techniques to be solved. First one must fix the gague freedom that comes from the choice of basis for the fusion space, next an appropriate Gröbner basis can be used to solve the system. See \cite{bonderson} for more details.
+Solving the pentagon and hexagon equations is in general highly non-trivial. The equations are multivariate polynomial equations and require elaborate techniques to be solved. First one must fix the gauge freedom that comes from the choice of basis for the fusion space, next an appropriate Gröbner basis can be used to solve the system. See \cite{bonderson} for more details on this approach.
 
 \begin{figure}[h]
   \centering
@@ -1447,20 +1502,34 @@ Since we seek to characterize general braiding in $V_{t^n}^1$, including interme
   where the charge labels $b_1, b_2, \ldots, b_{n+1}$ range over all values allowed by the fusion rules. The space $\widetilde{V}_{t^n}$ should be thought of as the space $V_{t^n}^1$ but including all possible left and right charge sectors. That is, the space of $n$ anyons of type $t$ with unfixed charge sectors.
 \end{definition}
 
+The following new notation shall be convenient when working with such fusion spaces.
+
+\begin{definition}
+  The basis fusion states of the fusion space $\widetilde{V}_{t^n}$ are denoted
+  \begin{align*}
+    \ket{b_1 b_2 \cdots b_{n} b_{n+1}} \coloneqq
+    \fswide{t,t}{b_1,b_2,b_3}
+    \cdots
+    \fswide{t,t}{b_{n-1},b_n,b_{n+1}},
+  \end{align*}
+  where the $n$ anyons of type $t$ are implicit in this notation.
+\end{definition}
+
 \begin{remark}
   We now have three slightly different notations for fusion spaces, to sum up:
   \begin{align*}
-    V_{t^n}^1 &: = \operatorname{span} \left\{ \fswide{t,t}{1,b_1,b_2} \cdots \fswider{t,t}{b_{n-3},b_{n-2},1} : \text{ for all possible $b_j$} \right\} \\
-    V_{t^n} &: = \operatorname{span} \left\{ \fswide{t,t}{1,b_1,b_2} \cdots \fswider{t,t}{b_{n-2},b_{n-1},b_{n}} : \text{ for all possible $b_j$} \right\} \\
-    \widetilde{V}_{t^n} &: = \operatorname{span} \left\{ \fswide{t,t}{b_1,b_2,b_3} \cdots \fswider{t,t}{b_{n-1},b_n,b_{n+1}} : \text{ for all possible $b_j$} \right\}
+    V_{t^n}^1 &: =
+    \operatorname{span} \left\{ \fswide{t,t}{\bm{1},t,b_1} \cdots \fswider{t,t}{b_{n-3},b_{n-2},\bm{1}} : \text{ for all possible $b_j$} \right\} \\
+    V_{t^n} &: =
+    \operatorname{span} \left\{ \fswide{t,t}{\bm{1},t,b_1} \cdots \fswider{t,t}{b_{n-3},b_{n-2},\bm{b_{n-1}}} : \text{ for all possible $b_j$} \right\} \\
+    \widetilde{V}_{t^n} &: =
+    \operatorname{span} \left\{ \fswide{t,t}{\bm{b_1},b_2,b_3} \cdots \fswider{t,t}{b_{n-1},b_n,\bm{b_{n+1}}} : \text{ for all possible $b_j$} \right\}
   \end{align*}
+  Note how the only thing that differs are the left and right charge sectors.
   Recall the notation $V_{t^n} = \bigoplus_c V_{t^n}^c$, this is the space of $n$ anyons of type $t$ with free right charge sector.
 \end{remark}
 
-
-
-
-
+We shall now see how braid group representations arise in the fusion space $\widetilde{V}_{t^n}$ for given non-trivial anyonic charge $t$. We let the left and right charge sectors be unspecified, meaning that the $n$ anyons we consider may really be part of a larger ensemble of anyons. If we in total had exactly $n$ anyons, it would suffice to consider the fusion space $V_{t^n}^1$, i.e.\ with left and right charge sectors fixed to $1$, but we proceed without this restriction. Note that we could instead consider the more general fusion space $\widetilde{V}_{a_1 \cdots a_n}$, however one is most often interested in braiding of anyons of the same type. This is also exactly what we need for the purposes outlined in \cref{chap:kinetic energy}. The fusion space $\widetilde{V}_{a_1 \cdots a_n}$ is treated analogously to $\widetilde{V}_{t^n}$.
 
 
 
@@ -1497,78 +1566,107 @@ For example, we have
 \begin{align*}
   \fswide{t,t}{\cdot,\cdot,\cdot} \xmapsto{\rho_2(\sigma_1)} \fswide[1]{t,t}{\cdot,\cdot,\cdot}
 \end{align*}
-furthermore,
+this is precisely the $B$ operator
 \begin{align*}
-  \sum_{b_2} \left( B_{b_1tt}^{b_3} \right)_{eb_2} \fswide{t,t}{b_1,b_2,b_3}
-  =
-  \fswide[1]{t,t}{b_1,e,b_3}.
+  B : \fswide{t,t}{b_1,b_2,b_3} \mapsto \fswide[1]{t,t}{b_1,e,b_3} =
+  \sum_{b_2} \left( B_{b_1tt}^{b_3} \right)_{b_2 e} \fswide{t,t}{b_1,b_2,b_3}.
   % \rho_2(\sigma_1)\left(\fswide{t,t}{b_1,b_2,b_3}\right)
 \end{align*}
-This shows that $ρ_2(σ_1)$ in $\widetilde{V}_{t^2}$ for given $b_1$ and $b_3$ is given by
+This shows that $ρ_2(σ_1)$ in $\widetilde{V}_{t^2}$ for fixed $b_1$ and $b_3$ is given by
 \begin{align*}
   ρ_2(σ_1) = \bigoplus_{b_1, b_3} B_{b_1tt}^{b_3}.
 \end{align*}
-By the nature of the $B$ matrix we see that there is no mixing of the values for $b_1$ or $b_3$, this matrix really only acts on the subspace $(b_1, \langle b_2\rangle, b_3)$ generated by the possible values of the label $b_2$ while keeping the labels $b_1$ and $b_3$ fixed.
-We write this as
-\begin{align*}
-  ρ_2(σ_1) \left( \fswide{t,t}{b_1,\langle b_2 \rangle,b_3} \right) = \fswide[1]{t,t}{b_1,\langle b_2 \rangle,b_3}
-\end{align*}
-where
-\begin{align*}
-  \fswide{t,t}{b_1,\langle b_2 \rangle,b_3}
-  \equiv (b_1, \langle b_2 \rangle, b_3)
-  \equiv \begin{pmatrix} (b_1, \langle b_2 \rangle_1, b_3) \\ (b_1, \langle b_2 \rangle_2, b_3) \\ \vdots \end{pmatrix}
-\end{align*}
-denotes the vector of fusion states for all possible $b_2$ with given $b_1$ and $b_3$. We denote the $j$:th possible value for $b_2$ by $\langle b_2 \rangle_j$. Since there is no mixing of the values for the labels $b_1$ and $b_3$, we see that the matrix for $ρ_2(σ_1)$ splits into blocks given by the left and right charge sectors $b_1$ and $b_3$,
+By the definition of the $B$ matrix we see that there is no mixing of the values for $b_1$ or $b_3$, this matrix really only acts on the subspace generated by the possible values of the label $b_2$ while keeping the labels $b_1$ and $b_3$ fixed.
+
+% , denoted $\ket{b_1 [b_2], b_3}$.
+% We write this as
+% TODO FIX NOTATION
+% \begin{align*}
+%   ρ_2(σ_1) \left( \fswide{t,t}{b_1,\langle b_2 \rangle,b_3} \right) = \fswide[1]{t,t}{b_1,\langle b_2 \rangle,b_3}
+% \end{align*}
+% where
+% \begin{align*}
+%   \fswide{t,t}{b_1,\langle b_2 \rangle,b_3}
+%   \equiv (b_1, \langle b_2 \rangle, b_3)
+%   \equiv \begin{pmatrix} (b_1, \langle b_2 \rangle_1, b_3) \\ (b_1, \langle b_2 \rangle_2, b_3) \\ \vdots \end{pmatrix}
+% \end{align*}
+% denotes the vector of fusion states for all allowed $b_2$ with given $b_1$ and $b_3$, i.e.\ such that the corresponding fusion state is valid. We denote the $j$:th possible value for $b_2$ by $\langle b_2 \rangle_j$. Explicitly, $\langle b_2 \rangle_j$ must be such that $b_1 \times \langle b_2 \rangle_j = b_3$ is a valid fusion.
+
+Since there is no mixing of the values for the labels $b_1$ and $b_3$, we see that the matrix for $ρ_2(σ_1)$ splits into blocks given by the left and right charge sectors $b_1$ and $b_3$,
 \begin{align*}
   ρ_2(σ_1)
   = \bigoplus_{b_1,b_3} B_{b_1tt}^{b_3}
-  = \bigoplus_{b_1,b_3}
+  % = \bigoplus_{b_1,b_3}
+  % \begin{pmatrix}
+  %   \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_2} & \cdots \\
+  %   \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_2} & \cdots \\
+  %   \vdots & \vdots & \ddots
+  % \end{pmatrix}
+\end{align*}
+where
+\begin{align*}
+  B_{b_1tt}^{b_3} =
   \begin{pmatrix}
-    \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_2} & \cdots \\
-    \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_2} & \cdots \\
+    \left( B_{b_1tt}^{b_3} \right)_{(b_2)_1, (b_2)_1} & \left( B_{b_1tt}^{b_3} \right)_{(b_2)_1, (b_2)_2} & \cdots \\
+    \left( B_{b_1tt}^{b_3} \right)_{(b_2)_2, (b_2)_1} & \left( B_{b_1tt}^{b_3} \right)_{(b_2)_2, (b_2)_2} & \cdots \\
     \vdots & \vdots & \ddots
   \end{pmatrix}
 \end{align*}
-Indeed, the action of $ρ_2(σ_1)$ on $\langle b_2 \rangle_j$ is
-\begin{align*}
-  ρ_2(σ_1)\big((b_1,\langle b_2 \rangle_j,b_3)\big) = \sum_{k} \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_j, \langle b_2 \rangle_k} (b_1,\langle b_2 \rangle_k,b_3).
-\end{align*}
+and $(b_2)_j$ denotes the $j$:th allowed value for the intermediate charge $b_2$. The allowed values for $b_2$ depend on $b_1$ and $b_3$, in particular we must have that $b_1 \times (b_2)_j = b_3$ is a valid fusion. Note how the number of possible values for $b_2$ determine the dimension of $B_{b_1tt}^{b_3}$. This also implicitly assumes we have chosen and specific order for our basis.
+
 Here we have expressed $ρ_2(σ_1)$ in the full basis of the fusion space $\widetilde{V}_{t^2}$ with basis elements
 \begin{align*}
-  (b_1, b_2, b_3) \equiv \fs{t,t}{b_1,b_2,b_3}
+  \ket{b_1 b_2 b_3} \equiv \fswide{t,t}{b_1,b_2,b_3}
 \end{align*}
 for all possible values of $b_1, b_2$ and $b_3$.
+Explicitly, the action of $ρ_2(σ_1)$ on $\ket{b_1 (b_2)_j b_3}$ is
+\begin{align*}
+  ρ_2(σ_1)\ket{b_1 (b_2)_j b_3} = \sum_{k} \left( B_{b_1tt}^{b_3} \right)_{(b_2)_k, (b_2)_j} \ket{b_1 (b_2)_k b_3}.
+\end{align*}
 
 Consider now the larger fusion space $\widetilde{V}_{t^n}$ with standard fusion states
 \begin{align*}
-  (b_1, b_2, \dots, b_n, b_{n+1}) \equiv \fswide{t,t}{b_1,b_2,b_3} \ldots \fswider{t,t}{b_{n-1},b_n,b_{n+1}}.
+  \ket{b_1 b_2 \cdots b_n b_{n+1}} \equiv \fswide{t,t}{b_1,b_2,b_3} \ldots \fswider{t,t}{b_{n-1},b_n,b_{n+1}}.
 \end{align*}
-for all possible values of the labels $b_1, b_2, \dots, b_{n+1}$. The braid generator $σ_1$ still braids the first two $t$ anyons. However, the basis of the space is now larger, giving us a larger representation $ρ_n(σ_1)$. The right charge sector for $σ_1$ can now be seen to consist of the labels $b_3, b_4, \ldots, b_{n+1}$. With the full basis of $\widetilde{V}_{t^n}$ ordered appropriately we then have
+for all allowed values of the labels $b_1, b_2, \dots, b_{n+1}$. The braid generator $σ_1$ still braids the first two $t$ anyons. However, the basis of the space is now larger, giving us a larger representation $ρ_n(σ_1)$. The right charge sector for $σ_1$ can now be seen to consist of the labels $b_3, b_4, \ldots, b_{n+1}$, we thus have
 \begin{align*}
   ρ_n(σ_1)
-  &= \bigoplus_{b_1,(b_3, \ldots, b_{n+1})} B_{b_1tt}^{b_3} \\
-  &= \bigoplus_{b_1,(b_3, \ldots, b_{n+1})}
+  &= \bigoplus_{b_1, b_3, \ldots, b_{n+1}} B_{b_1tt}^{b_3} \\
+\end{align*}
+In order for this expression to be valid, and for the blocks to not interweave, i.e.\ so that we don't have a situation like
+\begin{align*}
+  ρ_n(σ_1) =
   \begin{pmatrix}
-    \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_1, \langle b_2 \rangle_2} & \cdots \\
-    \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_2} & \cdots \\
-    \vdots & \vdots & \ddots
+    \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{11} & 0 & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{12} & \cdots \\
+    0 & \left(B_{(b_1)_2 t t}^{(b_3)_1}\right)_{11} & 0 & \cdots \\
+    \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{21} & 0 & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{22} & \cdots \\
+    \vdots & \vdots & \vdots & \ddots
   \end{pmatrix}
 \end{align*}
-In order for this expression to be valid, and for the blocks to not interweave we must have that the basis is ordered such that each for each value of $b_2$ all basis elements for given $b_2$ follow immediately after each other, and ordered in the same way for each value of $b_2$. Such a choice for the order of the basis can of course be made, however, this order will most likely cause $ρ_n(σ_2), ρ_n(σ_3), \dots, ρ_n(σ_{n-1})$ to have charge sectors appearing in non-contiguous order, giving interweaving blocks. To somewhat remedy this, we shall order the basis by the leftmost and rightmost charge sectors $b_1$ and $b_n$. The values for these labels can never be mixed, while all other intermediate charges can be mixed. Thus, all representations of the braid generators $ρ_n(σ_j)$ respect these outer charge sector blocks. There is however no ordering of the basis that gives a consistent non-interweaving block structure for $ρ_n(σ_2)$, see \cref{res:general fibonaci braiding 3} as a concrete example of this. It is clear that for each generator $σ_j$ there is a choice of the order of the basis such that its representation $ρ_n(σ_j)$ has this described block form. That is, the basis can be partitioned into subsets where each subset spans an invariant subspace under $ρ_n(σ_j)$. This discussion is summed up in the following result.
+but rather
+\begin{align*}
+  ρ_n(σ_1) =
+  \begin{pmatrix}
+    \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{11} & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{12} & 0 & \cdots \\
+    \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{21} & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{22} & 0 & \cdots \\
+    0 & 0 & \left(B_{(b_1)_2 t t}^{(b_3)_1}\right)_{11} & \cdots \\
+    \vdots & \vdots & \vdots & \ddots
+  \end{pmatrix},
+\end{align*}
+we must have that the basis is ordered such that each for each value of $b_2$ all basis elements for given $b_2$ follow immediately after each other, and ordered in the same way for each value of $b_2$. Such a choice for the order of the basis can of course be made, however, this order will most likely cause $ρ_n(σ_2), ρ_n(σ_3), \dots, ρ_n(σ_{n-1})$ to have charge sectors appearing in non-contiguous order, giving interweaving blocks. To somewhat remedy this, we shall order the basis by the leftmost and rightmost charge sectors $b_1$ and $b_n$. The values for these labels can never be mixed, while all other intermediate charges can be mixed. Thus, all representations of the braid generators $ρ_n(σ_j)$ respect these outer charge sector blocks. There is however no ordering of the basis that gives a consistent non-interweaving block structure for $ρ_n(σ_2)$, see \cref{res:general fibonaci braiding 3} as a concrete example of this. It is clear that for each generator $σ_j$ there is a choice of the order of the basis such that its representation $ρ_n(σ_j)$ has this described block form. That is, the basis can be partitioned into subsets where each subset spans an invariant subspace under $ρ_n(σ_j)$. This discussion is summed up in the following result.
 
 \begin{theorem}
   In a given anyon model with non-trivial charge label $t$, the fusion space $\widetilde{V}_{t^n}$ gives rise to a representation for the braid group $B_n$, where the generators are represented by
   \begin{align*}
     ρ_n(σ_j)
-    &= P_j^{-1} \left[\bigoplus_{(b_1\ldots,b_j),(b_{j+2}, \ldots, b_{n+1})} B_{b_{j}tt}^{b_{j+2}} \right]P_j \\
-    &= P_j^{-1} \left[\bigoplus_{(b_1\ldots,b_j),(b_{j+2}, \ldots, b_{n+1})}
-    \begin{pmatrix}
-      \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_2} & \cdots \\
-      \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_2} & \cdots \\
-      \vdots & \vdots & \ddots
-    \end{pmatrix}
-    \right]P_j
+    &= P_j^{-1} \left[\bigoplus_{b_1, \ldots, b_j, b_{j+2}, \ldots, b_{n+1}} B_{b_{j}tt}^{b_{j+2}} \right]P_j \\
+    % &= P_j^{-1} \left[\bigoplus_{(b_1\ldots,b_j),(b_{j+2}, \ldots, b_{n+1})}
+    % \begin{pmatrix}
+    %   \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_2} & \cdots \\
+    %   \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_2} & \cdots \\
+    %   \vdots & \vdots & \ddots
+    % \end{pmatrix}
+    % \right]P_j
   \end{align*}
   where $P_j$ is some permutation matrix, permuting the basis of the fusion space as described above.
 \end{theorem}
@@ -1577,12 +1675,12 @@ In order for this expression to be valid, and for the blocks to not interweave w
   By construction it is clear that the obtained representation satisfies the braid group generator relations, hence this is indeed a representation for the braid group $B_n$.
 \end{remark}
 
-It is now clear that only the immediate left and right charges $b_j$ and $b_{j+2}$ respectively are essential to determine $ρ_n(σ_j)$, regardless of $n$. Writing out $ρ_n(σ_j)$ in the full basis of the fusion space $\widetilde{V}_{t^n}$ gives repeated blocks which may be permuted as described. The number of times that a given (permuted) block is repeated is given by the number of corresponding left and right charge sectors. More specifically, consider $ρ_n(σ_j)$ and the block associated with $b_j$ and $b_{j+2}$. The number of times this block is repeated is given by
+It is now clear that only the immediate left and right charges $b_j$ and $b_{j+2}$ respectively are essentially all that is needed to determine $ρ_n(σ_j)$, regardless of $n$. Writing out $ρ_n(σ_j)$ in the full basis of the fusion space $\widetilde{V}_{t^n}$ gives repeated blocks which may be permuted as described. The number of times that a given (permuted) block is repeated is given by the number of corresponding left and right charge sectors in the full basis. More specifically, consider $ρ_n(σ_j)$ and the block associated with $b_j$ and $b_{j+2}$. The number of times this block is repeated is given by the number of possible values for $b_j$ and $b_{j+2}$, so that the following fusions are allowed
 \begin{align*}
-  \dim (\langle b_1 \rangle, \ldots, \langle b_{j-1} \rangle) +
-  \dim (\langle b_{j+3} \rangle, \ldots, \langle b_{n+1} \rangle).
+  b_1 \times \cdots \times b_{j-1} &= b_j \\
+  b_{j+2} \times \cdots \times b_n &= b_{n+1}.
 \end{align*}
-That is, the number of possible combinations for the labels $b_1, \ldots, b_{j-1}$ and $b_{j+3}, \ldots, b_{n+1}$. Indeed, the bold symbols in
+Indeed, the bold symbols in
 \begin{align*}
   \cdots \fswider{t,\bm{t},\bm{t},t}{b_{j-1},\bm{b_j},\bm{b_{j+1}},\bm{b_{j+2}},b_{j+3}} \cdots
 \end{align*}
@@ -1646,11 +1744,11 @@ In the following results, we use the convention of representing braid operators 
 \begin{proof}
   In the general case, the representation $ρ(σ_1)$ for the first generator $σ_1$ that braids $a_1$ with $a_2$, is given by
   \begin{align*}
-    ρ(σ_1) \left( \fswide{a_1,a_2}{1,a_1,b_1} \ldots \right) = \left( \fswide[1]{a_1,a_2}{1,a_2,b_1} \ldots \right) = \sum_g \left[ \left(B_{1 a_1 a_2}^{b_1}\right)_{a_2 g} \left( \fswide{a_1,a_2}{1,g,b_1} \ldots \right)\right]
+    ρ(σ_1) \left( \fswide{a_1,a_2}{1,a_1,b_1} \ldots \right) = \left( \fswide[1]{a_1,a_2}{1,a_2,b_1} \ldots \right) = \sum_g \left[ \left(B_{1 a_1 a_2}^{b_1}\right)_{g a_2} \left( \fswide{a_1,a_2}{1,g,b_1} \ldots \right)\right]
   \end{align*}
   Since $1$ fuses trivially we must have $g = a_1$ and thus $ρ(σ_1)$ is one-dimensional with
   \begin{align*}
-    ρ(σ_1) = \left( B_{1 a_1 a_2}^{b_1} \right)_{a_2, a_1} = \sum_f \left( \left(F^{-1}\right)_{1 a_2 a_1}^{b_1} \right)_{a_2 f} R_{a_1 a_2}^{f} \left( F_{1 a_1 a_2}^{b_1} \right)_{f a_1} = R_{a_1 a_2}^{b_1},
+    ρ(σ_1) = \left( B_{1 a_1 a_2}^{b_1} \right)_{a_1, a_2} = \sum_f \left( \left(F^{-1}\right)_{1 a_2 a_1}^{b_1} \right)_{f a_2} R_{a_1 a_2}^{f} \left( F_{1 a_1 a_2}^{b_1} \right)_{a_1 f} = R_{a_1 a_2}^{b_1},
   \end{align*}
   where the last equality follows from \cref{res:F1}.
 \end{proof}
@@ -1673,7 +1771,7 @@ In the following results, we use the convention of representing braid operators 
 \begin{proof}
   Note that $ρ(σ_j)$ is precisely the $B$-matrix applied appropriately,
   \begin{align*}
-    \left( \ldots \fswider[1]{a_j,a_{j+1}}{b_{j-2},e,b_{j}} \ldots \right) = \sum_{b_{j-1}} \left[ \left(B_{b_{j-2} a_j a_{j+1}}^{b_{j}}\right)_{e, b_{j-1}} \left( \ldots \fswider{a_j,a_{j+1}}{b_{j-2},b_{j-1},b_{j}} \ldots \right) \right],
+    \left( \ldots \fswider[1]{a_j,a_{j+1}}{b_{j-2},e,b_{j}} \ldots \right) = \sum_{b_{j-1}} \left[ \left(B_{b_{j-2} a_j a_{j+1}}^{b_{j}}\right)_{b_{j-1} e} \left( \ldots \fswider{a_j,a_{j+1}}{b_{j-2},b_{j-1},b_{j}} \ldots \right) \right],
   \end{align*}
   thus the result follows.
 \end{proof}
@@ -1693,12 +1791,12 @@ With the convention $b_{0} = a_1$ and $b_{-1} = 1$, \cref{res:sigma j is B} subs
   \begin{gather*}
     ρ(σ_{n-1}) \left( \ldots \fswider{a_{n-1},a_n}{b_{n-3},\overline{a_n},1} \right)
     = \left( \ldots \fswider[1]{a_{n-1},a_n}{b_{n-3},\overline{a_{n-1}},1} \right) \\
-    = \sum_g \left[ \left(B_{b_{n-3} a_{n-1} a_n}^{1}\right)_{\overline{a_{n-1}}, g} \left( \ldots \fswider{a_{n-1},a_n}{b_{n-3},g,1} \right) \right].
+    = \sum_g \left[ \left(B_{b_{n-3} a_{n-1} a_n}^{1}\right)_{g \overline{a_{n-1}}} \left( \ldots \fswider{a_{n-1},a_n}{b_{n-3},g,1} \right) \right].
   \end{gather*}
   Since the last fusion reads $g \times a_n = 1$ we must have $g = \overline{a_n}$ and thus
   \begin{align*}
-    ρ(σ_{n-1}) &= \left( B_{b_{n-3} a_{n-1} a_n}^{1} \right)_{\overline{a_{n-1}}, \overline{a_n}} \\
-    &= \sum_f \left( \left(F^{-1}\right)_{b_{n-3} a_n a_{n-1}}^1 \right)_{\overline{a_{n-1}} f} R_{a_{n-1} a_n}^f \left( F_{b_{n-3} a_{n-1} a_n}^1 \right)_{f,\overline{a_n}} \\
+    ρ(σ_{n-1}) &= \left( B_{b_{n-3} a_{n-1} a_n}^{1} \right)_{\overline{a_n} \overline{a_{n-1}}} \\
+    &= \sum_f \left( \left(F^{-1}\right)_{b_{n-3} a_n a_{n-1}}^1 \right)_{f \overline{a_{n-1}}} R_{a_{n-1} a_n}^f \left( F_{b_{n-3} a_{n-1} a_n}^1 \right)_{\overline{a_n} f} \\
     &= R_{a_{n-1} a_n}^{\overline{b_{n-3}}}
   \end{align*}
   where the last equality follows from \cref{res:F1}.
@@ -1760,7 +1858,7 @@ With the $F$ matrix we change basis from the standard basis to a basis where the
 \begin{align*}
   \fsfusedUp{t}{t}{t}{t}{a}{b}{c}{d}{e}
   =
-  \sum_{f} \left( F_{btt}^d \right)_{cf}
+  \sum_{f} \left( F_{btt}^d \right)_{fc}
   \fs{t,t,t,t}{a,b,f,d,e}.
 \end{align*}
 This extends to arbitrary number $p$ of enclosed particles by repeated application of the $F$ matrix. For any $p \ge 2$ we can thus change basis from the standard basis to the fused basis
@@ -1837,7 +1935,7 @@ Note that the braid corresponding to $U_p$ does not depend on the intermediate c
       \node at (3.5, -4.25) {$e$};
     \end{tikzpicture} \\
     &=
-    \sum_{f} \left( B_{act}^d \right)_{bf}
+    \sum_{f} \left( B_{act}^d \right)_{fb}
     \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
       \braid s_1^{-1} s_2^{-1};
       \node at (1, 0.5) {$t$};
@@ -1850,8 +1948,8 @@ Note that the braid corresponding to $U_p$ does not depend on the intermediate c
       \node at (3.5, -3.25) {$e$};
     \end{tikzpicture} \\
     &=
-    \sum_{f} \left( B_{act}^d \right)_{bf}
-    \sum_{g} \left( B_{ftt}^e \right)_{dg}
+    \sum_{f} \left( B_{act}^d \right)_{fb}
+    \sum_{g} \left( B_{ftt}^e \right)_{gd}
     \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
       \braid s_1^{-1};
       \draw (3, 0) to (3, -1.5);
@@ -1865,9 +1963,9 @@ Note that the braid corresponding to $U_p$ does not depend on the intermediate c
       \node at (3.5, -2.25) {$e$};
     \end{tikzpicture} \\
     &=
-    \sum_{f} \left( B_{act}^d \right)_{bf}
-    \sum_{g} \left( B_{ftt}^e \right)_{dg}
-    \sum_{h} \left( B_{at c}^g \right)_{fh}
+    \sum_{f} \left( B_{act}^d \right)_{fb}
+    \sum_{g} \left( B_{ftt}^e \right)_{gd}
+    \sum_{h} \left( B_{at c}^g \right)_{hf}
     \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
       \draw (1, 0) to (1, -1);
       \draw (2, 0) to (2, -1);
@@ -1888,9 +1986,9 @@ Thus, we have the following theorem.
   In a given abstract anyon model, exchange of a pair of $t$-anyons around $p$ enclosed $t$-anyons is described by the exchange operator $U_p$ given by
   \begin{align*}
     U_p \left( \fs{t,c,t}{a,b,d,e} \right) =
-    \sum_{f} \left( B_{act}^d \right)_{bf}
-    \sum_{g} \left( B_{ftt}^e \right)_{dg}
-    \sum_{h} \left( B_{at c}^g \right)_{fh}
+    \sum_{f} \left( B_{act}^d \right)_{fb}
+    \sum_{g} \left( B_{ftt}^e \right)_{gd}
+    \sum_{h} \left( B_{at c}^g \right)_{hf}
     \begin{tikzpicture}[scale=0.4,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
       \draw (1, 0) to (1, -1);
       \draw (2, 0) to (2, -1);
@@ -1979,7 +2077,7 @@ As a first example we shall see how fermionic statistics fits into the framework
   \begin{align*}
     R_{11}^0 = e^{inπ}.
   \end{align*}
-  We denote these two models by $\mathbb{Z}_2^{(n)}$ for $n = 0, 1$. In conclusion, we see that fermionic statistics are modeled by $\mathbb{Z}_2^{(1)}$.
+  We denote these two models by $\mathbb{Z}_2^{(n)}$ for $n = 0, 1$. In conclusion, we see that fermionic statistics are modeled by $\mathbb{Z}_2^{(1)}$. Similarly, bosonic statistics is modeled by $\mathbb{Z}_2^{(0)}$.
 \end{example}
 
 In the above example we considered fusion modeled by $\mathbb{Z}_2$ and saw that this gives rise to two distinct models. Before stating the general result, we first extend the example to see more clearly how the hexagon equation determines the $R$ matrices.
@@ -2061,9 +2159,9 @@ Furthermore, in the fusion space $\widetilde{V}_{1^m}$ of the $\mathbb{Z}_N^{(n)
 and \cref{thm:general Up} gives
 \begin{align}
   U_p \left( \fs{1,c,1}{a,b,d,e} \right) =
-  \sum_{f} \left( B_{act}^d \right)_{bf}
-  \sum_{g} \left( B_{ftt}^e \right)_{dg}
-  \sum_{h} \left( B_{at c}^g \right)_{fh}
+  \sum_{f} \left( B_{act}^d \right)_{fb}
+  \sum_{g} \left( B_{ftt}^e \right)_{gd}
+  \sum_{h} \left( B_{at c}^g \right)_{hf}
   \fs{1,c,1}{a,h,g,e}.
 \end{align}
 As we've seen, the intermediate charges play no role, indeed the fusion space is one dimensional. In the $\mathbb{Z}_N^{(n)}$model this expression for $U_p$ immediately reduces to
@@ -2186,17 +2284,17 @@ There are two Fibonacci string of length one, namely $1$ and $τ$, of length two
 \end{lemma}
 
 \begin{proof}
-  Let $\#_n$ denote the length number of Fibonacci strings of length $n$, and let $\#^a_n$ denote the number of Fibonacci strings of length $n$ ending with $a$, where $a = 1, τ$. We then have $\#_n = \#^1_n + \#^τ_n$. This, together with the definition of Fibonacci strings gives
+  Let $f_n$ denote the number of Fibonacci strings of length $n$, and let $f^a_n$ denote the number of Fibonacci strings of length $n$ ending with $a$, where $a = 1, τ$. We then have $f_n = f^1_n + f^τ_n$. This, together with the definition of Fibonacci strings gives
   \begin{align*}
-    \#_{n+1}
-    &= \#^1_{n+1} + \#^τ_{n+1} \\
-    &= \#^τ_n + \left(\#^1_n + \#^τ_n\right) \\
-    &= \left(\#^τ_n + \#^1_n\right) + \left(\#^1_{n-1} + \#^τ_{n-1}\right) \\
-    &= \#_n + \#_{n-1}.
+    f_{n+1}
+    &= f^1_{n+1} + f^τ_{n+1} \\
+    &= f^τ_n + \left(f^1_n + f^τ_n\right) \\
+    &= \left(f^τ_n + f^1_n\right) + \left(f^1_{n-1} + f^τ_{n-1}\right) \\
+    &= f_n + f_{n-1}.
   \end{align*}
-  This is precisely the recursion relation for the Fibonacci numbers. Finally, initial values $\#_1 = 2, \#_2 = 3$ shows that
+  This is precisely the recursion relation for the Fibonacci numbers. Finally, initial values $f_1 = 2, f_2 = 3$ shows that
   \begin{align*}
-    \#_n = \Fib(n+2).
+    f_n = \Fib(n+2).
   \end{align*}
 \end{proof}
 
@@ -2214,7 +2312,7 @@ Finally, we can use this to characterize the dimension of fusion spaces.
 \begin{proof}
   The first equality follows from
   \begin{align*}
-    \dim V_{τ^n}^1 = \#_{n-3} = \Fib((n-3)+2) = \Fib(n-1).
+    \dim V_{τ^n}^1 = f_{n-3} = \Fib((n-3)+2) = \Fib(n-1).
   \end{align*}
   Next,
   \begin{align*}
@@ -2222,7 +2320,7 @@ Finally, we can use this to characterize the dimension of fusion spaces.
   \end{align*}
   Finally,
   \begin{align*}
-    \dim \widetilde{V}_{τ^n} = \#_{n+1} = \Fib((n+1)+1) = \Fib(n+1).
+    \dim \widetilde{V}_{τ^n} = f_{n+1} = \Fib((n+1)+1) = \Fib(n+1).
   \end{align*}
 \end{proof}
 
@@ -2415,14 +2513,15 @@ in particular
     = R_{ττ}^τ \oplus R.
   \end{align*}
   The empty entries in the matrix are zero, we shall use this convention throughout the thesis, to make the notation less cluttered.
+
   \Cref{res:sigma n-1 is R} gives
   \begin{align*}
     ρ(σ_2)_{(τ1),(τ1)} &= R_{ττ}^τ.
   \end{align*}
   We compute $ρ(σ_2)$ for the $τ$-charge sector by considering its action on the standard fusion states
   \begin{align*}
-    ρ(σ_2) \fs{τ,τ,τ}{1,τ,1,τ}    &= \fs[2]{τ,τ,τ}{1,τ,1,τ}    = \left( B_{τττ}^τ \right)_{11} \fs{τ,τ,τ}{1,τ,1,τ} + \left( B_{τττ}^τ \right)_{1τ} \fs{τ,τ,τ}{1,τ,τ,τ}, \\
-    ρ(σ_2) \fs{τ,τ,τ}{1,τ,τ,τ} &= \fs[2]{τ,τ,τ}{1,τ,τ,τ} = \left( B_{τττ}^τ \right)_{τ1} \fs{τ,τ,τ}{1,τ,1,τ} + \left( B_{τττ}^τ \right)_{ττ} \fs{τ,τ,τ}{1,τ,τ,τ}.
+    ρ(σ_2) \fs{τ,τ,τ}{1,τ,\bm{1},τ} &= \fs[2]{τ,τ,τ}{1,τ,\bm{1},τ}    = \left( B_{τττ}^τ \right)_{11} \fs{τ,τ,τ}{1,τ,\bm{1},τ} + \left( B_{τττ}^τ \right)_{τ1} \fs{τ,τ,τ}{1,τ,\bm{τ},τ}, \\
+    ρ(σ_2) \fs{τ,τ,τ}{1,τ,\bm{τ},τ} &= \fs[2]{τ,τ,τ}{1,τ,\bm{τ},τ} = \left( B_{τττ}^τ \right)_{1τ} \fs{τ,τ,τ}{1,τ,\bm{1},τ} + \left( B_{τττ}^τ \right)_{ττ} \fs{τ,τ,τ}{1,τ,\bm{τ},τ}.
   \end{align*}
   Thus we have
   \begin{align*}
@@ -2441,6 +2540,7 @@ in particular
     \end{pmatrix}
     = R_{ττ}^τ \oplus B.
   \end{align*}
+
 \end{example}
 
 
@@ -2467,7 +2567,7 @@ in particular
     \end{align*}
     \Cref{res:sigma j is B} gives
     \begin{align*}
-      ρ(σ_2)_{ij} = \left( B^τ_{τττ} \right)_{ij} = \sum_f \left( \left(F^{-1}\right)_{τττ}^τ \right)_{if} R_{ττ}^f \left( F_{τττ}^τ \right)_{fj}
+      ρ(σ_2)_{ij} = \left( B^τ_{τττ} \right)_{ij} = \sum_f \left( \left(F^{-1}\right)_{τττ}^τ \right)_{fi} R_{ττ}^f \left( F_{τττ}^τ \right)_{jf}
     \end{align*}
     i.e.
     \begin{align*}
@@ -2509,7 +2609,7 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
       \end{array}
     \right\},
   \end{align*}
-  grouped into the four charge sector, $11, 1τ, τ1$ and $ττ$, respectively.
+  grouped into the four charge sector, $11$, $1τ$, $τ1$ and $ττ$, respectively, where the first symbol denotes the left charge sector and the right symbol denotes the right charge sector..
   From \cref{res:sigma j is B} we have
   \begin{align*}
     ρ_2(σ_1) = B_{aττ}^c \quad\iff\quad ρ_2(σ_1)_{ij} = \left( B_{aττ}^c \right)_{ij}
@@ -2564,7 +2664,7 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
       \end{array}
     \right\}.
   \end{align*}
-  In this order of the basis we have
+  Again, we have grouped the states by charge sectors. In this order of the basis we have
   % \begin{alignat*}{10}
   %   ρ(σ_1) &= R_{ττ}^τ &{}\oplus{}& R &{}\oplus{}& FRF^{-1} &{}\oplus{}& FRF^{-1} &{}\oplus{}& R_{ττ}^τ \\
   %   ρ(σ_2) &= R_{ττ}^τ &{}\oplus{}& FRF^{-1} &{}\oplus{}& R &{}\oplus{}& R_{ττ}^τ &{}\oplus{}& J_2 FRF^{-1} J_2
@@ -2965,55 +3065,19 @@ We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to comp
 We now have an explicit expression for the exchange operator $U_p$, allowing us to compute the spectrum for $U_p$.
 
 \begin{corollary}
+
   The eigenvalues of $U_p$ for Fibonacci anyons are
   \begin{align*}
-    % \sigma(U_0) &=
-    % \{
-    %   R_{ττ}^1 × 2,
-    %   R_{ττ}^τ × 3
-    % \} \\
-    % & =
-    % \{
-    %   e^{4iπ/5} × 2,
-    %   e^{-3iπ/5} × 3
-    % \} \\
-    % \sigma(U_1) &=
-    % \{
-    %   R_{ττ}^1 × 3,
-    %   \left( R_{ττ}^τ \right)^3 × 2,
-    %   \left( R_{ττ}^τ \right)^7 × 3
-    % \} \\
-    % & =
-    % \{
-    %   e^{4iπ/5} × 3,
-    %   e^{iπ/5} × 2,
-    %   e^{-iπ/5} × 3
-    % \} \\
-    % \sigma(U_p) &=
-    % \{
-    %   R_{ττ}^1,
-    %   \left( R_{ττ}^τ \right)^3,
-    %   \left( R_{ττ}^τ \right)^7,
-    %   R_{ττ}^τ
-    % \} \quad\quad (p \ge 2) \\
-    % & =
-    % \{
-    %   e^{4 i π/5},
-    %   e^{i π/5},
-    %   e^{-i π/5},
-    %   e^{-3 i π/5}
-    % \} \\
       \sigma(U_p) =
       \left\{
       \begin{array}{rl}
-        e^{i4π/5}  &\!\!\!×\;\; \Fib(p+3), \\
-        e^{iπ/5}   &\!\!\!×\;\; 2\Fib(p),\\
-        e^{-iπ/5}  &\!\!\!×\;\; 3\Fib(p), \\
-        e^{-i3π/5} &\!\!\!×\;\; 3\Fib(p-1)
+        e^{i4π/5}  &\text{\rm with multiplicity }\,\; \Fib(p+3) \\
+        e^{iπ/5}   &\text{\rm with multiplicity }\,\; 2\Fib(p)\\
+        e^{-iπ/5}  &\text{\rm with multiplicity }\,\; 3\Fib(p) \\
+        e^{-i3π/5} &\text{\rm with multiplicity }\,\; 3\Fib(p-1)
       \end{array}
-      \right\},
+      \right\}.
   \end{align*}
-  where $a×n$ denotes that $a$ occurs with multiplicity $n$.
 
   \begin{center}
     \begin{tikzpicture}[scale=2]
