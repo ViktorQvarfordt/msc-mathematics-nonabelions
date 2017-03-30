@@ -96,6 +96,7 @@
 \newunicodechar{×}{\ifmmode{\times}\else{×}\fi}
 \newunicodechar{±}{\ifmmode{\pm}\else{±}\fi}
 \newunicodechar{⊕}{\ifmmode{\oplus}\else{⊕}\fi}
+\newunicodechar{⊗}{\ifmmode{\otimes}\else{⊗}\fi}
 
 
 \DeclareMathOperator{\Fib}{Fib}
@@ -1593,7 +1594,7 @@ By the definition of the $B$ matrix we see that there is no mixing of the values
 % denotes the vector of fusion states for all allowed $b_2$ with given $b_1$ and $b_3$, i.e.\ such that the corresponding fusion state is valid. We denote the $j$:th possible value for $b_2$ by $\langle b_2 \rangle_j$. Explicitly, $\langle b_2 \rangle_j$ must be such that $b_1 \times \langle b_2 \rangle_j = b_3$ is a valid fusion.
 
 Since there is no mixing of the values for the labels $b_1$ and $b_3$, we see that the matrix for $ρ_2(σ_1)$ splits into blocks given by the left and right charge sectors $b_1$ and $b_3$,
-\begin{align*}
+\begin{equation}
   ρ_2(σ_1)
   = \bigoplus_{b_1,b_3} B_{b_1tt}^{b_3}
   % = \bigoplus_{b_1,b_3}
@@ -1602,39 +1603,44 @@ Since there is no mixing of the values for the labels $b_1$ and $b_3$, we see th
   %   \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_1} & \left( B_{b_1tt}^{b_3} \right)_{\langle b_2 \rangle_2, \langle b_2 \rangle_2} & \cdots \\
   %   \vdots & \vdots & \ddots
   % \end{pmatrix}
-\end{align*}
+\end{equation}
 where
-\begin{align*}
+\begin{equation}
   B_{b_1tt}^{b_3} =
   \begin{pmatrix}
     \left( B_{b_1tt}^{b_3} \right)_{(b_2)_1, (b_2)_1} & \left( B_{b_1tt}^{b_3} \right)_{(b_2)_1, (b_2)_2} & \cdots \\
     \left( B_{b_1tt}^{b_3} \right)_{(b_2)_2, (b_2)_1} & \left( B_{b_1tt}^{b_3} \right)_{(b_2)_2, (b_2)_2} & \cdots \\
     \vdots & \vdots & \ddots
   \end{pmatrix}
-\end{align*}
+\end{equation}
 and $(b_2)_j$ denotes the $j$:th allowed value for the intermediate charge $b_2$. The allowed values for $b_2$ depend on $b_1$ and $b_3$, in particular we must have that $b_1 \times (b_2)_j = b_3$ is a valid fusion. Note how the number of possible values for $b_2$ determine the dimension of $B_{b_1tt}^{b_3}$. This also implicitly assumes we have chosen and specific order for our basis.
 
 Here we have expressed $ρ_2(σ_1)$ in the full basis of the fusion space $\widetilde{V}_{t^2}$ with basis elements
-\begin{align*}
+\begin{equation}
   \ket{b_1 b_2 b_3} \equiv \fswide{t,t}{b_1,b_2,b_3}
-\end{align*}
+\end{equation}
 for all possible values of $b_1, b_2$ and $b_3$.
 Explicitly, the action of $ρ_2(σ_1)$ on $\ket{b_1 (b_2)_j b_3}$ is
-\begin{align*}
+\begin{equation}
   ρ_2(σ_1)\ket{b_1 (b_2)_j b_3} = \sum_{k} \left( B_{b_1tt}^{b_3} \right)_{(b_2)_k, (b_2)_j} \ket{b_1 (b_2)_k b_3}.
-\end{align*}
+\end{equation}
 
 Consider now the larger fusion space $\widetilde{V}_{t^n}$ with standard fusion states
-\begin{align*}
+\begin{equation}
   \ket{b_1 b_2 \cdots b_n b_{n+1}} \equiv \fswide{t,t}{b_1,b_2,b_3} \ldots \fswider{t,t}{b_{n-1},b_n,b_{n+1}}.
-\end{align*}
+\end{equation}
 for all allowed values of the labels $b_1, b_2, \dots, b_{n+1}$. The braid generator $σ_1$ still braids the first two $t$ anyons. However, the basis of the space is now larger, giving us a larger representation $ρ_n(σ_1)$. The right charge sector for $σ_1$ can now be seen to consist of the labels $b_3, b_4, \ldots, b_{n+1}$, we thus have
-\begin{align*}
-  ρ_n(σ_1)
-  &= \bigoplus_{b_1, b_3, \ldots, b_{n+1}} B_{b_1tt}^{b_3} \\
-\end{align*}
-In order for this expression to be valid, and for the blocks to not interweave, i.e.\ so that we don't have a situation like
-\begin{align*}
+\begin{equation}\label{eq:rho_n sigma_n repr}
+  ρ_n(σ_1) = \bigoplus_{b_1, b_3, \ldots, b_{n+1}} B_{b_1tt}^{b_3}
+\end{equation}
+This can also be understood by decomposing the fusion space as
+\begin{equation}
+  \widetilde{V}_{t^n} = \bigoplus_c V_{t^2}^c ⊗ \widetilde{V}_{ct^{n-2}}
+\end{equation}
+and realizing that $ρ_n(σ_1)$ acts only on the $V_{t^2}^c$ part of the space. However, in order to use this decomposition we must first use the $F$ operator to put the state in this fused state.
+
+In order for \cref{eq:rho_n sigma_n repr} to be valid, and for the blocks to not interweave, i.e.\ so that we don't have a situation like
+\begin{equation}
   ρ_n(σ_1) =
   \begin{pmatrix}
     \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{11} & 0 & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{12} & \cdots \\
@@ -1642,9 +1648,9 @@ In order for this expression to be valid, and for the blocks to not interweave, 
     \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{21} & 0 & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{22} & \cdots \\
     \vdots & \vdots & \vdots & \ddots
   \end{pmatrix}
-\end{align*}
+\end{equation}
 but rather
-\begin{align*}
+\begin{equation}
   ρ_n(σ_1) =
   \begin{pmatrix}
     \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{11} & \left(B_{(b_1)_1 t t}^{(b_3)_1}\right)_{12} & 0 & \cdots \\
@@ -1652,22 +1658,14 @@ but rather
     0 & 0 & \left(B_{(b_1)_2 t t}^{(b_3)_1}\right)_{11} & \cdots \\
     \vdots & \vdots & \vdots & \ddots
   \end{pmatrix},
-\end{align*}
+\end{equation}
 we must have that the basis is ordered such that each for each value of $b_2$ all basis elements for given $b_2$ follow immediately after each other, and ordered in the same way for each value of $b_2$. Such a choice for the order of the basis can of course be made, however, this order will most likely cause $ρ_n(σ_2), ρ_n(σ_3), \dots, ρ_n(σ_{n-1})$ to have charge sectors appearing in non-contiguous order, giving interweaving blocks. To somewhat remedy this, we shall order the basis by the leftmost and rightmost charge sectors $b_1$ and $b_n$. The values for these labels can never be mixed, while all other intermediate charges can be mixed. Thus, all representations of the braid generators $ρ_n(σ_j)$ respect these outer charge sector blocks. There is however no ordering of the basis that gives a consistent non-interweaving block structure for $ρ_n(σ_2)$, see \cref{res:general fibonaci braiding 3} as a concrete example of this. It is clear that for each generator $σ_j$ there is a choice of the order of the basis such that its representation $ρ_n(σ_j)$ has this described block form. That is, the basis can be partitioned into subsets where each subset spans an invariant subspace under $ρ_n(σ_j)$. This discussion is summed up in the following result.
 
 \begin{theorem}
   In a given anyon model with non-trivial charge label $t$, the fusion space $\widetilde{V}_{t^n}$ gives rise to a representation for the braid group $B_n$, where the generators are represented by
-  \begin{align*}
-    ρ_n(σ_j)
-    &= P_j^{-1} \left[\bigoplus_{b_1, \ldots, b_j, b_{j+2}, \ldots, b_{n+1}} B_{b_{j}tt}^{b_{j+2}} \right]P_j \\
-    % &= P_j^{-1} \left[\bigoplus_{(b_1\ldots,b_j),(b_{j+2}, \ldots, b_{n+1})}
-    % \begin{pmatrix}
-    %   \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_1, \langle b_{j+1} \rangle_2} & \cdots \\
-    %   \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_1} & \left( B_{b_{j}tt}^{b_{j+2}} \right)_{\langle b_{j+1} \rangle_2, \langle b_{j+1} \rangle_2} & \cdots \\
-    %   \vdots & \vdots & \ddots
-    % \end{pmatrix}
-    % \right]P_j
-  \end{align*}
+  \begin{equation}
+    ρ_n(σ_j) = P_j^{-1} \left[\bigoplus_{b_1, \ldots, b_j, b_{j+2}, \ldots, b_{n+1}} B_{b_{j}tt}^{b_{j+2}} \right]P_j
+  \end{equation}
   where $P_j$ is some permutation matrix, permuting the basis of the fusion space as described above.
 \end{theorem}
 
@@ -1919,7 +1917,12 @@ The intermediate charge $c$ depends on $p$ such that $c$ is a possible result of
   p &= 3 \implies c \text{ is a possible result of the fusion } t \times t \times t \\
   & \vdotswithin{=}
 \end{align*}
-Note that the braid corresponding to $U_p$ does not depend on the intermediate charges $c_1, c_2, \ldots, c_{p-2}$. We are now ready to compute $U_p$ for general $p$,
+
+This can be written as a decomposition of the fusion space
+\begin{equation}
+  \widetilde{V}_{t^p} = \bigoplus_c V_{t^{p-2}}^c ⊗ \widetilde{V}_{tct}.
+\end{equation}
+The braid $U_p$ acts only on the subspace $\widetilde{V}_{tct}$. In particular, the braid corresponding to $U_p$ does not depend on the intermediate charges $c_1, c_2, \ldots, c_{p-2}$. We are now ready to compute $U_p$ for general $p$,
 \begin{equation}\label{eq:U_p braid}
   \begin{aligned}
     U_p \left( \fs{t,c,t}{a,b,d,e} \right) &=
