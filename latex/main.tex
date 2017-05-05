@@ -466,7 +466,7 @@
 % \nocite{*} % from refcheck
 
 
-\title{Non-abelian Anyons:\\Statistical Repulsion and\\Topological Quantum Computation}
+\title{Non-Abelian Anyons:\\Statistical Repulsion and\\Topological Quantum Computation}
 \author{Viktor Qvarfordt}
 \newdateformat{isodate}{\THEYEAR-\twodigit{\THEMONTH}-\twodigit{\THEDAY}}
 \date{\isodate\today\ \currenttime}
@@ -474,9 +474,9 @@
 
 \maketitle
 
-\chapter*{Abstract}
+% \chapter*{Abstract}
 
-...
+% ...
 
 \tableofcontents
 
@@ -501,7 +501,7 @@
 
 \chapter{Introduction}
 
-Nature contains many types of particles, all of which can be classified into two distinct classes; bosons and fermions. This classification is essentially determined by how a pair of identical particles behave. If nature allows them to be in the same quantum state we say that they are bosons, otherwise we call them fermions. This is actually only true in three or more spatial dimensions. Clearly, space space around us is three-dimensional (ignoring any curled up dimension), which is why we typically only observe bosons and fermions. However, it is possible to trick nature into being two-dimensional by effectively freezing out motion in one of the three spatial dimensions, an example of this is the fractional quantum Hall effect. Contrary to what one may expect, removing one spatial degree of freedom allows for the existence of more types of particles. In two spatial dimensions essentially \emph{any} type of behavior of identical particles is allowed, hence we call them \emph{anyons}. In fact, a continuous interpolation between bosons and fermions arise, known as abelian anyons. Even more exotic particles are allowed, known as non-abelian anyons, having higher-dimensional internal degrees of freedom.
+Nature contains many types of particles, all of which can be classified into two distinct classes; bosons and fermions. This classification is essentially determined by how a pair of identical particles behave. If nature allows them to be in the same quantum state we say that they are bosons, otherwise we call them fermions. This is actually only true in three or more spatial dimensions. Clearly, space around us is three-dimensional (ignoring any curled up dimension), which is why we typically only observe bosons and fermions. However, it is possible to trick nature into being two-dimensional by effectively freezing out motion in one of the three spatial dimensions, an example of this is the fractional quantum Hall effect. Contrary to what one may expect, removing one spatial degree of freedom allows for the existence of more types of particles. In two spatial dimensions essentially \emph{any} type of behavior of identical particles is allowed, we call such particles \emph{anyons}, originally due to F. Wilczek \cite{wilczek}. In fact, a continuous interpolation between bosons and fermions arise, known as abelian anyons. Even more exotic particles are allowed, known as non-abelian anyons, having higher-dimensional internal degrees of freedom.
 
 Three dimensions are special in many ways. In particular, this is the only number of dimensions in which non trivial knots can exist. Indeed, any attempt at tying a knot in higher dimensions will fail because the the strands can simply be moved into the extra dimensions to unravel the knot. In fewer dimensions, the opposite problem arises, the strands cannot be moved across each other to form a knot. It is exactly this property of three dimensions that give rise to anyons. In 2+1-dimensional spacetime the world-lines of particles can form non-trivial braids, giving rise to particle statistics known as braid statistics.
 
@@ -575,7 +575,7 @@ Let $P_{jk}$ denote exchange (permutation) of the $j$:th and $k$:th particle, so
 \begin{equation}
   P_{jk}\ket{\psi(…,x_j,…,x_k,…)} = \ket{\psi(…,x_k,…,x_j,…)}.
 \end{equation}
-Note that $P_{jk}$ is not fully specified. Exactly \emph{how} are the particles exchanged? What loop in the configuration space is taken? This is the flaw often encountered: It is assumed that the loop is irrelevant and that $P_{jk}^2 = 1$, i.e. if the permuted state is $P_{jk}\ket{\psi} = c\ket{\psi}$ for some complex constant $c$, then
+Note that this does not fully specify $P_{jk}$. Exactly \emph{how} are the particles exchanged? What loop in the configuration space is taken? This is the flaw often encountered: It is assumed that the loop is irrelevant and that $P_{jk}^2 = 1$, i.e. if the permuted state is $P_{jk}\ket{\psi} = c\ket{\psi}$ for some complex constant $c$, then
 \begin{equation}
   \ket{\psi} = P_{jk}^2 \ket{\psi} = c^2 \ket{\psi}
 \end{equation}
@@ -661,7 +661,14 @@ where $B_n$ is the braid group on $n$ strands \cite{fröhlich,khare}. It is the 
 
 Note that in $d=1$ dimensions, particle exchange cannot occur, the configuration space is not connected, it is separated by the removal of $\bbDelta$. In fact, the concept of identical particles is not meaningful in $d = 1$ dimensions, the particles can always be distinguished by which part of the configuration space they exist on, since no transitions can occur.
 
-
+TOD: Generalized statistics in one dimension \url{https://arxiv.org/abs/hep-th/9902157}
+", however in this case there are other ambiguities leading to different
+quantizations Tˆ (see e.g. [Pol99, Myr99] for physical reviews, and [LS14, Section 2.1] for
+mathematical details). Intuitively, this is because a continuous exchange of two particles
+on the real line R necessarily leads to a collision and therefore one needs to prescribe what
+happens at the collision points, while formally it is because the removal of the diagonals
+4 introduces boundaries in the configuration space and thus demands the specification of
+boundary conditions."
 
 
 
@@ -698,12 +705,19 @@ Thus, the result of a particle exchange must be described by a unitary transform
 \end{equation}
 where $U(k)$ is the group of $k \times k$ unitary matrices over $\mathbb{C}$.
 
-If $π_1(\mathcal{C}_n) = S_n$, let $P_{jk}$ denotes the loop in configuration that exchanges particle $j$ and $k$ around no other particles, this loop is unique up to homotopy. Then $P_{jk}^2 = 1$ and there are only two representations, $\rho(P_{jk}) = 1$ for bosons and $\rho(P_{jk}) = -1$ for fermions. Note that we here assumed the representation to be one-dimensional. This is yet another subtlety with the traditional argument for that only bosons and fermions exist, namely that higher-dimensional unitary representations of $S_n$ also exist. Particles obeying such exchange are sometimes called plektons and their statistics known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom \cite{fröhlich}.
+\begin{definition}[Exchange operator]
+  Consider two identical particles, by \emph{simple exchange} of the two particles we mean a loop $α$ in the configuration space that performs a clockwise exchange of the particles exactly once. Let $P$ denote the simple exchange. The representation $U = ρ(P)$ of the simple exchange is referred to as the \emph{exchange operator} of the anyons. The exchange operator determines how the wave function changes upon exchange of the particles, i.e.\ $P\ket{\psi} = U\ket{\psi}$. This essentially gives boundary conditions for $\ket{\psi}$, as we shall see in more detail in \cref{chap:statistical repulsion}.
+\end{definition}
 
-Thus, if the underlying space is $\mathbb{R}^d$ with $d\ge 3$, there are fundamentally only two types of particle statistics. However, if the underlying space is $\mathbb{R}^2$, the fundamental group $π_1(\mathcal{C}_n)$ is the braid group $B_n$ which has much richer representations than $S_n$, as we shall see in detail throughout this thesis. Furthermore, statistics arising from higher-dimensional representations of the braid group cannot be reduced to one-dimensional representations, unlike the case of $S_n$ \cite{fröhlich}.
+If $π_1(\mathcal{C}_n) = S_n$, let $P_{jk}$ denotes the loop in configuration that exchanges particle $j$ and $k$ around no other particles, this loop is unique up to homotopy. Then $P_{jk}^2 = 1$ and there are only two representations, $\rho(P_{jk}) = 1$ for bosons and $\rho(P_{jk}) = -1$ for fermions. Note that we here assumed the representation to be one-dimensional. This is yet another subtlety with the traditional argument for that only bosons and fermions exist, namely that higher-dimensional unitary representations of $S_n$ also exist. Particles obeying such exchange are sometimes called plektons and their statistics known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom. \cite{fröhlich}
 
-A representation of the braid group $B_n$ group need not have the property that $\rho(P_{jk})^2 = 1$, a simple example of this is $B_2 \cong \mathbb{Z}$ as calculated in \cref{sec:conf sp 2 particles}. That is, the wave function need not be invariant under $P_{jk}^2$, it may be so that $P_{jk}^2\ket{\psi} \ne \ket{\psi}$. This is due to the non-trivial topology of the configuration space. To be precise, the state of a quantum system is described by a wave function $\psi$ defined as a section of the vector bundle with fiber $h$ over the configuration space $\mathcal{C}$, where $h = \mathbb{C}^k$ is the Hilbert space of $k$ local internal degrees of freedom. In this setting, loops in configuration space that return all particles to the original coordinates need not be homotopically trivial \cite{nakahara}.
+Thus, if the underlying space is $\mathbb{R}^d$ with $d\ge 3$, there are fundamentally only two types of particle statistics. However, if the underlying space is $\mathbb{R}^2$, the fundamental group $π_1(\mathcal{C}_n)$ is the braid group $B_n$ which has much richer representations than $S_n$, as we shall see in detail throughout this thesis. Furthermore, statistics arising from higher-dimensional representations of the braid group cannot be reduced to one-dimensional representations, unlike the case of $S_n$. \cite{fröhlich}
 
+A representation of the braid group $B_n$ group need not have the property that $\rho(P_{jk})^2 = 1$, a simple example of this is $B_2 \cong \mathbb{Z}$ as calculated in \cref{sec:conf sp 2 particles}. That is, the wave function need not be invariant under $P_{jk}^2$, it may be so that $P_{jk}^2\ket{\psi} \ne \ket{\psi}$. This is due to the non-trivial topology of the configuration space.
+
+\begin{remark}\label{rem:fiber bundels}
+  The proper way to deal with this is by use of fiber bundles \cite{nakahara}. The state of a quantum system is described by a wave function $\psi$ defined as a section of the vector bundle with fiber $h$ over the configuration space $\mathcal{C}$, where $h = \mathbb{C}^k$ is the Hilbert space of $k$ local internal degrees of freedom. In this setting, loops in configuration space that return all particles to the original coordinates need not be homotopically trivial.
+\end{remark}
 
 
 
@@ -1003,12 +1017,12 @@ As we've seen, the representation of the fundamental group of the configuration 
 \begin{lemma}
   Abelian representations of $B_n$, i.e.\ representations on $U(1)$ are such that
   \begin{equation}
-    ρ(σ_j) = e^{i\alpha}
+    ρ(σ_j) = e^{iθ}
   \end{equation}
   for all $j$.
 \end{lemma}
 \begin{proof}
-  $U(1)$ is an abelian group, thus the second braid group relation \cref{eq:braid relation 2} gives $ρ(σ_j) = ρ(σ_{j+1})$ for all $j$. The first braid group relation \cref{eq:braid relation 1} is trivially satisfied. The elements of $U(1)$ are of the form $e^{i\alpha}$.
+  $U(1)$ is an abelian group, thus the second braid group relation \cref{eq:braid relation 2} gives $ρ(σ_j) = ρ(σ_{j+1})$ for all $j$. The first braid group relation \cref{eq:braid relation 1} is trivially satisfied. The elements of $U(1)$ are of the form $e^{iθ}$.
 \end{proof}
 
 Particles obeying statistics described by abelian representations of the braid group are called abelian anyons.
@@ -1203,10 +1217,11 @@ For general non-abelian $U$ it is difficult to say much more than this. The depe
       ⟨0|ρᴮ|0⟩_B
       &= \frac{1}{4} \left( |a+1|² + |-e^{iθ}b|² \right) \\
       &= \frac{1}{4} \left( |a|² + 1 + 2\operatorname{Re}(a) + |b|² \right) \\
-      &= \frac{1}{2} \left( 1 + \cos(\operatorname{arg}(a)) \right).
+      &= \frac{1}{2} \left( 1 + \cos(\operatorname{arg}(a)) \right),
     \end{aligned}
   \end{equation}
-  Similarly the other parameters of $U$ can be determined by appropriately choosing the state $|ψ⟩$.
+  allowing measurements of $\operatorname{arg}(a)$.
+  Similarly, the other parameters of $U$ can be determined by appropriately choosing the state $|ψ⟩$.
 \end{example}
 
 
@@ -1301,307 +1316,429 @@ In the literature one generally encounters two types of anyons.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-% TODO REDO
-
-% % \chapter{Exclusion principle for (non-abelian) anyons: Lieb-Thirring inequalities and lower bound for the kinetic energy}\label{chap:statistical repulsion}
 \chapter{Statistical repulsion of anyons}\label{chap:statistical repulsion}
 
-\cite{lundholm-solovej,mancarella}
+This chapter is based on \cite{methmmp,lundholm-solovej,mancarella}. We give lower bounds for the kinetic energy of free anyons. This gives rise to what is known as statistical repulsion, an essentially geometric effect of the exchange operator that causes an effective repulsion of identical particles.
 
-Omarbetas.
 
-% This chapter gives an outline of a method to estimate lower bounds for the kinetic energy of a gas of anyons, more generally known as Lieb-Thirring inequalities. This chapter is base on \cite{lundholm-solovej}.
+\section{Fermionic statistical repulsion}
 
-% \section{Preliminaries}
+Recall that the exchange operator is the representation of a simple exchange of particles. In the case of bosons and fermions in $\ge 3$ dimensions the exchange operator is simply the identity and $-1$, respectively. That is,
+\begin{equation}
+  \psi(x_2, x_1) = \pm \psi(x_1, x_2).
+\end{equation}
+For fermions, this leads to the well known Pauli exclusion principle. Simply stated, if $x_1 = x_2$ it immediately follows that $\psi(x_1, x_1) = 0$, the particles cannot occupy the same state. More generally, the anti-symmetry of the fermionic wave causes the kinetic energy to increase as the particles tend closer to each other. This is an effective repulsion due to the particle statistics. We shall now see this in more detail.
 
-% Consider $N$ anyons in $\mathbb{R}^2$, with coordinate $x_1, \ldots, x_N$. This collection of anyons are described by an $N$-particle wave function $\psi \in L^2(\mathbb{R}^{2N})$, i.e. a square-integrable complex-valued function. The kinetic energy $T$ of the system of $N$ anyons is by definition
-% \begin{equation} % \cite{lundholm-solovej} (3)
-%   T \coloneqq \sum_{j=1}^N \int_{\mathbb{R}^{2N}} \abs{\Delta_j \psi}^2 dx
-% \end{equation}
-% where $\Delta_j$ acts on $x_j$.
-% In order to give bounds for the kinetic energy we shall determine the kinetic energy for pairs of anyons, by factoring out the dynamics of two anyons from the system of $N$ anyons.
+Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be the coordinates of the particles, with $x_j \in \mathbb{R}^d$. This collection of particles are described by an $N$-particle wave-function $\psi(x_1, \ldots, x_N) \in L^2(\mathbb{R}^{dN})$, i.e.\ a square integrable complex-valued function on $\mathbb{R}^{dN}$. The kinetic energy $T$ of this system is defined as
+\begin{equation}
+  T \coloneqq \sum_{j=1}^N \int_{\mathbb{R}^{dN}} |\nabla_j \psi|^2 dx.
+\end{equation}
 
-% Among the $N$ anyons, let all except two of them be fixed. Let $x_j, x_k \in \mathbb{R}^2$ denote the coordinates for the two free anyons and define
+Let the particles be fermions, i.e.\ $\psi \in L_\text{asym}^2(\mathbb{R}^{dN})$. This is the subspace of functions $\psi$ in $L^2(\mathbb{R}^{dN})$ such that $\psi(\ldots, x_j, \ldots, x_k, \ldots) = - \psi(\ldots, x_k, \ldots, x_j, \ldots)$ for $j \ne k$. The following theorem can then be shown. \cite{methmmp}
+\begin{theorem}[Many-body Hardy inequality for fermions]
+  In the described setting with $\psi$ being an $N$-particle wave-function, the following inequality for the kinetic energy holds
+  \begin{equation}\label{eq:fermion ineq}
+    \int_{\mathbb{R}^{dN}} \sum_{j=1}^N |\nabla_j \psi|^2 dx \ge
+    \frac{d^2}{N} \int_{\mathbb{R}^{dN}} \sum_{j \le j < k \le N} \frac{|\psi|^2}{|x_j-x_k|^2} dx +
+    \frac{1}{N} \int_{\mathbb{R}^{dN}} \left|\sum_{j=1}^N \nabla_j \psi \right|^2 dx.
+  \end{equation}
+\end{theorem}
+
+The first integral shows that fermionic particles have an inverse-squared pairwise effective repulsion. The second integral on the right hand side essentially gives the contribution of the center of mass motion.
+
+We give an outline of the proof.
+
+\begin{proof}
+  First, one can show
+  \begin{equation}
+    \sum_{j=1}^N |\nabla_j \psi|^2 = \frac{1}{N} \sum_{1 \le j < k \le N} \left| (\nabla_j - \nabla_k) \psi \right|^2 + \frac{1}{N} \left( \sum_{j=1}^N \nabla_j \psi \right),
+  \end{equation}
+  known as the many-body parallelogram identity. The last term corresponds to the center of mass motion and is not of interest. We focus on the first term.
+
+  Introduce relative coordinates for each pair $(j,k)$ of particles,
+  \begin{equation}
+    \begin{aligned}
+      x_{jk}^\text{rel} &\coloneqq (x_j - x_k)/2, & x_{jk}^\text{cm} &\coloneqq (x_j + x_k)/2, \\
+      \nabla_{x_{jk}^\text{rel}} &\coloneqq \nabla_j - \nabla_k, & \nabla_{x_{jk}^\text{cm}} &\coloneqq \nabla_j + \nabla_k.
+    \end{aligned}
+  \end{equation}
+  It shall be useful to split the coordinates as $x = (x_j, x_k; x')$ where $x' \in \mathbb{R}^{d(N-2)}$ and $j < k$ fixed. Next, define the relative wave-function
+  \begin{equation}
+    u(x^\text{rel}, x^\text{cm}) \coloneqq \psi(x_1, \ldots, x_j = X+r, \ldots, x_k = X-r, \ldots, x_N).
+  \end{equation}
+  We then have $u(-x^\text{rel}, x^\text{cm}) = -u(x^\text{rel}, x^\text{cm})$ for fermions, by the anti-symmetry of $\psi$.
+
+  With this change of variables we have
+  \begin{equation}
+    \begin{aligned}
+      \int_{\mathbb{R}^{dN}} \left|(\nabla_j-\nabla_k)\psi\right|^2 dx
+      &= \int_{\mathbb{R}^{d(N-2)}} \int_{\mathbb{R}^d \times \mathbb{R}^d} \left|(\nabla_j-\nabla_k)\psi\right|^2 dx_jdx_kdx' \\
+      &= \int_{\mathbb{R}^{d(N-2)}} \int_{\mathbb{R}^d \times \mathbb{R}^d} \left|\nabla_{x_{jk}^\text{rel}}u\right|^2  2 dx_{jk}^\text{rel}dx_{jk}^\text{cm} dx'.
+    \end{aligned}
+  \end{equation}
+
+  Finally, one shows, for fermionic wave-functions,
+  \begin{equation}
+    \int_{\mathbb{R}^d} \left|\nabla_{x_{jk}^\text{rel}} u(x) \right|^2 dx_{jk}^\text{rel} \ge \frac{d^2}{4} \int_{\mathbb{R}^d} \frac{|u(x)|^2}{|x_{jk}^\text{rel}|^2} dx
+  \end{equation}
+  from which the result follows.
+\end{proof}
+
+In the outline of the proof we skipped the details of the last step since it will not be needed for our purposes here. In fact, we shall modify this proof to obtain a similar inequality for anyons.
+
+
+% With the relative coordinates one can show \cite{methmmp} an inequality similar to \cref{eq:fermion ineq},
 % \begin{equation}
-%   x_\text{cm} = \frac{1}{2}(x_j + x_k), \quad
-%   x_\text{rel} = \frac{1}{2}(x_j - x_k).
+%   \begin{gathered}
+%     \int_{\mathbb{R}^{dN}} \sum_{j=1}^N |\nabla_j \psi|^2 dx \ge
+%     \frac{1}{N} \int_{\mathbb{R}^{dN}} \sum_{1\le j < k \le N} \left( |\partial_{r_{jk}}|\psi||^2 + 4(d-1)\frac{|\psi|^2}{|x_j-x_k|^2} \right) dx {}+{} \\
+%     {}+{} \frac{1}{N} \int_{\mathbb{R}^{dN}} \left|\sum_{j=1}^N \nabla_j \psi\right|^2 dx.
+%   \end{gathered}
 % \end{equation}
-% Consider a frame of reference where the center of mass is at the origin, i.e.\ $x_\text{cm} = 0$. Let $(r, \varphi)$ be the polar coordinates for the relative coordinates $x_\text{rel}$. The $N$-particle wave function can thus be parametrized as
+
+
+\section{Anyonic statistical repulsion}
+
+The statistics of quantum particles, essentially the corresponding exchange operator, can be modeled by changing the kinetic energy operator from
+\begin{equation}
+ \widehat{T} = \sum_{j=1}^N -\nabla_j^2
+\end{equation}
+to
+\begin{equation}
+ \widehat{T}_A = \sum_{j=1}^N \left( -i \nabla_j + A_j \right)^2,
+\end{equation}
+where $A$ is a connection one-form on the bundle of which the wave-function is a section. See \cref{rem:fiber bundels}. The following example illustrates this.
+
+\begin{example}
+  TODO skriv ner fr. tidigare anteckningar: Två abelska anyoner. Connection $A_j = \alpha \sum_{j \ne k} \frac{(x_j - x_k)^\perp}{|x_j-x_k|^2}$.
+\end{example}
+
+FRÅGA: Finns det enkelt exempel på connection som ger icke-abelskta anyoner?
+
+This principle allows us to easier work with anyonic wave function with general with exchange operator $U$,
+\begin{equation}
+  \psi_A(-x_{jk}^\text{rel}, x_{jk}^\text{cm}) = U \psi_A(x_{jk}^\text{rel}, x_{jk}^\text{cm}),
+\end{equation}
+by instead considering symmetric wave-functions, i.e.\
+\begin{equation}
+  \psi_0(-x_{jk}^\text{rel}, x_{jk}^\text{cm}) = \psi_0(x_{jk}^\text{rel}, x_{jk}^\text{cm}),
+\end{equation}
+and instead introducing a connection $A$ that implements the exchange operator $U$. That is, replacing $-i\nabla_j$ with $-i\nabla_j+A_j$.
+
+
+
+FRÅGA: Vad händer med parallelogram-identiteten? Är det varför man istället jobbar med $\psi_A$ så länge som möjligt? Nästa steg, ta uttrycket
+\begin{equation}
+  \int_{\mathbb{R}^d} \left|\nabla_{x_{jk}^\text{rel}}u\right|^2  2 dx_{jk}^\text{rel}
+\end{equation}
+från beviset av satsen ovan, låt $d = 2$ för att få anyoner, och skriv om det som i anteckningarna från tidigare. Hur går man från denna integral till att bara titta på övere halvplanet? För att tillåta $\psi$ att vara problematisk ($\psi_A$). Sen byter man variabel ($x_{jk}^\text{rel} = (r, φ)$), sen har man
+\begin{equation}
+  \int_{\mathbb{R}^2} \left|\nabla_{x_{jk}^\text{rel}}u\right|^2  2 dx_{jk}^\text{rel} =
+  \int_{r=0}^\infty \int_{φ=0}^\pi \left|\partial_r \psi\right|^2 + \frac{1}{r^2} \left|\partial_\varphi\psi \right|^2  2 dr d\varphi
+\end{equation}
+sen återgår vi till $\psi_A$ (här är jag förvirrad igen, exakt när och varför byter vi mellan att lägga anyoniciteten på vågfunktionen eller $\nabla$?), och slutligen tittar vi bara på
+\begin{equation}
+  \int_{φ=0}^π \left|\partial_\varphi\psi_A \right|^2 dr
+\end{equation}
+vilket ger att det är spektrumet till $U$ som är relevant. Använd Poincare olikheten (5.16) \cite{methmmp}? Vilket är baktanken till resten av uppsatsen.
+
+TODO: Delar av diskussionen från gamla versionen nedan ska tas med, så som annulus, visa resultatet för abelska anyoner, och diskussionen om icke-abelska.
+
+% To sum up, the kinetic energy operator can be written as
 % \begin{equation}
-%   \psi = \psi(x', r, \varphi),
+%   \widehat{T} = \sum_{j=1}^N \left( -i \nabla_j^\mathbf{A} \right)^2
 % \end{equation}
-% where $x'$ is the coordinates for the anyons that we considered to be fixed. If we also freeze out the radial dependence by fixing $r$, we factor out the angle-dependence from the wave function and write
+% for some connection $\mathbf{A}$ which implements the statistics, i.e.\ a simple exchange gives rise to a given exchange operator.
+
+
+
+
+
+\hrule
+
+\textbf{Det gammla:}
+
+\section{Preliminaries}
+
+Consider $N$ anyons in $\mathbb{R}^2$, with coordinate $x_1, \ldots, x_N$. This collection of anyons are described by an $N$-particle wave function $\psi \in L^2(\mathbb{R}^{2N})$, i.e. a square-integrable complex-valued function on $\mathbb{R}^{2N}$. The kinetic energy $T$ of this system is by definition
+\begin{equation} % \cite{lundholm-solovej} (3)
+  T \coloneqq \sum_{j=1}^N \int_{\mathbb{R}^{2N}} |\nabla_j \psi|^2 dx
+\end{equation}
+where $\Delta_j$ acts on $x_j$.
+In order to give bounds for the kinetic energy we shall determine the kinetic energy for pairs of anyons, by factoring out the dynamics of two anyons from the system of $N$ anyons.
+
+Among the $N$ anyons, let all except two of them be fixed. Let $x_j, x_k \in \mathbb{R}^2$ denote the coordinates for the two free anyons and define
+\begin{equation}
+  x_\text{cm} = \frac{1}{2}(x_j + x_k), \quad
+  x_\text{rel} = \frac{1}{2}(x_j - x_k).
+\end{equation}
+Consider a frame of reference where the center of mass is at the origin, i.e.\ $x_\text{cm} = 0$. Let $(r, \varphi)$ be the polar coordinates for the relative coordinates $x_\text{rel}$. The $N$-particle wave function can thus be parametrized as
+\begin{equation}
+  \psi = \psi(x', r, \varphi),
+\end{equation}
+where $x'$ is the coordinates for the anyons that we considered to be fixed. If we also freeze out the radial dependence by fixing $r$, we factor out the angle-dependence from the wave function and write
+\begin{equation}
+  \psi(\varphi) \coloneqq \psi(x', r, \varphi).
+\end{equation}
+
+We shall consider the angular dynamics of the two free anyons. As the free anyons circle each other, i.e.\ as $\varphi$ increases from $0$ to $π$, a number of fixed anyons may be enclosed. As we shall see, the number of encircled anyons will play a crucial role, therefore we separate the state space $\mathbb{R}^2$ as follows.
+
+Separate the state space into open annuli (regions between two concentric circles) such that none of the fixed $N-2$ anyons are at the interior of an annulus, cf.\ \cref{fig:annuli}. This gives a separation of $\mathbb{R}^2$ into regions with increasing number $p$ of the $N-2$ fixed anyons. More explicitly, each annulus is centered in $x_\text{cm}$. Furthermore, let $r_1 \le r_2 \le \ldots \le r_{N-2}$ be the radii of the $N-2$ fixed anyons. The innermost annulus is an open disc (degenerate annulus) with radius $r_1$, the second innermost annulus is the region between circles of radius $r_1$ and $r_2$, etc. Note that the circles with radii $r_1, r_2, \ldots, r_{N-2}$ are not contained in any annuli, since the anyons cannot pass through each other, and we are considering angular motion. If the radii of two fixed anyons coincide, then there is clearly no annulus separating them.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-3.75,0) -- (3.75,0) node[below] {$x$};
+    \draw[->] (0,-3.75) -- (0,3.75) node[right] {$y$};
+    \draw (0,0) circle (1.25);
+    \draw (0,0) circle (2);
+    \draw (0,0) circle (3);
+    \node at (0.5, 0.35) {$p = 0$};
+    \node at (0.5, 1.5) {$p = 1$};
+    \node at (0.5, 2.375) {$p = 2$};
+    \node at (0.5, 3.25) {$p = 3$};
+    \node[font=\Large] at ({1.25*cos(220)}, {1.25*sin(220)}) {$\bullet$};
+    \node[font=\Large] at ({2*cos(130)}, {2*sin(130)}) {$\bullet$};
+    \node[font=\Large] at ({3*cos(-55)}, {3*sin(-55)}) {$\bullet$};
+    \node at (1.5, -0.2) {$r_1$};
+    \node at (2.25, -0.2) {$r_2$};
+    \node at (3.25, -0.2) {$r_3$};
+  \end{tikzpicture}
+  \caption{Illustration of annuli separating $\mathbb{R}^2$ into regions with increasing number $p$ of contained anyons. A blob ($\bullet$) denotes a fixed anyon. In each annulus, exchange of the two free anyons, i.e.\ as $\varphi$ increases from $0$ to $\pi$, a given number $p$ of fixed anyons will be enclosed.}
+  \label{fig:annuli}
+\end{figure}
+
+In the general case, exchange of a pair of anyons introduces an anyonic phase $U_p \in U(n)$ as discussed in \cref{chap:how anyons arise}. The exchange operator $U_p$ may depend on the number $p$ of anyons that get encircled in the exchange loop. With the wave function $\psi = \psi(\varphi)$ parametrized by the relative angular coordinate, we thus get the boundary condition
+% \begin{alignat*}{3}
+%   \psi(-r) &= U_p \psi(r), && \quad \text{at the innermost annulus, containing no fixed anyons} \\
+%   \psi(-r) &= U_p \psi(r), && \quad \text{at an annulus enclosing $p$ fixed anyons.}
+% \end{alignat*}
+% \begin{equation*}
+%   \psi(-r) = U_p \psi(r)
+% \end{equation*}
+% at an annulus enclosing $p$ anyons.
+\begin{equation}\label{U_p boundary condition}
+  \psi(π) = U_p \psi(0).
+\end{equation}
+This essentially alters the geometry of the space, splitting it in half. It suffices to consider the region $0 \le \varphi \le π$, i.e.\ it suffices to consider half annuli.
+
+We have set out to estimate the energy of the system, this amounts to solving the Schrödinger equation, in particular solving for the lowest energy $λ$,
+\begin{equation}
+  H \psi = λ \psi
+\end{equation}
+where $H = -\nabla^2 = -\frac{\partial^2}{\partial\varphi^2}$ is the Hamiltonian of the system.
+So far we have just one boundary condition, \cref{U_p boundary condition}, while the Schrödinger equation is a second order differential equation, requiring two boundary conditions to give a unique solution.
+However, since we are primarily interested the energies of the system, it suffices to compute the spectrum of $H$. With this in mind, we write the Hamiltonian $H = -\nabla^2$ as a square $H = D^2$, where
+\begin{equation}
+  D = -i\partial_\varphi, \quad 0 \le \varphi \le π, \text{ subject to boundary conditions given by $U_p$,}
+\end{equation}
+and use the spectral theorem to compute the spectrum of $H$ as the squared spectrum of $D$, i.e.
+\begin{equation}
+  σ(H) = \{λ^2 : λ \in σ(D)\}.
+\end{equation}
+Similarly, we have that the ground state energy is the infimum of $σ(H)$, i.e.
+\begin{equation}
+  λ_0 = \inf σ(H) = \inf \{λ^2 : λ \in σ(D)\}.
+\end{equation}
+The spectrum of $D$ is straight forward to compute and we present the result as a lemma.
+
+\begin{lemma}
+  % Consider a pair of anyons subject to the boundary condition \cref{U_p boundary condition}.
+  The eigenfunctions $u$ and eigenvalues $λ$ of $D$ are such that
+  \begin{equation}
+    D u = λ u \quad \iff \quad -iu'(\varphi) = λ u(\varphi),
+  \end{equation}
+  having general solution
+  \begin{equation}
+    u(\varphi) = C e^{iλ\varphi}
+  \end{equation}
+  for some constant $C \in \mathbb{C}^n$.
+\end{lemma}
+
+We seek an expression for the spectrum of $D$, the above lemma and the boundary condition \cref{U_p boundary condition} gives
+\begin{equation}
+  u(π) = U_p u(0) \implies
+  C e^{iλπ} = U_p C,
+\end{equation}
+that is, $e^{iλπ}$ is an eigenvalues of $U_p$. We have the following result.
+
+\begin{lemma}\label{D spectrum}
+  The spectrum of $D$ (and by extension the spectrum of $H$) is given by
+  \begin{equation}
+    σ(D) = \big\{λ : e^{iλπ} \text{ is an eigenvalue of } U_p\big\}.
+  \end{equation}
+\end{lemma}
+
+\begin{remark}
+  Recall that $U_p$ is unitary, so all eigenvalues of $U_p$ are on the complex unit circle. Hence, each eigenvalue $e^{iλπ}$ of $U_p$ with $0 \le λ < 2$, gives a family of possible energy levels $\big\{(λ + 2n)^2 \mid n \in \mathbb{Z}\big\}$ to the system.
+\end{remark}
+
+
+
+
+
+\section{Abelian anyons}\label{sec:statistical repulsion abelian ayons}
+
+Although non-abelian anyons are the main focus of this thesis, we give a quick overview of the the case of abelian anyons. For more details, see \cite{lundholm-solovej}
+% In full generality for abelian anyons we have the following.
+
+Abelian anyons are characterized by the fact that the exchange operator is one-dimensional, i.e.\ an element of $U(1)$, hence it is of the form $e^{i\alpha\pi}$. Take this to be $U_0$, i.e.\ simple exchange of a pair of abelian anyons, with the exchange loop enclosing no other anyons. It is then easy to realize that
+\begin{align}\label{eq:abelian Up}
+  U_p = e^{iα(1+2p)π}
+\end{align}
+because the left anyon performs an exchange with the $p$ inner anyons, likewise for the right anyon, finally the two anyons undergoing exchange are exchanged with each other, resulting in $1+2p$ exchanges of $α$-type anyons, as illustrated in \cref{fig:abelian Up}.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics{img/interchange_loop_p.pdf}
+  \caption{Exchange of a pair of abelian $α$ anyons around $p$ fixed $α$ anyons. Figure taken from \cite{lundholm-solovej}.}
+  \label{fig:abelian Up}
+\end{figure}
+
+
+\begin{proposition}[Ground state energy for a pair of abelian anyons]
+  Consider a pair of abelian anyons with anyonic phase $\alpha$ enclosing $p$ fixed anyons (also with anyonic phase $\alpha$).
+  The ground state energy is bound from below by
+    \begin{gather*}
+      \inf_{p,q\in\mathbb{Z}} \left(\alpha(1+2p)+2q\right)^2 =\\
+      = \begin{cases}
+        \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
+        0, & \text{otherwise}
+      \end{cases}
+    \end{gather*}
+\end{proposition}
+
+\begin{proof}
+  By \cref{eq:abelian Up} we have the anyonic exchange operator as
+  \begin{equation}
+    U_p = e^{i\alpha(1+2p)π}.
+  \end{equation}
+  By \cref{D spectrum} we have that the boundary condition gives
+  \begin{equation}
+    \begin{aligned}
+      &u(π) = e^{i\alpha(1+2p)π} u(0) \\
+      \iff\;\; &e^{iλ π} = e^{i\alpha(1+2p)π} \\
+      \iff\;\; &λ = \alpha(1+2p) + 2q, \quad q \in \mathbb{Z}.
+    \end{aligned}
+  \end{equation}
+  Thus we see that the spectrum for $D$ and $H = D^2$, respectively, is
+  \begin{equation}
+    \begin{aligned}
+      σ(D) &= \{ \alpha(1+2p) + 2q : q \in \mathbb{Z}\}, \\
+      σ(H) &= \{ (\alpha(1+2p) + 2q)^2 : q \in \mathbb{Z}\}.
+    \end{aligned}
+  \end{equation}
+  Hence, the energy $λ^2$ is minimized for
+  \begin{equation}
+    E_0 = \inf_{p,q\in\mathbb{Z}} (\alpha(1+2p)+2q)^2.
+  \end{equation}
+  A number-theoretic result, found as proposition 5 in \cite{lundholm-solovej}, shows that this can be written as
+  \begin{equation}
+    E_0 =
+    \begin{cases}
+      \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
+      0, & \text{otherwise}.
+    \end{cases}
+  \end{equation}
+\end{proof}
+
+From this we have an immediate corollary for bosons ($\alpha = 0$) and fermions ($\alpha = 1$).
+
+\begin{corollary}
+  With $\alpha = 0$, the anyonic phase reads
+  \begin{equation}
+    U_p = e^{i\alpha(1+2p)π} = 1
+  \end{equation}
+  for all $p$, i.e. bosons do not ``see'' each other, and they have a zero ground state energy.
+
+  With $\alpha = 1$, the anyonic phase reads
+  \begin{equation}
+    U_p = e^{i\alpha(1+2p)π} = e^{i(1+2p)π},
+  \end{equation}
+  giving us the boundary condition
+  \begin{equation}
+    e^{iλ π} = e^{i(1+2p)π} \iff λ = 1 + 2p + 2q, \quad q \in \mathbb{Z}
+  \end{equation}
+  Since $p$ is an integer, this shows that also fermions do not ``see'' the enclosed $p$ anyons.
+  However, the anyons in the pair do ``see'' each other, in the sense that the their wave-function changes sign after they have been exchanged, as expected. Finally, this also shows that fermions have a non-zero ground state energy $E_0 = 1$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Non-abelian anyons}
+
+Consider the same setting as above, with the distinction that the anyons are now non-abelian. That is, consider a pair of non-abelian anyons, with wave-function $\psi \in L^2(\mathbb{R}; \mathbb{C}^n)$ parametrized by the relative angle $\varphi$, such that the pair of anyons encloses $p$ fixed anyons as $\varphi$ increases from $0$ to $π$, giving rise to an anyonic phase $U_p \in U(n)$.
+
+% From \cref{D spectrum} the boundary condition reads
 % \begin{equation}
-%   \psi(\varphi) \coloneqq \psi(x', r, \varphi).
+%   u(π) = U_p u(0) \iff C e^{iλπ} = U_p C.
 % \end{equation}
+% This is precisely the condition that $e^{iλπ}$ is an eigenvalue of $U_p$.
 
-% We shall consider the angular dynamics of the two free anyons. As the free anyons circle each other, i.e.\ as $\varphi$ increases from $0$ to $π$, a number of fixed anyons may be enclosed. As we shall see, the number of encircled anyons will play a crucial role, therefore we separate the state space $\mathbb{R}^2$ as follows.
 
-% Separate the state space into open annuli (regions between two concentric circles) such that none of the fixed $N-2$ anyons are at the interior of an annulus, cf.\ \cref{fig:annuli}. This gives a separation of $\mathbb{R}^2$ into regions with increasing number $p$ of the $N-2$ fixed anyons. More explicitly, each annulus is centered in $x_\text{cm}$. Furthermore, let $r_1 \le r_2 \le \ldots \le r_{N-2}$ be the radii of the $N-2$ fixed anyons. The innermost annulus is an open disc (degenerate annulus) with radius $r_1$, the second innermost annulus is the region between circles of radius $r_1$ and $r_2$, etc. Note that the circles with radii $r_1, r_2, \ldots, r_{N-2}$ are not contained in any annuli, since the anyons cannot pass through each other, and we are considering angular motion. If the radii of two fixed anyons coincide, then there is clearly no annulus separating them.
+% \hrule
 
-% \begin{figure}[h]
+% Consider first the case $n=2$, then $U_p \in U(2)$ can be parametrized as follows.
+
+% \begin{lemma}[Characterization of $U(2)$ matrices]
+%   Let $U \in U(2)$, then
+%   \begin{equation}
+%     U = \begin{pmatrix} a & b \\ -e^{i\thetaπ}\overline{b} & e^{i\thetaπ} \overline{a} \end{pmatrix}, \quad \operatorname{det} U = e^{i\thetaπ}.
+%   \end{equation}
+%   for $a,b,\theta \in \mathbb{R}$ such that $\abs{a}^2 + \abs{b}^2 = 1$ and $0 \le \theta < 2$.
+%   The parameter $\theta$ corresponds to the abelian phase in the factorization $U(2) = U(1)\times SU(2)$, where $\theta = 0$ gives $SU(2)$.
+% \end{lemma}
+
+% \hrule
+
+A standard characterization of unitary matrices is as follows.
+
+\begin{lemma}
+  Let $U \in U(n)$, the $n$ eigenvalues (counted with multiplicity) of $U$ are on the form $e^{i\beta_jπ}$ for $j = 1,2,\ldots,n$. Furthermore, $e^{i\alpha\pi}$ where $\alpha = \frac{1}{n}\sum_j \beta_j$ is referred to as the abelian phase of $U_p$. It is the abelian part in the factorization of $U(n) = U(1) \times SU(n)$. Note that if $\det U = e^{iθπ}$ we have $α = θ/n$.
+\end{lemma}
+
+\begin{proof}
+  We only show the $U(n) = U(1) \times SU(n)$ decomposition.
+  Rewrite $U$ as $U = e^{i\alpha}\left( e^{-i\alpha} U \right)$ where $e^{i\alpha}$ is the abelian part and $e^{-i\alpha} U$ is the $SU(n)$ part. It suffices to show that $\det \left( e^{-iαπ} U \right) = 1$,
+  \begin{equation}
+    \begin{aligned}
+      \det \left( e^{-iαπ} U \right)
+      &= \left(e^{-iαπ}\right)^n e^{i\left(\sum_j \beta_j\right)π} \\
+      &= \left(e^{-i\left(\sum_j \beta_j\right)π/n}\right)^n e^{i\left(\sum_j \beta_j\right)π} = 1.
+    \end{aligned}
+  \end{equation}
+  On the other hand, $1 = \det \left( e^{-iαπ} U \right) = e^{-iαπn} e^{iθπ} = e^{i(-αn+θ)π}$, thus $α = θ/n$ (modulo $2$).
+\end{proof}
+
+Next, we show that the abelian phase shifts the eigenvalues uniformly along the complex unit circle.
+
+\begin{proposition}
+  Consider non-abelian anyons with arbitrary (unitary) $U_p \in U(n)$ exchange operator. The abelian part of of the non-abelian anyonic phase $U_p$ can always be chosen so that the ground state has zero energy.
+\end{proposition}
+
+\begin{proof}
+  By changing the abelian phase, each eigenvalue is shifted. This is obvious if we diagonalize $U_p$. In particular, adding $-\beta_j$ to the abelian phase, the $j$:th eigenvalue is shifted to $e^{i(\beta_j-\beta_j)} = 1$, corresponding to zero energy.
+\end{proof}
+
+% From this, the abelian part $e^{iαπ}$ of the anyonic phase $U_p \in U(n)$ can be seen as a shift of the eigenvalues $e^{iλπ}$ of $U_p$ along the complex unit circle, where $λ^2$ gives the energy of the system, as shown in figure \cref{fig: abelian phase shift}.
+
+% \begin{figure}
 %   \centering
-%   \begin{tikzpicture}
-%     \draw[->] (-3.75,0) -- (3.75,0) node[below] {$x$};
-%     \draw[->] (0,-3.75) -- (0,3.75) node[right] {$y$};
-%     \draw (0,0) circle (1.25);
-%     \draw (0,0) circle (2);
-%     \draw (0,0) circle (3);
-%     \node at (0.5, 0.35) {$p = 0$};
-%     \node at (0.5, 1.5) {$p = 1$};
-%     \node at (0.5, 2.375) {$p = 2$};
-%     \node at (0.5, 3.25) {$p = 3$};
-%     \node[font=\Large] at ({1.25*cos(220)}, {1.25*sin(220)}) {$\bullet$};
-%     \node[font=\Large] at ({2*cos(130)}, {2*sin(130)}) {$\bullet$};
-%     \node[font=\Large] at ({3*cos(-55)}, {3*sin(-55)}) {$\bullet$};
-%     \node at (1.5, -0.2) {$r_1$};
-%     \node at (2.25, -0.2) {$r_2$};
-%     \node at (3.25, -0.2) {$r_3$};
-%   \end{tikzpicture}
-%   \caption{Illustration of annuli separating $\mathbb{R}^2$ into regions with increasing number $p$ of contained anyons. A blob ($\bullet$) denotes a fixed anyon. In each annulus, exchange of the two free anyons, i.e.\ as $\varphi$ increases from $0$ to $\pi$, a given number $p$ of fixed anyons will be enclosed.}
-%   \label{fig:annuli}
+%   \includegraphics[width=0.5\linewidth]{img/abelian-phase-shift.jpg}
+%   \caption{The shift of energy levels due to an abelian phase $\alpha$ TODO it says theta.}
+%   \label{fig: abelian phase shift}
 % \end{figure}
 
-% In the general case, exchange of a pair of anyons introduces an anyonic phase $U_p \in U(n)$ as discussed in \cref{chap:how anyons arise}. The exchange operator $U_p$ may depend on the number $p$ of anyons that get encircled in the exchange loop. With the wave function $\psi = \psi(\varphi)$ parametrized by the relative angular coordinate, we thus get the boundary condition
-% % \begin{alignat*}{3}
-% %   \psi(-r) &= U_p \psi(r), && \quad \text{at the innermost annulus, containing no fixed anyons} \\
-% %   \psi(-r) &= U_p \psi(r), && \quad \text{at an annulus enclosing $p$ fixed anyons.}
-% % \end{alignat*}
-% % \begin{equation*}
-% %   \psi(-r) = U_p \psi(r)
-% % \end{equation*}
-% % at an annulus enclosing $p$ anyons.
-% \begin{equation}\label{U_p boundary condition}
-%   \psi(π) = U_p \psi(0).
-% \end{equation}
-% This essentially alters the geometry of the space, splitting it in half. It suffices to consider the region $0 \le \varphi \le π$, i.e.\ it suffices to consider half annuli.
-
-% We have set out to estimate the energy of the system, this amounts to solving the Schrödinger equation, in particular solving for the lowest energy $λ$,
-% \begin{equation}
-%   H \psi = λ \psi
-% \end{equation}
-% where $H = -\nabla^2 = -\frac{\partial^2}{\partial\varphi^2}$ is the Hamiltonian of the system.
-% So far we have just one boundary condition, \cref{U_p boundary condition}, while the Schrödinger equation is a second order differential equation, requiring two boundary conditions to give a unique solution.
-% However, since we are primarily interested the energies of the system, it suffices to compute the spectrum of $H$. With this in mind, we write the Hamiltonian $H = -\nabla^2$ as a square $H = D^2$, where
-% \begin{equation}
-%   D = -i\partial_\varphi, \quad 0 \le \varphi \le π, \text{ subject to boundary conditions given by $U_p$,}
-% \end{equation}
-% and use the spectral theorem to compute the spectrum of $H$ as the squared spectrum of $D$, i.e.
-% \begin{equation}
-%   σ(H) = \{λ^2 : λ \in σ(D)\}.
-% \end{equation}
-% Similarly, we have that the ground state energy is the infimum of $σ(H)$, i.e.
-% \begin{equation}
-%   λ_0 = \inf σ(H) = \inf \{λ^2 : λ \in σ(D)\}.
-% \end{equation}
-% The spectrum of $D$ is straight forward to compute and we present the result as a lemma.
-
-% \begin{lemma}
-%   % Consider a pair of anyons subject to the boundary condition \cref{U_p boundary condition}.
-%   The eigenfunctions $u$ and eigenvalues $λ$ of $D$ are such that
-%   \begin{equation}
-%     D u = λ u \quad \iff \quad -iu'(\varphi) = λ u(\varphi),
-%   \end{equation}
-%   having general solution
-%   \begin{equation}
-%     u(\varphi) = C e^{iλ\varphi}
-%   \end{equation}
-%   for some constant $C \in \mathbb{C}^n$.
-% \end{lemma}
-
-% We seek an expression for the spectrum of $D$, the above lemma and the boundary condition \cref{U_p boundary condition} gives
-% \begin{equation}
-%   u(π) = U_p u(0) \implies
-%   C e^{iλπ} = U_p C,
-% \end{equation}
-% that is, $e^{iλπ}$ is an eigenvalues of $U_p$. We have the following result.
-
-% \begin{lemma}\label{D spectrum}
-%   The spectrum of $D$ (and by extension the spectrum of $H$) is given by
-%   \begin{equation}
-%     σ(D) &= \big\{λ : e^{iλπ} \text{ is an eigenvalue of } U_p\big\}.
-%   \end{equation}
-% \end{lemma}
-
-% \begin{remark}
-%   Recall that $U_p$ is unitary, so all eigenvalues of $U_p$ are on the complex unit circle. Hence, each eigenvalue $e^{iλπ}$ of $U_p$ with $0 \le λ < 2$, gives a family of possible energy levels $\big\{(λ + 2n)^2 \mid n \in \Z\big\}$ to the system.
-% \end{remark}
-
-
-
-
-
-% \section{Abelian anyons}\label{sec:statistical repulsion abelian ayons}
-
-% Although non-abelian anyons are the main focus of this thesis, we give a quick overview of the the case of abelian anyons. For more details, see \cite{lundholm-solovej}
-% % In full generality for abelian anyons we have the following.
-
-% Abelian anyons are characterized by the fact that the exchange operator is one-dimensional, i.e.\ an element of $U(1)$, hence it is of the form $e^{i\alpha\pi}$. Take this to be $U_0$, i.e.\ simple exchange of a pair of abelian anyons, with the exchange loop enclosing no other anyons. It is then easy to realize that
-% \begin{align}\label{eq:abelian Up}
-%   U_p = e^{iα(1+2p)π}
-% \end{align}
-% because the left anyon performs an exchange with the $p$ inner anyons, likewise for the right anyon, finally the two anyons undergoing exchange are exchanged with each other, resulting in $1+2p$ exchanges of $α$-type anyons, as illustrated in \cref{fig:abelian Up}.
-
-% \begin{figure}[h]
-%   \centering
-%   \includegraphics{img/interchange_loop_p.pdf}
-%   \caption{Exchange of a pair of abelian $α$ anyons around $p$ fixed $α$ anyons. Figure taken from \cite{lundholm-solovej}.}
-%   \label{fig:abelian Up}
-% \end{figure}
-
-
-% \begin{proposition}[Ground state energy for a pair of abelian anyons]
-%   Consider a pair of abelian anyons with anyonic phase $\alpha$ enclosing $p$ fixed anyons (also with anyonic phase $\alpha$).
-%   The ground state energy is bound from below by
-%     \begin{gather*}
-%       \inf_{p,q\in\mathbb{Z}} \left(\alpha(1+2p)+2q\right)^2 =\\
-%       = \begin{cases}
-%         \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
-%         0, & \text{otherwise}
-%       \end{cases}
-%     \end{gather*}
-% \end{proposition}
-
-% \begin{proof}
-%   By \cref{eq:abelian Up} we have the anyonic exchange operator as
-%   \begin{equation}
-%     U_p = e^{i\alpha(1+2p)π}.
-%   \end{equation}
-%   By \cref{D spectrum} we have that the boundary condition gives
-%   \begin{equation}
-%     &u(π) = e^{i\alpha(1+2p)π} u(0) \\
-%     \iff\;\; &e^{iλ π} = e^{i\alpha(1+2p)π} \\
-%     \iff\;\; &λ = \alpha(1+2p) + 2q, \quad q \in \mathbb{Z}.
-%   \end{equation}
-%   Thus we see that the spectrum for $D$ and $H = D^2$, respectively, is
-%   \begin{equation}
-%     σ(D) &= \{ \alpha(1+2p) + 2q : q \in \mathbb{Z}\}, \\
-%     σ(H) &= \{ (\alpha(1+2p) + 2q)^2 : q \in \mathbb{Z}\}.
-%   \end{equation}
-%   Hence, the energy $λ^2$ is minimized for
-%   \begin{equation}
-%     E_0 = \inf_{p,q\in\mathbb{Z}} (\alpha(1+2p)+2q)^2.
-%   \end{equation}
-%   A number-theoretic result, found as proposition 5 in \cite{lundholm-solovej}, shows that this can be written as
-%   \begin{equation}
-%     E_0 =
-%     \begin{cases}
-%       \frac{1}{\nu^2}, & \text{if $\alpha = \frac{\mu}{\nu}$ with $\mu \in \mathbb{Z}, \nu \in \mathbb{N}_+$ relatively prime and $\mu$ odd}, \\
-%       0, & \text{otherwise}.
-%     \end{cases}
-%   \end{equation}
-% \end{proof}
-
-% From this we have an immediate corollary for bosons ($\alpha = 0$) and fermions ($\alpha = 1$).
-
-% \begin{corollary}
-%   With $\alpha = 0$, the anyonic phase reads
-%   \begin{equation}
-%     U_p = e^{i\alpha(1+2p)π} = 1
-%   \end{equation}
-%   for all $p$, i.e. bosons do not ``see'' each other, and they have a zero ground state energy.
-
-%   With $\alpha = 1$, the anyonic phase reads
-%   \begin{equation}
-%     U_p = e^{i\alpha(1+2p)π} = e^{i(1+2p)π},
-%   \end{equation}
-%   giving us the boundary condition
-%   \begin{equation}
-%     e^{iλ π} = e^{i(1+2p)π} &\iff λ = 1 + 2p + 2q, \quad q \in \mathbb{Z}
-%   \end{equation}
-%   Since $p$ is an integer, this shows that also fermions do not ``see'' the enclosed $p$ anyons.
-%   However, the anyons in the pair do ``see'' each other, in the sense that the their wave-function changes sign after they have been exchanged, as expected. Finally, this also shows that fermions have a non-zero ground state energy $E_0 = 1$.
-% \end{corollary}
-
-
-
-
-
-
-
-
-
-
-
-
-% \section{Non-abelian anyons}
-
-% Consider the same setting as above, with the distinction that the anyons are now non-abelian. That is, consider a pair of non-abelian anyons, with wave-function $\psi \in L^2(\mathbb{R}; \mathbb{C}^n)$ parametrized by the relative angle $\varphi$, such that the pair of anyons encloses $p$ fixed anyons as $\varphi$ increases from $0$ to $π$, giving rise to an anyonic phase $U_p \in U(n)$.
-
-% % From \cref{D spectrum} the boundary condition reads
-% % \begin{equation}
-% %   u(π) = U_p u(0) \iff C e^{iλπ} = U_p C.
-% % \end{equation}
-% % This is precisely the condition that $e^{iλπ}$ is an eigenvalue of $U_p$.
-
-
-% % \hrule
-
-% % Consider first the case $n=2$, then $U_p \in U(2)$ can be parametrized as follows.
-
-% % \begin{lemma}[Characterization of $U(2)$ matrices]
-% %   Let $U \in U(2)$, then
-% %   \begin{equation}
-% %     U = \begin{pmatrix} a & b \\ -e^{i\thetaπ}\overline{b} & e^{i\thetaπ} \overline{a} \end{pmatrix}, \quad \operatorname{det} U = e^{i\thetaπ}.
-% %   \end{equation}
-% %   for $a,b,\theta \in \mathbb{R}$ such that $\abs{a}^2 + \abs{b}^2 = 1$ and $0 \le \theta < 2$.
-% %   The parameter $\theta$ corresponds to the abelian phase in the factorization $U(2) = U(1)\times SU(2)$, where $\theta = 0$ gives $SU(2)$.
-% % \end{lemma}
-
-% % \hrule
-
-% A standard characterization of unitary matrices is as follows.
-
-% \begin{lemma}
-%   Let $U \in U(n)$, the $n$ eigenvalues (counted with multiplicity) of $U$ are on the form $e^{i\beta_jπ}$ for $j = 1,2,\ldots,n$. Furthermore, $e^{i\alpha\pi}$ where $\alpha = \frac{1}{n}\sum_j \beta_j$ is referred to as the abelian phase of $U_p$. It is the abelian part in the factorization of $U(n) = U(1) \times SU(n)$. Note that if $\det U = e^{iθπ}$ we have $α = θ/n$.
-% \end{lemma}
-
-% \begin{proof}
-%   We only show the $U(n) = U(1) \times SU(n)$ decomposition.
-%   Rewrite $U$ as $U = e^{i\alpha}\left( e^{-i\alpha} U \right)$ where $e^{i\alpha}$ is the abelian part and $e^{-i\alpha} U$ is the $SU(n)$ part. It suffices to show that $\det \left( e^{-iαπ} U \right) = 1$,
-%   \begin{equation}
-%     \det \left( e^{-iαπ} U \right)
-%     &= \left(e^{-iαπ}\right)^n e^{i\left(\sum_j \beta_j\right)π} \\
-%     &= \left(e^{-i\left(\sum_j \beta_j\right)π/n}\right)^n e^{i\left(\sum_j \beta_j\right)π} = 1.
-%   \end{equation}
-%   On the other hand, $1 = \det \left( e^{-iαπ} U \right) = e^{-iαπn} e^{iθπ} = e^{i(-αn+θ)π}$, thus $α = θ/n$ (modulo $2$).
-% \end{proof}
-
-% Next, we show that the abelian phase shifts the eigenvalues uniformly along the complex unit circle.
-
-% \begin{proposition}
-%   Consider non-abelian anyons with arbitrary (unitary) $U_p \in U(n)$ exchange operator. The abelian part of of the non-abelian anyonic phase $U_p$ can always be chosen so that the ground state has zero energy.
-% \end{proposition}
-
-% \begin{proof}
-%   By changing the abelian phase, each eigenvalue is shifted. This is obvious if we diagonalize $U_p$. In particular, adding $-\beta_j$ to the abelian phase, the $j$:th eigenvalue is shifted to $e^{i(\beta_j-\beta_j)} = 1$, corresponding to zero energy.
-% \end{proof}
-
-% % From this, the abelian part $e^{iαπ}$ of the anyonic phase $U_p \in U(n)$ can be seen as a shift of the eigenvalues $e^{iλπ}$ of $U_p$ along the complex unit circle, where $λ^2$ gives the energy of the system, as shown in figure \cref{fig: abelian phase shift}.
-
-% % \begin{figure}
-% %   \centering
-% %   \includegraphics[width=0.5\linewidth]{img/abelian-phase-shift.jpg}
-% %   \caption{The shift of energy levels due to an abelian phase $\alpha$ TODO it says theta.}
-% %   \label{fig: abelian phase shift}
-% % \end{figure}
-
-% As we shall see in the following chapter, the exchange operator $U_p$ has a rather involved dependence on the particular type of non-abelian anyons that are considered. In order to characterize the energy bound, via the eigenvalues of $U_p$, we must first dive into the framework of abstract anyon models in order to characterize $U_p$.
-
-
-
+As we shall see in the following chapter, the exchange operator $U_p$ has a rather involved dependence on the particular type of non-abelian anyons that are considered. In order to characterize the energy bound, via the eigenvalues of $U_p$, we must first dive into the framework of abstract anyon models in order to characterize $U_p$.
 
 
 
@@ -1641,9 +1778,9 @@ Omarbetas.
 
 \chapter{Abstract anyon models}\label{anyon models}
 
-In this chapter we shall present the framework of abstract anyon models, leading up to the succeeding chapter that characterizes braiding of anyons described abstract anyon models.
+In this chapter we shall present the framework of abstract anyon models, leading up to the succeeding chapter that characterizes braiding of anyons described by abstract anyon models.
 
-Anyon models can be modeled by unitary braided tensor categories, see \cite[appendix E]{kitaev} and \cite{naaijkens,prakash,tensor categories,tuba}. However, setting up this framework in full generality is redundant for our purposes and we take a more straight forward approach, which is also most common in the literature. The benefit of the categorical approach is that consistency of braiding and fusion is most naturally shown this way. We shall see the ties between the straight forward approach and the categorical model in when discussing the consistency conditions in \cref{sec:pentagon hexagon}.
+Anyon models can be modeled by unitary braided tensor categories, see \cite{kitaev}, one of the founding papers, and \cite{naaijkens,prakash,tensor categories,tuba}. However, setting up this framework in full generality is redundant for our purposes and we take a more straight forward approach, which is also most common in the literature. The benefit of the categorical approach is that consistency of braiding and fusion is most naturally shown this way. We shall see the ties between the straight forward approach and the categorical model in when discussing the consistency conditions in \cref{sec:pentagon hexagon}.
 
 This chapter is in part based on \cite{preskill,kitaev,bonderson}. We shall be using the notation that is standard in the literature, and when possible make use of and extend the fusion diagram notation, which greatly clarifies braiding of fusion states.
 
@@ -1656,14 +1793,6 @@ An abstract anyon model consists of a set of labels representing different types
   a \times b = \sum_c N_{ab}^c c
 \end{equation}
 representing the possible outcomes from fusion of anyons of type $a$ and $b$. The fusion multiplicities $N_{ab}^c$ are non-negative integers denoting the number of distinct ways $a$ and $b$ can fuse to $c$. In each anyon model there is the trivial label $1$, representing the vacuum, with the property $N_{a1}^b = N_{1a}^b = \delta_{ab}$, i.e. $1$ fuses trivially with every other charge. Furthermore, to each charge $a$ there is a corresponding conjugate charge $\bar{a}$ representing the antiparticle of $a$, with the property $N_{ab}^1 = \delta_{b\bar{a}}$, i.e. $a$ fuses to the vacuum only with its antiparticle.
-
-% Fusion of $a$ and $b$ is given by $a \times b = \sum_c N_{ab}^c c$
-
-% The state space of anyons resulting from fusion of anyons $a_1, \ldots, a_n$ is denoted by $V_{a_1 \ldots a_n}$ and can be decomposed as
-% \begin{equation}
-%   V_{a_1 \ldots a_n} = \bigoplus_b = V_{a_1 \ldots a_n}^b
-% \end{equation}
-% where $V_{a_1 \ldots a_n}^b$ denotes the state space of anyons of type $b$ resulting from fusion of $a_1, \ldots, a_n$.
 
 The $N_{ab}^c$ distinguishable ways in which $a$ and $b$ can fuse to $c$ can be regarded as an orthonormal basis of a Hilbert space $V_{ab}^c$. This is the state space, or fusion space, of anyons of type $c$ resulting from fusion of $a$ and $b$. The states of $V_{ab}^c$ are called fusion states and we denote the basis for $V_{ab}^c$ by
 \begin{equation}
@@ -1781,7 +1910,7 @@ Alternatively, written in Dirac notation, using the resolution of identity $I = 
   A \ket{\psi} = \sum_{j,k} \ket{j} \underbrace{\bra{j} A \ket{k}}_{A_{jk}} \underbrace{\braket{k}{\psi}}_{c_k}
 \end{equation}
 
-In what follows, we shall define some important linear operators on fusion spaces. We shall define the operators in terms of their action on the on the standard fusion states, as in \cref{eq:linear op on basis state}.
+In what follows, we shall define some important linear operators on fusion spaces. We shall define the operators in terms of their action on the standard fusion states, as in \cref{eq:linear op on basis state}.
 
 
 
@@ -1796,19 +1925,24 @@ In what follows, we shall define some important linear operators on fusion space
 
 \section{The \texorpdfstring{$F$}{F} operator: Associativity of fusion}
 
-The result of fusing multiple anyons must be independent of which anyons are fused first. That is, fusion is associative, TODO: we require it.
+The result of fusing multiple anyons is required to be independent of which anyons are fused first. This is motivated by the physics as the conservation of the anyonc charge. Mathematically, this translates to requiring that fusion is associative,
 \begin{equation}
-  (a \times b) \times c = a \times (b \times c)
+  (a \times b) \times c = a \times (b \times c).
 \end{equation}
 This gives rise to a natural isomorphism between the two decompositions of the fusion space
 \begin{equation}
   V_{abc}^d \cong
   \bigoplus_f V_{ab}^f \otimes V_{fc}^d
   \cong
-  \bigoplus_e V_{bc}^e \otimes V_{ae}^d
+  \bigoplus_e V_{bc}^e \otimes V_{ea}^d
   .
 \end{equation}
-TODO: show above with diagram.
+In terms of fusion diagrams that is
+\begin{equation}
+  \bigoplus_f \fs{b,c}{a,f,d}
+  \cong
+  \bigoplus_e \fsfused{a}{b}{c}{e}{d}.
+\end{equation}
 The first decomposition should be understood as first fusing $a$ with $b$ in all possible ways giving an intermediate charge $f$, followed by fusing $c$ with $f$ to give the final charge $d$.
 The second decomposition should be understood as first fusing $b$ with $c$ in all possible ways giving an intermediate charge $e$, followed by fusing $a$ with $e$ to give the final charge $d$.
 
@@ -1901,24 +2035,58 @@ The result of fusing $a$ with $b$ must be the same as fusing $b$ with $a$. That 
 \begin{equation}
   a \times b = b \times a.
 \end{equation}
-This gives rise to a natural isomorphism
-\begin{equation}
-  R_{ab} : V_{ba}^c \to V_{ab}^c
-\end{equation}
-between the corresponding fusion spaces which can be represented by a unitary matrix $R_{ab}^c$ acting on the fused basis states
-\begin{equation}
-  \fsfused{}{a}{b}{}{c}.
-\end{equation}
+This gives rise to a natural isomorphism.
 \begin{definition}
-  The $R$ matrix $R_{ab}$ is given by
+  The $R$ operator $R_{ab}$ is an isomorphism
   \begin{equation}\label{R-matrix}
-    R : \fsfused{}{a}{b}{}{c} \mapsto \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}.
+    R_{ab} : V_{ba}^c \to V_{ab}^c
   \end{equation}
+  such that
+  \begin{equation}
+    R_{ab} :
+    \begin{tikzpicture}[scale=0.35,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \node at (0.7, 2.7) {$a$};
+      \node at (2.3, 2.7) {$b$};
+      \draw (0.5, -0.6) to (2.5, -0.6);
+      \draw (0.7, 2.3) to [bend left=-20] (1.25, 1.35);
+      \draw (2.3, 2.3) to [bend left=20] (1.75, 1.35);
+      \draw (1.5, 1) circle (0.45);
+      \node at (1.503, 1.08) {$\mu$};
+      \draw (1.5, 0.55) to (1.5, -0.6);
+      \node at (2, -0.05) {$c$};
+    \end{tikzpicture}
+    \mapsto
+    \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \node at (0.7, 4.9) {$a$};
+      \node at (2.3, 4.9) {$b$};
+      \braid[width=1.6cm, height=2cm] at (0.7, 4.5) s_1^{-1};
+      \draw (0.5, -0.75) to (2.5, -0.75);
+      \draw (0.7, 2) to [bend left=-30] (1.25, 1.2);
+      \draw (2.3, 2) to [bend left=30] (1.75, 1.2);
+      \draw (1.5, 0.85) circle (0.45);
+      \node at (1.503, 0.9) {$\nu$};
+      \draw (1.5, 0.4) to (1.5, -0.75);
+      \node at (2, -0.15) {$c$};
+    \end{tikzpicture}
+    = \sum_{\nu} \left( R_{ab}^c \right)_{\nu\mu}
+    \begin{tikzpicture}[scale=0.35,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+      \node at (0.7, 2.7) {$a$};
+      \node at (2.3, 2.7) {$b$};
+      \draw (0.5, -0.6) to (2.5, -0.6);
+      \draw (0.7, 2.3) to [bend left=-20] (1.25, 1.35);
+      \draw (2.3, 2.3) to [bend left=20] (1.75, 1.35);
+      \draw (1.5, 1) circle (0.45);
+      \node at (1.503, 1.02) {$\nu$};
+      \draw (1.5, 0.55) to (1.5, -0.6);
+      \node at (2, -0.05) {$c$};
+    \end{tikzpicture}.
+  \end{equation}
+  Disregarding the fusion multiplicities we see that the $R$ operator is diagonal,
+  \begin{equation}
+    R_{ab} : \fsfused{}{a}{b}{}{c} \mapsto \fsfusedbraided{}{a}{b}{}{c} = R_{ab}^c \fsfused{}{a}{b}{}{c}.
+  \end{equation}
+  That is, there is no mixing of the $c$ label. Note that mixing of $a$ and $b$ cannot occur since these are the charges to be braided and fused.
 \end{definition}
-It is clear that $R$-matrix $R_{ab}$ is diagonal and we can denote this as
-\begin{equation}
-  (R_{ab})_{ij} = \delta_{ij} R_{ab}^i.
-\end{equation}
 
 
 
@@ -2925,7 +3093,36 @@ The Fibonacci anyon model consists of two particle types, $1$ (the mandatory tri
 \end{equation}
 Furthermore, $\tau$ is its own anti-particle $\overline{τ}$. We shall refer to the $τ$ anyon as Fibonacci anyons.
 
-As we shall now see, the dimension of the fusion space of $n$ Fibonacci anyons grows as the Fibonacci numbers as $n$ increases. Thus motivating the name of the model. Consider the fusion spaces $V_{τ^n}^1$, where $τ^n$ denotes $n$ repetitions of $τ$. This is the space of possible fusions of $n$ Fibonacci anyons, having total charge $1$. Writing out the canonical basis for these spaces we find
+As we shall now see, the dimension of the fusion space of $n$ Fibonacci anyons grows as the Fibonacci numbers as $n$ increases. Thus motivating the name of the model. First, recall the definition of the Fibonacci numbers.
+
+\begin{definition}
+  The $n$:th Fibonacci number $\Fib(n)$ is defined by the recurrence relation
+  \begin{equation}
+    \begin{aligned}
+      \Fib(0) &= 0 \\
+      \Fib(1) &= 1 \\
+      \Fib(n) &= \Fib(n-1) + \Fib(n-2).
+    \end{aligned}
+  \end{equation}
+  For example:
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{c|ccccccccccc}
+      $n$       & $-3$ & $-2$ & $-1$ & $0$ & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ \\ \hline
+      $\Fib(n)$ & $2$ & $-1$ & $1$ & $0$ & $1$ & $1$ & $2$ & $3$ & $5$ & $8$ & $13$
+    \end{tabular}
+  \end{center}
+  Furthermore, we have the closed-form formula
+  \begin{equation}
+    \Fib(n) = \frac{φ^n-(-φ)^{-n}}{\sqrt{5}}
+  \end{equation}
+  where $φ = \frac{1+\sqrt{5}}{2}$ is the golden ratio
+  \begin{equation}
+    φ = \lim_{n\to\infty} \frac{\Fib(n+1)}{\Fib(n)}.
+  \end{equation}
+\end{definition}
+
+Consider the fusion spaces $V_{τ^n}^1$, where $τ^n$ denotes $n$ repetitions of $τ$. This is the space of possible fusions of $n$ Fibonacci anyons, having total charge $1$. Writing out the canonical basis for these spaces we find
 \begin{equation}
   \begin{aligned}
     V_{τ^2}^1 :&
@@ -2988,14 +3185,7 @@ There are two Fibonacci string of length one, namely $1$ and $τ$, of length two
 The following result determines the number $f_n$.
 
 \begin{lemma}\label{lemma:fibonacci string length}
-  The number $f_n$ of Fibonacci strings of length $n$ is $\Fib(n + 2)$, where $\Fib(n)$ denotes the $n$:th Fibonacci number given by
-  \begin{equation}
-    \begin{aligned}
-      \Fib(0) &= 0 \\
-      \Fib(1) &= 1 \\
-      \Fib(n+1) &= \Fib(n) + \Fib(n-1).
-    \end{aligned}
-  \end{equation}
+  The number $f_n$ of Fibonacci strings of length $n$ is $\Fib(n + 2)$, where $\Fib(n)$ denotes the $n$:th Fibonacci number.
 \end{lemma}
 
 \begin{proof}
@@ -3037,6 +3227,16 @@ We can now use this to characterize the dimension of fusion spaces.
   Next,
   \begin{equation}
     \dim V_{τ^n}^τ = \dim V_{τ^{n+1}}^1 = \Fib(n).
+  \end{equation}
+  Next,
+  \begin{equation}
+    \begin{aligned}
+      \dim V_{τ^n}
+      =& \dim V_{τ^n}^1 \oplus V_{τ^n}^τ \\
+      =& \dim V_{τ^n}^1 + \dim V_{τ^n}^τ \\
+      =& \Fib(n-1) + \Fib(n) \\
+      =& \Fib(n+1).
+    \end{aligned}
   \end{equation}
   Finally,
   \begin{equation}
@@ -3087,6 +3287,19 @@ so that
   \end{aligned}
 \end{equation}
 
+It is easy to verify that
+\begin{equation}
+  \begin{pmatrix}
+    0 & 1 \\
+    1 & 1
+  \end{pmatrix}^n
+  =
+  \begin{pmatrix}
+    \Fib(n-1) & \Fib(n) \\
+    \Fib(n) & \Fib(n+1)
+  \end{pmatrix}
+\end{equation}
+
 We can now use this to determine fusion of $n$ Fibonacci anyons,
 \begin{equation}
   \begin{pmatrix}
@@ -3099,7 +3312,10 @@ We can now use this to determine fusion of $n$ Fibonacci anyons,
   \begin{pmatrix}
     \Fib(n-1) \\ \Fib(n)
   \end{pmatrix}
-  = \Fib(n-1) 1 + \Fib(n) \tau.
+\end{equation}
+i.e.\
+\begin{equation}
+  \tau^n = \Fib(n-1) 1 + \Fib(n) \tau.
 \end{equation}
 This counts the dimension of the fusion spaces $V_{\tau^n}^1$ and $V_{\tau^n}^\tau$, respectively, in a agreement with \cref{lemma:fibonacci fusion space dimension}.
 
@@ -3442,27 +3658,23 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
     \right\}
     \equiv
     \left\{
-        1 ττ  1 ,
+        1ττ1 ,
       \begin{array}{c}
-          1 τ  1 τ, \\
-          1 τττ,
+        1τ1τ,\\
+        1τττ,
       \end{array}
       \begin{array}{c}
-        τ  1 τ  1 ,\\
-        τττ  1 ,
+        τ1τ1,\\
+        τττ1,
       \end{array}
       \begin{array}{c}
-        τ  1 ττ,\\
-        ττ  1 τ,\\
+        τ1ττ,\\
+        ττ1τ,\\
         ττττ
       \end{array}
     \right\}.
   \end{equation}
   Again, we have grouped the states by charge sectors. In this order of the basis we have
-  % \begin{alignat*}{10}
-  %   ρ(σ_1) &= R_{ττ}^τ &{}\oplus{}& R &{}\oplus{}& FRF^{-1} &{}\oplus{}& FRF^{-1} &{}\oplus{}& R_{ττ}^τ \\
-  %   ρ(σ_2) &= R_{ττ}^τ &{}\oplus{}& FRF^{-1} &{}\oplus{}& R &{}\oplus{}& R_{ττ}^τ &{}\oplus{}& J_2 FRF^{-1} J_2
-  % \end{alignat*}
   \begin{alignat*}{10}
     ρ_3(σ_1) &= R_{ττ}^τ &{}\oplus{}& \centermathcell{R}  &{}\oplus{}& B           &{}\oplus{}&
     \begin{pmatrix}
@@ -3477,89 +3689,6 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
       & B_{τ1} & B_{ττ}
     \end{pmatrix}
   \end{alignat*}
-  % where $J_n$ is the exchange matrix
-  % \begin{equation}
-  %   J_2 =
-  %   \begin{pmatrix}
-  %     0 & 1 \\
-  %     1 & 0
-  %   \end{pmatrix},
-  %   \quad
-  %   J_3 =
-  %   \begin{pmatrix}
-  %     0 & 0 & 1 \\
-  %     0 & 1 & 0 \\
-  %     1 & 0 & 0
-  %   \end{pmatrix}, \quad\ldots
-  % \end{equation}
-
-  % Note that $ρ(σ_2) = Pρ(σ_1)P^{-1}$ where $P$ is the permutation matrix
-  % \begin{equation}
-  %   P = I_2 \oplus J_2^{\oplus 3} =
-  %   \begin{pmatrix}
-  %     1 &   &   &   &   &   &   &   \\
-  %       & 1 &   &   &   &   &   &   \\
-  %       &   & 0 & 1 &   &   &   &   \\
-  %       &   & 1 & 0 &   &   &   &   \\
-  %       &   &   &   & 0 & 1 &   &   \\
-  %       &   &   &   & 1 & 0 &   &   \\
-  %       &   &   &   &   &   &   &   \\
-  %       &   &   &   &   &   & 0 & 1 \\
-  %       &   &   &   &   &   & 1 & 0
-  %   \end{pmatrix}
-  % \end{equation}
-  % which satisfies $P^{-1} = P$.
-
-
-
-  % \vspace{1cm}\hrule\vspace{1cm}
-
-  % OLD: USES BAD ORDER OF BASIS
-
-  % From this we easily conclude that, in the basis
-  % \begin{equation}
-  %   \left\{ \fs{τ,τ,τ}{a,b,c,d} \text{ for possible } a,b,c,d \right\} \equiv
-  %   \{
-  %     1τ1τ,
-  %     1ττ1,
-  %     1τττ,
-  %     τ1τ1,
-  %     τ1ττ,
-  %     ττ1τ,
-  %     τττ1,
-  %     ττττ
-  %   \}
-  % \end{equation}
-  % the braid generators
-  % \begin{equation}
-  %   ρ(σ_1) \fs{τ,τ,τ}{a,b,c,d} &= \fs[1]{τ,τ,τ}{a,b,c,d}, \\
-  %   ρ(σ_2) \fs{τ,τ,τ}{a,b,c,d} &= \fs[2]{τ,τ,τ}{a,b,c,d}
-  % \end{equation}
-  % are given by
-  % \begin{equation}
-  %   ρ(σ_1) &=
-  %   \begin{pmatrix}
-  %     R_{ττ}^1 \\
-  %     & R_{ττ}^τ \\
-  %     & & R_{ττ}^τ \\
-  %     & & & B_1^1 & & & B_1^τ \\
-  %     & & & & B_1^1 & & & B_1^τ \\
-  %     & & & & & R_{ττ}^τ \\
-  %     & & & B_τ^1 & & & B_τ^τ \\
-  %     & & & & B_τ^1 & & & B_τ^τ
-  %   \end{pmatrix} \\
-  %   ρ(σ_2) &=
-  %   \begin{pmatrix}
-  %     B_1^1 & & B_1^τ \\
-  %     & R_{ττ}^τ \\
-  %     B_τ^1 & & B_τ^τ \\
-  %     & & & R_{ττ}^1 \\
-  %     & & & & R_{ττ}^τ \\
-  %     & & & & & B_1^1 & & B_1^τ \\
-  %     & & & & & & R_{ττ}^τ \\
-  %     & & & & & B_τ^1 & & B_τ^τ
-  %   \end{pmatrix}
-  % \end{equation}
 \end{example}
 
 
@@ -3883,8 +4012,6 @@ We now have an explicit expression for the exchange operator $U_p$, allowing us 
 
 \begin{corollary}
 
-  TODO: Mention ok also for $Fib(-1)$ etc, show example $U_0$, $U_1$.
-
   The eigenvalues of $U_p$ for Fibonacci anyons are
   \begin{equation}
       \sigma(U_p) =
@@ -3916,11 +4043,42 @@ We now have an explicit expression for the exchange operator $U_p$, allowing us 
 
 \end{corollary}
 
+Note that this expression is valid for all $p \ge 0$ since $\Fib(p)$ is defined also for negative $p$. In particular we have
+\begin{align}
+  σ(U_0) &=
+  \left\{
+  \begin{array}{rl}
+    e^{i4π/5}  &\text{\rm mult. }\,\; 2, \\
+    e^{iπ/5}   &\text{\rm mult. }\,\; 0, \\
+    e^{-iπ/5}  &\text{\rm mult. }\,\; 0, \\
+    e^{-i3π/5} &\text{\rm mult. }\,\; 3
+  \end{array}
+  \right\}, \\
+  σ(U_1) &=
+  \left\{
+  \begin{array}{rl}
+    e^{i4π/5}  &\text{\rm mult. }\,\; 3, \\
+    e^{iπ/5}   &\text{\rm mult. }\,\; 2, \\
+    e^{-iπ/5}  &\text{\rm mult. }\,\; 3, \\
+    e^{-i3π/5} &\text{\rm mult. }\,\; 0
+  \end{array}
+  \right\}, \\
+  \sigma(U_2) &=
+  \left\{
+  \begin{array}{rl}
+    e^{i4π/5}  &\text{\rm mult. }\,\; 5, \\
+    e^{iπ/5}   &\text{\rm mult. }\,\; 2, \\
+    e^{-iπ/5}  &\text{\rm mult. }\,\; 3, \\
+    e^{-i3π/5} &\text{\rm mult. }\,\; 3
+  \end{array}
+  \right\}.
+\end{align}
+
 \begin{proof}
   Since $U_p$ consists of repeated block, it suffices to compute the eigenvalues for each block, multiplied by the number of occurrences for each block to get the multiplicities. Note that $B = F^{-1}R F$ is similar to $R$. The multiplicity for $e^{i4π/5}$ is $2\Fib(p-1) + 3\Fib(p) = \Fib(p+3)$, the other multiplicities are straight forward.
 \end{proof}
 
-In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$, corresponding to kinetic energy $λ^2$ proportional to $(1/5)^2$.
+In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$, corresponding to kinetic energy proportional to $λ^2 = (1/5)^2$.
 
 % We see that exchange of Fibonacci described by $U_p$ always corresponds to a non-zero kinetic energy, it is natural to ask if there are braids that do have zero energy. The following corollary positively answers this.
 
@@ -3955,7 +4113,7 @@ For Fibonacci anyons we thus have
   d_\tau = \lim_{n\to\infty} \frac{\operatorname{dim}\left( V^1_{\tau^{n+1}} \right)}{\operatorname{dim}\left( V^1_{\tau^{n}} \right)}
   = \lim_{n\to\infty} \frac{\Fib(n)}{\Fib(n-1)} = \varphi
 \end{align}
-and $d_1 = 1$. TODO: Define $\varphi$.
+and $d_1 = 1$.
 
 Recall from \cref{sec:fibonacci preliminaries} that fusion with a $\tau$ anyon can be represented as the matrix
 \begin{align}
@@ -3964,11 +4122,11 @@ Recall from \cref{sec:fibonacci preliminaries} that fusion with a $\tau$ anyon c
     1 & 1
   \end{pmatrix}
 \end{align}
-acting on
+which we call the Fibonacci matrix. It acts on
 \begin{align}
   1 \equiv \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad \tau \equiv \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
 \end{align}
-Thus, fusion can be seen as a Markov process and the stationary distribution is given by the eigenvectors. The characteristic polynomial of the Fibonacci fusion matrix is
+Thus, fusion with $τ$ can be seen as a Markov process where the transition matrix is precisely the matrix giving fusion with $τ$. The corresponding stationary states of the Markov process is given by the eigenvectors. The characteristic polynomial of the Fibonacci matrix is
 \begin{align}
   \begin{vmatrix}
     -λ & 1 \\
@@ -3976,11 +4134,11 @@ Thus, fusion can be seen as a Markov process and the stationary distribution is 
   \end{vmatrix} =
   λ^2-λ-1 = 0 \iff \lambda = \frac{1±\sqrt{5}}{2} = φ, -φ^{-1}.
 \end{align}
-Note the resemblance to the fusion rule, if we replace charge labels by quantum the corresponding quantum dimension,
+Note the resemblance to the fusion rule, if we replace charge labels by the corresponding quantum dimension we get
 \begin{align}
-  τ × τ = 1 + τ \implies d_τ^2 - d_τ - 1 = 0 \iff d_τ = \frac{1±\sqrt{5}}{2} = φ, -φ^{-1}.
+  τ × τ = 1 + τ \implies d_τ^2 = 1 + d_τ \iff d_τ = \frac{1±\sqrt{5}}{2} = φ, -φ^{-1}.
 \end{align}
-The corresponding eigenvectors are
+The igenvectors of the Fibonacci matrix corresponding to eigenvalues $φ$ and $-φ^{-1}$ are
 \begin{align}
   \begin{pmatrix}
     1 \\ φ
@@ -3989,13 +4147,14 @@ The corresponding eigenvectors are
     1 \\ -φ^{-1}
   \end{pmatrix}
 \end{align}
-which represent the steady state distribution of anyons of type $1$ and $τ$, corresponding to the first and second component respectively, in the limit of fusion an infinite number of times with $τ$ anyons. The second eigenvector is non-physical, since it has a negative component. From the first eigenvector we read off the probabilities of getting $1$ or $\tau$ as a result from this infinite fusion.
+respectively. This represent the steady state distribution of anyons of type $1$ and $τ$, corresponding to the first and second component respectively, in the limit of fusion with $\tau$ anyons an infinite number of times. The first eigenvector gives the first steady state. We read off the probabilities of getting $1$ or $\tau$ as a result from this infinite fusion as
 \begin{align}
   P(1) = \frac{1}{1+φ} = φ^{-2}, \quad
   P(τ) = \frac{φ}{1+φ} = φ^{-1}.
 \end{align}
+The second eigenvector is non-physical, since it has a negative component.
 
-That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fact that the fusion space has no decomposition as a tensor product of subsystems. That is, the dimension of the fusion space does not increase by an integer factor when one more Fibonacci anyon is added, hence there is no part of the fusion space that can be factored out which describes one single particle. Indeed, if we have independent identical particles with internal Hilbert space $h$, then the total Hilbert space of $n$ such particles is $\mathcal{H}_n = h^{⊗n}$ and the quantum dimension is simply $\dim h$. Thus, quantum information encoded in the fusion space is necessarily a collective property of all anyons. Furthermore, quantum information can be encoded in the non-abelian phase of the system, and we have seen that this anyonic phase is topological. This is the key observation motivating topological quantum computation, which we explore in the next chapter.
+That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fact that the fusion space has no decomposition as a tensor product of subsystems. That is, the dimension of the fusion space does not increase by an integer factor when one more Fibonacci anyon is added, hence there is no part of the fusion space that can be factored out which describes one single particle. Indeed, if we have independent identical particles, such that each particle can be associated with a Hilbert space $h$, then the total Hilbert space of $n$ such particles is $\mathcal{H}_n = h^{⊗n}$ and the quantum dimension is simply $\frac{\dim \mathcal{H}_{n+1}}{\dim \mathcal{H}_n} = \dim h$. Thus, quantum information encoded in the fusion space is necessarily a collective property of all anyons. Furthermore, quantum information can be encoded in the non-abelian phase of the system, and we have seen that this anyonic phase is topological. This is the key observation motivating topological quantum computation, which we explore in the next chapter.
 
 
 % The quantum dimension can be immediately computed from the fusion rules. For the Fibonacci anyons we have the fusion rule
@@ -4173,7 +4332,7 @@ That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fac
 
 \chapter{Topological Quantum Computation}
 
-This chapter can be seen as an application of non-abelian anyons to perform topological quantum computation. For further details see \cite{nayak,freedman kitaev larsen wang,shor fault-tolerant,braid topologies}.
+This chapter can be seen as an application of non-abelian anyons to perform topological quantum computation. For further details see \cite{nayak,freedman kitaev larsen wang,shor fault-tolerant,braid topologies,ainsworth slingerland}.
 
 The motivation for considering topological quantum computers is that most existing attempts at constructing quantum computers, such as ion traps, superconducting Josephson junctions and optical lattices, all share one pressing limitation; decoherence. Quantum decoherence is the effect where a quantum system, such as one implementing a quantum computer, essentially looses information to the environment. When a system is coupled to the environment, the dynamics of the system is no longer necessarily unitary, however, the total system still evolves unitarily, but it is not feasible to keep track of the exact state of the environment. The environment can introduce noise simply from heat, this eventually leads to errors in the quantum information. Efforts of completely isolating quantum systems from the environment have yet not proved successful. In some cases this can be (partially) remedied by quantum error correction algorithms.
 
@@ -4554,7 +4713,7 @@ In order to implement two qubits, a fusion space of at least dimension four shal
       \Bigg\}.
   \end{aligned}
 \end{equation}
-In principle one can declare the computational basis states $\ket{00}, \ket{01}, \ket{10}, \ket{11}$ to be the first through forth fusion states, leaving the fifth fusion state non-computational. A more efficient scheme would be to let each of these fusion states be one of the states of a five-dimensional qudit. More generally, the fusion space $V_{τ^n}^1$, which is $\operatorname{Fib}(n-1)$-dimensional, can be used to implement a $\operatorname{Fib}(n-1)$-dimensional qudit.
+In principle one can declare the computational basis states $\ket{00}, \ket{01}, \ket{10}, \ket{11}$ to be the first through forth fusion states, leaving the fifth fusion state non-computational. A more efficient scheme would be to let each of these fusion states be one of the states of a five-dimensional qudit. More generally, the fusion space $V_{τ^n}^1$, which is $\operatorname{Fib}(n-1)$-dimensional, can be used to implement a $\operatorname{Fib}(n-1)$-dimensional qudit. See further discussion \cite{ainsworth slingerland}.
 
 The most common approach in the literature instead uses $n$ Fibonacci qubits to implement $n$ qubits, by using the fusion space $V_{τ^{2n+2}}^1$. The computational basis is defined as
 \begin{equation}
@@ -4629,7 +4788,7 @@ Note that \cite{topological quantum compiling} uses the mirrored phase conventio
 
 \chapter{Summary and conclusion}
 
-TODO: Future, configuration spaces with other $M$ than $\mathbb{R}^d$. Would be fun with a 3-manifold such that $(\pi_1(\mathcal{C}))^2$ is not trivial, like for a torus.
+TODO: possible extensions: configuration spaces with other $M$ than $\mathbb{R}^d$. Could be fun with a 3-manifold such that $(\pi_1(\mathcal{C}))^2$ is not trivial, e.g. a `filled torus'?.
 
 
 
@@ -4902,6 +5061,7 @@ Print[EigenvaluesArg[σ[3, 1]]];
   \bibitem{khare} A. Khare. \textit{Fractional statistics and quantum theory.} 2nd edition. World Scientific (2005)
   \bibitem{ballentine} L. Ballentine. \textit{Quantum mechanics: A modern development.} World Scientific (1988)
   \bibitem{hard-core} M. Bourdeau, R. Sorkin. \textit{When can identical particles collide?} Phys.Rev. D45 (1992) 687-696. \url{http://doi.org/10.1103/PhysRevD.45.687}
+  \bibitem{methmmp} D. Lundholm. \textit{Methods of modern mathematical physics: Uncertainty and exclusion principles in quantum mechanics.} Draft lecture notes. \url{https://people.kth.se/~dogge/mp/methmmp.pdf}
   \bibitem{dummit foote} D. Dummit, R. Foote. \textit{Abstract algebra.} 3rd edition. Wiley. (2003)
 
   %%% Statistical repulsiton etc
@@ -4919,7 +5079,7 @@ Print[EigenvaluesArg[σ[3, 1]]];
   \bibitem{feynmann path integrals indistinguishable particles} M. G. G. Laidlaw, C. M. DeWitt. \textit{Feynman functional integrals for systems of indistinguishable particles.} Phys. Rev. D 3 (1971) 1375–1378.
 
   %%% Anyons in general
-  \bibitem{kitaev} A. Kitaev. \textit{Anyons in an exactly solved model and beyond.} Annals of Physics 321 (2006) 2. (Revised version \href{https://arxiv.org/abs/cond-mat/0506438}{\texttt{arXiv:cond-mat/0506438}}.) \\\relax (One of the founding papers.)
+  \bibitem{kitaev} A. Kitaev. \textit{Anyons in an exactly solved model and beyond.} Annals of Physics 321 (2006) 2. (Revised version \href{https://arxiv.org/abs/cond-mat/0506438}{\texttt{arXiv:cond-mat/0506438}}.)% \\\relax (One of the founding papers.)
   \bibitem{preskill} J. Preskill. \textit{Lecture Notes for Physics 219: Quantum Computation, Chapter 9: Topological quantum computation}. \\ \url{http://www.theory.caltech.edu/~preskill/ph219/topological.pdf}
   \bibitem{bonderson} P. H. Bonderson \textit{Non-Abelian Anyons and Interferometry.} (2007) Ph.D Thesis
   \bibitem{short intro fib} S. Trebst, M. Troyer, Z. Wang and A. W. W. Ludwig. \textit{A Short Introduction to Fibonacci Anyon Models.} Progress of Theoretical Physics Supplement No. 176, 2008. \\ \url{http://stationq.cnsi.ucsb.edu/~wang/Publications/34.pdf}
@@ -4939,7 +5099,8 @@ Print[EigenvaluesArg[σ[3, 1]]];
   \bibitem{nayak} C. Nayak, S. H. Simon, A. Stern, M. Freedman, S. D. Sarma. \textit{Non-Abelian Anyons and Topological Quantum Computation.} \href{https://arxiv.org/pdf/0707.1889.pdf}{\texttt{arXiv:0707.1889}}
   \bibitem{topological quantum compiling} L. Hormozi, G. Zikos, N. Bonesteel, S. Simon. \textit{Topological quantum compiling.} Phys. Rev. B 75, 165310 (2007), \href{https://arxiv.org/abs/quant-ph/0610111}{\texttt{arXiv:quant-ph/0610111}} \\ \url{http://link.aps.org/doi/10.1103/PhysRevB.75.165310}
   \bibitem{wang book} Z. Wang. \textit{Topological Quantum Computation.} Microsoft Research Station Q, University of California. AMS and CBMS. \url{http://www.math.ucsb.edu/~zhenghwa/data/course/cbms.pdf}
-  \bibitem{pachos book} J. Pachos. \textit{Introduction to Topological Quantum Computation.} Cambridge University Press. \\ \url{http://quantum.leeds.ac.uk/jiannis-pachos/book.html} \\ \url{http://quantum.leeds.ac.uk/fileadmin/user_upload/Jiannis/IntroTQC.pdf}
+  \bibitem{pachos book} J. Pachos. \textit{Introduction to Topological Quantum Computation.} Cambridge University Press. \\ \url{http://quantum.leeds.ac.uk/jiannis-pachos/book.html}% \\ \url{http://quantum.leeds.ac.uk/fileadmin/user_upload/Jiannis/IntroTQC.pdf}
+  \bibitem{ainsworth slingerland} R. Ainsworth, J. Slingerland. \textit{Topological Qubit Design and Leakage.} New J. Phys. 13 065030. \href{https://arxiv.org/abs/1102.5029}{\texttt{arXiv:1102.5029}} (2011)
   \bibitem{one mobile quasiparticle} S. Simon, N. Bonesteel, M. Freedman, N. Petrovic, L. Hormozi. \textit{Topological Quantum Computing with Only One Mobile Quasiparticle.} \href{https://arxiv.org/abs/quant-ph/0509175}{\texttt{arXiv:quant-ph/0509175}}
   \bibitem{nielsen chuang} M. Nielsen, I. Chuang. \textit{Quantum computation and quantum information.} Cambridge university press (2010).
   \bibitem{dawson nielsen} C. Dawson, M. Nielsen. \textit{The Solovay-Kitaev algorithm.} \href{https://arxiv.org/abs/quant-ph/0505030}{\texttt{arXiv:quant-ph/0505030}}
@@ -4951,11 +5112,17 @@ Print[EigenvaluesArg[σ[3, 1]]];
 
   %%% Unsorted
   \bibitem{slingerland bais} J.K. Slingerland, F.A. Bais. \textit{Quantum groups and nonabelian braiding in quantum Hall systems} \href{https://arxiv.org/abs/cond-mat/0104035}{\texttt{arXiv:cond-mat/0104035}}
-  \bibitem{asymptotical top compl} V. Kliuchnikov, A. Bocharov, K. Svore. \textit{Asymptotically optimal topological quantum compiling.} \\ \href{https://arxiv.org/abs/1310.4150}{\texttt{arXiv:1310.4150}}
+  \bibitem{asymptotical top compl} V. Kliuchnikov, A. Bocharov, K. Svore. \textit{Asymptotically optimal topological quantum compiling.} \href{https://arxiv.org/abs/1310.4150}{\texttt{arXiv:1310.4150}}
   % \bibitem{fulton harris} W. Fulton, J. Harris. \textit{Representation theory. A first course.} Graduate Texts in Mathematics. Springer-Verlag. (1991)
 
   % Possible references, perhaps not needed
   % \bibitem{} M. Freedman, M. Larsen, Z. Wang. \textit{A modular functor which is universal for quantum computation.} \\ \url{https://arxiv.org/pdf/quant-ph/0001108v2.pdf}
+
+  % Discussions about permutation symmetry
+  % TODO: Cite:
+  % https://arxiv.org/pdf/quant-ph/0301020.pdf
+  % https://arxiv.org/pdf/quant-ph/0511002.pdf
+  % https://arxiv.org/pdf/1308.3275.pdf
 
 \end{thebibliography}
 

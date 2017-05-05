@@ -1,28 +1,15 @@
-- Fråga: Vad kallas partiklar som beter sig så att H = H₁⊗H₂⊗⋯ och vad kallas partiklar som inte kan tillskrivas ett eget hilbertrum?
-- Fråga: M = fylld torus, 3-dimensionella anyoner?
-- Fråga: 2 st abelska anyoner, vad är det lättaste exemplet på ett sådant tillstånd?
-
+- TODO: α vs. θ
+- Intro: Discuss statistical repulsion.
+- Fixa exemplet pseud-abelian.
+- Skriv ℋ = 𝐿²(ℝᵈᴺ;ℂⁿ)
 
 - Använd resultaten för U_p för att säga något om statistiken för nonabelions.
 
 - Chap Statistical repulsion
 
-- Mjuka upp intro. Gör ψ: Conf → ℂᵏ
-- Intro: Discuss local exclusion.
-- TODO: α vs. θ
-
-- Låt ∣ψ(x₁,x₂)⟩ vara tillståndet för två identiska partiklar med koordinater x₁ resp. x₂. Eftersom partiklarna är identiska går det inte att skilja tillståndet ∣ψ(x₁,x₂)⟩ från ∣ψ(x₂,x₁)⟩, dvs. för vilken observabel A som helst måste det gälla att ⟨ψ(x₁,x₂)∣A∣ψ(x₁,x₂)⟩ = ⟨ψ(x₂,x₁)∣A∣ψ(x₂,x₁)⟩. Om partiklarna är anyoner med utväxlingsoperator U så har vi ∣ψ(x₁,x₂)⟩ = U∣ψ(x₂,x₁)⟩. Det följer att ⟨ψ(x₁,x₂)∣A∣ψ(x₁,x₂)⟩ = ⟨Uψ(x₁,x₂)∣A∣Uψ(x₁,x₂)⟩ = ⟨ψ(x₁,x₂)∣U*AU∣ψ(x₁,x₂)⟩ ⟹ A = U*AU, dvs. A och U kommuterar, men det behöver det ju inte göra! Vad går fel här?
-
-- Om partiklarna är sådana att \u
-
-- Nakahara principal fibre bundle framework
-
-- Dela upp Up mer, i R1 och B...
 
 
 Dimensionen för rummet av fermioner respektive bosoner
-
-
 
 x1 x2 = e^(i theta) x2 x1
 
@@ -30,3 +17,11 @@ a 00 + b 01 + c 10 + d 11 = a 00 + c 01 + d 10 + d 11
 
 testa annars med tre energinivåer osv.
 
+
+- Fråga: M = fylld torus, 3-dimensionella anyoner?
+
+
+# Skriv
+
+- Vad kallas partiklar som beter sig så att H = H₁⊗H₂⊗⋯ och vad kallas partiklar som inte kan tillskrivas ett eget hilbertrum?
+- 2 st abelska anyoner, vad är det lättaste exemplet på ett sådant tillstånd?
