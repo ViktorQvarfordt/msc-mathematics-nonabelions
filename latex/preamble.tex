@@ -1,0 +1,298 @@
+%!TEX program = xelatex
+%!TEX root = nonabelions.tex
+
+\documentclass[a4paper,oneside]{book}
+
+
+
+%% Packages order is important
+\usepackage{unicode-latex} % https://github.com/ViktorQvarfordt/unicode-latex/blob/master/unicode-latex.sty
+%\usepackage[left=3.175cm, marginparwidth=2.825cm, marginparsep=3mm]{geometry}
+\usepackage{tikz}
+\usepackage{amsthm}
+\usepackage{braids}
+\usepackage{xifthen}
+\usepackage{datetime}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage[section]{placeins}
+\usepackage[hidelinks,unicode=true]{hyperref}
+\usepackage{cleveref}
+
+% For unicode font in verbatim, this is the only think requiring use of xelatex in this document.
+\usepackage{fontspec}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+
+
+% Check unused references
+% \usepackage{refcheck}
+
+% \usepackage{showkeys}
+% \setlength{\marginparwidth}{3.5cm}
+% Enable showkeys for \cref and \Cref
+% tex.stackexchange.com/questions/139698/usiong-showkes-and-cleveref-together
+% \makeatletter
+%   \SK@def\cref#1{\SK@\SK@@ref{#1}\SK@cref{#1}}%
+%   \SK@def\Cref#1{\SK@\SK@@ref{#1}\SK@Cref{#1}}%
+% \makeatother
+% \renewcommand*\showkeyslabelformat[1]{%
+%   \parbox[t]{\marginparwidth}{\raggedright\normalfont\footnotesize\ttfamily#1}}
+
+% \usepackage{showlabels}
+% \showlabels{cite}
+% \showlabels{eqref}
+% \showlabels{cref}
+% \showlabels{bibitem}
+% \renewcommand*\showlabelsetlabel[1]{%
+%   \parbox[t]{\marginparwidth}{\raggedright\normalfont\footnotesize\ttfamily#1}}
+
+
+%% Theorems
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\AtEndEnvironment{example}{\hspace*{0pt}\hfill\ensuremath{\diamondsuit}}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+
+
+%% Macros
+
+% \newcommand{\bbDelta}{{\mbox{$\Delta$}\hspace{-8.0pt}\scalebox{0.8}{$\Delta$}}}
+\def\bbDelta{{%
+\setbox0\hbox{$\Delta$}%
+% \rlap{\hbox to \wd0{\hss\scalebox{0.8}{$\Delta$}\hss}}\box0
+% \rlap{\hbox to \wd0{\scalebox{0.8}{$\Delta$}\hss}}\box0
+\rlap{\hbox to \wd0{\hss\scalebox{0.82}{$\Delta$}}}\box0
+}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\bra{\langle}{\rvert}
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
+\DeclarePairedDelimiterX\braket[2]{\langle}{\rangle}{#1 \delimsize\vert #2}
+
+\DeclareMathOperator{\Fib}{Fib}
+
+\newcommand*\centermathcell[1]{\omit\hfil$\displaystyle#1$\hfil\ignorespaces}
+\newcommand{\centermath}[1]{\par\centerline{\begin{minipage}{\linewidth}#1\end{minipage}}\par}
+
+
+
+
+
+
+
+
+
+% BEGIN FUSION STATE DIAGRAMS
+
+\makeatletter
+\newcounter{mycounter}
+\newcommand{\fs}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.5}
+    \def\offset{0.5}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid at (\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\value{mycounter}, \height) to (\value{mycounter}, 0);
+        }
+      }
+      \node at (\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\value{mycounter}+1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\value{mycounter}+0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
+\newcommand{\fswide}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{2}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
+\newcommand{\fswideflex}[4][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{#4}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\makeatletter
+\newcommand{\fswider}[3][]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \def\widthfactor{3}
+    \ifthenelse{\equal{#1}{}}{\def\height{1}}{} % Smaller height if no braiding
+    \setcounter{mycounter}{0}
+    \@for\el:=#2\do{
+      \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        \braid[width=\widthfactor cm, height=1.25 cm] at (\widthfactor*\value{mycounter},\height) s_1^{-1};
+        \stepcounter{mycounter}
+      }{
+        \stepcounter{mycounter}
+        \ifthenelse{\equal{#1}{\value{mycounter}}}{
+        }{
+          \draw (\widthfactor*\value{mycounter}, \height) to (\widthfactor*\value{mycounter}, 0);
+        }
+      }
+      \node at (\widthfactor*\value{mycounter}, \height+\offset) {$\el$};
+    }
+    \draw (0, 0) to (\widthfactor*\value{mycounter}+\widthfactor*1, 0);
+    \setcounter{mycounter}{0}
+    \@for\el:=#3\do{
+      \node at (\widthfactor*\value{mycounter} + \widthfactor*0.5, -0.6) {$\el$};
+      \stepcounter{mycounter}
+    }
+  \end{tikzpicture}
+}
+\makeatother
+
+\newcommand{\fsfused}[5]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \draw (0.5, 0) to (2.5, 0);
+    \draw (1, \height) to [bend left=-30] (1.5, 1);
+    \draw (2, \height) to [bend left=30] (1.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \node at (0.75, -0.6) {$#1$};
+    \node at (2.25, -0.6) {$#4$};
+    \node at (2, 0.7) {$#5$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfusedUp}[9]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \node at (0, 1.5+0.5) {$#1$};
+    \node at (1, 2.5+0.5) {$#2$};
+    \node at (2, 2.5+0.5) {$#3$};
+    \node at (3, 1.5+0.5) {$#4$};
+    \draw (-1, 0) to (4, 0); % horizontal
+    \draw (1, 2.5) to [bend left=-30] (1.5, 1.5);
+    \draw (2, 2.5) to [bend left=30]  (1.5, 1.5);
+    \draw (1.5, 1.5) to (1.5, 0); % vertical under bend
+    \draw (0,   1.5) to (0,   0); % vertical non-bend
+    \draw (3,   1.5) to (3,   0); % vertical non-bend
+    \node at (-0.75, -0.6) {$#5$};
+    \node at (0.75, -0.6) {$#6$};
+    \node at (2, 0.7) {$#7$};
+    \node at (2.25, -0.6) {$#8$};
+    \node at (3.75, -0.6) {$#9$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfuseddouble}[9]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{1.75}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \node at (3, \height+\offset) {$#6$};
+    \node at (4, \height+\offset) {$#7$};
+    \draw (0.5, 0) to (4.5, 0);
+    \draw (1, \height) to [bend left=-30] (1.5, 1);
+    \draw (2, \height) to [bend left=30]  (1.5, 1);
+    \draw (3, \height) to [bend left=-30] (3.5, 1);
+    \draw (4, \height) to [bend left=30]  (3.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \draw (3.5, 1) to (3.5, 0);
+    \node at (2,     0.5) {$#4$};
+    \node at (0.75, -0.6) {$#1$};
+    \node at (2.5,    -0.6) {$#5$};
+    \node at (4,     0.5) {$#8$};
+    \node at (4.25, -0.6) {$#9$};
+  \end{tikzpicture}
+}
+
+\newcommand{\fsfusedbraided}[5]{
+  \begin{tikzpicture}[scale=0.3,font=\footnotesize,anchor=mid,baseline={([yshift=-.5ex]current bounding box.center)}]
+    \def\height{3}
+    \def\offset{0.5}
+    \node at (1, \height+\offset) {$#2$};
+    \node at (2, \height+\offset) {$#3$};
+    \braid at (1, \height) s_1^{-1};
+    \draw (0.5, 0) to (2.5, 0);
+    \draw (1, 1.5) to [bend left=-30] (1.5, 1);
+    \draw (2, 1.5) to [bend left=30] (1.5, 1);
+    \draw (1.5, 1) to (1.5, 0);
+    \node at (0.5, -0.6) {$#1$};
+    \node at (2.5, -0.6) {$#4$};
+    \node at (2, 0.7) {$#5$};
+  \end{tikzpicture}
+}
+
+% END FUSION STATE DIAGRAM
