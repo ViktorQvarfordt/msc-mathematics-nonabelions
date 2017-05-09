@@ -13,7 +13,7 @@ Recall that the exchange operator is the representation of a simple exchange of 
 \end{equation}
 For fermions, this leads to the well known Pauli exclusion principle. Simply stated, if $x_1 = x_2$ it immediately follows that $\psi(x_1, x_1) = 0$, the particles cannot occupy the same position. More generally, the anti-symmetry of the fermionic wave function causes the kinetic energy to increase as the particles tend closer to each other. This is an effective repulsion due to the particle statistics. We shall now see this in more detail.
 
-Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be the coordinates of the particles, with $x_j \in \mathbb{R}^d$. This collection of particles are described by an $N$-particle wave-function $\psi(x_1, \ldots, x_N) \in L^2(\mathbb{R}^{dN})$, i.e.\ a square integrable complex-valued function on $\mathbb{R}^{dN}$. The kinetic energy $T$ of this system is defined as
+Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be the coordinates of the particles, with $x_j \in \mathbb{R}^d$. This collection of particles are described by an $N$-particle wave function $\psi(x_1, \ldots, x_N) \in L^2(\mathbb{R}^{dN})$, i.e.\ a square integrable complex-valued function on $\mathbb{R}^{dN}$. The kinetic energy $T$ of this system is defined as
 \begin{equation}
   T \coloneqq \sum_{j=1}^N \int_{\mathbb{R}^{dN}} |\nabla_j \psi|^2 dx.
 \end{equation}
@@ -21,7 +21,7 @@ Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be th
 Let the particles be fermions, i.e.\ $\psi \in L_\text{asym}^2(\mathbb{R}^{dN})$. This is the subspace of functions $\psi$ in $L^2(\mathbb{R}^{dN})$ such that $\psi(\ldots, x_j, \ldots, x_k, \ldots) = - \psi(\ldots, x_k, \ldots, x_j, \ldots)$ for $j \ne k$. The following theorem can then be shown. \cite{methmmp}
 
 \begin{theorem}[Many-body Hardy inequality for fermions]
-  In the described setting with $\psi$ being an $N$-particle wave-function, the following inequality for the kinetic energy holds
+  In the described setting with $\psi$ being an $N$-particle wave function, the following inequality for the kinetic energy holds
   \begin{equation}\label{eq:fermion ineq}
     \int_{\mathbb{R}^{dN}} \sum_{j=1}^N |\nabla_j \psi|^2 dx \ge
     \frac{d^2}{N} \int_{\mathbb{R}^{dN}} \sum_{j \le j < k \le N} \frac{|\psi|^2}{|x_j-x_k|^2} dx +
@@ -47,7 +47,7 @@ We give an outline of the proof.
       \nabla_{x_{jk}^\text{rel}} &\coloneqq \nabla_j - \nabla_k, & \nabla_{x_{jk}^\text{cm}} &\coloneqq \nabla_j + \nabla_k.
     \end{aligned}
   \end{equation}
-  It shall be useful to split the coordinates as $x = (x_j, x_k; x')$ where $x' \in \mathbb{R}^{d(N-2)}$ and $j < k$ fixed. Next, define the relative wave-function
+  It shall be useful to split the coordinates as $x = (x_j, x_k; x')$ where $x' \in \mathbb{R}^{d(N-2)}$ and $j < k$ fixed. Next, define the relative wave function
   \begin{equation}
     u(x^\text{rel}, x^\text{cm}) \coloneqq \psi(x_1, \ldots, x_j = X+r, \ldots, x_k = X-r, \ldots, x_N).
   \end{equation}
@@ -62,7 +62,7 @@ We give an outline of the proof.
     \end{aligned}
   \end{equation}
 
-  Finally, one shows, for fermionic wave-functions,
+  Finally, one shows, for fermionic wave functions,
   \begin{equation}
     \int_{\mathbb{R}^d} \left|\nabla_{x_{jk}^\text{rel}} u(x) \right|^2 dx_{jk}^\text{rel} \ge \frac{d^2}{4} \int_{\mathbb{R}^d} \frac{|u(x)|^2}{|x_{jk}^\text{rel}|^2} dx
   \end{equation}
@@ -92,7 +92,7 @@ to
 \begin{equation}
  \widehat{T}_A = \sum_{j=1}^N \left( -i \nabla_j + A_j \right)^2,
 \end{equation}
-where $A$ is a connection one-form on the bundle of which the wave-function is a section. See \cref{rem:fiber bundels}. The following example illustrates this.
+where $A$ is a connection one-form on the bundle of which the wave function is a section. See \cref{rem:fiber bundels}. The following example illustrates this.
 
 \begin{example}
   TODO skriv ner fr. tidigare anteckningar: Två abelska anyoner. Connection $A_j = \alpha \sum_{j \ne k} \frac{(x_j - x_k)^\perp}{|x_j-x_k|^2}$.
@@ -104,7 +104,7 @@ This principle allows us to easier work with anyonic wave function with general 
 \begin{equation}
   \psi_A(-x_{jk}^\text{rel}, x_{jk}^\text{cm}) = U \psi_A(x_{jk}^\text{rel}, x_{jk}^\text{cm}),
 \end{equation}
-by instead considering symmetric wave-functions, i.e.\
+by instead considering symmetric wave functions, i.e.\
 \begin{equation}
   \psi_0(-x_{jk}^\text{rel}, x_{jk}^\text{cm}) = \psi_0(x_{jk}^\text{rel}, x_{jk}^\text{cm}),
 \end{equation}
@@ -345,7 +345,7 @@ From this we have an immediate corollary for bosons ($\alpha = 0$) and fermions 
     e^{iλ π} = e^{i(1+2p)π} \iff λ = 1 + 2p + 2q, \quad q \in \mathbb{Z}
   \end{equation}
   Since $p$ is an integer, this shows that also fermions do not ``see'' the enclosed $p$ anyons.
-  However, the anyons in the pair do ``see'' each other, in the sense that the their wave-function changes sign after they have been exchanged, as expected. Finally, this also shows that fermions have a non-zero ground state energy $E_0 = 1$.
+  However, the anyons in the pair do ``see'' each other, in the sense that the their wave function changes sign after they have been exchanged, as expected. Finally, this also shows that fermions have a non-zero ground state energy $E_0 = 1$.
 \end{corollary}
 
 
@@ -361,7 +361,7 @@ From this we have an immediate corollary for bosons ($\alpha = 0$) and fermions 
 
 \section{Non-abelian anyons}
 
-Consider the same setting as above, with the distinction that the anyons are now non-abelian. That is, consider a pair of non-abelian anyons, with wave-function $\psi \in L^2(\mathbb{R}; \mathbb{C}^n)$ parametrized by the relative angle $\varphi$, such that the pair of anyons encloses $p$ fixed anyons as $\varphi$ increases from $0$ to $π$, giving rise to an anyonic phase $U_p \in U(n)$.
+Consider the same setting as above, with the distinction that the anyons are now non-abelian. That is, consider a pair of non-abelian anyons, with wave function $\psi \in L^2(\mathbb{R}; \mathbb{C}^n)$ parametrized by the relative angle $\varphi$, such that the pair of anyons encloses $p$ fixed anyons as $\varphi$ increases from $0$ to $π$, giving rise to an anyonic phase $U_p \in U(n)$.
 
 % From \cref{D spectrum} the boundary condition reads
 % \begin{equation}
