@@ -2,7 +2,7 @@
 
 \chapter{Statistical repulsion of anyons}\label{chap:statistical repulsion}
 
-This chapter is based on \cite{methmmp,lundholm-solovej,mancarella}. We give lower bounds for the kinetic energy of free anyons. This gives rise to what is known as statistical repulsion, an essentially geometric effect of the exchange operator that causes an effective repulsion of identical particles.
+This chapter is based on \cite{methmmp,lundholm-solovej,mancarella}. We give lower bounds for the kinetic energy of free anyons. This gives rise to what is known as statistical repulsion, an essentially geometric effect of the exchange operator that causes an effective repulsion of identical particles. This has consequences for the density of the wave function, and might thus be measured.
 
 
 \section{Fermionic statistical repulsion}
@@ -11,7 +11,7 @@ Recall that the exchange operator is the representation of a simple exchange of 
 \begin{equation}
   \psi(x_2, x_1) = \pm \psi(x_1, x_2).
 \end{equation}
-For fermions, this leads to the well known Pauli exclusion principle. Simply stated, if $x_1 = x_2$ it immediately follows that $\psi(x_1, x_1) = 0$, the particles cannot occupy the same state. More generally, the anti-symmetry of the fermionic wave causes the kinetic energy to increase as the particles tend closer to each other. This is an effective repulsion due to the particle statistics. We shall now see this in more detail.
+For fermions, this leads to the well known Pauli exclusion principle. Simply stated, if $x_1 = x_2$ it immediately follows that $\psi(x_1, x_1) = 0$, the particles cannot occupy the same position. More generally, the anti-symmetry of the fermionic wave function causes the kinetic energy to increase as the particles tend closer to each other. This is an effective repulsion due to the particle statistics. We shall now see this in more detail.
 
 Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be the coordinates of the particles, with $x_j \in \mathbb{R}^d$. This collection of particles are described by an $N$-particle wave-function $\psi(x_1, \ldots, x_N) \in L^2(\mathbb{R}^{dN})$, i.e.\ a square integrable complex-valued function on $\mathbb{R}^{dN}$. The kinetic energy $T$ of this system is defined as
 \begin{equation}
@@ -19,6 +19,7 @@ Consider $N$ identical particles on $\mathbb{R}^d$. Let $x_1, \ldots, x_N$ be th
 \end{equation}
 
 Let the particles be fermions, i.e.\ $\psi \in L_\text{asym}^2(\mathbb{R}^{dN})$. This is the subspace of functions $\psi$ in $L^2(\mathbb{R}^{dN})$ such that $\psi(\ldots, x_j, \ldots, x_k, \ldots) = - \psi(\ldots, x_k, \ldots, x_j, \ldots)$ for $j \ne k$. The following theorem can then be shown. \cite{methmmp}
+
 \begin{theorem}[Many-body Hardy inequality for fermions]
   In the described setting with $\psi$ being an $N$-particle wave-function, the following inequality for the kinetic energy holds
   \begin{equation}\label{eq:fermion ineq}

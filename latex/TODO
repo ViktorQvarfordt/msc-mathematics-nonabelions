@@ -1,8 +1,6 @@
-- Intro: Discuss statistical repulsion.
-- Fixa exemplet pseud-abelian.
-- Skriv ℋ = 𝐿²(ℝᵈᴺ;ℂⁿ)
-
+- Skriv ℋ = 𝐿²(𝒞ₙ;ℂᵏ) = 𝐿²(𝒞ₙ)⊗ℂᵏ
 - H = T + (V + W), T = ∑ 1/(2m) pⱼ²
+- Discussion of total hilbert space, separable into identical particles components or not.
 
 - Använd resultaten för U_p för att säga något om statistiken för nonabelions.
 
