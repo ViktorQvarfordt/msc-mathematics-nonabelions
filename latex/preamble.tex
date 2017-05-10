@@ -9,7 +9,6 @@
 \usepackage{unicode-latex} % https://github.com/ViktorQvarfordt/unicode-latex/blob/master/unicode-latex.sty
 %\usepackage[left=3.175cm, marginparwidth=2.825cm, marginparsep=3mm]{geometry}
 \usepackage{tikz}
-\usepackage{amsthm}
 \usepackage{braids}
 \usepackage{xifthen}
 \usepackage{datetime}
@@ -49,19 +48,32 @@
 
 %% Theorems
 
-\theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{corollary}[theorem]{Corollary}
+\usepackage{amsthm}
+\usepackage{thmtools}
 
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
-\newtheorem{example}{Example}[section]
-\AtEndEnvironment{example}{\hspace*{0pt}\hfill\ensuremath{\diamondsuit}}
+\declaretheorem[style=plain,numberwithin=section]{theorem}
+\declaretheorem[style=plain,sibling=theorem]{proposition}
+\declaretheorem[style=plain,sibling=theorem]{lemma}
+\declaretheorem[style=plain,sibling=theorem]{corollary}
 
-\theoremstyle{remark}
-\newtheorem{remark}{Remark}[section]
+\declaretheorem[style=definition,numberwithin=section]{definition}
+\declaretheorem[style=definition,qed=$\diamondsuit$,numberwithin=section]{example}
+\declaretheorem[style=definition,qed=$\triangle$,numberwithin=section]{remark}
+
+
+% \theoremstyle{plain}
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+
+% \theoremstyle{definition}
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{example}{Example}[section]
+% \AtEndEnvironment{example}{\hspace*{0pt}\hfill\ensuremath{\diamondsuit}}
+
+% \theoremstyle{remark}
+% \newtheorem{remark}{Remark}[section]
 
 
 %% Macros
@@ -84,9 +96,6 @@
 
 \newcommand*\centermathcell[1]{\omit\hfil$\displaystyle#1$\hfil\ignorespaces}
 \newcommand{\centermath}[1]{\par\centerline{\begin{minipage}{\linewidth}#1\end{minipage}}\par}
-
-
-
 
 
 

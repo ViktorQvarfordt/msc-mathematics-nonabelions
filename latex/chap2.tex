@@ -79,7 +79,7 @@ The flaw in this argument is essentially that double exchange need not return th
 \end{definition}
 
 \begin{definition}[Simple exchange]
-  A simple exchange is an exchange where exactly two particles have been exchanged exactly once.
+  A simple exchange is an exchange where exactly two particles have been exchanged exactly once. In the case $M=ℝ²$, i.e.\ $π₁(𝒞ₙ) = Bₙ$, the path of the simple exchange is the clockwise direction
 \end{definition}
 
 It is now clear that double exchange $P_γ²$ is trivial if and only if the loop given by traversing $γ$ twice is continuously deformable to the trivial loop, hence returning the state to the original state. As we shall now see, the configuration space need not have this property. This observation is originally due to \cite{leinaas myrheim} in 1976.
@@ -399,7 +399,7 @@ The braid group can be understood as representing (homotopically equivalent) bra
 
 We now define the braid representing exchange of two strands around $p$ fixed strands, which will play a key role when studying statistical repulsion of anyons in \cref{chap:statistical repulsion} and \cref{chap:anyonic braid repr}.
 
-\begin{definition}
+\begin{definition}\label{def:exchange braid}
   The exchange braid $Σₚ$ is the braid
   \begin{equation}
     Σₚ = σ₁σ₂⋯σₚσ_{p+1}σₚ⋯σ₂σ₁,
@@ -443,7 +443,7 @@ As we've seen, the representation of the fundamental group of the configuration 
 
 A representation $ρ:Bₙ→ℂᵏ$ of $Bₙ$ is determined by $ρ(σⱼ)$ for $j = 1,…,n-1$. If all generator representations commute we say that the representation is abelian. If $k = 1$ the representation is trivially abelian, since $U(1) = \{e^{iθ}:θ∈[0,2π)\}$ is an abelian group. In this case the possible representations are completely characterized by just one parameter $θ$.
 
-\begin{lemma}
+\begin{lemma}\label{res:abelian repr}
   A representation $ρ:Bₙ→ℂ$ is given by
   \begin{equation}
     ρ(σⱼ) = e^{iθ},
@@ -461,8 +461,8 @@ A representation $ρ:Bₙ→ℂᵏ$ of $Bₙ$ is determined by $ρ(σⱼ)$ for $
 
 All representations $ρ:B₁→ℂᵏ$ of $B₁$ are trivially abelian regardless of the dimension $k$, since there is just one generator $σ₁$. Higher-dimensional representations of $Bₙ$ are generally non-abelian, but not necessarily.
 
-\begin{example}[Higher-dimensional abelian representations] TODO REDO
-  Consider $n$ anyons, assume their statistics is determined by an abelian representation $ρ:Bₙ→Cᵏ$ with $k \ge 2$. Since all $ρ(σⱼ)$ commute they can be simultaneously diagonalized. That is, the representation is reducible and can be written as a direct sum of one-dimensional abelian representations, each acting on a separate one-dimensional sector of the Hilbert space $ℂᵏ$. No mixing occurs between these sectors. This situation essentially corresponds to having $k$ different non-interacting one-dimensional abelian anyons, each belonging to one of the sectors.
+\begin{example}[Higher-dimensional abelian representations]
+  Consider $n$ anyons, assume their statistics is determined by an abelian representation $ρ:Bₙ→Cᵏ$ with $k ≥ 2$. Since all $ρ(σⱼ)$ commute they can be simultaneously diagonalized. That is, the representation is reducible and can be written as a direct sum of one-dimensional abelian representations, each acting on a separate one-dimensional sector of the Hilbert space $ℂᵏ$. No mixing occurs between these sectors. This situation essentially corresponds to having $k$ different non-interacting one-dimensional abelian anyons, each belonging to one of the sectors.
 \end{example}
 
 In this example we saw how non-interacting sectors of the Hilbert space correspond to distinct particle types. This concept gives rise different particle types also in the non-abelian case. The following section discusses this in detail.
@@ -875,7 +875,7 @@ This thesis focuses primarily on the mathematical aspects of anyons, however, in
 
 Abelian anyons have been claimed to have been detected in the fractional quantum hall (FQH) effect \cite{abelian fqh}. These results are not unambiguous and total consensus does not exist in the scientific community. It is  Furthermore, it has only been conjectured that non-abelian anyons can be realized in FQH liquids at the filling fractions $\nu = 5/2$, where anyons known as the Ising anyons are thought to exist \cite{wang book}. Partial experimental results exist which support the existence of non-abelian anyons \cite{non-abelian experimental}. The Fibonacci anyon model which is studied in \cref{fibonacci anyons} has support from the topological quantum field theory $SU(2)₃$ Chern-Simons-Witten (CSW). \cite{nayak}
 
-There are different attempts to identify whether particles obey anyonic statistics. Interferometry methods have been developed, as in \cite{bonderson}. Another approach is to study the wave function density, as outlined in \cite{lundholm-rougerie,fractional angular momentum}. The benefit of using interferometry is that it is a direct way to identify braid statistics, while the wave function density is an indirect effect of the statistics. However, anyonic interferometry is in practice difficult to achieve, it can be argued that wave function density is easier to measure.
+There are different attempts to identify whether particles obey anyonic statistics. Interferometry methods have been developed, as in \cite{bonderson}. Another approach is to study the wave function density, as outlined in \cite{lundholm-rougerie,fractional angular momentum}. An unambiguous argument for abelian anyons in the context of FQH is given in \cite{lundholm-rougerie}. The benefit of using interferometry is that it is a direct way to identify braid statistics, while the wave function density is an indirect effect of the statistics. However, anyonic interferometry is in practice difficult to achieve, it can be argued that wave function density is easier to measure.
 
 In the literature one generally encounters two types of anyons.
 \begin{enumerate}
