@@ -14,7 +14,7 @@ A quantum system is generally determined by a Hamiltonian $\hat{H} = \hat{T} + \
 
 \section{Fermionic statistical repulsion}
 
-Recall that the exchange operator is the representation of a simple exchange of particles. In the case of bosons and fermions in $d ≥ 3$ dimensions the exchange operator is simply the identity and $-1$, respectively. That is,
+Recall that the exchange operator is the braid group representation of a simple exchange of particles. In the case of bosons and fermions in $d ≥ 3$ dimensions the exchange operator is simply the identity and $-1$, respectively. That is,
 \begin{equation}
   ψ(x_2, x₁) = \pm ψ(x₁, x_2).
 \end{equation}
@@ -37,7 +37,7 @@ Let the particles be fermions, i.e.\ $ψ ∈ L_\text{asym}^2(ℝ^{dn})$. This is
   \end{equation}
 \end{theorem}
 
-The first integral shows that fermionic particles have an inverse-squared pairwise effective repulsion. The second integral on the right hand side essentially gives the contribution of the motion of the center of mass.
+The first integral shows that fermionic particles have an inverse-squared pairwise effective repulsion. The second integral on the right-hand side essentially gives the contribution of the motion of the center of mass.
 
 We give an outline of the proof.
 
@@ -46,7 +46,7 @@ We give an outline of the proof.
   \begin{equation}
     ∑_{j=1}^n |∇ⱼ ψ|^2 = \frac{1}{n} ∑_{1 \le j < k \le n} \left| (∇ⱼ - ∇ₖ) ψ \right|^2 + \frac{1}{n} \left| ∑_{j=1}^n ∇ⱼ ψ \right|,
   \end{equation}
-  by expanding by expanding the expression, known as the many-body parallelogram identity. The last term sum to the center of mass motion and is not of interest. We focus on the first sum on the right hand side.
+  by expanding the expression, known as the many-body parallelogram identity. The last term sum to the center of mass motion and is not of interest. We focus on the first sum on the right-hand side.
 
   Introduce relative coordinates for each pair $(j,k)$ of particles,
   \begin{equation}
@@ -153,7 +153,7 @@ is precisely the integral we are considering. In the above calculation, the boun
     &= 0.
   \end{aligned}
 \end{equation}
-Similarly one shows that $D$ is self-adjoint. Thus, also $D²$ is self-adjoint, so the Rayleigh quotient of $D²$ can be used to obtain a lower bound by the min-max theorem,
+Similarly, one shows that $D$ is self-adjoint. Thus, also $D²$ is self-adjoint, so the Rayleigh quotient of $D²$ can be used to obtain a lower bound by the min-max theorem,
 \begin{equation}
   ∫₀^π |∂_φu|² dφ = ⟨u|D²|u⟩ ≥ \inf σ(D²) ≕ λ₀,
 \end{equation}
@@ -183,7 +183,7 @@ The spectrum of $D$ is straight forward to compute.
   i.e.\ $e^{iλπ}$ is an eigenvalue of $U_γ$.
 \end{proof}
 
-Thus we have a lower bound for the angular term, carrying the contribution of the anyonic statistics leading to statistical repulsion.
+Thus, we have a lower bound for the angular term, carrying the contribution of the anyonic statistics leading to statistical repulsion.
 
 \begin{theorem}\label{thm:inf spec bound}
   Anyons with exchange operator $U_γ$ satisfy the inequality
@@ -359,5 +359,5 @@ becomes problematic. In light of this, we must better understand how the non-abe
   \begin{equation}
     \det \left( (\det U)^{-1/k} U \right) = (\det U)^{-k/k} (\det U) = 1.
   \end{equation}
-  Write the abelian part as $e^{iφ}$, then $U = e^{iφ}U'$ with $\det U' = 1$. Varying the abelian phase $φ$ can be seen as shifting the eigenvalues of $U$ uniformly along the complex unit circle. In particular, with $U'$ diagonalized as $U' = \operatorname{diag}(e^{iθ₁}, …, e^{iθₖ})$, changing the abelian phase according to $e^{iφ} ↦ e^{-iθⱼ}$ gives $U$ a zero eigenvalue. Thus implying zero statistical repulsion. However, the abelian part can generally not be decoupled and controlled independently.
+  Write the abelian part as $e^{iφ}$, then $U = e^{iφ}U'$ with $\det U' = 1$. Varying the abelian phase $φ$ can be seen as shifting the eigenvalues of $U$ uniformly along the complex unit circle. In particular, with $U'$ diagonalized as $U' = \operatorname{diag}(e^{iθ₁}, …, e^{iθₖ})$, changing the abelian phase according to $e^{iφ} ↦ e^{-iθⱼ}$ gives $U$ a zero eigenvalue. Thus, implying zero statistical repulsion. However, the abelian part can generally not be decoupled and controlled independently.
 \end{remark}

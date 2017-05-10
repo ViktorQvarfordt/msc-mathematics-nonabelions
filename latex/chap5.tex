@@ -91,7 +91,7 @@ We shall now see how braid group representations arise in the fusion space $\wid
 
 \section{Braid group representations in \texorpdfstring{$\widetilde{V}_{t^n}$}{V\~\_(τⁿ)}}\label{sec:anyonic braid representations in fusion space}
 
-Each anyon model gives rise to representations of the braid group, the representations depend on the number of considered anyons and the possible charges sectors. In this and the following sections we give a detailed account of how braid group representations comes about in the framework of abstract anyon models. An account of the general theory of braid group representations, not necessarily arising from abstract anyon models, can be found in \cite{oskar}.
+Each anyon model gives rise to representations of the braid group, the representations depend on the number of considered anyons and the possible charges sectors. In this and the following sections we give a detailed account of how braid group representations aries in the framework of abstract anyon models. An account of the general theory of braid group representations, not necessarily arising from abstract anyon models, can be found in \cite{oskar}.
 
 Single out a non-trivial anyonic charge and consider the fusion space $\widetilde{V}_{t^n}$ with the standard basis. In this space we naturally have $n-1$ braid group generators by exchanging neighbouring $t$ anyons, we introduce the following notation.
 
@@ -382,7 +382,7 @@ Time reversal as charge conjugation is also simply manifested in the following l
 
 \section{Anyonic exchange operator \texorpdfstring{$Uₚ$}{Uₚ}}\label{sec:general Up}
 
-Given any abstract anyon model, single out a non-trivial anyonic charge $t$ and consider exchange of a pair of anyons around $p$ enclosed anyons. That is consider the fusion space $\widetilde{V}_{t^{p+2}}$.
+Given any abstract anyon model, single out a non-trivial anyonic charge $t$ and consider exchange of a pair of anyons around $p$ enclosed anyons. That is, consider the fusion space $\widetilde{V}_{t^{p+2}}$.
 
 In the standard basis of $\widetilde{V}_{t^n}$, we can compute the braid group generators $ρ_n(σ_j)$ for $j = 1, 2, \ldots, n-1$ as shown in \cref{sec:general braiding}. The exchange operator $U_p$ (as introduced in \cref{sec:braid group}) is then
 \begin{equation}
@@ -390,7 +390,7 @@ In the standard basis of $\widetilde{V}_{t^n}$, we can compute the braid group g
 \end{equation}
 c.f.\ \cref{fig:abelian Up}. However, working in the standard basis is rather problematic for computing $U_p$, instead we change basis.
 
-With the $F$ matrix we change basis from the standard basis to a basis where the enclosed $p$ anyons are fused. If $p = 2$ we have
+With the $F$ matrix we change basis from the standard basis to a basis where the enclosed $p$ anyons are fused. If $p = 2$ then we have
 \begin{equation}
   \fsfusedUp{t}{t}{t}{t}{a}{b}{c}{d}{e}
   =
@@ -712,11 +712,13 @@ Furthermore, in the fusion space $\widetilde{V}_{1^m}$ of the $\mathbb{Z}_N^{(n)
   \end{aligned}
 \end{equation}
 \Cref{thm:general Up} is clearly not needed in the abelian case, we instantly have all information of $U_p$. However, \cref{thm:general Up} still applies, first change basis to the fused basis
-\begin{gather*}
-  \fswideflex{1,1}{a,a+1,a+2}{3} \cdots \fswideflex{1,1}{a+p+1,a+p+2,a+p+3}{5} \\
-  \xmapsto{F}
-  \fswideflex{1,p,1}{a,a+1,a+p+1,a+p+2}{5}
-\end{gather*}
+\begin{equation}
+  \begin{gathered}
+    \fswideflex{1,1}{a,a+1,a+2}{3} \cdots \fswideflex{1,1}{a+p+1,a+p+2,a+p+3}{5} \\
+    \xmapsto{F}
+    \fswideflex{1,p,1}{a,a+1,a+p+1,a+p+2}{5}
+  \end{gathered}
+\end{equation}
 and \cref{thm:general Up} gives
 \begin{align}
   U_p \left( \fs{1,c,1}{a,b,d,e} \right) =
@@ -725,7 +727,7 @@ and \cref{thm:general Up} gives
   \sum_{h} \left( B_{at c}^g \right)_{hf}
   \fs{1,c,1}{a,h,g,e}.
 \end{align}
-As we've seen, the intermediate charges play no role, indeed the fusion space is one-dimensional. In the $\mathbb{Z}_N^{(n)}$model this expression for $U_p$ immediately reduces to
+As we've seen, the intermediate charges play no role, indeed the fusion space is one-dimensional. In the $\mathbb{Z}_N^{(n)}$-model, this expression for $U_p$ immediately reduces to
 \begin{align}
   U_p =
   R_{c1} R_{11} R_{1c} =

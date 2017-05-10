@@ -43,7 +43,7 @@ In conclusion, the state $\ket{\psi}$ is determined by two real parameters, $0 \
 
 \subsection{The Bloch sphere}
 
-The space of the two parameters determining a qubit is the Cartesian product of the interval $[0,1]$ representing the possible values for $a$, and the circle $[0,2\pi]$ with endpoints $0$ and $2\pi$ identified, representing the possible values for the relative phase $\beta - \alpha$. Thus we have a cylinder with the property that all points on the circles at $a = 0$ and $a = 1$, respectively, are identified, since the relative phase is non-physical at these points. The resulting space of physically distinguishable states is topologically equivalent to a sphere. This space is called the Bloch sphere, see \cref{fig:bloch sphere}. The Bloch sphere can be parametrized by spherical coordinates and every qubit state can be written uniquely as
+The space of the two parameters determining a qubit is the Cartesian product of the interval $[0,1]$ representing the possible values for $a$, and the circle $[0,2\pi]$ with endpoints $0$ and $2\pi$ identified, representing the possible values for the relative phase $\beta - \alpha$. Thus, we have a cylinder with the property that all points on the circles at $a = 0$ and $a = 1$, respectively, are identified, since the relative phase is non-physical at these points. The resulting space of physically distinguishable states is topologically equivalent to a sphere. This space is called the Bloch sphere, see \cref{fig:bloch sphere}. The Bloch sphere can be parameterized by spherical coordinates and every qubit state can be written uniquely as
 \begin{equation}
   \ket{\psi} = \cos(\theta/2) \ket{0} + e^{i\phi}\sin(\theta/2) \ket{1}
 \end{equation}
@@ -60,7 +60,7 @@ where $0 \le \theta \le \pi$ and $0 \le \phi < 2\pi$. This provides geometric in
 
 \subsection{Multi-qubit systems}
 
-Similarly we can define $d$-dimensional analogues of qubits, referred to as qudits, by
+We can define $d$-dimensional analogues of qubits, referred to as qudits, by
 \begin{equation}
   \ket{\psi} = a_1 e^{i\theta_1} \ket{0} + \ldots + a_d e^{i \theta_d} \ket{d}.
 \end{equation}
@@ -73,7 +73,11 @@ where we use the notation
   \ket{x_1x_2\cdots x_n} = \ket{x_1}\otimes\ket{x_2}\otimes\cdots\otimes\ket{x_n}.
 \end{equation}
 
-Note the striking difference between quantum and classical bits. The state of one classical bit is determined by one number ($0$ or $1$). The state of $n$ classical bits is determined by $n$ numbers (each $0$ or $1$), the number of parameters grows linearly. The state of one qubit is determined by two continuous parameters, the amplitude trade-off and the relative phase. The state of $n$ qubits is determined by $2^{n+1}-2$ continuous parameters, the term $-2$ is due to the fact that two parameters are fixed by normalization and the global phase. These parameters are the coefficients in the linear combination of basis states, the number of parameters grows exponentially. In conclusion, $n$ qubits can be seen as holding exponentially more information than classical bits. However, only $n$ classical bits can be read out from $n$ qubits, because a measurement collapses entanglement. This is an important consideration when designing quantum algorithms.
+Note the striking difference between quantum and classical bits:
+The state of one classical bit is determined by one number ($0$ or $1$).
+The state of one qubit is determined by two continuous parameters, the amplitude trade-off and the relative phase.
+The state of $n$ classical bits is determined by $n$ numbers (each $0$ or $1$), the number of parameters grows linearly.
+The state of $n$ qubits is determined by $2^{n+1}-2$ continuous parameters, the term $-2$ is due to the fact that two parameters are fixed by normalization and the global phase. These parameters are the coefficients in the linear combination of basis states, the number of parameters grows exponentially. In conclusion, $n$ qubits can be seen as holding exponentially more information than classical bits. However, only $n$ classical bits can be read out from $n$ qubits, because a measurement collapses entanglement. This is an important consideration when designing quantum algorithms.
 
 Quantum information can be entangled across qubits. As an example, consider the case of $n = 2$ qubits, the state
 \begin{equation}
@@ -96,7 +100,7 @@ for some Hamiltonian $H$, necessarily being Hermitian and $\ket{\psi(t)}$ an ele
 \begin{equation}
   \ket{\psi(t)} = e^{-iHt}\ket{\psi(0)}.
 \end{equation}
-Since every unitary matrix can be written on the form $e^{-iHt}$, we see that quantum states have unitary time evolution. Quantum computation is performed by taking an initial state $\ket{\psi}$, often $\ket{\psi} = \ket{00\cdots0}$, and unitarily evolving it by acting with a unitary operator $U$ on $\ket{\psi}$ to give a new state $U\ket{\psi}$. If the system consists of $n$ qubits, the unitary operator is an element of $U(2)^{\otimes n} = U(2^n)$, where $U(m)$ is the group of $m$-dimensional unitary matrices. Similarly, evolution of qudits is described by $U(d)$ matrices. Such a unitary action is achieved by appropriately manipulating the Hamiltonian $H$. How this happens in practice depends heavily on how the qubit system is implemented. In the case of ion traps, single qubit gates are performed by shooting a lase at the ion, and entanglement is established via electromagnetic couping. In the case of non-abelian anyons, quantum gates are implemented via braids, as we shall see in \cref{sec:computing with fibonacci}. Note that since unitary operators are invertible, quantum computation is necessarily reversible (provided that no wave function collapse occurs).
+Since every unitary matrix can be written on the form $e^{-iHt}$, we see that quantum states have unitary time evolution. Quantum computation is performed by taking an initial state $\ket{\psi}$, often $\ket{\psi} = \ket{00\cdots0}$, and unitarily evolving it by acting with a unitary operator $U$ on $\ket{\psi}$ to give a new state $U\ket{\psi}$. If the system consists of $n$ qubits, the unitary operator is an element of $U(2)^{\otimes n} = U(2^n)$, where $U(m)$ is the group of $m$-dimensional unitary matrices. Similarly, evolution of qudits is described by $U(d)$ matrices. Such a unitary action is achieved by appropriately manipulating the Hamiltonian $H$. How this happens in practice depends heavily on how the qubit system is implemented. In the case of ion traps, single qubit gates are performed by shooting a lase at the ion, and entanglement is established via electromagnetic coupling. In the case of non-abelian anyons, quantum gates are implemented via braids, as we shall see in \cref{sec:computing with fibonacci}. Note that since unitary operators are invertible, quantum computation is necessarily reversible (provided that no wave function collapse occurs).
 
 
 
@@ -115,7 +119,7 @@ and the tensor product (for multi-qubit systems) is computed as the Kronecker pr
   \begin{pmatrix} a \\ b \end{pmatrix} \otimes \begin{pmatrix} c \\ d \end{pmatrix}
   = \begin{pmatrix} ac \\ ad \\ bc \\ bd \end{pmatrix}.
 \end{equation}
-This can be repeated for any number of tensor products. Thus we represent quantum gates as matrices. Common single-qubit gates include the Pauli operators
+This can be repeated for any number of tensor products. Thus, we represent quantum gates as matrices. Common single-qubit gates include the Pauli operators
 \begin{equation}
   σₓ  = σ₀ = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
   σ_y = σ₁ = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad
@@ -156,7 +160,7 @@ Single-qubit cannot introduce entanglement, which is inherently a property of mu
     0 & 0 & 1 & 0
   \end{pmatrix} : \mathbb{C}^2 ⊗ \mathbb{C}^2 \to \mathbb{C}^2 ⊗ \mathbb{C}^2
 \end{equation}
-that acts on pairs of qubits, flipping the second qubit iff the first qubit is in the state $\ket{1}$, i.e.
+that acts on pairs of qubits, flipping the second qubit if and only if the first qubit is in the state $\ket{1}$, i.e.
 \begin{equation}
   \begin{aligned}
     \ket{00} \mapsto \ket{00},\quad &\quad \ket{10} \mapsto \ket{11}. \\
@@ -189,7 +193,7 @@ This can be seen as a controlled-controlled-$\begin{pmatrix}i\cos(\theta)&\sin(\
 
 \subsection{Quantum algorithms}
 
-One of the most well known quantum algorithms is Shor's algorithm for integer factorization. It runs exponentially faster than the fastest known classical factoring algorithm. Time complexity is essentially determined by the number of gates needed to perform the algorithm. It is worth noting that quantum and classical gates are physically very different. Many quantum algorithms, including Shor's, gain their exponential speedup from using the quantum Fourier transform (QFT). Because of this, the QFT will serve as a good example of how quantum algorithms work. We now describing the QFT in some detail.
+One of the most well-known quantum algorithms is Shor's algorithm for integer factorization. It runs exponentially faster than the fastest known classical factoring algorithm. Time complexity is essentially determined by the number of gates needed to perform the algorithm. It is worth noting that quantum and classical gates are physically very different. Many quantum algorithms, including Shor's, gain their exponential speedup from using the quantum Fourier transform (QFT). Because of this, the QFT will serve as a good example of how quantum algorithms work. We now describe the QFT in some detail.
 
 Define the $n$-qubit QFT on the basis states as
 \begin{equation}
@@ -320,7 +324,7 @@ This is clearly satisfied if $ρᴬ = \operatorname{tr}_B(ρ)$. Furthermore, it 
 
 \section{Topological quantum computation with Fibonacci anyons}\label{sec:computing with fibonacci}
 
-In this section we give an account based on  of how topological quantum computation can be achieved with Fibonacci anyons. For further information, see \cite{topological quantum compiling,kitaev fault-tolerant anyons,kauffman lomonaco,wang book,pachos book,asymptotical top compl,slingerland bais}.
+In this section we give an account of how topological quantum computation can be achieved with Fibonacci anyons. For further information, see \cite{topological quantum compiling,kitaev fault-tolerant anyons,kauffman lomonaco,wang book,pachos book,asymptotical top compl,slingerland bais}.
 
 \subsection{Topological qubits}
 
@@ -333,7 +337,7 @@ We define Fibonacci qubits by specifying the computational basis as
 \end{equation}
 That is, the computational basis state $\ket{0}$ is the fusion state where the first and second Fibonacci anyons fuse trivially, and computational basis state $\ket{1}$ is the fusion state where the first and second Fibonacci anyons fuse with anyonic charge $τ$. This also specifies how to read out data from such qubits; bring the first and second anyons close together to let them fuse and observe the resulting charge.
 
-In the literature, in particular \cite{topological quantum compiling}, another common notation replaces string diagrams with a special notations used specifically for Fibonacci anyons, fusion of two $τ$ anyons is represented by
+In the literature, in particular \cite{topological quantum compiling}, another common notation replaces string diagrams with a special notation used specifically for Fibonacci anyons, fusion of two $τ$ anyons is represented by
 \begin{equation}
   \begin{aligned}
     (•,•)_0 &\coloneqq \fsfused{}{τ}{τ}{}{1} = \fs{τ,τ}{1,τ,1}, \\
@@ -376,7 +380,7 @@ as shown in \cref{res:fibonacci qubit braiding}, where
     φe^{3πi/5} & - φ^{-1}
   \end{pmatrix}
 \end{equation}
-and $φ = (1+\sqrt{5})/2$ is the golden ratio. Sometimes one works with the mirror image of this model by substituting $e^{-4πi/5} \mapsto e^{4πi/5}$ and $e^{3πi/5} \mapsto e^{-3πi/5}$, these two models are essentially the same..Thus, in this setup there are essentially four single-qubit gates, $R$ and $B$ and their inverses $R^{-1}$ and $B^{-1}$. It is clear that the fusion space $V_{τ^3}^τ$ has the two braid group generators $σ_1 = R$ and $σ_2 = B$, making it clear that one can work with either one of these fusion spaces for Fibonacci qubits. Furthermore, this shows that braiding the fourth Fibonacci anyon gives nothing new, it suffices to work with $σ_1$ and $σ_2$.
+and $φ = (1+\sqrt{5})/2$ is the golden ratio. Sometimes one works with the mirror image of this model by substituting $e^{-4πi/5} \mapsto e^{4πi/5}$ and $e^{3πi/5} \mapsto e^{-3πi/5}$, these two models are essentially the same. Thus, in this setup there are essentially four single-qubit gates, $R$ and $B$ and their inverses $R^{-1}$ and $B^{-1}$. It is clear that the fusion space $V_{τ^3}^τ$ has the two braid group generators $σ_1 = R$ and $σ_2 = B$, making it clear that one can work with either one of these fusion spaces for Fibonacci qubits. Furthermore, this shows that braiding the fourth Fibonacci anyon gives nothing new, it suffices to work with $σ_1$ and $σ_2$.
 
 As discussed in \cref{sec:gates and universality}, in order to be able to perform general quantum computation the set of quantum gates must be universal. The set of quantum gates $\{R,R^{-1},B,B^{-1}\}$ for a Fibonacci qubit is indeed universal \cite{nayak,wang book,freedman kitaev larsen wang}. Thus, braiding of Fibonacci anyons is rich enough to model single qubits. However, not that the universality result only implies that there are braids that approximate any element of $SU(2)$ to arbitrary non-zero error. To achieve higher precision, longer braids are needed. It is not known if there exists a braid that exactly represents the Pauli $x$-matrix up to a global phase. \cite[sec. 1.5]{wang book}
 

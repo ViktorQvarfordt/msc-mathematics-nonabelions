@@ -174,7 +174,7 @@ and the fundamental group of this configuration space is given by
 \end{equation}
 where $Bₙ$ is the braid group on $n$ strands \cite{fröhlich,khare}.
 
-It is the occurrence of the braid group as the fundamental group for the configuration space for particles in $ℝ²$ that essentially motivate the study of anyons. In \cref{sec:braid group} we define and further discuss the braid group. We disregard other exotic possibilities for the underlying space $M$. For instance, the solid torus is a three-dimensional manifold with fundamental group $ℤ ≅ B₁$. However, this does not really correspond to free particles.
+It is the occurrence of the braid group as the fundamental group for the configuration space for particles in $ℝ²$ that essentially motivate the study of anyons. In \cref{sec:braid group}, we define and further discuss the braid group. We disregard other exotic possibilities for the underlying space $M$. For instance, the solid torus is a three-dimensional manifold with fundamental group $ℤ ≅ B₁$. However, this does not really correspond to free particles.
 
 Note that in $d=1$ dimensions, particle exchange of non-interacting particles cannot occur, the configuration space is not connected, it is separated by the removal of $\bbDelta$. In fact, the concept of identical particles is not meaningful in $d = 1$ dimensions, the particles can always be distinguished by which part of the configuration space they exist on, since no transitions can occur, given that particles do not interact. However, one can define generalized statistics by allowing interactions, this gives rise to a rich theory of particle statistics also in one dimension. \cite{polychronakos,myrheim}
 
@@ -507,11 +507,11 @@ Before discussing selection and superselection, we must introduce the concept of
 
 \subsection{Observables}\label{sec:global vs relative phase}
 
-Everything that can be measured in quantum mechanics is represented by self-adjoint (Hermitian) operators, called observables, acting on the Hilbert space in which the quantum states are defined. A measurement of an observable $A$ on a state $|ψ⟩$ gives exactly one of the eigenvalues $λₐ$ of $A$ (the eigenvalues may have multiplicity) and the resulting state $A|ψ⟩$ after measurement is the projection of $|ψ⟩$ onto the eigenspace corresponding to the measured eigenvalue $λₐ$. Since $A$ is Hermitian, the set of eigenvectors $\{|a⟩\}ₐ$ can be chosen as an orthonormal basis for the space Hilbert space that $A$ acts on. Thus we have a resolution of the identity
+Everything that can be measured in quantum mechanics is represented by self-adjoint (Hermitian) operators, called observables, acting on the Hilbert space in which the quantum states are defined. A measurement of an observable $A$ on a state $|ψ⟩$ gives exactly one of the eigenvalues $λₐ$ of $A$ (the eigenvalues may have multiplicity) and the resulting state $A|ψ⟩$ after measurement is the projection of $|ψ⟩$ onto the eigenspace corresponding to the measured eigenvalue $λₐ$. Since $A$ is Hermitian, the set of eigenvectors $\{|a⟩\}ₐ$ can be chosen as an orthonormal basis for the space Hilbert space that $A$ acts on. Thus, we have a resolution of the identity
 \begin{equation}
   I = ∑ₐ |a⟩⟨a|,
 \end{equation}
-where we assume the Hilbert space to be finite, for the sake of simplifying the discussion. Thus we can write $A$ in its eigenbasis
+where we assume the Hilbert space to be finite, for the sake of simplifying the discussion. Thus, we can write $A$ in its eigenbasis
 \begin{equation}
   A = ∑ₐ λₐ |a⟩⟨a|,
 \end{equation}
@@ -555,7 +555,7 @@ Let $|ψ⟩$ is a state of identical particles, then $P_γ|ψ⟩$ cannot be dist
 \begin{equation}
   ⟨ψ|A|ψ⟩ = ⟨ψ|P_γ^*AP_γ|ψ⟩ \quad\text{for all $P_γ$,}
 \end{equation}
-otherwise the observable $A$ could in principle be used to distinguish the particles. Thus we have the following result.
+otherwise the observable $A$ could in principle be used to distinguish the particles. Thus, we have the following result.
 
 \begin{lemma}
   If the fundamental group of the configuration space of identical particles is $Sₙ$, all observable of this system must be exchange invariant,
@@ -575,7 +575,7 @@ otherwise the particles would in principle be distinguishable.
 
 \subsection{Superselection}
 
-The obtained selection rules essentially state that the Hilbert space $ℋ$ of a quantum system can be decomposed as $ℋ = ⨂ⱼ ℋⱼ$ where each component $ℋⱼ$ is an invariant subspace for all exchange operators $P_γ$. Since any observable $A$ and $P_γ$ commute, also $A$ leaves these subspaces invariants.
+The obtained selection rules essentially state that the Hilbert space $ℋ$ of a quantum system can be decomposed as $ℋ = ⨂ⱼ ℋⱼ$ where each component $ℋⱼ$ is an invariant subspace for all exchange operators $P_γ$. Since any observable $A$ and $P_γ$ commute, also $A$ leaves these subspaces invariant.
 % Furthermore, $A$ and $U_γ$ and thus also for all observables $A$, since $P_γ$ and $A$ commute.
 % Furthermore, since $U_γ$ and $A$ commute, also $U_γ$ has $ℋⱼ$ as invariant subspaces.
 
@@ -602,7 +602,7 @@ Thus, with $|ψⱼ⟩ ∈ ℋⱼ$ and $|ψₖ⟩ ∈ ℋₖ$ and $j≠k$, we hav
 % TODO
 % for all observables $A$.
 %
-This is known as superselection, originally introduced by Wick, Wightman and Wigner \cite{wick-wightman-wigner}. The components $ℋⱼ$ of $ℋ$ are known as superselection sectors, or superselection charge sectors, since these sector can be interpreted as different particles types with different `charge'.
+This is known as superselection, originally introduced by Wick, Wightman and Wigner \cite{wick-wightman-wigner}. The components $ℋⱼ$ of $ℋ$ are known as superselection sectors, or superselection charge sectors, since these sectors can be interpreted as different particles types with different `charge'.
 
 An immediate consequence is that there can be no interference between states with different exchange symmetries, since the off-diagonal elements $⟨ψⱼ|A|ψₖ⟩$ of an observable $A$ represent the interference between $|ψⱼ⟩$ and $|ψₖ⟩$. To see this clearly, consider the (not normalized) state
 \begin{equation}
@@ -825,7 +825,7 @@ For general $U$ it is difficult to say much more than this. The dependence of th
   \end{equation}
 \end{example}
 
-This procedure can be straight-forward extended to let the the state $|ψ⟩$ represent more than two anyons, and thus allow the operator $\widetilde{U}$ to introduce a more complex braid. In this way, truly non-abelian properties of a larger system of anyons can in principle be probed.
+This procedure can be straight-forward extended to let the state $|ψ⟩$ represent more than two anyons, and thus allow the operator $\widetilde{U}$ to introduce a more complex braid. In this way, truly non-abelian properties of a larger system of anyons can in principle be probed.
 
 Other methods of anyonic interferometry is discussed in \cite{bonderson}. Note that as one anyon is taken around one or several other anyons, the introduced phase can only be measured after one full loop as been traversed and the phase can be compared to another anyon. Thus, it is not physical to say that the phase continuously (or in any other way) changes during the exchange. That is, how the phase is affected before the particles meet is non-physical, we are free to choose this as long as the choice respects the result of a complete winding of particles; this illustrates the gauge invariance of the anyonic phase during braiding.
 
@@ -873,7 +873,7 @@ Other methods of anyonic interferometry is discussed in \cite{bonderson}. Note t
 
 This thesis focuses primarily on the mathematical aspects of anyons, however, in this section we give a short account of possible physical realizations for anyons. This topic is further discussed in for instance \cite{nayak,topological quantum compiling,slingerland bais}.
 
-Abelian anyons have been claimed to have been detected in the fractional quantum hall (FQH) effect \cite{abelian fqh}. These results are not unambiguous and total consensus does not exist in the scientific community. It is  Furthermore, it has only been conjectured that non-abelian anyons can be realized in FQH liquids at the filling fractions $\nu = 5/2$, where anyons known as the Ising anyons are thought to exist \cite{wang book}. Partial experimental results exist which support the existence of non-abelian anyons \cite{non-abelian experimental}. The Fibonacci anyon model which is studied in \cref{fibonacci anyons} has support from the topological quantum field theory $SU(2)₃$ Chern-Simons-Witten (CSW). \cite{nayak}
+Abelian anyons have been claimed to have been detected in the fractional quantum hall (FQH) effect \cite{abelian fqh}. These results are not unambiguous and total consensus does not exist in the scientific community. Furthermore, it has only been conjectured that non-abelian anyons can be realized in FQH liquids at the filling fractions $\nu = 5/2$, where anyons known as the Ising anyons are thought to exist \cite{wang book}. Partial experimental results exist which support the existence of non-abelian anyons \cite{non-abelian experimental}. The Fibonacci anyon model which is studied in \cref{fibonacci anyons} has support from the topological quantum field theory $SU(2)₃$ Chern-Simons-Witten (CSW). \cite{nayak}
 
 There are different attempts to identify whether particles obey anyonic statistics. Interferometry methods have been developed, as in \cite{bonderson}. Another approach is to study the wave function density, as outlined in \cite{lundholm-rougerie,fractional angular momentum}. An unambiguous argument for abelian anyons in the context of FQH is given in \cite{lundholm-rougerie}. The benefit of using interferometry is that it is a direct way to identify braid statistics, while the wave function density is an indirect effect of the statistics. However, anyonic interferometry is in practice difficult to achieve, it can be argued that wave function density is easier to measure.
 
