@@ -260,76 +260,59 @@ As we have seen in \cref{anyon models}, an anyon model is determined by the corr
 
 \section{Determining the model: Computing the \texorpdfstring{$F$}{F} and \texorpdfstring{$R$}{R} matrices}
 
-TODO: Write down computation.
+As shown in \cref{res:F1}, the only non-trivial $F$-matrix is $F_{τττ}^τ$. Similarly the only non-trivial $R$-matrix is $R_{ττ}$. Indeed, $R_{τ1}$ and $R_{ττ}$ describes braiding of $τ$ with the vacuum $1$, i.e.\ there really is no braiding. To simplify the notation, we define $F ≔ F_{τττ}^τ$, and denote $F_1 = 1$ and $F_τ = F$.
 
-TODO: Discuss the free parameter in F that is fixed by gauge fixing. Preskill p. 60.
+The pentagon equation \ref{eq:pentagon} thus reduces to
+\begin{equation}
+  \left(F_c\right)_{da} \left(F_a\right)_{cb} = \sum_e \left(F_d\right)_{ce} \left(F_e\right)_{db} \left(F_b\right)_{ea}
+\end{equation}
+where $e$ ranges over the possible intermediate charges, determined by $a$, $b$, $c$ and $d$. Let $b=c=1$ and $a=d=τ$, then $e=τ$ and we have
+\begin{equation}\label{eq:reduced pentagon}
+  \begin{aligned}
+    \left(F_1\right)_{ττ} \left(F_τ\right)_{11} &= \left(F_τ\right)_{1τ} \left(F_τ\right)_{τ1} \left(F_1\right)_{ττ} \\
+                                    \iff F_{11} &= F_{1τ} F_{τ1}.
+  \end{aligned}
+\end{equation}
+Since $F$ is unitary, it is on the form
+\begin{equation}
+  F =
+  \begin{pmatrix}
+    ae^{iα} & be^{iβ} \\
+    e^{iθ}be^{-iβ} & -e^{iθ}ae^{i-α}
+  \end{pmatrix}
+\end{equation}
+for $α, β, θ ∈ [0,2π)$ and $a² + b² = 1$. Thus, \cref{eq:reduced pentagon} can be written as
+\begin{equation}
+  ae^{iα} = b².
+\end{equation}
+This immediately implies $α=0$ and
+\begin{equation}
+  a = b² = 1 - a² ⟹
+    \begin{cases}
+    a = φ^{-1} = \frac{√{5}-1}{2} \\
+    b = φ^{-1/2}
+  \end{cases}
+\end{equation}
+where $φ$ is the golden ratio. It turns out that $β$ is not fixed by the pentagon equation, but can be set to zero as a phase convention \cite{preskill}. Thus we have
+\begin{equation*}
+  F =
+  \begin{pmatrix}
+    φ^{-1} & φ^{-1/2} \\
+    φ^{-1/2} & -φ^{-1}
+  \end{pmatrix}.
+\end{equation*}
 
-TODO: Mention clockwise mapsto anticlockwise.
+Similarly, the hexagon equation \ref{eq:hexagon} reduces to
+\begin{equation}
+  R_{ττ}ᶜ F_{ca} R_{ττ}ᵃ = F_{c1} F_{1a} + F_{cτ} R_{ττ}τ F_{τa}
+\end{equation}
+which is solved by using the obtained value for $F$ as \cite{short intro fib}
+\begin{equation}
+  R_{ττ}¹ = e^{4πi/5}, \quad R_{ττ}^τ = e^{-3πi/5},
+\end{equation}
+or with the signs of the exponents reversed, corresponding to interchanging clockwise and anti-clockwise braiding.
 
-% The $F$-matrix is determined by solving the pentagon equation. This is in general highly non-trivial, but for the case of Fibonacci anyons this is rather straight forward. In order to simplify the calculations we make the observation that $F_{abc}^d = 1$, i.e.\ fusion acts trivially when there is just two non-trivial charges involved in the fusion. Thus, it remains to determine $F_{τττ}^1$ and $F_{τττ}^τ$. We make a second observation, namely
-% \begin{equation}
-%   (F_{τττ}^1)_{ab} = \delta_{aτ}\delta_{bτ},
-% \end{equation}
-% since $τ$ is the only allowed intermediate charge when three Fibonacci anyons fuse to the vacuum. Next
-
-% \cite[p. 389-390]{short intro fib} argues that the only non-trivial $F$-matrix is $F^{τττ}_τ \eqqcolon F$.
-% Since $F$ is unitary, $FF^* = I$, it can be written on the form
-% \begin{equation*}
-%   F = \begin{pmatrix} a & b \\ -e^{i\theta}b^* & e^{i\theta}a^* \end{pmatrix}
-% \end{equation*}
-% for $\theta \in [0, 2π)$ and $a, b \in \mathbb{C}$ such that $|a|^2 + |b|^2 = 1$.
-% Furthermore, $F$ is its own inverse. (This is clear from the diagrammatic representation of $F$, since reversing the order of fusion twice takes us back to the initial order of fusion. TODO: Show this from nPOV). Thus
-% \begin{equation*}
-%   F = F^*
-%   \iff
-%   \begin{pmatrix} a & b \\ -e^{i\theta}b^* & e^{i\theta}a^* \end{pmatrix}
-%   =
-%   \begin{pmatrix} a^* & -e^{-i\theta}b \\ b^* & e^{-i\theta}a^* \end{pmatrix}.
-% \end{equation*}
-% Equality for the first element shows that $a \in R$, equality for the second and third element give the same condition, namely $-e^{i\theta} = 1$, that is $\theta = π$. Finally, equality for the fourth element gives no more information. Thus,
-% \begin{equation*}
-%   F = \begin{pmatrix} a & b \\ b^* & -a \end{pmatrix}.
-% \end{equation*}
-% Let $F$ be expressed in the $\{1, τ\}$ basis, The pentagon equation then reduces to
-% \begin{equation*}
-%   F_{1,1} = F_{1,τ} F_{τ,1} \iff a = |b|^2 \quad (\implies a \ge 0).
-% \end{equation*}
-% The unitarity condition $|a|^2 + |b|^2 = 1$ thus reduces to
-% \begin{equation*}
-%   a^2 + a = 1, a \ge 0 \iff a = \varphi^{-1}
-% \end{equation*}
-% where $\varphi = \frac{1+\sqrt{5}}{2}$ is the golden ratio. Finally, $a = |b|^2 \implies b = e^{i\phi}\varphi^{-1/2}$, where the phase $\phi$ is arbitrary and by a suitable phase convention can be set to zero TODO: Why?. Hence
-% \begin{equation*}
-%   F = \begin{pmatrix} \varphi^{-1} & \varphi^{-1/2} \\ \varphi^{-1/2} & -\varphi^{-1} \end{pmatrix}
-% \end{equation*}
-
-
-% \hrule
-
-% The only non-trivial $F$-matrix is $F_{τττ}^τ$, which is two-dimensional. By considering the valid fusion channels for $F_{τττ}^1$,
-% \begin{equation}
-%   \fs{τ,τ}{τ,e,1} = \sum_f \left(F_{τττ}^1\right)_e^f \fsfused{τ}{τ}{τ}{1}{f}
-% \end{equation}
-% we see that only $e=f=τ$ correspond to valid fusions, thus $\left(F_{τττ}^1\right)_τ^τ$ acts trivially. With the same argument applied to the remaining $F$-matrices we obtain
-% \begin{alignat*}{100}
-%   % 1 =
-%   \left(F_{1ττ}^τ\right)_τ^τ &{}={}&
-%   \left(F_{τ1τ}^τ\right)_τ^τ &{}={}&
-%   \left(F_{ττ1}^τ\right)_τ^τ &{}=
-%   \\
-%   \left(F_{11τ}^τ\right)_1^τ &{}={}&
-%   \left(F_{1τ1}^τ\right)_τ^τ &{}={}&
-%   \left(F_{τ11}^τ\right)_τ^1 &{}=
-%   \\
-%   \left(F_{1ττ}^1\right)_τ^1 &{}={}&
-%   \left(F_{τ1τ}^1\right)_τ^τ &{}={}&
-%   \left(F_{ττ1}^1\right)_1^τ &{}=
-%   \\
-%   \left(F_{τττ}^1\right)_τ^τ &{}={}&
-%   \left(F_{111}^1\right)_1^1&=1\hspace{-2em}
-% \end{alignat*}
-% Other indices correspond to invalid fusions, and the corresponding $F$-matrices never show up in computations since there is no fusion state on which they act.
-
+In conclusion,
 \begin{equation}
   \begin{array}{r @{{}={}} c @{{}={}} c}
     R_{ττ} &
@@ -364,6 +347,13 @@ For convenience, when discussing Fibonacci anyons, let
     B \coloneqq F^{-1} R F.
   \end{aligned}
 \end{equation}
+
+
+
+
+
+
+
 
 
 
@@ -803,7 +793,7 @@ This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any 
 
 
 
-\section{Exchange operator \texorpdfstring{$Uₚ$}{Uₚ}}\label{sec:fibonacci Up}
+\section{Exchange operator \texorpdfstring{$Uₚ$}{Uₚ} and statistical repulsion}\label{sec:fibonacci Up}
 
 Consider the fusion space $\widetilde{V}_{τ^n}$ and exchange of a pair of anyons, $j$ and $k$, around $p$ enclosed anyons, $j+1, j+2, \ldots, k-1$.
 We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. As discussed in \cref{sec:anyonic braid representations in fusion space}, the dimension of the representation of the braid group depends on the number of considered anyons, in the case of Fibonacci anyons we saw in \cref{remark:fibonacci sigma dimension} that the dimension of $\widetilde{V}_{τ^n}$ increases as the Fibonacci numbers as $n$ increases. If considering a fusion space with more particles than what enters the represented braid, the braid operator will simply get repeated block. Thus, we shall represent $U_p$ in the fusion space $\widetilde{V}_{p+2}$. This is sufficient to compute the spectrum. Furthermore, representing $U_p$ in a higher-dimensional fusion space is in principle straight forward and described in full generality in \cref{sec:anyonic braid representations in fusion space}.
@@ -1003,25 +993,10 @@ Note that this expression is valid for all $p \ge 0$ since $\Fib(p)$ is defined 
   Since $U_p$ consists of repeated block, it suffices to compute the eigenvalues for each block, multiplied by the number of occurrences for each block to get the multiplicities. Note that $B = F^{-1}R F$ is similar to $R$. The multiplicity for $e^{i4π/5}$ is $2\Fib(p-1) + 3\Fib(p) = \Fib(p+3)$, the other multiplicities are straight forward.
 \end{proof}
 
-In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. The distance of the eigenvalues from $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two anyons has a higher corresponding kinetic energy than exchange of two anyons around $p \ge 1$ anyons. In particular $U_p$ for $p \ge 1$ has the eigenvalue $e^{\pm iπ/5}$ closest to $1$, corresponding to kinetic energy proportional to $λ^2 = (1/5)^2$.
 
-% We see that exchange of Fibonacci described by $U_p$ always corresponds to a non-zero kinetic energy, it is natural to ask if there are braids that do have zero energy. The following corollary positively answers this.
-
-% \begin{corollary}[Zero energy braid for Fibonacci anyons]
-%   With $U_p$ as in \cref{thm:fibonacci U_p} we have
-%   \begin{equation}
-%     \sigma\left( U_p^5 \right) = \{1,-1\}
-%   \end{equation}
-%   for all $p \ge 0$, by straight-forward computation. This shows that braiding a pair of Fibonacci anyons five times around any number of Fibonacci anyons behaves as both fermions and bosons simultaneously. In particular, the occurrence of the eigenvalue $1$ shows that the braid $U_p^5$ is a zero-energy braid, according to the discussion in \cref{chap:statistical repulsion}.
-% \end{corollary}
-
-% This can be seen as a consequence of the fact that $\left( R_{ττ}^1 \right)^5 = 1$ and $\left( R_{ττ}^τ \right)^5 = -1$.
-
-
-
-
-
-
+\begin{remark}[Consequences for statistical repulsion.]
+  In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. In essence, the eigenvalue of $Uₚ$ closest to $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two Fibonacci $τ$-anyons have a higher corresponding kinetic energy than exchange of two $τ$-anyons around $p \ge 1$ $τ$-anyons. In particular, for $p \ge 1$ the exchange operator $U_p$ has the eigenvalue $e^{±iπ/5}$ closest to $1$, corresponding to kinetic energy proportional to $λ^2 = (1/5)^2$. However, for this interpretation to be valid the wave function must adjust to minimize the energy in configurations of this type. This is a difficult problem, also for abelian anyons, see \cite{many-anyon trial states}.
+\end{remark}
 
 
 
@@ -1057,11 +1032,11 @@ Thus, fusion with $τ$ can be seen as a Markov process where the transition matr
     -λ & 1 \\
     1 & 1-λ
   \end{vmatrix} =
-  λ^2-λ-1 = 0 \iff \lambda = \frac{1±\sqrt{5}}{2} = φ, -φ^{-1}.
+  λ^2-λ-1 = 0 \iff \lambda = \frac{1±\sqrt{5}}{2} = φ \text{ or } {-φ^{-1}}.
 \end{align}
 Note the resemblance to the fusion rule, if we replace charge labels by the corresponding quantum dimension we get
 \begin{align}
-  τ × τ = 1 + τ \implies d_τ^2 = 1 + d_τ \iff d_τ = \frac{1±\sqrt{5}}{2} = φ, -φ^{-1}.
+  τ × τ = 1 + τ \implies d_τ^2 = 1 + d_τ \iff d_τ = \frac{1±\sqrt{5}}{2} = φ \text{ or } {-φ^{-1}}.
 \end{align}
 The eigenvectors of the Fibonacci matrix corresponding to eigenvalues $φ$ and $-φ^{-1}$ are
 \begin{align}
@@ -1074,75 +1049,9 @@ The eigenvectors of the Fibonacci matrix corresponding to eigenvalues $φ$ and $
 \end{align}
 respectively. This represent the steady state distribution of anyons of type $1$ and $τ$, corresponding to the first and second component respectively, in the limit of fusion with $\tau$ anyons an infinite number of times. The first eigenvector gives the first steady state. We read off the probabilities of getting $1$ or $\tau$ as a result from this infinite fusion as
 \begin{align}
-  P(1) = \frac{1}{1+φ} = φ^{-2}, \quad
-  P(τ) = \frac{φ}{1+φ} = φ^{-1}.
+  P(1) = \frac{1}{1+φ} = φ^{-2} ≈ 0.38, \quad
+  P(τ) = \frac{φ}{1+φ} = φ^{-1} ≈ 0.62.
 \end{align}
 The second eigenvector is non-physical, since it has a negative component.
 
 That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fact that the fusion space has no decomposition as a tensor product of subsystems. That is, the dimension of the fusion space does not increase by an integer factor when one more Fibonacci anyon is added, hence there is no part of the fusion space that can be factored out which describes one single particle. Indeed, if we have independent identical particles, such that each particle can be associated with a Hilbert space $h$, then the total Hilbert space of $n$ such particles is $\mathcal{H}_n = h^{⊗n}$ and the quantum dimension is simply $\frac{\dim \mathcal{H}_{n+1}}{\dim \mathcal{H}_n} = \dim h$. Thus, quantum information encoded in the fusion space is necessarily a collective property of all anyons. Furthermore, quantum information can be encoded in the non-abelian phase of the system, and we have seen that this anyonic phase is topological. This is the key observation motivating topological quantum computation, which we explore in the next chapter.
-
-
-% The quantum dimension can be immediately computed from the fusion rules. For the Fibonacci anyons we have the fusion rule
-% \begin{equation}
-%   τ \times τ = 1 + τ
-% \end{equation}
-% which gives the quantum dimension
-% \begin{equation}
-%   d_τ^2 = 1 + d_τ
-%   \, \implies \,
-%   d_τ = \varphi
-% \end{equation}
-% note that only the positive solution is meaningful. Furthermore, the trivial particle $1$ has quantum dimension $d_1 = 1$. Indeed, the corresponding fusion space $V_{1^n}^1$ does not grow in dimension as $n$ increases.
-
-% Using the quantum dimension, \cite{preskill} shows the following result.
-% \begin{proposition}\label{fusion probability}
-%   The probability $P(ab \to c)$ that anyons of type $a$ and $b$ fuse to an anyon of type $c$ is given by
-%   \begin{equation}
-%     P(ab \to c) = \frac{N_{ab}^c d_c}{d_a d_b}.
-%   \end{equation}
-% \end{proposition}
-
-% Consider fusion of $n$ Fibonacci $τ$ anyons. \Cref{fusion probability} together with $d_τ = \varphi$ and $d_1 = 1$ gives
-% \begin{equation}
-%   P(ττ \to τ) = \varphi^{-1}, \quad P(ττ \to 1) = \varphi^{-2}.
-% \end{equation}
-% We then have the probability of $n$ Fibonacci $τ$ anyons fusing to charge $τ$ given by the recursion relation
-% \begin{equation}
-%   P(τ^n \to τ)
-%   &= P(τ^{n-1} \to τ) P(τ τ \to τ) + P(τ^{n-1} \to 1) P(1τ \to τ) \\
-%   &= \varphi^{-1} P(τ^{n-1} \to τ) + P(τ^{n-1} \to 1) \\
-%   &= \varphi^{-1} P(τ^{n-1} \to τ) + P(τ^{n-2} \to τ) P(ττ \to 1) \\
-%   &= \varphi^{-1} P(τ^{n-1} \to τ) + \varphi^{-2} P(τ^{n-2} \to τ).
-% \end{equation}
-% With initial values $P(τ \to τ) = 1$ and $P(ττ \to τ) = \varphi^{-1}$ we get
-% \begin{equation}
-%   P(τ^n \to τ) = \Fib(n) \varphi^{1-n}.
-% \end{equation}
-% Using the closed form expression
-% \begin{equation}
-%   \Fib(n) = \frac{\varphi^n-(-\varphi)^{-n}}{\sqrt{5}}
-% \end{equation}
-% we get the limit
-% \begin{equation}
-%   \lim_{n\to\infty} P(τ^n \to τ) = \frac{\varphi}{\sqrt{5}} \approx 0.72
-% \end{equation}
-% and thus
-% \begin{equation}
-%   \lim_{n\to\infty} P(τ^n \to 1) \approx 0.28.
-% \end{equation}
-
-% julia
-% φ = (1+√5)/2
-% fib(n) = round(Int, φ^n/√5)
-% P(n) = fib(n)*φ^(1-n)
-% for n in 0:9 @printf("%s: %.4f\n", n, P(n)) end
-% @printf("∞: %.4f\n", φ/√5)
-
-
-% TODO: Can this be used to say anything more abut the eigenvalues of $U_p$? Some eigenvalues correspond to $c=1$, some correspond to $c=τ$, as we've now seen the latter case is more probable.
-
-
-
-% \section{$SU(2)_3 \cong SO(3)$}
-
-% See ``Topological Quantum Compiling, Section II''.

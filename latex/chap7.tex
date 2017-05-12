@@ -64,7 +64,7 @@ We can define $d$-dimensional analogues of qubits, referred to as qudits, by
 \begin{equation}
   \ket{\psi} = a_1 e^{i\theta_1} \ket{0} + \ldots + a_d e^{i \theta_d} \ket{d}.
 \end{equation}
-Similarly, classical bits can be generalized to computational units of $d$ states. However, the most common approach to have a larger computational space is to instead introduce additional qubits. The state space of a single qubit is Hilbert space $\mathbb{C}^2$, the state space of $n$ qubits is the Hilbert space $\mathcal{H}_n \cong (\mathbb{C}^2)^{\otimes n} \cong \mathbb{C}^{2n}$ and the basis states are
+Similarly, classical bits can be generalized to computational units of $d$ states. However, the most common approach to have a larger computational space is to instead introduce additional qubits. The state space of a single qubit is Hilbert space $\mathbb{C}^2$, the state space of $n$ qubits is the Hilbert space $ℋ_n \cong (\mathbb{C}^2)^{\otimes n} \cong \mathbb{C}^{2n}$ and the basis states are
 \begin{equation}
   |000⋯0⟩, |100⋯0⟩, |010⋯0⟩, |110⋯0⟩, |001⋯0⟩, …, |11⋯1⟩,
 \end{equation}
@@ -285,22 +285,20 @@ depending on if we represent the state as a vector or a density matrix. If this 
   (A|ψ⟩) (A|ψ⟩)^* = A|ψ⟩⟨ψ|A^* = A ρ A^*.
 \end{equation}
 
-Consider the composite system $\mathcal{H}_A ⊗ \mathcal{H}_B$ of subsystems $A$ and $B$, let $ρ$ be a density operator in the composite system. If we only have access to subsystem $A$, we only have information of the reduced density operator $ρᴬ$ defined as
+Consider the composite system $ℋ_A ⊗ ℋ_B$ of subsystems $A$ and $B$, let $ρ$ be a density operator in the composite system. If we only have access to subsystem $A$, we only have information of the reduced density operator $ρᴬ$ defined as
 \begin{equation}\label{eq:red dens op}
   ρᴬ = \operatorname{tr}_B(ρ),
 \end{equation}
-where $\operatorname{tr}_B(ρ)$ is the partial trace, tracing out subsystem $B$. It is the linear operator defined by
+where $\operatorname{tr}_B(ρ)$ is the partial trace, tracing out subsystem $B$. It is the unique linear operator defined by
 \begin{equation}
   \operatorname{tr}_B : \quad
   \begin{alignedat}{2}
-    L(\mathcal{H}_A &⊗ \mathcal{H}_B) &{}\to{}& L(\mathcal{H}_A) \\
-    R&⊗S &{}↦{}& R\operatorname{tr}(S),
+    L(ℋ_A &⊗ ℋ_B) &{}→{}& L(ℋ_A) \\
+    R     &⊗S      &{}↦{}& R\operatorname{tr}(S),
     % |a₁⟩⟨a₂|&⊗|b₁⟩⟨b₂| &{}↦{}& |a₁⟩⟨a₂|\operatorname{tr}(|b₁⟩⟨b₂|).
   \end{alignedat}
 \end{equation}
-where $L(V)$ is the space of linear operators on $V$. It can be shown
-% TODO
-that this uniquely defines the partial trace. The partial trace $\operatorname{tr}_A$ is defined analogously.
+where $L(V)$ is the space of linear operators on $V$. The partial trace $\operatorname{tr}_A$ is defined analogously.
 
 The reduced density operator $ρᴬ$ is defined as such because if we only have access to subsystem $A$, we can only make measurements corresponding to observables on the form $M⊗I$ where $M$ is any observable for subsystem $A$, leaving system $B$ invariant. The reduced density operator $ρᴬ$ must thus have the property
 \begin{equation}
@@ -382,12 +380,12 @@ as shown in \cref{res:fibonacci qubit braiding}, where
 \end{equation}
 and $φ = (1+\sqrt{5})/2$ is the golden ratio. Sometimes one works with the mirror image of this model by substituting $e^{-4πi/5} \mapsto e^{4πi/5}$ and $e^{3πi/5} \mapsto e^{-3πi/5}$, these two models are essentially the same. Thus, in this setup there are essentially four single-qubit gates, $R$ and $B$ and their inverses $R^{-1}$ and $B^{-1}$. It is clear that the fusion space $V_{τ^3}^τ$ has the two braid group generators $σ_1 = R$ and $σ_2 = B$, making it clear that one can work with either one of these fusion spaces for Fibonacci qubits. Furthermore, this shows that braiding the fourth Fibonacci anyon gives nothing new, it suffices to work with $σ_1$ and $σ_2$.
 
-As discussed in \cref{sec:gates and universality}, in order to be able to perform general quantum computation the set of quantum gates must be universal. The set of quantum gates $\{R,R^{-1},B,B^{-1}\}$ for a Fibonacci qubit is indeed universal \cite{nayak,wang book,freedman kitaev larsen wang}. Thus, braiding of Fibonacci anyons is rich enough to model single qubits. However, not that the universality result only implies that there are braids that approximate any element of $SU(2)$ to arbitrary non-zero error. To achieve higher precision, longer braids are needed. It is not known if there exists a braid that exactly represents the Pauli $x$-matrix up to a global phase. \cite[sec. 1.5]{wang book}
+As discussed in \cref{sec:gates and universality}, in order to be able to perform general quantum computation the set of quantum gates must be universal. The set of quantum gates $\{R,R^{-1},B,B^{-1}\}$ for a Fibonacci qubit is indeed universal \cite{nayak,wang book,freedman kitaev larsen wang}. Thus, braiding of Fibonacci anyons is rich enough to model single qubits. However, not that the universality result only implies that there are braids that approximate any element of $SU(2)$ to arbitrary non-zero error. To achieve higher precision, longer braids are needed. It is not known if there exists a braid that exactly represents the Pauli $x$-matrix up to a global phase. \cite[sec.\ 1.5]{wang book}
 
 
 \subsection{Topological multi-qubit systems}
 
-In order to perform general quantum computation we must be able to manipulate multiple qubits. The Hilbert space $\mathcal{H}_n$ of $n$ qubits is $2^n$-dimensional, therefore we must have a fusion space of at least $2^n$ dimensions in order to model $\mathcal{H}_n$. We shall not expect to find fusion spaces of exactly $2^n$ dimensions since the dimension of the fusion space $V_{τ^m}^1$ of $m$ Fibonacci anyons grow as the Fibonacci numbers with increasing $m$.
+In order to perform general quantum computation we must be able to manipulate multiple qubits. The Hilbert space $ℋ_n$ of $n$ qubits is $2^n$-dimensional, therefore we must have a fusion space of at least $2^n$ dimensions in order to model $ℋ_n$. We shall not expect to find fusion spaces of exactly $2^n$ dimensions since the dimension of the fusion space $V_{τ^m}^1$ of $m$ Fibonacci anyons grow as the Fibonacci numbers with increasing $m$.
 
 In order to implement two qubits, a fusion space of at least dimension four shall be needed. The smallest fusion space $V_{τ^m}^1$ with dimension at least four is
 \begin{equation}

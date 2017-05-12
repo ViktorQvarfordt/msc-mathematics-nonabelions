@@ -1,20 +1,6 @@
 % TRASH
 % This is kept only for future reference
 
-The statistics of quantum particles, essentially the corresponding exchange operator, can be modeled by changing the kinetic energy operator from
-\begin{equation}
- \widehat{T} = ∑_{j=1}^n -∇ⱼ^2
-\end{equation}
-to
-\begin{equation}
- \widehat{T}_A = ∑_{j=1}^n \left( -i ∇ⱼ + Aⱼ \right)^2,
-\end{equation}
-where $A$ is a connection one-form on the bundle of which the wave function is a section. See \cref{rem:fiber bundels}. The following example illustrates this.
-
-\begin{example}
-  TODO skriv ner fr. tidigare anteckningar: Två abelska anyoner. Connection $Aⱼ = α ∑_{j \ne k} \frac{(xⱼ - xₖ)^\perp}{|xⱼ-xₖ|^2}$.
-\end{example}
-
 FRÅGA: Finns det enkelt exempel på connection som ger icke-abelskta anyoner?
 
 This principle allows us to easier work with anyonic wave function with general with exchange operator $U$,
@@ -44,7 +30,7 @@ sen återgår vi till $ψ_A$ (här är jag förvirrad igen, exakt när och varf�
 \end{equation}
 vilket ger att det är spektrumet till $U$ som är relevant. Använd Poincare olikheten (5.16) \cite{methmmp}? Vilket är baktanken till resten av uppsatsen.
 
-TODO: Delar av diskussionen från gamla versionen nedan ska tas med, så som annulus, visa resultatet för abelska anyoner, och diskussionen om icke-abelska.
+% Delar av diskussionen från gamla versionen nedan ska tas med, så som annulus, visa resultatet för abelska anyoner, och diskussionen om icke-abelska.
 
 % To sum up, the kinetic energy operator can be written as
 % \begin{equation}
@@ -347,12 +333,5 @@ Next, we show that the abelian phase shifts the eigenvalues uniformly along the 
 \end{proof}
 
 % From this, the abelian part $e^{iαπ}$ of the anyonic phase $U_p ∈ U(n)$ can be seen as a shift of the eigenvalues $e^{iλπ}$ of $U_p$ along the complex unit circle, where $λ^2$ gives the energy of the system, as shown in figure \cref{fig: abelian phase shift}.
-
-% \begin{figure}
-%   \centering
-%   ∈cludegraphics[width=0.5\linewidth]{img/abelian-phase-shift.jpg}
-%   \caption{The shift of energy levels due to an abelian phase $α$ TODO it says theta.}
-%   \label{fig: abelian phase shift}
-% \end{figure}
 
 As we shall see in the following chapter, the exchange operator $U_p$ has a rather involved dependence on the particular type of non-abelian anyons that are considered. In order to characterize the energy bound, via the eigenvalues of $U_p$, we must first dive into the framework of abstract anyon models in order to characterize $U_p$.

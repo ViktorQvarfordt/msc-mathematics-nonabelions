@@ -19,8 +19,7 @@ Consider $n$ identical quantum mechanical particles. The state of the particles 
 \begin{equation}
   |ψ⟩ : 𝒞ₙ → h
 \end{equation}
-where $𝒞ₙ$ is the configuration space of the particles, and $h = ℂᵏ$ is the % TODO: the/a ?
-local Hilbert space of $k$ local internal degrees of freedom. The configuration space $𝒞ₙ$ is the space of possible spatial positions for the $n$ particles, it is given by
+where $𝒞ₙ$ is the configuration space of the particles, and $h = ℂᵏ$ is a local Hilbert space of $k$ local internal degrees of freedom. The configuration space $𝒞ₙ$ is the space of possible spatial positions for the $n$ particles, it is given by
 \begin{align}
   𝒞ₙ = \frac{Mⁿ - \bbDeltaₙ}{Sₙ}
 \end{align}
@@ -46,7 +45,7 @@ Consider exchange of $n$ identical particles with configuration space $𝒞ₙ$.
 
 In this way, each loop in $𝒞ₙ$ corresponds to a classical motion of the particles along world-lines starting and ending in the same configuration. The corresponding quantum mechanical dynamics is obtained by quantizing the system via the path integral formulation \cite{feynmann path integral,nakahara,feynmann path integrals indistinguishable particles,myrheim}. In this way, homotopically equivalent paths can be seen to give the same contribution. Thus, it is really the fundamental group $π₁(𝒞ₙ)$ of the configuration space that characterize fundamentally different particle exchanges. For more details on this, see \cite{configuration spaces,bonderson}.
 
-What is the resulting state after exchange? Most introductory texts on quantum mechanics give an unsatisfactory discussion of this, not taking the configuration space into account, thus not unraveling anyons.
+What is the resulting state after exchange? Most text books on quantum mechanics give an unsatisfactory discussion of this, not taking the configuration space into account, thus not unraveling anyons.
 
 \begin{example}[Incomplete view of particle exchange]\label{ex:crude exchange}
   The incomplete textbook approach is as follows. Let
@@ -272,7 +271,7 @@ To sum up:
 A representation of the braid group $Bₙ$ need not have the property that $ρ(P_γ)^2 = 1$, a simple example of this is $B₂ ≅ ℤ$ as computed in \cref{sec:conf sp 2 particles}. That is, the wave function need not be invariant under double exchange $P_γ²$. This is due to the non-trivial topology of the configuration space. It is essentially this observation that motivates the study of anyons.
 
 \begin{remark}
-  Let $P_γ$ be a simple exchange and assume $π₁(𝒞ₙ) = Sₙ$, we then have that bosons and fermions corresponds to the representations $ρ(P_γ) = 1$ and $ρ(P_γ) = -1$, respectively. In light of this, the question arises: What about other representations of $Sₙ$? As it turns out, the bosonic and fermionic representations are the only one-dimensional representations of $Sₙ$. However, there exists higher-dimensional representations of $Sₙ$. Particles obeying such exchange are sometimes called plektons and their statistics is known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom, in the framework of relativistic quantum field theory. \cite{fröhlich,doplicher}
+  Let $P_γ$ be a simple exchange and assume $π₁(𝒞ₙ) = Sₙ$, we then have that bosons and fermions corresponds to the representations $ρ(P_γ) = 1$ and $ρ(P_γ) = -1$, respectively. In light of this, the question arises: What about other representations of $Sₙ$? As it turns out, the bosonic and fermionic representations are the only one-dimensional representations of $Sₙ$. However, there exists higher-dimensional representations of $Sₙ$. Particles obeying such exchange are sometimes called plektons and their statistics is known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom, in the framework of relativistic quantum field theory. \cite{fröhlich,doplicher} Furthermore, the spin-statistics theorem relates particles statistics to intrinsic spin: Bosons have integer spin and fermions have half-integer spin. This is discussed in connection to anyons in \cite{nonperturbative}.
 \end{remark}
 
 Thus, if the underlying space is $ℝᵈ$ with $d ≥ 3$, there are fundamentally only two types of particle statistics. However, if the underlying space is $ℝ²$, the fundamental group $π₁(𝒞ₙ)$ is the braid group $Bₙ$ which has much richer representations than $Sₙ$, as we shall see in detail throughout this thesis. Furthermore, statistics arising from higher-dimensional representations of the braid group cannot be reduced to one-dimensional representations, unlike the case of $Sₙ$. \cite{fröhlich}
@@ -576,32 +575,12 @@ otherwise the particles would in principle be distinguishable.
 \subsection{Superselection}
 
 The obtained selection rules essentially state that the Hilbert space $ℋ$ of a quantum system can be decomposed as $ℋ = ⨂ⱼ ℋⱼ$ where each component $ℋⱼ$ is an invariant subspace for all exchange operators $P_γ$. Since any observable $A$ and $P_γ$ commute, also $A$ leaves these subspaces invariant.
-% Furthermore, $A$ and $U_γ$ and thus also for all observables $A$, since $P_γ$ and $A$ commute.
-% Furthermore, since $U_γ$ and $A$ commute, also $U_γ$ has $ℋⱼ$ as invariant subspaces.
 
 Thus, with $|ψⱼ⟩ ∈ ℋⱼ$ and $|ψₖ⟩ ∈ ℋₖ$ and $j≠k$, we have
 \begin{equation}
   ⟨ψⱼ|A|ψₖ⟩ = 0 = ⟨ψₖ|A|ψⱼ⟩.
 \end{equation}
-%
-% Let $|ψ₁⟩$ and $|ψ₂⟩$ be two states with different exchange symmetry, i.e.
-% \begin{equation}
-%   \begin{aligned}
-%     P_γ |ψ₁⟩ &= U_{1γ} |ψ₁⟩ \\
-%     P_γ |ψ₂⟩ &= U_{2γ} |ψ₂⟩
-%   \end{aligned}
-% \end{equation}
-% for $U_γ ≠ U'_γ$. Since any observable $A$ commutes with $P_γ$ we have
-% \begin{equation}
-%   ⟨ψ|AP_γ|ϕ⟩ = ⟨ψ|P_γA|ϕ⟩ ⟺ ⟨ψ|AU'_γ|ϕ⟩ = ⟨ψ|U_γA|ϕ⟩
-% \end{equation}
-% but we don't have the equality $AU'_γ = U_γA$ by assumption $U'_γ \ne U_γ$, thus we conclude that
-% \begin{equation}
-%   ⟨ψ|A|ϕ⟩ = 0
-% \end{equation}
-% TODO
-% for all observables $A$.
-%
+
 This is known as superselection, originally introduced by Wick, Wightman and Wigner \cite{wick-wightman-wigner}. The components $ℋⱼ$ of $ℋ$ are known as superselection sectors, or superselection charge sectors, since these sectors can be interpreted as different particles types with different `charge'.
 
 An immediate consequence is that there can be no interference between states with different exchange symmetries, since the off-diagonal elements $⟨ψⱼ|A|ψₖ⟩$ of an observable $A$ represent the interference between $|ψⱼ⟩$ and $|ψₖ⟩$. To see this clearly, consider the (not normalized) state
@@ -665,7 +644,7 @@ We shall now see how, in principle, the anyonic exchange operator $U$ of two any
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{img/exchange-interference-cropped.png}
-  \caption{Schematic of a quantum circuit to measure the exchange operator $U$ via interference. TODO: Fix $H ↦ I⊗H$ and rotate the final mirror.}
+  \caption{Schematic of a quantum circuit measuring the exchange operator $U$ via interference.}
   \label{fig:exchange interference}
 \end{figure}
 

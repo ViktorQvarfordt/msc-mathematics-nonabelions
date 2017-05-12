@@ -206,13 +206,12 @@ That is, the $F$-matrix is the change of basis matrix from the standard basis to
 The following lemma will be useful when computing the $F$-matrix.
 
 \begin{lemma}\label{res:F1}
-  Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e.\ $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$ and the corresponding $F$-matrix $F_{abc}^d$ is trivial. More explicitly we have
+  Consider the fusion space $V_{abc}^d$, when one of the particle types is trivial, i.e.\ $a,b,c$ or $d$ equals $1$, then $\dim V_{abc}^d = 1$, furthermore if $a,b$ or $c$ equals $1$, then the corresponding $F$-matrix $F_{abc}^d$ is trivial. Explicitly that is
   \begin{equation}
     \begin{aligned}
       F_{1bc}^d &= \left( F_{1bc}^d \right)_{bd} = 1, \\
       F_{a1c}^d &= \left( F_{a1c}^d \right)_{ac} = 1, \\
-      F_{ab1}^d &= \left( F_{ab1}^d \right)_{db} = 1, \\
-      F_{abc}^1 &= \left( F_{abc}^1 \right)_{\overline{c}\,\overline{a}} = 1.
+      F_{ab1}^d &= \left( F_{ab1}^d \right)_{db} = 1.
     \end{aligned}
   \end{equation}
 \end{lemma}
@@ -226,17 +225,19 @@ The following lemma will be useful when computing the $F$-matrix.
   Similarly, on the left hand side the final fusion reads $1 \times e = d$, implying $e = d$. Since the indices $e$ and $f$ are forced, this implicitly shows that the corresponding fusion spaces is one-dimensional. The other results follow analogously,
   \begin{equation}
     \begin{aligned}
-      % \fs{b,c}{a,e,d} &= \sum_f \left(F_{abc}^d \right)_{ef} \fsfused{a}{b}{c}{d}{f} \\
       \fsfused{a}{1}{c}{d}{e} &= \sum_f \left(F_{a1c}^d \right)_{fe} \fs{1,c}{a,f,d} \implies e = c, f = a, \\
-      \fsfused{a}{b}{1}{d}{e} &= \sum_f \left(F_{ab1}^d \right)_{fe} \fs{b,1}{a,f,d} \implies e = b, f = d, \\
-      \fsfused{a}{b}{c}{1}{e} &= \sum_f \left(F_{abc}^1 \right)_{fe} \fs{b,c}{a,f,1} \implies e = \overline{a}, f = \overline{c}.
+      \fsfused{a}{b}{1}{d}{e} &= \sum_f \left(F_{ab1}^d \right)_{fe} \fs{b,1}{a,f,d} \implies e = b, f = d.
     \end{aligned}
   \end{equation}
-  The result can also be realized by noting that three anyons of type $a, b$ and $c$, where one of them is the trivial type $1$, is uniquely determined by their total charge. Indeed, these three anyons are really just two, since the trivial particle $1$ fuses trivially, it can be added or removed in the representation without changing anything. Thus, the corresponding $F$ matrix must be trivial in this case. This is particularly clear if $b$ or $c$ equals $1$, we then have
+  The result can also be realized by noting that three anyons of type $a, b$ and $c$, where one of them is the trivial type $1$, is uniquely determined by their total charge. Indeed, these three anyons are really just two, since the trivial particle $1$ fuses trivially, it can be added or removed in the representation without changing anything. Thus, the corresponding $F$ matrix must be trivial in this case. In particular, if $c = 1$, then
   \begin{equation}
-    \fsfused{a}{1}{c}{d}{e} = \fsfused{a}{1}{c}{d}{c} = \fs{c}{a,d}
+    F_{a1c}ᵈ : \fs{b,1}{a,,d} ↦ \fsfused{a}{b}{1}{d}{}
   \end{equation}
-  and it is clear that no fusion can occur.
+  but
+  \begin{equation}
+    \fs{b,1}{a,,d} = \fs{b}{a,d} = \fsfused{a}{b}{1}{d}{}
+  \end{equation}
+  because the vacuum fuses trivially. Finally, the $F$-operator does a priori act non-trivially in these one-dimensional fusion spaces. However, one imposes the physical axiom that fusion and splitting with the vacuum is trivial. This can also be dealt with as a gauge choice in defining the standard basis states \cite{bonderson}.
 \end{proof}
 
 
@@ -360,8 +361,7 @@ As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have t
     \begin{aligned}
       B_{1bc}^d &= \left( B_{1bc}^d \right)_{bc} = R_{bc}^d, \\
       B_{a1c}^d &= \left( B_{a1c}^d \right)_{ad} = R_{1c}^c = 1, \\
-      B_{ab1}^d &= \left( B_{ab1}^d \right)_{da} = R_{b1}^b = 1, \\
-      B_{abc}^1 &= \left( B_{abc}^1 \right)_{\overline{c}\,\overline{b}} = R_{bc}^{\overline{a}}.
+      B_{ab1}^d &= \left( B_{ab1}^d \right)_{da} = R_{b1}^b = 1.
     \end{aligned}
   \end{equation}
 \end{lemma}
@@ -417,15 +417,18 @@ As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have t
 When considering an anyon model, it is ultimately the $B$ operator (braid operator) that describes how braiding affects the anyons. The $B$ operator gives the phase change introduced when braiding anyons. In the next chapter we shall explicitly see how the $B$ operator is used to characterize the braid group representation for anyon models. It is the braid group representation that is the relevant property both for the study the dynamics of anyons, but also for developing methods for quantum computation with anyons, known as topological quantum computation.
 
 We have seen that the $B$-matrix is computed from the $F$ and $R$-matrices. These matrices are in turn determined by what is known as the pentagon equation
+% \begin{equation}\label{eq:pentagon}
+%   \left(F_{12c}^5\right)^d_a \left(F_{a34}^5\right)^c_b = \left(F_{234}^d\right)^c_e \left( F_{1e4}^5 \right)^d_b \left( F_{123}^b \right)^e_a
+% \end{equation}
 \begin{equation}\label{eq:pentagon}
-  \left(F_{12c}^5\right)^d_a \left(F_{a34}^5\right)^c_b = \left(F_{234}^d\right)_c^c \left( F_{1e4}^5 \right)^d_b \left( F_{123}^b \right)^e_a
+  \left(F_{12c}^5\right)_{da} \left(F_{a34}^5\right)_{cb} = ∑ₑ\left(F_{234}^d\right)_{ce} \left( F_{1e4}^5 \right)_{db} \left( F_{123}^b \right)_{ea}
 \end{equation}
 and hexagon equation
 \begin{equation}\label{eq:hexagon}
-  % R_{13}^c \left(F_{213}^4\right)^c_a R_{12}^a = \sum_{b} \left(F_{231}^4\right)^c_b R_{1b}^4 \left(F_{123}^4\right)^b_a.
-  R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e = \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e.
+  R_{13}^c \left(F_{213}^4\right)_{ca} R_{12}^a = \sum_{b} \left(F_{231}^4\right)_{cb} R_{1b}^4 \left(F_{123}^4\right)_{ba}.
+  % R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e = \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e.
 \end{equation}
-In these equations, all indices are taken as arbitrary particle labels.
+In these equations, all indices are taken as arbitrary particle labels. \cite{preskill}
 
 These equations should be understood as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_space} and \cref{fig:pentagon_space,fig:hexagon_space} make the point clear, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
 \begin{equation}

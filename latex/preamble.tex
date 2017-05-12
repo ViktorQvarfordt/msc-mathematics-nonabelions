@@ -21,6 +21,15 @@
 % For unicode font in verbatim, this is the only think requiring use of xelatex in this document.
 \usepackage{fontspec}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\usepackage{minted}
+\usemintedstyle{mathematica}
+
+
+
+\usepackage{amssymb}
+\usepackage{mathbbol}
+\DeclareSymbolFontAlphabet{\mathbb}{AMSb}
+\DeclareSymbolFontAlphabet{\mathbbl}{bbold}
 
 
 % Check unused references
@@ -79,12 +88,13 @@
 %% Macros
 
 % \newcommand{\bbDelta}{{\mbox{$\Delta$}\hspace{-8.0pt}\scalebox{0.8}{$\Delta$}}}
-\def\bbDelta{{%
-\setbox0\hbox{$\Delta$}%
-% \rlap{\hbox to \wd0{\hss\scalebox{0.8}{$\Delta$}\hss}}\box0
-% \rlap{\hbox to \wd0{\scalebox{0.8}{$\Delta$}\hss}}\box0
-\rlap{\hbox to \wd0{\hss\scalebox{0.82}{$\Delta$}}}\box0
-}}
+% \def\bbDelta{{%
+% \setbox0\hbox{$\Delta$}%
+% % \rlap{\hbox to \wd0{\hss\scalebox{0.8}{$\Delta$}\hss}}\box0
+% % \rlap{\hbox to \wd0{\scalebox{0.8}{$\Delta$}\hss}}\box0
+% \rlap{\hbox to \wd0{\hss\scalebox{0.82}{$\Delta$}}}\box0
+% }}
+\newcommand{\bbDelta}{\mathbbl{\Delta}}
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
