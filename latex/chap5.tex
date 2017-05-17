@@ -89,11 +89,11 @@ We shall now see how braid group representations arise in the fusion space $\wid
 
 
 
-\section{Braid group representations in \texorpdfstring{$\widetilde{V}_{t^n}$}{V\~\_(τⁿ)}}\label{sec:anyonic braid representations in fusion space}
+\section{Braid group representations in the fusion space \texorpdfstring{$\widetilde{V}_{t^n}$}{V\~\_(τⁿ)}}\label{sec:anyonic braid representations in fusion space}
 
-Each anyon model gives rise to representations of the braid group, the representations depend on the number of considered anyons and the possible charges sectors. In this and the following sections we give a detailed account of how braid group representations aries in the framework of abstract anyon models. An account of the general theory of braid group representations, not necessarily arising from abstract anyon models, can be found in \cite{oskar}.
+Each anyon model gives rise to representations of the braid group, the representations depend on the number of considered anyons and the possible charge sectors. In this and the following sections we give a detailed account of how braid group representations arise in the framework of abstract anyon models. An account of the general theory of braid group representations, not necessarily arising from abstract anyon models, can be found in \cite{oskar}.
 
-Single out a non-trivial anyonic charge and consider the fusion space $\widetilde{V}_{t^n}$ with the standard basis. In this space we naturally have $n-1$ braid group generators by exchanging neighbouring $t$ anyons, we introduce the following notation.
+Single out a non-trivial anyonic charge and consider the fusion space $\widetilde{V}_{t^n}$ with the standard basis. In this space we naturally have $n-1$ braid group generators by exchanging neighbouring $t$ anyons and we introduce the following notation.
 
 \begin{definition}\label{def:rho_n sigma_j}
   The representation of the $j$:th braid group generator $σ_j$ in $\widetilde{V}_{t^n}$ is denoted $ρ_n(σ_j)$.
@@ -128,7 +128,7 @@ Written out explicitly, we have
     \vdots & \vdots & \ddots
   \end{pmatrix}
 \end{equation}
-where $(b_2)_j$ denotes the $j$:th allowed value for the intermediate charge $b_2$. The allowed values for $b_2$ depend on $b_1$ and $b_3$, in particular we must have that $b_1 \times (b_2)_j = b_3$ is a valid fusion. Note how the number of possible values for $b_2$ determine the dimension of $B_{b_1tt}^{b_3}$. This also implicitly assumes we have chosen and specific order for our basis.
+where $(b_2)_j$ denotes the $j$:th allowed value for the intermediate charge $b_2$. The allowed values for $b_2$ depend on $b_1$ and $b_3$, in particular we must have that $b_1 \times (b_2)_j = b_3$ is a valid fusion. Note how the number of possible values for $b_2$ determine the dimension of $B_{b_1tt}^{b_3}$. This also implicitly assumes we have chosen a specific order for our basis.
 
 Here we have expressed $ρ_2(σ_1)$ in the full basis of the fusion space $\widetilde{V}_{t^2}$ with basis elements
 \begin{equation}
@@ -154,7 +154,7 @@ This can also be understood by decomposing the fusion space as
 \end{equation}
 and realizing that $ρ_n(σ_1)$ acts only on the $V_{t^2}^c$ part of the space. However, in order to use this decomposition we must first use the $F$ operator to put the state in this fused state.
 
-In order for \cref{eq:rho_n sigma_n repr} to be valid, and for the blocks to not interweave, i.e.\ so that we don't have a situation like
+In order for \cref{eq:rho_n sigma_n repr} to be valid, and for the blocks to not interwoven, i.e.\ so that we don't have a situation like
 \begin{equation}
   ρ_n(σ_1) =
   \begin{pmatrix}
@@ -206,7 +206,7 @@ Finally, we verify that the obtained representation indeed satisfies the braid g
   It suffices to show that $ρ(σ_j)$ satisfies the braid group relations \cref{eq:braid relations}.
   \begin{enumerate}
     \item The first relation \cref{eq:braid relation 1} is trivially satisfied since the $B$ operator $B_{b_jtt}^{b_{j+2}}$ holds all labels fixed except $b_{j+1}$. Thus, for $\abs{j-k} \ge 2$ the free label of $ρ(σ_j)$ does not affect $ρ(σ_k)$ and vice versa.
-    \item The second relation \cref{eq:braid relation 2} requires the hexagon equation. Note that the commutativity forced by the hexagon equation \cref{fig:hexagon_diagram} implies the braid relation for trivial left charge sector. The case of non-trivial left charge sector is handled by using the $F$ operator to ``factor out'' the left charge sector, so that $\widetilde{V}_{t^3} = \bigoplus_{b_1, b_4} V_{b_1}^{b_{1}} \otimes V_{t^3}^{b_{4}}$ and use the hexagon equation on the $V_{t^3}^{b_{4}}$-part of the fusion space.
+    \item The second relation \cref{eq:braid relation 2} requires the hexagon equation \cref{eq:hexagon}. Note that the commutativity forced by the hexagon equation \cref{fig:hexagon_diagram} implies the braid relation for trivial left charge sector. The case of non-trivial left charge sector is handled by using the $F$ operator to ``factor out'' the left charge sector, so that $\widetilde{V}_{t^3} = \bigoplus_{b_1, b_4} V_{b_1}^{b_{1}} \otimes V_{t^3}^{b_{4}}$ and use the hexagon equation on the $V_{t^3}^{b_{4}}$-part of the fusion space.
   \end{enumerate}
 \end{proof}
 
@@ -235,9 +235,9 @@ Finally, we verify that the obtained representation indeed satisfies the braid g
 
 
 % \section{Braid group representations \texorpdfstring{$ρ(σ_j)$}{ρ(σⱼ)}: Braiding of general fusion states}\label{sec:general braiding}
-\section{Computing the braid group generators \texorpdfstring{$ρₙ(σⱼ)$}{ρₙ(σⱼ)}}\label{sec:general braiding}
+\section{Determining the braid group generators \texorpdfstring{$ρₙ(σⱼ)$}{ρₙ(σⱼ)}}\label{sec:general braiding}
 
-Consider the fusion space $V_{a_1 \cdots a_n}^c$ in a given anyon model, the representation $ρ(σ_j)$ gives the anyonic phase introduced to the total wave function when particles $a_j$ and $a_j+1$ are exchanged (counter)clockwise. Recall from \cref{chap:how anyons arise} that the braid group is generated by $σ_1, \ldots, σ_n$, thus it suffices to give expressions for $ρ(σ_j)$ in order to be able to compute any braid in a given anyon model.
+Consider the fusion space $V_{a_1 \cdots a_n}^c$ in a given anyon model, the representation $ρ(σ_j)$ gives the anyonic phase introduced to the total wave function when particles $a_j$ and $a_{j+1}$ are exchanged. Recall from \cref{chap:how anyons arise} that the braid group is generated by $σ_1, \ldots, σ_n$, thus it suffices to give expressions for $ρ(σ_j)$ in order to be able to compute any braid in a given anyon model.
 % Computing the representations $ρ(σ_j)$ of the generators in the general case will thus be of paramount importance.
 
 Before showing how $ρ(σ_j)$ is computed, we begin by making our notation slightly more flexible. Consider the fusion space $V_{a_1\ldots a_n}^c$. As we have seen, the fusion states are on the form
@@ -257,7 +257,7 @@ In the following results, we use the convention of representing braid operators 
   \begin{equation}
     ρ(σ_1)_{ij} = \delta_{ij} R_{a_1 a_2}^{j} \quad \iff \quad ρ(σ_1) = R_{a_1 a_2}
   \end{equation}
-  in the basis spanned by $b_1$. The indices $i,j$ range over the possible values for $b_1$, which essentially represent the basis elements of the reduced space $\langle b_1 \rangle$.
+  in the basis spanned by $b_1$. The indices $i$ and $j$ range over the possible values for $b_1$.
 \end{lemma}
 
 \begin{proof}
@@ -273,7 +273,7 @@ In the following results, we use the convention of representing braid operators 
 \end{proof}
 
 \begin{remark}\label{remark:abuse notation}
-  Above, $ρ(σ_1)$ is expressed in the basis for the reduced space $V_{a_1 a_2} = \bigoplus_{b_1} V_{a_1 a_2}^{b_1}$, having basis determined by the possible anyonic labels $b_1$. The full space $V_{a_1 \cdots a_n}^c$ has basis states $(b_1,\ldots,b_{n-2})$ and we implicitly used the operator on the space reduced to fusion states $(b_1)$.
+  Above, $ρ(σ_1)$ is expressed in the basis for the reduced space $V_{a_1 a_2} = \bigoplus_{b_1} V_{a_1 a_2}^{b_1}$, having basis determined by the possible anyonic labels $b_1$. The full space $V_{a_1 \cdots a_n}^c$ has basis states determined by all the possible intermediate labels $b_1,\ldots,b_{n-2}$ and we implicitly used the operator on the space reduced to fusion states with only $b_1$ as free intermediate charge.
 
   Extending $ρ(σ_1)$ to the full space is straight forward: In order to determine the action of $ρ(σ_1)$ on a given fusion state in the basis of the full fusion space it suffices to consider the action of $ρ(σ_1)$ on the labels $a_1$ and $a_2$ in the given fusion state. This information is precisely captured in the representation of $ρ(σ_1)$ in the reduced basis. This results in repeating blocks in the matrix representing $ρ(σ_1)$ when considering the basis of the full fusion space. This motivates the slight abuse of notation.
 
@@ -281,7 +281,7 @@ In the following results, we use the convention of representing braid operators 
 \end{remark}
 
 \begin{lemma}\label{res:sigma j is B}
-  In a general anyon model, consider the fusion space $V_{a_1\cdots a_n}^c$ with the standard basis $(b_1,\ldots,b_{n-1})$, then
+  In a general anyon model, consider the fusion space $V_{a_1\cdots a_n}^c$ with the standard basis with intermediate charges $b_1,\ldots,b_{n-1}$, then
   \begin{equation}
     ρ(σ_j) = \bigoplus_{b_{j-2},b_j} B_{b_{j-2} a_j a_{j+1}}^{b_j},
   \end{equation}
@@ -326,7 +326,7 @@ With the convention $b_{0} = a_1$ and $b_{-1} = 1$, \cref{res:sigma j is B} subs
 \end{proof}
 
 \begin{remark}
-  Note that $ρ(σ_1)$ and $ρ(σ_{n-1})$ are equal in the restricted basis, up to charge conjugation of the basis. Furthermore, note that if time is reversed, the roles of $ρ(σ_1)$ and $ρ(σ_j)$ are interchanged. Reversing the fusion in time means reading the fusion diagram from right/bottom to left/top. This is an example of time reversal symmetry; time reversal corresponds to charge conjugation, see \cite{nayak}.
+  Note that $ρ(σ_1)$ and $ρ(σ_{n-1})$ are equal in the restricted basis, up to charge conjugation of the basis. Furthermore, note that if time is reversed, the roles of $ρ(σ_1)$ and $ρ(σ_1)^{-1}$ are interchanged. Reversing the fusion in time means reading the fusion diagram from right/bottom to left/top. This is an example of time reversal symmetry; time reversal corresponds to charge conjugation, see \cite{nayak}.
 \end{remark}
 
 Time reversal as charge conjugation is also simply manifested in the following lemma, as a result of \cref{res:sigma 1 is R} and \ref{res:sigma n-1 is R}.
@@ -367,7 +367,7 @@ Time reversal as charge conjugation is also simply manifested in the following l
 
 
 
-\section{Exchange operator \texorpdfstring{$Uₚ$}{Uₚ}}\label{sec:general Up}
+\section{Determining the exchange operator \texorpdfstring{$Uₚ$}{Uₚ}}\label{sec:general Up}
 
 Given any abstract anyon model, single out a non-trivial anyonic charge $t$ and consider exchange of a pair of anyons around $p$ enclosed anyons. That is, consider the fusion space $\widetilde{V}_{t^{p+2}}$.
 
@@ -595,7 +595,7 @@ In this section we show how abelian anyons are modeled in the framework of abstr
 \end{equation}
 As a consequence of this we have that any fusion space of abelian anyons is trivial and one-dimensional. All intermediate charges are uniquely determined by the simple fusion rules.
 
-As a first example we shall see how fermionic statistics fits into the framework of abstract anyon models. In the computations, recall that $R_{ab}^c = R_{ba}^c$. In this section we deviate from our convention and denote the trivial particle by $0$ and positive integers denote non-trivial label, the reason being that fusion is defined as the sum of the labels.
+As a first example we shall see how bosonic and fermionic statistics fits into the framework of abstract anyon models. In the computations, recall that $R_{ab}^c = R_{ba}^c$. In this section we deviate from our convention and denote the trivial particle by $0$ and positive integers denote non-trivial label, the reason being that fusion is defined as the sum of the labels.
 
 \begin{example}[$\mathbb{Z}_2^{(n)}$]
   Let the set of anyonic charges be $\mathbb{Z}_2 = \{0, 1\}$, the trivial vacuum particle $0$ and one non-trivial particle $1$, with corresponding fusion corresponding to addition in $\mathbb{Z}_2$, in particular
@@ -615,7 +615,7 @@ As a first example we shall see how fermionic statistics fits into the framework
   \begin{equation}
     R_{ac}^{a+c} R_{ab}^{a+b} = R_{a,(b+c)}^{a+b+c}.
   \end{equation}
-  Since $R_{ab}^{a+b} = 1$ if $a$ or $b$ equals $0$. The only non-trivial case is
+  Since $R_{ab}^{a+b} = 1$ if $a$ or $b$ equals $0$, the only non-trivial case is
   \begin{equation}
     R_{11}^{0} R_{11}^{0} = 1 \quad \iff \quad R_{11}^{0} = ±1.
   \end{equation}

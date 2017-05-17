@@ -1,4 +1,5 @@
 %!TEX program = xelatex
+%!TEX options = -shell-escape
 %!TEX root = nonabelions.tex
 
 \documentclass[a4paper,oneside]{book}
@@ -16,14 +17,13 @@
 \usepackage{lastpage}
 \usepackage[section]{placeins}
 \usepackage[hidelinks,unicode=true]{hyperref}
-\usepackage{cleveref}
+\usepackage[capitalise]{cleveref}
 
 % For unicode font in verbatim, this is the only think requiring use of xelatex in this document.
 \usepackage{fontspec}
 \setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
 \usepackage{minted}
 \usemintedstyle{mathematica}
-
 
 
 \usepackage{amssymb}
@@ -61,6 +61,7 @@
 \usepackage{thmtools}
 
 \declaretheorem[style=plain,numberwithin=section]{theorem}
+\declaretheorem[style=plain,numbered=no,name=Theorem]{theorem*}
 \declaretheorem[style=plain,sibling=theorem]{proposition}
 \declaretheorem[style=plain,sibling=theorem]{lemma}
 \declaretheorem[style=plain,sibling=theorem]{corollary}
@@ -108,6 +109,10 @@
 \newcommand{\centermath}[1]{\par\centerline{\begin{minipage}{\linewidth}#1\end{minipage}}\par}
 
 
+\usepackage{newunicodechar}
+\newunicodechar{𝟙}{\ifmmode%
+\mathbbl{1}\else%
+𝟙\fi}
 
 
 

@@ -4,7 +4,7 @@
 
 The Fibonacci anyon model is one of the simplest non-abelian anyon models containing all the interesting features of non-abelian anyons. It is commonly studied as a prototypical example of non-abelian anyons. Another common model is the Ising model, however Ising anyons cannot be used for general quantum computation.
 
-Fibonacci anyons can be realized in the $k=3$ Reed-Rezayi state \cite{topological quantum compiling}, cf. \cref{sec:models and realizability}. In this state there will be additional abelian phases present, which do not occur in the model that we shall describe in this chapter. These additional abelian phases may have physical consequences for some experiments, but they are not of interest for the higher-dimensional non-abelian representation, which is what we are primarily interested in. In the context of conformal field theory the Fibonacci model is called the Yang-Lee model.
+The Fibonacci anyon model which is studied in \cref{fibonacci anyons} has support from the topological quantum field theory $SU(2)₃$ Chern-Simons-Witten (CSW) \cite{nayak,topological quantum compiling}. In this state there will be additional abelian phases present, which do not occur in the model that we shall describe in this chapter. These additional abelian phases may have physical consequences for some experiments, but they are not of interest for the higher-dimensional non-abelian representation, which is what we are primarily interested in.
 
 This chapter is partly based on \cite{preskill,topological quantum compiling,short intro fib}. The literature is rather vague on deriving the properties of Fibonacci anyons, in this chapter we spelled out the details more clearly.
 
@@ -133,7 +133,7 @@ The following result determines the number $f_n$.
 We can now use this to characterize the dimension of fusion spaces.
 
 \begin{lemma}\label{lemma:fibonacci fusion space dimension}
-  The dimension of the fusion space with $n$ Fibonacci, with different charge sectors, is given by
+  The dimension of the fusion space with $n$ Fibonacci with different charge sectors is given by
   \begin{equation}
     \begin{aligned}
       \dim V_{τ^n}^1 &= \Fib(n-1) \\
@@ -157,7 +157,7 @@ We can now use this to characterize the dimension of fusion spaces.
   \begin{equation}
     \begin{aligned}
       \dim V_{τ^n}
-      =& \dim V_{τ^n}^1 \oplus V_{τ^n}^τ \\
+      =& \dim \left( V_{τ^n}^1 \oplus V_{τ^n}^τ \right) \\
       =& \dim V_{τ^n}^1 + \dim V_{τ^n}^τ \\
       =& \Fib(n-1) + \Fib(n) \\
       =& \Fib(n+1).
@@ -242,7 +242,7 @@ i.e.\
 \begin{equation}
   \tau^n = \Fib(n-1) 1 + \Fib(n) \tau.
 \end{equation}
-This counts the dimension of the fusion spaces $V_{\tau^n}^1$ and $V_{\tau^n}^\tau$, respectively, in a agreement with \cref{lemma:fibonacci fusion space dimension}.
+This counts the dimension of the fusion spaces $V_{\tau^n}^1$ and $V_{\tau^n}^\tau$, respectively, in agreement with \cref{lemma:fibonacci fusion space dimension}.
 
 
 As we have seen in \cref{anyon models}, an anyon model is determined by the corresponding $F$- and $R$-matrices. We continue determining these operators for the case of Fibonacci anyons.
@@ -260,9 +260,13 @@ As we have seen in \cref{anyon models}, an anyon model is determined by the corr
 
 \section{Determining the model: Computing the \texorpdfstring{$F$}{F} and \texorpdfstring{$R$}{R} matrices}
 
-As shown in \cref{res:F1}, the only non-trivial $F$-matrix is $F_{τττ}^τ$. Similarly the only non-trivial $R$-matrix is $R_{ττ}$. Indeed, $R_{τ1}$ and $R_{ττ}$ describes braiding of $τ$ with the vacuum $1$, i.e.\ there really is no braiding. To simplify the notation, we define $F ≔ F_{τττ}^τ$, and denote $F_1 = 1$ and $F_τ = F$.
+As a consequence of \cref{res:F1}, the only non-trivial $F$-matrix is $F_{τττ}^τ$ and $F_{τττ}^τ$. Similarly the only non-trivial $R$-matrix is $R_{ττ}$. Indeed, $R_{τ1}$ and $R_{1τ}$ describes braiding of $τ$ with the vacuum $1$, i.e.\ there really is no braiding. To simplify the notation, we define $F_τ ≔ F_{τττ}^τ$ and $F₁ ≔ F_{τττ}¹$. The latter is one dimensional, $F₁ = \left(F₁\right)_{ττ}$, because the only allowed intermediate charge $e$ in the corresponding fusion diagram
+\begin{equation}
+  \fs{τ,τ}{τ,e,1}
+\end{equation}
+is $e = τ$. Next, it follows from the pentagon equation \ref{eq:pentagon} that $\left(F_1\right)_{ττ} = 1$.
 
-The pentagon equation \ref{eq:pentagon} thus reduces to
+To determine $F_τ$, note that the pentagon equation \ref{eq:pentagon} thus reduces to
 \begin{equation}
   \left(F_c\right)_{da} \left(F_a\right)_{cb} = \sum_e \left(F_d\right)_{ce} \left(F_e\right)_{db} \left(F_b\right)_{ea}
 \end{equation}
@@ -273,9 +277,9 @@ where $e$ ranges over the possible intermediate charges, determined by $a$, $b$,
                                     \iff F_{11} &= F_{1τ} F_{τ1}.
   \end{aligned}
 \end{equation}
-Since $F$ is unitary, it is on the form
+We choose $F_τ$ to be unitary, thus it is on the form
 \begin{equation}
-  F =
+  F_τ =
   \begin{pmatrix}
     ae^{iα} & be^{iβ} \\
     e^{iθ}be^{-iβ} & -e^{iθ}ae^{i-α}
@@ -295,7 +299,7 @@ This immediately implies $α=0$ and
 \end{equation}
 where $φ$ is the golden ratio. It turns out that $β$ is not fixed by the pentagon equation, but can be set to zero as a phase convention \cite{preskill}. Thus we have
 \begin{equation*}
-  F =
+  F_τ =
   \begin{pmatrix}
     φ^{-1} & φ^{-1/2} \\
     φ^{-1/2} & -φ^{-1}
@@ -306,14 +310,14 @@ Similarly, the hexagon equation \ref{eq:hexagon} reduces to
 \begin{equation}
   R_{ττ}ᶜ F_{ca} R_{ττ}ᵃ = F_{c1} F_{1a} + F_{cτ} R_{ττ}τ F_{τa}
 \end{equation}
-which is solved by using the obtained value for $F$ as \cite{short intro fib}
+which is solved by using the obtained value for $F_τ$ as \cite{short intro fib}
 \begin{equation}
   R_{ττ}¹ = e^{4πi/5}, \quad R_{ττ}^τ = e^{-3πi/5},
 \end{equation}
 or with the signs of the exponents reversed, corresponding to interchanging clockwise and anti-clockwise braiding.
 
 In conclusion,
-\begin{equation}
+\begin{equation}\label{eq:fib F R}
   \begin{array}{r @{{}={}} c @{{}={}} c}
     R_{ττ} &
     \begin{pmatrix}
@@ -340,9 +344,9 @@ In conclusion,
 \end{equation}
 
 For convenience, when discussing Fibonacci anyons, let
-\begin{equation}
+\begin{equation}\label{eq:fib F R B}
   \begin{aligned}
-    F \coloneqq F_{τττ}^τ, &&
+    F \coloneqq F_{τττ}, &&
     R \coloneqq R_{ττ}, &&
     B \coloneqq F^{-1} R F.
   \end{aligned}
@@ -379,7 +383,7 @@ in particular
     V_{ττ}^1    = \operatorname{span} \left\{ \fs{τ,τ}{1,τ,\boldsymbol{1}} \right\}, \quad
     V_{ττ}^τ = \operatorname{span} \left\{ \fs{τ,τ}{1,τ,\boldsymbol{τ}} \right\}.
   \end{equation}
-  That is, the fusion space $V_{τ^2}$ is two-dimensional and we denote the ordered basis by $\{1, τ\}$. Since there is only two $τ$-anyons, there are only one generator for the braid group, $σ_1$. We compute $ρ(σ_1)$ by considering its action on the standard fusion states,
+  That is, the fusion space $V_{τ^2}$ is two-dimensional and we denote the ordered basis by $\{1, τ\}$. Since there is only two $τ$-anyons, there is only one generator for the braid group, $σ_1$. We compute $ρ(σ_1)$ by considering its action on the standard fusion states,
   \begin{equation}
     \begin{aligned}
       ρ(σ_1) \fs{τ,τ}{1,τ,1}    &= \fs[1]{τ,τ}{1,τ,1}    = R_{ττ}^1    \fs{τ,τ}{1,τ,1} \\
@@ -468,43 +472,43 @@ in particular
 
 
 \begin{example}[Braiding in $V_{τ^4}^1$]
-  Consider $V_{τ^4}^1$, this is the smallest non-trivial proper fusion space having dimension two. The fusion space is proper in the sense that the there is only one charge sector and it is the trivial (vacuum) charge sector. That is, there are really only $4$ Fibonacci anyons. The following result determines the braid group representation determined by exchange of Fibonacci anyons in the standard basis of $V_{τ^4}^1$. This shall be used in the discussion of topological quantum computation with Fibonacci anyons in \cref{sec:computing with fibonacci}.
-
-  \begin{proposition}\label{res:fibonacci qubit braiding}
-    The representation of the braid group generators determined by $V_{τ^4}^1$ in the standard basis is
-    \begin{equation}
-      ρ(σ_1) = R,\quad
-      ρ(σ_2) = B,\quad
-      ρ(σ_3) = R.
-    \end{equation}
-  \end{proposition}
-
-  \begin{proof}
-    \Cref{res:sigma 1 is R} gives
-    \begin{equation}
-      ρ(σ_1) = B_{1ττ}^{τ} = R_{ττ} =
-      \begin{pmatrix}
-        R_{ττ}^1 & 0 \\
-        0 & R_{ττ}^τ
-      \end{pmatrix}.
-    \end{equation}
-    \Cref{res:sigma j is B} gives
-    \begin{equation}
-      ρ(σ_2)_{ij} = \left( B^τ_{τττ} \right)_{ij} = \sum_f \left( \left(F^{-1}\right)_{τττ}^τ \right)_{fi} R_{ττ}^f \left( F_{τττ}^τ \right)_{jf}
-    \end{equation}
-    i.e.
-    \begin{equation}
-      ρ(σ_2) = F^{-1} R F \eqqcolon B.
-    \end{equation}
-    Finally, \cref{res:sigma n-1 is R} gives
-    \begin{equation}
-      ρ(σ_3)_{ij} = \delta_{ij} R_{ττ}^{\overline{j}}
-      \implies
-      ρ(σ_3) = R_{ττ}
-    \end{equation}
-    since $τ$ is its own antiparticle, $\overline{τ} = τ$.
-  \end{proof}
+  Consider $V_{τ^4}^1$, this is the smallest non-trivial proper fusion space, having dimension two. The fusion space is proper in the sense that the there is only one charge sector and it is the trivial (vacuum) charge sector. That is, there are really only $4$ Fibonacci anyons. The following result determines the braid group representation by exchange of Fibonacci anyons in the standard basis of $V_{τ^4}^1$. This shall be used in the discussion of topological quantum computation with Fibonacci anyons in \cref{sec:computing with fibonacci}.
 \end{example}
+
+\begin{proposition}\label{res:fibonacci qubit braiding}
+  The representation of the braid group generators determined by $V_{τ^4}^1$ in the standard basis is
+  \begin{equation}
+    ρ(σ_1) = R,\quad
+    ρ(σ_2) = B,\quad
+    ρ(σ_3) = R.
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  \Cref{res:sigma 1 is R} gives
+  \begin{equation}
+    ρ(σ_1) = B_{1ττ}^{τ} = R_{ττ} =
+    \begin{pmatrix}
+      R_{ττ}^1 & 0 \\
+      0 & R_{ττ}^τ
+    \end{pmatrix}.
+  \end{equation}
+  \Cref{res:sigma j is B} gives
+  \begin{equation}
+    ρ(σ_2)_{ij} = \left( B^τ_{τττ} \right)_{ij} = \sum_f \left( \left(F^{-1}\right)_{τττ}^τ \right)_{fi} R_{ττ}^f \left( F_{τττ}^τ \right)_{jf}
+  \end{equation}
+  i.e.
+  \begin{equation}
+    ρ(σ_2) = F^{-1} R F \eqqcolon B.
+  \end{equation}
+  Finally, \cref{res:sigma n-1 is R} gives
+  \begin{equation}
+    ρ(σ_3)_{ij} = \delta_{ij} R_{ττ}^{\overline{j}}
+    \implies
+    ρ(σ_3) = R_{ττ}
+  \end{equation}
+  since $τ$ is its own antiparticle, $\overline{τ} = τ$.
+\end{proof}
 
 
 
@@ -517,7 +521,7 @@ Recall the discussion of charge sectors from \cref{sec:charge sectors}. Since we
 
 \begin{example}[Braiding in $\widetilde{V}_{τ^2}$]\label{res:general fibonacci braiding 2}
   % Consider $V_{τ^n}^1$ with the standard basis. Restrict attention to a pair of neighbouring $τ$ anyons. That is, we restrict attention to a part of the space with basis
-  The fusion space $\widetilde{V}_{τ^2}$ has standard
+  The fusion space $\widetilde{V}_{τ^2}$ has standard basis
   \begin{equation}
     \left\{
       \text{valid intermediate charges $abc$ in } \fs{τ,τ}{a,b,c}
@@ -767,11 +771,11 @@ This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any 
 \end{theorem}
 
 \begin{proof}
-  From \cref{res:braid generator conjugate} we have that the all braid group generators $σ_j$ are conjugate, this translates to that the corresponding representations $ρ_n(σ_j)$ are similar for fixed $n$. That is, for fixed $n$ there exists an invertible matrix $S$ such that
+  From \cref{res:braid generator conjugate} we have that the all braid group generators $σ_j$ are conjugate, this translates to that the corresponding representations $ρ_n(σ_j)$ are similar for fixed $n$. That is, for fixed $n$ there exists an invertible matrix $A$ such that
   \begin{equation}
-    ρ_n(σ_{j+1}) = S ρ_n(σ_j) S^{-1}.
+    ρ_n(σ_{j+1}) = A ρ_n(σ_j) A^{-1}.
   \end{equation}
-  (In particular we have $S = ρ_n(σ_j) ρ_n(σ_{j+1})$ from the proof of \cref{res:braid generator conjugate}.) Thus, the eigenvalues of $ρ_n(σ_j)$ are independent of $j$. Fix $j = 1$, the representation $ρ_n(σ_1)$ of $σ_1$ acts on $\widetilde{V}_{τ^n}$ with basis elements
+  (In particular we have $A = ρ_n(σ_j) ρ_n(σ_{j+1})$ from the proof of \cref{res:braid generator conjugate}.) Thus, the eigenvalues of $ρ_n(σ_j)$ are independent of $j$. Fix $j = 1$, the representation $ρ_n(σ_1)$ of $σ_1$ acts on $\widetilde{V}_{τ^n}$ with basis elements
   \begin{equation}
     \fswide{\tau,\tau}{b_1,b_2,b_3} \cdots \fswide{\tau,\tau}{b_{n-1},b_n,b_{n+1}}.
   \end{equation}
@@ -779,7 +783,7 @@ This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any 
   \begin{equation}
     \fswide{\tau,\tau}{b_1,b_2,b_3}
   \end{equation}
-  that $ρ_n(σ_1)$ acts on. Thus, as discussed in \cref{remark:abuse notation}, as $n$ increases the matrix $ρ_n(σ_1)$ increases and gets repeated block. These repeated blocks give no new eigenvalues (but give increased multiplicity for the existing eigenvalues). Thus, the spectrum of $ρ_n(σ_1)$ is independent of $n$, not counting multiplicities.
+  that $ρ_n(σ_1)$ acts on. Thus, as discussed in \cref{remark:abuse notation}, as $n$ increases the matrix $ρ_n(σ_1)$ increases and gets repeated blocks. These repeated blocks give no new eigenvalues (but give increased multiplicity for the existing eigenvalues). Thus, the spectrum of $ρ_n(σ_1)$ is independent of $n$, not counting multiplicities.
 
   To sum up, the spectrum of $ρ_n(σ_j)$, not counting multiplicities, is independent of both $n$ and $j$. Thus, we can compute the spectrum from the special case $ρ_2(σ_1)$, computed in \cref{res:general fibonacci braiding 2}.
 \end{proof}
@@ -796,7 +800,7 @@ This can be continued to compute $ρ_n(σ_j)$ in $\widetilde{V}_{τ^n}$ for any 
 \section{Exchange operator \texorpdfstring{$Uₚ$}{Uₚ} and statistical repulsion}\label{sec:fibonacci Up}
 
 Consider the fusion space $\widetilde{V}_{τ^n}$ and exchange of a pair of anyons, $j$ and $k$, around $p$ enclosed anyons, $j+1, j+2, \ldots, k-1$.
-We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. As discussed in \cref{sec:anyonic braid representations in fusion space}, the dimension of the representation of the braid group depends on the number of considered anyons, in the case of Fibonacci anyons we saw in \cref{remark:fibonacci sigma dimension} that the dimension of $\widetilde{V}_{τ^n}$ increases as the Fibonacci numbers as $n$ increases. If considering a fusion space with more particles than what enters the represented braid, the braid operator will simply get repeated block. Thus, we shall represent $U_p$ in the fusion space $\widetilde{V}_{p+2}$. This is sufficient to compute the spectrum. Furthermore, representing $U_p$ in a higher-dimensional fusion space is in principle straight forward and described in full generality in \cref{sec:anyonic braid representations in fusion space}.
+We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to compute $U_p$ for general $p$ for Fibonacci anyons. As discussed in \cref{sec:anyonic braid representations in fusion space}, the dimension of the representation of the braid group depends on the number of considered anyons, in the case of Fibonacci anyons we saw in \cref{remark:fibonacci sigma dimension} that the dimension of $\widetilde{V}_{τ^n}$ increases as the Fibonacci numbers as $n$ increases. If considering a fusion space with more particles than what enters the represented braid, the braid operator will simply get repeated blocks. Thus, we shall represent $U_p$ in the fusion space $\widetilde{V}_{p+2}$. This is sufficient to compute the spectrum. Furthermore, representing $U_p$ in a higher-dimensional fusion space is in principle straight forward and described in full generality in \cref{sec:anyonic braid representations in fusion space}.
 
 \begin{theorem}\label{thm:fibonacci U_p}
   Exchange of a pair of $τ$ anyons around $p$ enclosed $τ$ anyons introduces a non-abelian anyonic phase $U_p$, given by
@@ -925,8 +929,7 @@ We shall use \cref{sec:general Up}, in particular \cref{thm:general Up}, to comp
 
 We now have an explicit expression for the exchange operator $U_p$, allowing us to compute the spectrum for $U_p$.
 
-\begin{corollary}
-
+\begin{corollary}\label{res:Up fib}
   The eigenvalues of $U_p$ for Fibonacci anyons are
   \begin{equation}
       \sigma(U_p) =
@@ -937,26 +940,29 @@ We now have an explicit expression for the exchange operator $U_p$, allowing us 
         e^{-iπ/5}  &\text{\rm with multiplicity }\,\; 3\Fib(p), \\
         e^{-i3π/5} &\text{\rm with multiplicity }\,\; 3\Fib(p-1)
       \end{array}
-      \right\}.
+      \right\},
   \end{equation}
-
-  \begin{center}
-    \begin{tikzpicture}[scale=2]
-      \draw[->] (-1.25,0) -- (1.25,0) node[below] {Re};
-      \draw[->] (0,-1.25) -- (0,1.25) node[right] {Im};
-      \draw (0,0) circle (1);
-      \node[font=\large] at ({cos(deg(pi/5))}, {sin(deg(pi/5))}) {$\bullet$};
-      \node at ({cos(deg(pi/5))+0.3}, {sin(deg(pi/5))+0.15}) {$e^{iπ/5}$};
-      \node[font=\large] at ({cos(-deg(pi/5))}, {sin(-deg(pi/5))}) {$\bullet$};
-      \node at ({cos(-deg(pi/5))+0.3}, {sin(-deg(pi/5))-0.15}) {$e^{-iπ/5}$};
-      \node[font=\large] at ({cos(deg(4*pi/5))}, {sin(deg(4*pi/5))}) {$\bullet$};
-      \node at ({cos(deg(4*pi/5))-0.2}, {sin(deg(4*pi/5))+0.15}) {$e^{i4π /5}$};
-      \node[font=\large] at ({cos(-deg(3*pi/5))}, {sin(-deg(3*pi/5))}) {$\bullet$};
-      \node at ({cos(-deg(3*pi/5))-0.15}, {sin(-deg(3*pi/5))-0.25}) {$e^{-3iπ/5}$};
-    \end{tikzpicture}
-  \end{center}
-
+  c.f.\ \cref{fig:fib eigenvals}.
 \end{corollary}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}[scale=2]
+    \draw[->] (-1.25,0) -- (1.25,0) node[below] {Re};
+    \draw[->] (0,-1.25) -- (0,1.25) node[right] {Im};
+    \draw (0,0) circle (1);
+    \node[font=\large] at ({cos(deg(pi/5))}, {sin(deg(pi/5))}) {$\bullet$};
+    \node at ({cos(deg(pi/5))+0.3}, {sin(deg(pi/5))+0.15}) {$e^{iπ/5}$};
+    \node[font=\large] at ({cos(-deg(pi/5))}, {sin(-deg(pi/5))}) {$\bullet$};
+    \node at ({cos(-deg(pi/5))+0.3}, {sin(-deg(pi/5))-0.15}) {$e^{-iπ/5}$};
+    \node[font=\large] at ({cos(deg(4*pi/5))}, {sin(deg(4*pi/5))}) {$\bullet$};
+    \node at ({cos(deg(4*pi/5))-0.2}, {sin(deg(4*pi/5))+0.15}) {$e^{i4π /5}$};
+    \node[font=\large] at ({cos(-deg(3*pi/5))}, {sin(-deg(3*pi/5))}) {$\bullet$};
+    \node at ({cos(-deg(3*pi/5))-0.15}, {sin(-deg(3*pi/5))-0.25}) {$e^{-3iπ/5}$};
+  \end{tikzpicture}
+  \caption{Eivenvalues of $Uₚ$ for Fibonacci anyons on the complex unit circle.}
+  \label{fig:fib eigenvals}
+\end{figure}
 
 Note that this expression is valid for all $p \ge 0$ since $\Fib(p)$ is defined also for negative $p$. In particular we have
 \begin{align}
@@ -990,12 +996,12 @@ Note that this expression is valid for all $p \ge 0$ since $\Fib(p)$ is defined 
 \end{align}
 
 \begin{proof}
-  Since $U_p$ consists of repeated block, it suffices to compute the eigenvalues for each block, multiplied by the number of occurrences for each block to get the multiplicities. Note that $B = F^{-1}R F$ is similar to $R$. The multiplicity for $e^{i4π/5}$ is $2\Fib(p-1) + 3\Fib(p) = \Fib(p+3)$, the other multiplicities are straight forward.
+  Since $U_p$ consists of repeated blocks, it suffices to compute the eigenvalues for each block, multiplied by the number of occurrences for each block to get the multiplicities. Note that $B = F^{-1}R F$ is similar to $R$. The multiplicity for $e^{i4π/5}$ is $2\Fib(p-1) + 3\Fib(p) = \Fib(p+3)$, the other multiplicities are straight forward.
 \end{proof}
 
 
 \begin{remark}[Consequences for statistical repulsion.]
-  In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. In essence, the eigenvalue of $Uₚ$ closest to $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two Fibonacci $τ$-anyons have a higher corresponding kinetic energy than exchange of two $τ$-anyons around $p \ge 1$ $τ$-anyons. In particular, for $p \ge 1$ the exchange operator $U_p$ has the eigenvalue $e^{±iπ/5}$ closest to $1$, corresponding to kinetic energy proportional to $λ^2 = (1/5)^2$. However, for this interpretation to be valid the wave function must adjust to minimize the energy in configurations of this type. This is a difficult problem, also for abelian anyons, see \cite{many-anyon trial states}.
+  In \cref{chap:statistical repulsion} we showed the connection between eigenvalues for the exchange operator and bounds for the kinetic energy. In essence, the eigenvalue of $Uₚ$ closest to $1$ along the complex unit circle gives this energy bound. We thus see that simple exchange of two Fibonacci $τ$-anyons have a higher corresponding kinetic energy than exchange of two $τ$-anyons around $p \ge 1$ $τ$-anyons. In particular, for $p \ge 1$ the exchange operator $U_p$ has the eigenvalue $e^{±iπ/5}$ closest to $1$, corresponding to a kinetic energy on the circle proportional to $λ₀^2 = (1/5)^2$ and for $p=0$ we get $λ₀² = (3/5)²$. However, for this interpretation to be valid the wave function must adjust to minimize the energy in configurations of this type. This is a difficult problem, also for abelian anyons, see \cite{many-anyon trial states}.
 \end{remark}
 
 
@@ -1054,4 +1060,4 @@ respectively. This represent the steady state distribution of anyons of type $1$
 \end{align}
 The second eigenvector is non-physical, since it has a negative component.
 
-That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fact that the fusion space has no decomposition as a tensor product of subsystems. That is, the dimension of the fusion space does not increase by an integer factor when one more Fibonacci anyon is added, hence there is no part of the fusion space that can be factored out which describes one single particle. Indeed, if we have independent identical particles, such that each particle can be associated with a Hilbert space $h$, then the total Hilbert space of $n$ such particles is $\mathcal{H}_n = h^{⊗n}$ and the quantum dimension is simply $\frac{\dim \mathcal{H}_{n+1}}{\dim \mathcal{H}_n} = \dim h$. Thus, quantum information encoded in the fusion space is necessarily a collective property of all anyons. Furthermore, quantum information can be encoded in the non-abelian phase of the system, and we have seen that this anyonic phase is topological. This is the key observation motivating topological quantum computation, which we explore in the next chapter.
+That the quantum dimension $d_τ = φ$ of $τ$ is irrational illustrates the fact that the fusion space has no decomposition as a tensor product of subsystems. That is, the dimension of the fusion space does not increase by an integer factor when one more Fibonacci anyon is added, hence there is no part of the fusion space that can be factored out which describes one single particle. Indeed, if we have independent particles, such that each particle can be associated with a Hilbert space $h$, then the total Hilbert space of $n$ such particles is $\mathcal{H}_n = h^{⊗n}$ and the quantum dimension is simply $\frac{\dim \mathcal{H}_{n+1}}{\dim \mathcal{H}_n} = \dim h$. Thus, quantum information encoded in the fusion space is necessarily a collective property of all anyons. Furthermore, quantum information can be encoded in the non-abelian phase of the system, and we have seen that this anyonic phase is topological. This is the key observation motivating topological quantum computation, which we explore in the next chapter.

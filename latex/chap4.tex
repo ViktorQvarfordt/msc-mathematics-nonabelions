@@ -4,7 +4,7 @@
 
 In this chapter we shall present the framework of abstract anyon models, leading up to the succeeding chapter that characterizes braiding of anyons described by abstract anyon models.
 
-Anyon models can be modeled by unitary braided tensor categories, see \cite{kitaev}, one of the founding papers, and \cite{naaijkens,prakash,tensor categories,tuba}. However, setting up this framework in full generality is redundant for our purposes and we take a more straight forward approach, which is also most common in the literature. The benefit of the categorical approach is that consistency of braiding and fusion is most naturally shown this way. We shall see the ties between the straight forward approach and the categorical model in when discussing the consistency conditions in \cref{sec:pentagon hexagon}.
+Anyon models can be modeled by unitary braided tensor categories, see \cite{kitaev,naaijkens,prakash,tensor categories,tuba}. However, setting up this framework in full generality is redundant for our purposes and we take a more straight forward approach, which is also most common in the literature. The benefit of the categorical approach is that consistency of braiding and fusion is most naturally shown this way. We shall see the ties between the straight forward approach and the categorical model when discussing the consistency conditions in \cref{sec:pentagon hexagon}.
 
 This chapter is in part based on \cite{preskill,kitaev,bonderson}. We shall be using the notation that is standard in the literature, and when possible make use of and extend the fusion diagram notation, which greatly clarifies braiding of fusion states.
 
@@ -24,7 +24,7 @@ The $N_{ab}^c$ distinguishable ways in which $a$ and $b$ can fuse to $c$ can be 
 \end{equation}
 where $\ket{ab;c,\mu}$ represents the $\mu$:th way in which $a$ and $b$ can fuse to $c$. This is the notation used by \cite{preskill}.
 
-The splitting space $V_c^{ab}$ is the dual space of the fusion space $V_{ab}^c$, it is the state space of particles with anyonic charge $a$ and $b$ that can be split from an anyon of charge $c$.
+The splitting space $V_c^{ab}$ is the dual space of the fusion space $V_{ab}^c$; it is the state space of particles with anyonic charge $a$ and $b$ that can be split from an anyon of charge $c$.
 
 More generally, the fusion space of anyons of type $c$ resulting from fusion of anyons of type $a_1, \ldots, a_n$ is denoted by $V_{a_1 a_2 \cdots a_n}^c$. This space has a canonical decomposition
 \begin{equation}
@@ -34,7 +34,7 @@ with an associated canonical orthonormal basis with elements being the fusion st
 \begin{equation}
   \ket{a_1 a_2; b_1, \mu_1} \otimes \ket{b_1 a_3; b_2, \mu_2} \otimes \cdots \otimes \ket{b_{n-3} a_{n-1}; b_{n-2}, \mu_{n-2}} \otimes \ket{b_{n-2} a_n; c, \mu_{n-1}}
 \end{equation}
-for all possible $b_j$ and $\mu_j$. For convenience we write $b_{0} = a_1$ and $b_{-1} = 1$.
+for all possible $b_j$ and $\mu_j$. For convenience we may write $b_{0} = a_1$ and $b_{-1} = 1$.
 
 Many anyon models of interest have the property that $N_{ab}^c \le 1$ for all particle types $a, b$ and $c$. When this is the case, such as for the Fibonacci anyons that we shall consider in \cref{fibonacci anyons}, the multiplicity label $\mu$ can be ignored. This makes the model easier to handle, and we introduce the fusion diagram notation.
 
@@ -119,9 +119,9 @@ can thus be written in terms of fusion diagrams, assuming trivial fusion multipl
 \end{equation}
 It is thus clear that for given anyons $a_1, \ldots, a_n$ the fusion states are really determined by the intermediate charges $b_j$.
 
-The real advantage of writing fusions states with fusion diagrams is that braiding is much easier to represent. This will be extremely useful now as we proceed in developing the abstract model for anyons, and characterize braiding.
+The real advantage of writing fusion states with fusion diagrams is that braiding is much easier to represent. This will be extremely useful now as we proceed in developing the abstract model for anyons, and characterize braiding.
 
-Consider an arbitrary fusion state $\ket{\psi} = \sum_k c_k \ket{k}$ where $\ket{k}$ denotes the $k$:th basis fusion states. Let $A$ be a linear operator on the fusion space. The basis fusion states are transformed according to
+Consider an arbitrary fusion state $\ket{\psi} = \sum_k c_k \ket{k}$ where $\ket{k}$ denotes the $k$:th basis fusion states and $cₖ∈ℂ$. Let $A$ be a linear operator on the fusion space. The basis fusion states are transformed according to
 \begin{equation}\label{eq:linear op on basis state}
   A\ket{k} = \sum_j A_{jk} \ket{j}
 \end{equation}
@@ -165,7 +165,7 @@ In terms of fusion diagrams that is
 \begin{equation}
   \bigoplus_f \fs{b,c}{a,f,d}
   \cong
-  \bigoplus_e \fsfused{a}{b}{c}{e}{d}.
+  \bigoplus_e \fsfused{a}{b}{c}{d}{e}.
 \end{equation}
 The first decomposition should be understood as first fusing $a$ with $b$ in all possible ways giving an intermediate charge $f$, followed by fusing $c$ with $f$ to give the final charge $d$.
 The second decomposition should be understood as first fusing $b$ with $c$ in all possible ways giving an intermediate charge $e$, followed by fusing $a$ with $e$ to give the final charge $d$.
@@ -341,7 +341,7 @@ From this we define the $B$-matrix.
 \begin{definition}\label{def:B}
   The $B$ matrix $B_{abc}^d$ is given by
   \begin{equation}
-    \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{ef} R_{bc}^f \left(F_{abc}^d\right)_{fg}.
+    \left(B_{abc}^d\right)_{eg} = \sum_f \left(\left(F^{-1}\right)_{acb}^d\right)_{fe} R_{bc}^f \left(F_{abc}^d\right)_{gf}.
   \end{equation}
   Symbolically we write this as
   \begin{equation}
@@ -362,6 +362,7 @@ As a consequence of the definition of the $B$-matrix and \cref{res:F1} we have t
       B_{1bc}^d &= \left( B_{1bc}^d \right)_{bc} = R_{bc}^d, \\
       B_{a1c}^d &= \left( B_{a1c}^d \right)_{ad} = R_{1c}^c = 1, \\
       B_{ab1}^d &= \left( B_{ab1}^d \right)_{da} = R_{b1}^b = 1.
+      % B_{abc}^1 &= \left( B_{abc}^1 \right)_{\overline{c}\,\overline{a}} = R_{bc}^\overline{a}.
     \end{aligned}
   \end{equation}
 \end{lemma}
@@ -428,9 +429,9 @@ and hexagon equation
   R_{13}^c \left(F_{213}^4\right)_{ca} R_{12}^a = \sum_{b} \left(F_{231}^4\right)_{cb} R_{1b}^4 \left(F_{123}^4\right)_{ba}.
   % R_{ac}^g \left(F_{bac}^d\right)^g_e R_{ab}^e = \sum_{f} \left(F_{bca}^d\right)^g_f R_{af}^d \left(F_{abc}^d\right)^f_e.
 \end{equation}
-In these equations, all indices are taken as arbitrary particle labels. \cite{preskill}
+In these equations, all indices are taken as arbitrary particle labels \cite{preskill}.
 
-These equations should be understood as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_space} and \cref{fig:pentagon_space,fig:hexagon_space} make the point clear, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
+These equations should be understood as coherence conditions for fusion and braiding. The diagrammatic version of these equations, found as commutative diagrams in \cref{fig:pentagon_diagram,fig:hexagon_diagram,fig:pentagon_space,fig:hexagon_space} make the point clear, and shows that these equations are commutativity constraints for fusion and braiding. Indeed, the pentagon equation is the formal constraint for associativity of fusion,
 \begin{equation}
   (a \times b) \times c = a \times (b \times c).
 \end{equation}
@@ -441,28 +442,28 @@ Solving the pentagon and hexagon equations is in general highly non-trivial. The
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1\linewidth]{img/pentagon_diagram.pdf}
-  \caption{The pentagon equation in terms of fusion diagrams. Figure take from \cite{kitaev}. Note that the $F$-matrix have super- and sub-scripts reversed.}
+  \caption{The pentagon equation in terms of fusion diagrams. Figure taken from \cite{kitaev}. Note that the $F$-matrix have super- and sub-scripts reversed.}
   \label{fig:pentagon_diagram}
 \end{figure}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1\linewidth]{img/pentagon_space.pdf}
-  \caption{The pentagon equation in terms of fusion spaces. Figure take from \cite{kitaev}. Note that the fusion spaces and the $F$-matrix have super- and sub-scripts reversed.}
+  \caption{The pentagon equation in terms of fusion spaces. Figure taken from \cite{kitaev}. Note that the fusion spaces and the $F$-matrix have super- and sub-scripts reversed.}
   \label{fig:pentagon_space}
 \end{figure}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=0.8\linewidth]{img/hexagon_diagram.pdf}
-  \caption{The hexagon equation in terms of fusion diagrams. Figure take from \cite{kitaev}.}
+  \caption{The hexagon equation in terms of fusion diagrams. Figure taken from \cite{kitaev}.}
   \label{fig:hexagon_diagram}
 \end{figure}
 
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=1\linewidth]{img/hexagon_space.pdf}
-  \caption{The hexagon equation in terms of fusion spaces. Figure take from \cite{kitaev}. Note that the fusion spaces, $F$-matrix and $R$-matrix have super- and sub-scripts reversed.}
+  \caption{The hexagon equation in terms of fusion spaces. Figure taken from \cite{kitaev}. Note that the fusion spaces, $F$-matrix and $R$-matrix have super- and sub-scripts reversed.}
   \label{fig:hexagon_space}
 \end{figure}
 

@@ -2,7 +2,7 @@
 
 \chapter{How anyons arise}\label{chap:how anyons arise}
 
-Anyons arise as identical quantum mechanical particles in two dimensions. In order to see how this comes about, we must fist develop the theory of identical particles.
+Anyons arise as indistinguishable quantum mechanical particles in two dimensions. In order to see how this comes about, we must first develop the theory of indistinguishable particles.
 
 
 
@@ -11,25 +11,30 @@ Anyons arise as identical quantum mechanical particles in two dimensions. In ord
 
 
 
-\section{Identical particles and particle statistics}
+\section{Indistinguishable particles: The configuration space \texorpdfstring{$𝒞ₙ$}{C\_n}}
 
 This discussion is in part based on \cite{myrheim,bonderson}.
 
-Consider $n$ identical quantum mechanical particles. The state of the particles is determined by the wave function
+Consider $n$ indistinguishable quantum mechanical particles. The state of the particles is determined by a wave function
 \begin{equation}
   |ψ⟩ : 𝒞ₙ → h
 \end{equation}
-where $𝒞ₙ$ is the configuration space of the particles, and $h = ℂᵏ$ is a local Hilbert space of $k$ local internal degrees of freedom. The configuration space $𝒞ₙ$ is the space of possible spatial positions for the $n$ particles, it is given by
+where $𝒞ₙ$ is the configuration space of the particles, and $h = ℂᵏ$ is a local Hilbert space of $k$ local internal degrees of freedom. Most introductory texts on quantum mechanics work with $h = ℂ$. Spin can also be modeled in this way. The configuration space $𝒞ₙ$ is the space of possible spatial positions for the $n$ particles. If the particles are distinguishable, the configuration space is simply given by
+\begin{equation}
+  𝒞ₙ = Mⁿ
+\end{equation}
+where $M$ is the spatial $d$-dimensional manifold in which the particles exist. If the particles are indistinguishable we have
 \begin{align}
   𝒞ₙ = \frac{Mⁿ - \bbDeltaₙ}{Sₙ}
 \end{align}
-where $M$ is the spatial $d$-dimensional manifold on which the particles exist, the set
+where
 \begin{align}
   \bbDeltaₙ = \{(x₁,…,xₙ) ∈ Mⁿ ∣ xᵢ = xⱼ \text{ for some } i, j\}
 \end{align}
-is the set of configurations where particles occupy the same point in space, known as a ``hard-core'' condition.%
-\footnote{The hard-core condition is motivated by the fact that without it we cannot say that we have exactly $n$ particles, two of them may be in the same position, thus not visible. Furthermore, if the particles are allowed to be at the same position, they might interact, however, we are not considering particle interactions. In fact, the configuration space is not necessarily a smooth manifold if the singular points of $\bbDelta$ are not removed. In many cases, the points $\bbDelta$ can be added back later in the analysis. The use of hard-core condition has been discussed in depth, see \cite{hard-core} for more details.}
-To model the fact that the particles are identical, we form the quotient of $Mⁿ - \bbDeltaₙ$ by the symmetric group $Sₙ$ acting on the coordinates $(x₁,…,xₙ) ∈ Mⁿ$ where $xⱼ$ is the coordinates for the $j$:th particle. In this way all permutations of the $n$ particles are considered to be the same configuration, i.e.\ $(…,xⱼ,…,xₖ,…) = (…,xₖ,…,xⱼ,…)$ in $𝒞ₙ$. Thus, one cannot associate a coordinate $xⱼ$ to a specific particle.
+is the set of configurations where particles occupy the same point in space, known as a ``hard-core'' condition.\footnote{
+  The hard-core condition is motivated by the fact that without it we cannot say that we have exactly $n$ particles, two of them may be in the same position, thus not visible. Furthermore, if the particles are allowed to be at the same position, they might interact, however, we are not considering particle interactions. In fact, the configuration space is not necessarily a smooth manifold if the singular points of $\bbDelta$ are not removed. In many cases, the points $\bbDelta$ can be added back later in the analysis. The use of hard-core condition has been discussed in depth, see \cite{hard-core} for more details.
+}
+To model the fact that the particles are indistinguishable, we form the quotient of $Mⁿ - \bbDeltaₙ$ by the symmetric group $Sₙ$ acting on the coordinates $(x₁,…,xₙ) ∈ Mⁿ$ where $xⱼ$ is the coordinate for the $j$:th particle in $M$. In this way all permutations of the $n$ particles are considered to be the same configuration, i.e.\ $(…,xⱼ,…,xₖ,…) = (…,xₖ,…,xⱼ,…)$ in $𝒞ₙ$. Thus, one cannot associate a coordinate $xⱼ$ to a specific particle.
 
 
 
@@ -39,24 +44,27 @@ To model the fact that the particles are identical, we form the quotient of $M�
 
 
 
-\subsection{Particle exchange: The fundamental group of \texorpdfstring{$𝒞ₙ$}{C\_n}}
+\subsection{Particle exchange: Loops in \texorpdfstring{$𝒞ₙ$}{C\_n}}
 
-Consider exchange of $n$ identical particles with configuration space $𝒞ₙ$. That is, take $n$ identical particles on $M$ with given positions and move them around until they are back at some permutation of the original positions. Since the particles are identical, such an exchange is described by a loop in the configuration space $𝒞ₙ$. More precisely, a loop $γ(t) : [0,1] → 𝒞ₙ$, where $t ∈ [0,1]$ can be seen as the time parameter, corresponds to world-lines of particle trajectories in $M×[0,1]$. The corresponding world-lines are constructed by choosing a representative of $γ(t)$ in $M^n×[0,1]$, e.g.\ associating the coordinates $xⱼ$ with the $j$:th particle, and then projecting the coordinates of each particle into $M×[0,1]$.
+Consider exchange of $n$ indistinguishable particles with configuration space $𝒞ₙ$. That is, take $n$ indistinguishable particles on $M$ with given positions and move them around until they are back at some permutation of the original positions. Since the particles are indistinguishable, such an exchange is described by a loop in the configuration space $𝒞ₙ$. More precisely, a loop $γ(t) : [0,1] → 𝒞ₙ$, where $t ∈ [0,1]$ can be seen as the time parameter, corresponds to world-lines of particle trajectories in $M×[0,1]$. The corresponding world-lines are constructed by choosing a representative of $γ(t)$ in $M^n×[0,1]$, e.g.\ associating the coordinates $xⱼ$ with the $j$:th particle, and then projecting the coordinates of each particle into $M×[0,1]$.
 
-In this way, each loop in $𝒞ₙ$ corresponds to a classical motion of the particles along world-lines starting and ending in the same configuration. The corresponding quantum mechanical dynamics is obtained by quantizing the system via the path integral formulation \cite{feynmann path integral,nakahara,feynmann path integrals indistinguishable particles,myrheim}. In this way, homotopically equivalent paths can be seen to give the same contribution. Thus, it is really the fundamental group $π₁(𝒞ₙ)$ of the configuration space that characterize fundamentally different particle exchanges. For more details on this, see \cite{configuration spaces,bonderson}.
+In this way, each loop in $𝒞ₙ$ corresponds to a classical motion of the particles along world-lines starting and ending in the same configuration. The corresponding quantum mechanical dynamics is obtained by quantizing the system via the path integral formulation \cite{feynmann path integral,nakahara,feynmann path integrals indistinguishable particles,myrheim}. In this way, homotopically equivalent paths can be seen to give the same contribution.\footnote{
+  Provided that no external magnetic field is present. Magnetic fields can be seen as a geometric phase, due to the curvature of the space. The anyonic phase is instead a consequence of the topology.
+}
+Thus, it is really the fundamental group $π₁(𝒞ₙ)$ of the configuration space that characterize fundamentally different particle exchanges. For more details on this, see \cite{configuration spaces,bonderson}.
 
-What is the resulting state after exchange? Most text books on quantum mechanics give an unsatisfactory discussion of this, not taking the configuration space into account, thus not unraveling anyons.
+What is the resulting state after exchange? Most introductory text books on quantum mechanics give an unsatisfactory discussion of this, not taking the configuration space $𝒞ₙ$ into account, thus not unraveling anyons.
 
 \begin{example}[Incomplete view of particle exchange]\label{ex:crude exchange}
   The incomplete textbook approach is as follows. Let
   \begin{equation}
     |ψ(…,xⱼ,…,xₖ,…)⟩
   \end{equation}
-  be the wave function of $n$ identical particles. Exchanging particles $j$ and $k$ gives the state
+  be the wave function of $n$ indistinguishable particles. Exchanging particles $j$ and $k$ gives the state
   \begin{equation}
     P_{jk} |ψ(…,xⱼ,…,xₖ,…)⟩ = |ψ(…,xₖ,…,xⱼ,…)⟩.
   \end{equation}
-  The probability of measuring a system in the state $|ψ⟩$ is given by $|ψ|²$, since the particles are identical we must then have
+  The probability of measuring a system in the state $|ψ⟩$ is given by $|ψ|²$, since the particles are indistinguishable we must then have
   \begin{equation}
     |ψ(…,xₖ,…,xⱼ,…)|² = |ψ(…,xⱼ,…,xₖ,…)|².
   \end{equation}
@@ -74,14 +82,14 @@ What is the resulting state after exchange? Most text books on quantum mechanics
 The flaw in this argument is essentially that double exchange need not return the system to the original state, i.e.\ $P_{jk}² ≠ I$, if the configuration space $𝒞ₙ$ has a non-trivial geometry. To see this clearly, we must specify the notion of particle exchange more precisely.
 
 \begin{definition}[Exchange]
-  Consider $n$ identical particles with configuration space $𝒞ₙ$. A path in $𝒞ₙ$ corresponds to motion of the particles, if the path is a loop the particles are returned to a (possibly trivial) permutation of the particles. A non-trivial loop $γ$ corresponds to an exchange of particles, denoted by $P_γ$. Since homotopically equivalent loops are indistinguishable, the exchange operator $P_γ$ is determined only up to homotopy equivalence of $γ$, we may denote the exchange by $P_{[γ]}$ where $[γ]$ is the equivalence class of loops homotopically equivalent to $γ$.
+  Consider $n$ indistinguishable particles with configuration space $𝒞ₙ$. A path in $𝒞ₙ$ corresponds to motion of the particles. Moreover, if the path is a loop, the particles are returned to a (possibly trivial) permutation of the particles. A non-trivial loop $γ$ corresponds to an exchange of particles, denoted by $P_γ$. Since homotopically equivalent loops are indistinguishable, the exchange operator $P_γ$ is determined only up to homotopy equivalence of $γ$, we may denote the exchange by $P_{[γ]}$ where $[γ]$ is the equivalence class of loops homotopically equivalent to $γ$.
 \end{definition}
 
 \begin{definition}[Simple exchange]
-  A simple exchange is an exchange where exactly two particles have been exchanged exactly once. In the case $M=ℝ²$, i.e.\ $π₁(𝒞ₙ) = Bₙ$, the path of the simple exchange is the clockwise direction
+  A simple exchange is an exchange where exactly two particles have been exchanged exactly once. No other particles are enclosed in the loop of a simple exchange. In the case $M=ℝ²$, i.e.\ $π₁(𝒞ₙ) = Bₙ$, the path of the simple exchange is taken in the counter-clockwise direction.
 \end{definition}
 
-It is now clear that double exchange $P_γ²$ is trivial if and only if the loop given by traversing $γ$ twice is continuously deformable to the trivial loop, hence returning the state to the original state. As we shall now see, the configuration space need not have this property. This observation is originally due to \cite{leinaas myrheim} in 1976.
+It is now clear that double exchange $P_γ²$ is trivial if and only if the loop given by traversing $γ$ twice is continuously deformable to the trivial loop, hence returning the state to the original state. As we shall now see, the configuration space need not have this property. This observation in the context of quantum statistics is originally due to \cite{leinaas myrheim} in 1976.
 
 
 % Another way to see that homotopically equivalent paths represent the same physical particle exchange is via the Aharonov-Bohm effect. Particles in two spatial dimensions can be modeled in three dimensions by charged magnetic flux tubes, as these particles move around each other, they gain a quantum phase due to the Aharonov-Bohm effect, this phase is independent of continuous deformations of the path. topological phase <-> magnetic fields.
@@ -96,21 +104,21 @@ It is now clear that double exchange $P_γ²$ is trivial if and only if the loop
 
 
 
-\subsection{\texorpdfstring{$π_1(𝒞_2)$ with $M = ℝᵈ$}{π₁(C₂) with M = Rᵈ}}\label{sec:conf sp 2 particles}
+\subsection{The fundamental group \texorpdfstring{$π_1(𝒞_2)$}{π₁(C₂)}}\label{sec:conf sp 2 particles}
 
-The configuration space of two identical particles in $ℝᵈ$ is given by
+The configuration space of two indistinguishable particles in $ℝᵈ$ is given by
 \begin{equation}
   𝒞 = \frac{(ℝᵈ)^2 - \bbDelta}{S_2}.
 \end{equation}
-The space $(ℝᵈ)^2$ can be factored as $ℝᵈ_\text{cm} × ℝᵈ_\text{rel}$ where $ℝᵈ_\text{cm}$ gives the coordinates of the center of mass for the two particles and $ℝᵈ_\text{rel}$ gives the relative coordinate of the two particles. Let $x_1, x_2 \in ℝᵈ$ be the (absolute) coordinates of the two particles, so that $x = (x_1, x_2) \in 𝒞$. We then define
+The space $(ℝᵈ)^2$ can be factored as $ℝᵈ_\text{cm} × ℝᵈ_\text{rel}$ where $ℝᵈ_\text{cm}$ gives the coordinates of the center of mass for the two particles and $ℝᵈ_\text{rel}$ gives the relative coordinate of the two particles. Let $x_1, x_2 \in ℝᵈ$ be the (absolute) coordinates of the two particles, so that $x = (x_1, x_2) ∈ 𝒞$. We then define
 \begin{equation}
-  x_\text{cm} = \frac{1}{2}(x_1 + x_2), \quad
-  x_\text{rel} = \frac{1}{2}(x_1 - x_2).
+  x_\text{cm} = \frac{1}{2}(x_1 + x_2) ∈ ℝᵈ_\text{cm}, \quad
+  x_\text{rel} = \frac{1}{2}(x_1 - x_2) ∈ ℝᵈ_\text{rel}.
 \end{equation}
-Now, $Δ = \{(x₁, x₂) ∈ (ℝᵈ)² ∣ x₁ = x₂\}$ is precisely the origin of $ℝᵈ_\text{rel}$.
-Furthermore, quotiening with $S_2$ corresponds to quotiening with the antipodal equivalence relation
+Now, $\bbDelta = \{(x₁, x₂) ∈ (ℝᵈ)² ∣ x₁ = x₂\}$ is precisely the origin of $ℝᵈ_\text{rel}$.
+Furthermore, quotiening with $S_2$ permutations corresponds to quotiening with the antipodal equivalence relation
 \begin{equation}
-  x ∼ y ⟺ x = -y \text{ or } x = y
+  x ∼ y ⟺ x = -y \text{ or } x = y.
 \end{equation}
 Thus we have
 \begin{equation}
@@ -123,7 +131,7 @@ The real projective $d$-space is the $d$-sphere with antipodal points identified
 \begin{equation}
   ℝℙᵈ = Sᵈ/{∼}.
 \end{equation}
-Furthermore, we have $ℝᵈ-\{0\} ≅ ℝ₊ × S^{d-1}$ Thus,
+Furthermore, we have $ℝᵈ-\{0\} ≅ ℝ₊ × S^{d-1}$. Thus,
 \begin{equation}
   \begin{aligned}
     𝒞_\text{rel}
@@ -138,8 +146,8 @@ Since the fundamental group has the property that $π_1(X× Y) ≅ π_1(X) × π
 \begin{equation}
   π_1(𝒞) = π_1(ℝℙ^{d-1}) =
   \begin{cases}
-    ℤ, & d = 2 \\
-    ℤ₂, & d ≥ 3
+    ℤ, & d = 2, \\
+    ℤ₂, & d ≥ 3,
   \end{cases}
 \end{equation}
 as basic result from topology, showing how the case of two spatial dimensions is special. The fundamental group $ℤ$ can be seen as a way of counting the number of loops, the winding number.
@@ -147,19 +155,7 @@ as basic result from topology, showing how the case of two spatial dimensions is
 In $d = 2$ dimension the space $𝒞_\text{rel}$ can be seen as the half plane $ℝ^2_{y \ge 0} - \{ 0 \}$ with $x$ and $-x$ identified, geometrically viewed as gluing the edges $ℝ_{-}$ and $ℝ_{+}$ of $ℝ^2_{y \ge 0} - \{ 0 \}$ together. The resulting space can be seen as a punctured cone. In fact, the curvature of this cone can be interpreted to determine the particle statistics.
 
 
-
-
-
-
-
-
-
-
-
-
-\subsection{\texorpdfstring{$π_1(𝒞ₙ)$ with $M = ℝᵈ$}{π₁(Cₙ) with M = Rᵈ}}
-
-The above example can be generalized to $n$ particles in $d$-dimensional euclidean space. The corresponding configuration space is then
+This can be generalized to $n$ particles in $d$-dimensional euclidean space. The corresponding configuration space is then
 \begin{equation}
   𝒞ₙ = \frac{\left(ℝᵈ\right)^n - \bbDeltaₙ}{Sₙ}
 \end{equation}
@@ -173,9 +169,9 @@ and the fundamental group of this configuration space is given by
 \end{equation}
 where $Bₙ$ is the braid group on $n$ strands \cite{fröhlich,khare}.
 
-It is the occurrence of the braid group as the fundamental group for the configuration space for particles in $ℝ²$ that essentially motivate the study of anyons. In \cref{sec:braid group}, we define and further discuss the braid group. We disregard other exotic possibilities for the underlying space $M$. For instance, the solid torus is a three-dimensional manifold with fundamental group $ℤ ≅ B₁$. However, this does not really correspond to free particles.
+It is the occurrence of the braid group as the fundamental group for the configuration space for particles in $ℝ²$ that essentially motivates the study of anyons. In \cref{sec:braid group}, we define and further discuss the braid group. We disregard other exotic possibilities for the underlying space $M$. For instance, the solid torus is a three-dimensional manifold with fundamental group $ℤ ≅ B₁$. However, this does not really correspond to free particles.
 
-Note that in $d=1$ dimensions, particle exchange of non-interacting particles cannot occur, the configuration space is not connected, it is separated by the removal of $\bbDelta$. In fact, the concept of identical particles is not meaningful in $d = 1$ dimensions, the particles can always be distinguished by which part of the configuration space they exist on, since no transitions can occur, given that particles do not interact. However, one can define generalized statistics by allowing interactions, this gives rise to a rich theory of particle statistics also in one dimension. \cite{polychronakos,myrheim}
+Note that in $d=1$ dimensions, particle exchange of non-interacting particles cannot occur, the configuration space (after removing the diagonal $\bbDelta$ and quotiening with $Sₙ$) is simply connected, and therefore $π₁(𝒞ₙ)$ is trivial. In fact, the concept of indistinguishable particles is not meaningful in $d = 1$ dimensions, the particles can always be distinguished by which part of the configuration space they exist on, since no transitions can occur, given that particles do not interact. However, one can define generalized statistics by allowing interactions, this gives rise to a rich theory of particle statistics also in one dimension \cite{polychronakos,myrheim}.
 
 
 
@@ -227,9 +223,9 @@ Note that in $d=1$ dimensions, particle exchange of non-interacting particles ca
 
 \section{Representations of \texorpdfstring{$π_1(𝒞ₙ)$}{π₁(Cₙ)} determine particle statistics}
 
-The effect of an exchange of identical particles gives rise to different particle statistics. Since fermions have anti-symmetric wave function, it is clear that two fermions cannot occupy the same state, this is the Pauli exclusion principle, seen as an effective repulsion. On the other hand, bosons have symmetric wave functions and are thus allowed to be in the same state. Statistically it is more likely to find bosons in the same stat than if the particles where distinguishable, seen as an effective attraction. The statistics of bosons and fermions is described by Bose–Einstein statistics and Fermi–Dirac statistics, respectively. Anyons are described by braid statistics, as we shall see in detail.
+The effect of an exchange of indistinguishable particles gives rise to different particle statistics. Fermions can be represented as having an anti-symmetric wave function, this leads to the fact that fermions cannot occupy the same state; this is the Pauli exclusion principle, which can be seen as an effective repulsion. On the other hand, bosons have symmetric wave functions and are thus allowed to be in the same state. Statistically it is more likely to find bosons in the same state than if the particles where distinguishable, seen as an effective attraction. The statistics of bosons and fermions is described by Bose–Einstein statistics and Fermi–Dirac statistics, respectively. Anyons are described by braid statistics, as we shall see in detail.
 
-We have seen that have that particle exchanges, i.e.\ loops in configuration, are distinguished only up to homotopy equivalence. That is, particle exchange must obey the structure of the fundamental group of the configuration space. For instance, if the fundamental group is $Sₙ$, then particle exchange must be such that double exchange is trivial, since $P^2 = 1$ for any element $P$ of $Sₙ$. Thus, it is clear that double exchange in $ℝᵈ$ is trivial for $d ≥ 3$, since the fundamental group of the corresponding configuration space is $Sₙ$. This motivates the crude argument in \cref{ex:crude exchange} for that only fermions and bosons exist, and clarifies when the argument is valid; only for $d \ge 3$ dimensions.
+We have seen that particle exchanges, i.e.\ loops in the configuration space, are distinguished only up to homotopy equivalence. That is, particle exchange must obey the structure of the fundamental group of the configuration space. For instance, if the fundamental group is $Sₙ$, then particle exchange must be such that double exchange is trivial, since $P^2 = 1$ for any element $P$ of $Sₙ$. Thus, it is clear that double exchange in $ℝᵈ$ is trivial for $d ≥ 3$, since the fundamental group of the corresponding configuration space is $Sₙ$. This motivates the crude argument in \cref{ex:crude exchange} for that only fermions and bosons exist, and clarifies when the argument is valid; only for $d \ge 3$ dimensions.
 
 This idea is captured precisely by requiring that particle exchange is determined by a representation of the fundamental group of the configuration space.
 
@@ -238,7 +234,7 @@ This idea is captured precisely by requiring that particle exchange is determine
   \begin{equation}
     ρ : G \mapsto GL(V),
   \end{equation}
-  where $GL(V)$ is the general linear group on $V$, i.e.\ the group of automorphisms on $V$.\cite{dummit foote} If $ρ(g)$ commutes with $ρ(h)$ for all $g, h \in G$ we say that the representation is abelian, and say that particles with such exchange are abelian, otherwise we call them non-abelian.
+  where $GL(V)$ is the general linear group on $V$, i.e.\ the group of automorphisms on $V$ \cite{dummit foote}. If $ρ(g)$ commutes with $ρ(h)$ for all $g, h \in G$ we say that the representation is abelian, and say that particles with such exchange are abelian, otherwise we call them non-abelian. A representation is said to be unitary if $ρ(g)$ is unitary, i.e.\ $ρ(g)^*ρ(g) = 1$, for all $g ∈ G$.
 \end{definition}
 
 We shall only be interested in unitary representations, as motivated by the following. The dynamics of every quantum system is determined by the Schrödinger equation
@@ -251,8 +247,13 @@ for some Hamiltonian $H$. The solution to this equation is
 \end{equation}
 Thus, time evolution is given by $U = e^{-iHt}$. Furthermore, time-evolution $U$ of a quantum system must be unitary\footnote{
   Essentially motivated by preserving normalization of quantum probabilities, $|⟨ψ|ψ⟩|² = |⟨Uψ|Uψ⟩|² = |⟨ψ|U^*U|ψ⟩|² ⟺ U^*U = I ⟺ U$ unitary.
-}. The operator $U = e^{-iHt}$ is unitary precisely when $H$ is Hermitian.\footnote{Furthermore, the Hamiltonian $H$ must be Hermitian because it is an observable, see \cref{sec:observables}.}
-
+}. The operator $U = e^{-iHt}$ is unitary precisely when $H$ is Hermitian.\footnote{
+  Furthermore, the Hamiltonian $H$ must be self-adjoint because it is an observable, see \cref{sec:observables}.
+}
+Particle exchange is a time evolution of the state, thus it must be unitary. Moreover, since particle exchange maps a configuration $|ψ⟩ ∈ 𝒞ₙ$ back to itself, there is no observable difference between the original state $|ψ⟩$ and the exchanged state $U_γ|ψ⟩$, for an exchange loop $γ$. That is,
+\begin{equation}
+  ‖ψ‖² = ‖U_γψ‖² ⟹ U_γ \text{ unitary}.
+\end{equation}
 Thus, the result of a particle exchange must be described by a unitary transformation on the Hilbert space $h = ℂᵏ$ of internal degrees of freedom. Therefore, we are only interested in unitary representations on $ℂᵏ$, that is, a map
 \begin{equation}
   ρ : G → U(k)
@@ -265,19 +266,19 @@ To sum up:
   \begin{equation}
     P_γ |ψ⟩ = ρ(P_γ) |ψ⟩
   \end{equation}
-  where $ρ(P_γ)$ is a unitary operator.
+  where $ρ(P_γ)$ is a unitary operator on the internal space $h$.
 \end{lemma}
 
 A representation of the braid group $Bₙ$ need not have the property that $ρ(P_γ)^2 = 1$, a simple example of this is $B₂ ≅ ℤ$ as computed in \cref{sec:conf sp 2 particles}. That is, the wave function need not be invariant under double exchange $P_γ²$. This is due to the non-trivial topology of the configuration space. It is essentially this observation that motivates the study of anyons.
 
 \begin{remark}
-  Let $P_γ$ be a simple exchange and assume $π₁(𝒞ₙ) = Sₙ$, we then have that bosons and fermions corresponds to the representations $ρ(P_γ) = 1$ and $ρ(P_γ) = -1$, respectively. In light of this, the question arises: What about other representations of $Sₙ$? As it turns out, the bosonic and fermionic representations are the only one-dimensional representations of $Sₙ$. However, there exists higher-dimensional representations of $Sₙ$. Particles obeying such exchange are sometimes called plektons and their statistics is known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom, in the framework of relativistic quantum field theory. \cite{fröhlich,doplicher} Furthermore, the spin-statistics theorem relates particles statistics to intrinsic spin: Bosons have integer spin and fermions have half-integer spin. This is discussed in connection to anyons in \cite{nonperturbative}.
+  Let $P_γ$ be a simple exchange and assume $π₁(𝒞ₙ) = Sₙ$, we then have that bosons and fermions correspond to the representations $ρ(P_γ) = 1$ and $ρ(P_γ) = -1$, respectively. In light of this, the question arises: What about other representations of $Sₙ$? As it turns out, the bosonic and fermionic representations are the only one-dimensional representations of $Sₙ$. However, there exists higher-dimensional representations of $Sₙ$. Particles obeying such exchange are sometimes called plektons and their statistics is known as parastatistics. However, it has been shown that parastatistics can always be reduced to bosons or fermions by introducing additional internal degrees of freedom, in the framework of relativistic quantum field theory \cite{fröhlich,doplicher}. Furthermore, the spin-statistics theorem relates particles statistics to intrinsic spin: Bosons have integer spin and fermions have half-integer spin. This is discussed in connection to anyons in \cite{nonperturbative}.
 \end{remark}
 
-Thus, if the underlying space is $ℝᵈ$ with $d ≥ 3$, there are fundamentally only two types of particle statistics. However, if the underlying space is $ℝ²$, the fundamental group $π₁(𝒞ₙ)$ is the braid group $Bₙ$ which has much richer representations than $Sₙ$, as we shall see in detail throughout this thesis. Furthermore, statistics arising from higher-dimensional representations of the braid group cannot be reduced to one-dimensional representations, unlike the case of $Sₙ$. \cite{fröhlich}
+Thus, if the underlying space is $ℝᵈ$ with $d ≥ 3$, there are fundamentally only two types of particle statistics. However, if the underlying space is $ℝ²$, the fundamental group $π₁(𝒞ₙ)$ is the braid group $Bₙ$ which has much richer representations than $Sₙ$, as we shall see in detail throughout this thesis. Furthermore, statistics arising from higher-dimensional representations of the braid group cannot be reduced to one-dimensional representations, unlike the case of $Sₙ$ \cite{fröhlich}.
 
 \begin{remark}\label{rem:fiber bundels}
-  The proper way to deal with functions defined on configuration spaces with non-trivial geometry is by using fiber bundles \cite{nakahara}. The state of a quantum system is described by a wave function $ψ$ defined as a section of the vector bundle with fiber $h$ over the configuration space $𝒞$, where $h = ℂᵏ$ is the Hilbert space of $k$ local internal degrees of freedom. In this setting, loops in configuration space that return all particles to the original coordinates need not be homotopically trivial.
+  The proper way to deal with functions defined on configuration spaces with non-trivial geometry is by using fiber bundles \cite{nakahara}. The state of a quantum system is described by a wave function $ψ$ defined as a section of the vector bundle with fiber $h$ over the configuration space $𝒞$, where $h = ℂᵏ$ is the Hilbert space of $k$ local internal degrees of freedom. In this setting, loops in the configuration space that return all particles to the original coordinates need not be homotopically trivial.
 \end{remark}
 
 
@@ -328,7 +329,7 @@ The braid group $Bₙ$ is the group with generators $σ₁, …, σ_{n-1}$ and r
     σⱼ σ_{j+1} σⱼ &= σ_{j+1} σⱼ σ_{j+1}.
   \end{align}
 \end{subequations}
-It is an infinite group, e.g.\ $B₂ = \{σ₁ᵐ: m∈ℤ\}$. The symmetric group $Sₙ$ is defined as the braid group with the additional relation $σⱼ²=1$ for all $j$, it is a finite group.
+It is an infinite group, e.g.\ $B₂ = \{σ₁ᵐ: m∈ℤ\}$. The symmetric group $Sₙ$ is defined as the braid group with the additional relation $σⱼ²=1$ for all $j$; it is a finite group.
 
 The braid group can be understood as representing (homotopically equivalent) braids on $n$ strands, the generator $σⱼ$ braids the $j$:th and $j+1$:th strand clockwise, cf.\ \cref{fig:braid group generators}. The braid group relations can thus be visualized as in \cref{fig:braid group rel1,fig:braid group rel2}.
 
@@ -403,7 +404,7 @@ We now define the braid representing exchange of two strands around $p$ fixed st
   \begin{equation}
     Σₚ = σ₁σ₂⋯σₚσ_{p+1}σₚ⋯σ₂σ₁,
   \end{equation}
-  on $p+2$ strands, cf. \cref{fig:Up on strands}. This braid keeps the middle $p$ strands fixed while the outer strands $1$ and $p+2$ are exchanged around the middle strands. The corresponding representations is referred to as the exchange operator $Uₚ = ρ(Σₚ)$.
+  on $p+2$ strands, cf. \cref{fig:Up on strands}. This braid keeps the middle $p$ strands fixed while the outer strands $1$ and $p+2$ are exchanged around the middle strands. The corresponding representation is referred to as the exchange operator $Uₚ = ρ(Σₚ)$.
 \end{definition}
 
 \begin{figure}[!htb]
@@ -415,7 +416,7 @@ We now define the braid representing exchange of two strands around $p$ fixed st
     \node at (3, -5.75) {$3$};
     \node at (4, -5.75) {$4$};
   \end{tikzpicture}
-  \caption{Strand representation of the exchange operator $U₂ = σ₁σ₂σ₃σ₂σ₁$, note how the middle strands, 2 and 3, are kept in place, while the outer strands 1 and 4 are exchanged.}
+  \caption{Strand representation of the exchange braid $Σ₂ = σ₁σ₂σ₃σ₂σ₁$, note how the middle strands, 2 and 3, are kept in place, while the outer strands 1 and 4 are exchanged.}
   \label{fig:Up on strands}
 \end{figure}
 
@@ -438,12 +439,12 @@ The following observation shall later be useful.
   Finally, conjugation is transitive, thus all braid generators are conjugate.
 \end{proof}
 
-As we've seen, the representation of the fundamental group of the configuration space determines the statistics. In $d=2$ dimensions the fundamental group is the braid group. The fact that $Bₙ$ is an infinite group makes the representation theory for $Bₙ$ much more involved than for finite groups. A general discussion of the representation theory of braid groups, see \cite{oskar}. Furthermore, it is not always clear whether a given representation corresponds to physically realizable particles. In this thesis we shall therefore use a general framework of abstract anyon models rooted in quantum field theory to characterize possible non-abelian representations and study the exchange of such anyons, which we introduce in \cref{anyon models}.
+As we have seen, the representation of the fundamental group of the configuration space determines the statistics. In $d=2$ dimensions the fundamental group is the braid group. The fact that $Bₙ$ is an infinite group makes the representation theory for $Bₙ$ much more involved than for finite groups. For a general discussion of the representation theory of braid groups, see \cite{oskar}. In particular, it can be shown that non-abelian representations necessarily grow in dimension with the number of particles. Furthermore, it is not always clear whether a given representation corresponds to physically realizable particles. In this thesis we shall therefore use a general framework of abstract anyon models rooted in quantum field theory to characterize possible non-abelian representations and study the exchange of such anyons, which we introduce in \cref{anyon models}.
 
 A representation $ρ:Bₙ→ℂᵏ$ of $Bₙ$ is determined by $ρ(σⱼ)$ for $j = 1,…,n-1$. If all generator representations commute we say that the representation is abelian. If $k = 1$ the representation is trivially abelian, since $U(1) = \{e^{iθ}:θ∈[0,2π)\}$ is an abelian group. In this case the possible representations are completely characterized by just one parameter $θ$.
 
 \begin{lemma}\label{res:abelian repr}
-  A representation $ρ:Bₙ→ℂ$ is given by
+  A unitary representation $ρ:Bₙ→ℂ$ is uniquely determined by
   \begin{equation}
     ρ(σⱼ) = e^{iθ},
   \end{equation}
@@ -458,13 +459,13 @@ A representation $ρ:Bₙ→ℂᵏ$ of $Bₙ$ is determined by $ρ(σⱼ)$ for $
 \end{remark}
 
 
-All representations $ρ:B₁→ℂᵏ$ of $B₁$ are trivially abelian regardless of the dimension $k$, since there is just one generator $σ₁$. Higher-dimensional representations of $Bₙ$ are generally non-abelian, but not necessarily.
+All representations $ρ:B₂→ℂᵏ$ of $B₂$ are trivially abelian regardless of the dimension $k$, since there is just one generator $σ₁$. Higher-dimensional representations of $Bₙ$ are generally non-abelian, but not necessarily.
 
 \begin{example}[Higher-dimensional abelian representations]
-  Consider $n$ anyons, assume their statistics is determined by an abelian representation $ρ:Bₙ→Cᵏ$ with $k ≥ 2$. Since all $ρ(σⱼ)$ commute they can be simultaneously diagonalized. That is, the representation is reducible and can be written as a direct sum of one-dimensional abelian representations, each acting on a separate one-dimensional sector of the Hilbert space $ℂᵏ$. No mixing occurs between these sectors. This situation essentially corresponds to having $k$ different non-interacting one-dimensional abelian anyons, each belonging to one of the sectors.
+  Consider $n$ anyons and assume their statistics is determined by an abelian representation $ρ:Bₙ→ℂᵏ$ with $k ≥ 2$. Since all $ρ(σⱼ)$ commute they can be simultaneously diagonalized. That is, the representation is reducible and can be written as a direct sum of one-dimensional abelian representations, each acting on a separate one-dimensional sector of the Hilbert space $ℂᵏ$. No mixing occurs between these sectors. This situation essentially corresponds to having $k$ different non-interacting one-dimensional abelian anyons, each belonging to one of the sectors.
 \end{example}
 
-In this example we saw how non-interacting sectors of the Hilbert space correspond to distinct particle types. This concept gives rise different particle types also in the non-abelian case. The following section discusses this in detail.
+In this example we saw how non-interacting sectors of the Hilbert space correspond to distinct particle types. This concept gives rise to different particle types also in the non-abelian case. The following section discusses this in detail.
 
 
 
@@ -502,15 +503,15 @@ In this example we saw how non-interacting sectors of the Hilbert space correspo
 
 \section{Superselection and particle types}\label{sec:observables}
 
-Before discussing selection and superselection, we must introduce the concept of observables. The set of available observables essentially representing the information that is available for a quantum system.
+Before discussing selection and superselection, we must introduce the concept of observables. The set of available observables essentially represent the information that is available for a quantum system.
 
 \subsection{Observables}\label{sec:global vs relative phase}
 
-Everything that can be measured in quantum mechanics is represented by self-adjoint (Hermitian) operators, called observables, acting on the Hilbert space in which the quantum states are defined. A measurement of an observable $A$ on a state $|ψ⟩$ gives exactly one of the eigenvalues $λₐ$ of $A$ (the eigenvalues may have multiplicity) and the resulting state $A|ψ⟩$ after measurement is the projection of $|ψ⟩$ onto the eigenspace corresponding to the measured eigenvalue $λₐ$. Since $A$ is Hermitian, the set of eigenvectors $\{|a⟩\}ₐ$ can be chosen as an orthonormal basis for the space Hilbert space that $A$ acts on. Thus, we have a resolution of the identity
+Everything that can be measured in quantum mechanics is represented by self-adjoint (Hermitian) operators, called observables, acting on the Hilbert space $ℋ$ in which the quantum states are defined. A measurement of an observable $A$ on a state $|ψ⟩$ gives one of the eigenvalues $λₐ$ of $A$ (the eigenvalues may have multiplicity) and the resulting state $A|ψ⟩$ after measurement is the projection of $|ψ⟩$ onto the eigenspace corresponding to the measured eigenvalue $λₐ$. Here we assume for simplicity that the Hilbert space $ℋ$ is finite-dimensional. Essentially the same discussion applies in the general case. Since $A$ is Hermitian, the set of eigenvectors $\{|a⟩\}ₐ$ can be chosen as an orthonormal basis for the Hilbert space that $A$ acts on. Thus, we have a resolution of the identity
 \begin{equation}
-  I = ∑ₐ |a⟩⟨a|,
+  I = ∑ₐ |a⟩⟨a|.
 \end{equation}
-where we assume the Hilbert space to be finite, for the sake of simplifying the discussion. Thus, we can write $A$ in its eigenbasis
+Thus, we can write $A$ in its eigenbasis
 \begin{equation}
   A = ∑ₐ λₐ |a⟩⟨a|,
 \end{equation}
@@ -550,20 +551,20 @@ The relative phase is $β-α$ and the above shows that it affects measurements f
 
 \subsection{Selection}
 
-Let $|ψ⟩$ is a state of identical particles, then $P_γ|ψ⟩$ cannot be distinguished from $|ψ⟩$ for any exchange $P_γ$. Thus, for any observable $A$ we must have
+Let $|ψ⟩$ be a state of indistinguishable particles, then $P_γ|ψ⟩$ cannot be distinguished from $|ψ⟩$ for any exchange $P_γ$. Thus, for any observable $A$ we must have
 \begin{equation}
   ⟨ψ|A|ψ⟩ = ⟨ψ|P_γ^*AP_γ|ψ⟩ \quad\text{for all $P_γ$,}
 \end{equation}
 otherwise the observable $A$ could in principle be used to distinguish the particles. Thus, we have the following result.
 
 \begin{lemma}
-  If the fundamental group of the configuration space of identical particles is $Sₙ$, all observable of this system must be exchange invariant,
+  If the fundamental group of the configuration space of indistinguishable particles is $Sₙ$, all observable of this system must be exchange invariant,
   \begin{equation}
     A = P_γ^*AP_γ\quad\text{for all $P_γ$}.
   \end{equation}
 \end{lemma}
 
-This is known as selection rules, for observables of a system of identical particles, effectively giving constraints on what transitions are possible.
+This is known as selection rules, for observables of a system of indistinguishable particles, effectively giving constraints on what transitions are possible.
 
 Consider particles obeying statistics given by a unitary representation $ρ : π₁(𝒞ₙ) → h$ such that $P_γ ↦ U_γ$. Consider $A$ to be an observable on the local Hilbert space $h$, then we must furthermore have
 \begin{equation}
@@ -574,7 +575,7 @@ otherwise the particles would in principle be distinguishable.
 
 \subsection{Superselection}
 
-The obtained selection rules essentially state that the Hilbert space $ℋ$ of a quantum system can be decomposed as $ℋ = ⨂ⱼ ℋⱼ$ where each component $ℋⱼ$ is an invariant subspace for all exchange operators $P_γ$. Since any observable $A$ and $P_γ$ commute, also $A$ leaves these subspaces invariant.
+The obtained selection rules essentially state that the Hilbert space $ℋ$ of a quantum system can be decomposed as $ℋ = ⨁ⱼ ℋⱼ$ where each component $ℋⱼ$ is an invariant subspace for all exchange operators $P_γ$. Since any observable $A$ and $P_γ$ commute, also $A$ leaves these subspaces invariant.
 
 Thus, with $|ψⱼ⟩ ∈ ℋⱼ$ and $|ψₖ⟩ ∈ ℋₖ$ and $j≠k$, we have
 \begin{equation}
@@ -597,7 +598,7 @@ For any observable $A$ we then have
 \end{equation}
 independent of $e^{iθ}$.
 
-A crude yet vivid example of this is a superposition of a state of two electrons and a state of one electron.
+% A crude yet vivid example of this is a superposition of a state of two electrons and a state of one electron, in Fock space.
 
 To sum up, states that are superpositions of states from different superselection sectors exhibit no interference, as opposed to superposition states in general. Furthermore, having indistinguishable particles entails that the space of allowed states is a subspace of the full space of distinguishable particle states. The observables that are allowed are those that leave this subspace invariant, they map states of indistinguishable particles to states of indistinguishable particles. Furthermore, superselection implies that all observables leave superselection sectors invariant. Thus, each superselection sector can be understood as a distinct particle type, which cannot be transformed to another particle type. Further discussion of superselection can be found in \cite{ballentine,preskill,kitaev}.
 
@@ -639,11 +640,11 @@ To sum up, states that are superpositions of states from different superselectio
 
 \section{Interference of anyonic particle exchange}
 
-We shall now see how, in principle, the anyonic exchange operator $U$ of two anyons can be measured. The principle can be illustrated as the quantum circuit in \cref{fig:exchange interference}. Consider a state $|ψ⟩$ of two identical anyons with clockwise exchange given by $|ψ⟩ ↦ U|ψ⟩$. Note that the loop describing clockwise exchange is unique up to homotopy.
+We shall now see how, in principle, the anyonic exchange operator $U$ of two anyons of the same type can be measured. The principle can be illustrated as the quantum circuit in \cref{fig:exchange interference}. Consider a state $|ψ⟩$ of two indistinguishable anyons with clockwise exchange given by $|ψ⟩ ↦ U|ψ⟩$. Note that the loop describing clockwise exchange is unique up to homotopy.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{img/exchange-interference-cropped.png}
+  \includegraphics[width=0.8\textwidth]{img/exchange-interference-cropped.ps}
   \caption{Schematic of a quantum circuit measuring the exchange operator $U$ via interference.}
   \label{fig:exchange interference}
 \end{figure}
@@ -662,7 +663,7 @@ The Hadamard transform defined as
 \end{equation}
 is a unitary transform that forms a superposition of states. Apply the Hadamard transform to the initial state
 \begin{equation}
-  |ψ⟩⊗|0⟩ \xmapsto{I⊗H} \frac{1}{\sqrt{2}} \Big( |ψ⟩⊗|0⟩ + |ψ⟩⊗|1⟩ \Big).
+  |Ψ_\text{initial}⟩ = |ψ⟩⊗|0⟩ \xmapsto{I⊗H} \frac{1}{\sqrt{2}} \Big( |ψ⟩⊗|0⟩ + |ψ⟩⊗|1⟩ \Big).
 \end{equation}
 Next, apply the unitary operator
 \begin{equation}
@@ -686,7 +687,7 @@ to recombine the states after the split, this is only for the schematic, mathema
 \end{equation}
 Finally, perform a Hadamard transform again, mapping the state to
 \begin{equation}
-  \frac{1}{2} \Big( \big((I+U)|ψ⟩\big)⊗|0⟩ + \big((I-U)|ψ⟩\big)⊗|1⟩ \Big).
+  |Ψ_\text{final}⟩ = \frac{1}{2} \Big( \big((I+U)|ψ⟩\big)⊗|0⟩ + \big((I-U)|ψ⟩\big)⊗|1⟩ \Big).
 \end{equation}
 To sum up we have performed the sequence of three operations $(I⊗H)\widetilde{U}(I⊗H)$. Note that if $U = I$ this sequence of operations does nothing, since $H² = I$.
 
@@ -703,54 +704,79 @@ The exchange phase $U$ can now be measured by performing a measurement in the $\
 \end{equation}
 The anyonic phase $θ$ can thus be measured, and in this setup $θ$ can be understood as a shift of the probability of measuring the final state in $|0⟩$ or $|1⟩$. In particular, bosons ($θ=0$) always end up in $|0⟩$ and fermions ($θ=π$) always end up in $|1⟩$.
 
-In the case where $U$ is non-abelian, computing the probability of measuring the final state in $|0⟩$ becomes more involved because $U$ can no longer be moved between the two Hilbert spaces $\mathcal{H}_A$ and $\mathcal{H}_B$ as in the case where $U$ is abelian (in which case $U$ is a scalar). We need some more machinery for this, namely that of density operators and partial trace. These concepts are discussed in \cref{sec:density operators and partial trace}. This unfortunate forward reference allows the discussion of quantum computation in \cref{sec:intro qc} to be self-contained.
-
-Denote the resulting state by
+Similarly, if $U$ is non-abelian, the measurement in the state $|0⟩ ∈ ℋ_B$ can be represented by the observable $𝟙⊗|0⟩⟨0|$ on the total Hilbert space $ℋ$. Thus, we obtain the probability of measuring $|Ψ_\text{final}⟩$ to be in the state $|0⟩$ as
 \begin{equation}
-  |Ψ⟩ = \frac{1}{2} \Big( \big((I+U)|ψ⟩\big)⊗|0⟩ + \big((I-U)|ψ⟩\big)⊗|1⟩ \Big)
+  \big⟨Ψ_\text{final}\big|\big(𝟙⊗|0⟩⟨0|\big)\big|Ψ_\text{final}\big⟩ = \frac{1}{4} \big‖(I+U)ψ\big‖².
 \end{equation}
-and form the corresponding density operator
-\begin{equation}
-  ρ_ψ = |ψ⟩⟨ψ|.
-\end{equation}
-We measure the interference by measuring the probability $P(|0⟩)$ that $ρ_ψ$ is in the state $|0⟩$ in subsystem $B$. The available information of the total state $ρ_ψ$ in subsystem $B$ is given by the reduced density operator $ρ_ψᴮ$ with subsystem $A$ traced out, defined in \cref{eq:red dens op}. Thus,
-\begin{equation}
-  P(|0⟩) = ⟨0|ρ_ψᴮ|0⟩.
-\end{equation}
-We have
-\begin{equation}
-  \begin{aligned}
-    ρ_ψ = |Ψ⟩⟨Ψ| =
-    \frac{1}{4} \Bigg(
-      & \bigg[(I+U)|ψ⟩⟨ψ|(I+U^*)\bigg] ⊗ |0⟩⟨0| {}+{} \\
-      & \bigg[(I-U)|ψ⟩⟨ψ|(I-U^*)\bigg] ⊗ |1⟩⟨1| {}+{} \\
-      & \bigg[(I+U)|ψ⟩⟨ψ|(I-U^*)\bigg] ⊗ |0⟩⟨1| {}+{} \\
-      & \bigg[(I-U)|ψ⟩⟨ψ|(I+U^*)\bigg] ⊗ |1⟩⟨0|
-    \Bigg).
-  \end{aligned}
-\end{equation}
-Thus
-\begin{equation}
-  \begin{aligned}
-    ⟨0|ρ_ψᴮ|0⟩_B
-    &= \frac{1}{4} \operatorname{tr} \Big[(I+U)|ψ⟩⟨ψ|(I+U^*)\Big] \\
-    &= \frac{1}{4} ∑ₖ ⟨k|(I+U)|ψ⟩⟨ψ|(I+U^*)|k⟩ \\
-    &= \frac{1}{4} ∑ₖ |⟨k|(I+U)|ψ⟩|².
-  \end{aligned}
-\end{equation}
-
 We recover the result for abelian anyons by letting $U = e^{iθ}$,
 \begin{equation}
   \begin{aligned}
-    ⟨0|ρ_ψᴮ|0⟩_B
-    &= \frac{1}{4} ∑ₖ |⟨k|(I+U)|ψ⟩|² \\
-    &= \frac{1}{4} ∑ₖ |1+e^{iθ}|² |⟨k|ψ⟩|² \\
+    \frac{1}{4} \big‖(I+U)ψ\big‖²
+    &= \frac{1}{4} \big‖(1+e^{iθ})ψ\big‖² \\
+    &= \frac{1}{4} \big|1+e^{iθ}\big|² \big‖ψ\big‖² \\
     &= \frac{1}{2} (1+\cosθ),
   \end{aligned}
 \end{equation}
-where $∑ₖ |⟨k|ψ⟩|² = 1$ due to normalization of $|ψ⟩$.
+where $|ψ⟩$ is taken to be normalized.
 
-For general $U$ it is difficult to say much more than this. The dependence of the probability $⟨0|ρ_ψᴮ|0⟩$ on the exchange operator $U$ can be rather involved. Assuming that we have control of the state $|ψ⟩$, with an appropriate set of choices for $|ψ⟩$ the elements of $U$ can be deduced by repeating the interference measurement. We outline this idea in the following example.
+
+% In the case where $U$ is non-abelian, computing the probability of measuring the final state in $|0⟩$ becomes more involved because $U$ can no longer be moved between the two Hilbert spaces $\mathcal{H}_A$ and $\mathcal{H}_B$ as in the case where $U$ is abelian (in which case $U$ is a scalar). We need some more machinery for this, namely that of density operators and partial trace. These concepts are discussed in \cref{sec:density operators and partial trace}.
+
+% Denote the resulting state by
+% \begin{equation}
+%   |Ψ⟩ = \frac{1}{2} \Big( \big((I+U)|ψ⟩\big)⊗|0⟩ + \big((I-U)|ψ⟩\big)⊗|1⟩ \Big)
+% \end{equation}
+% and form the corresponding density operator
+% \begin{equation}
+%   ρ_ψ = |ψ⟩⟨ψ|.
+% \end{equation}
+% We measure the interference by measuring the probability $P(|0⟩)$ that $ρ_ψ$ is in the state $|0⟩$ in subsystem $B$. The available information of the total state $ρ_ψ$ in subsystem $B$ is given by the reduced density operator $ρ_ψᴮ$ with subsystem $A$ traced out, defined in \cref{eq:red dens op}. Thus,
+% \begin{equation}
+%   P(|0⟩) = ⟨0|ρ_ψᴮ|0⟩.
+% \end{equation}
+% We have
+% \begin{equation}
+%   \begin{aligned}
+%     ρ_ψ = |Ψ⟩⟨Ψ| =
+%     \frac{1}{4} \Bigg(
+%       & \bigg[(I+U)|ψ⟩⟨ψ|(I+U^*)\bigg] ⊗ |0⟩⟨0| {}+{} \\
+%       & \bigg[(I-U)|ψ⟩⟨ψ|(I-U^*)\bigg] ⊗ |1⟩⟨1| {}+{} \\
+%       & \bigg[(I+U)|ψ⟩⟨ψ|(I-U^*)\bigg] ⊗ |0⟩⟨1| {}+{} \\
+%       & \bigg[(I-U)|ψ⟩⟨ψ|(I+U^*)\bigg] ⊗ |1⟩⟨0|
+%     \Bigg).
+%   \end{aligned}
+% \end{equation}
+% Thus
+% \begin{equation}
+%   \begin{aligned}
+%     ⟨0|ρ_ψᴮ|0⟩_B
+%     &= \frac{1}{4} \operatorname{tr} \Big[(I+U)|ψ⟩⟨ψ|(I+U^*)\Big] \\
+%     &= \frac{1}{4} ∑ₖ ⟨k|(I+U)|ψ⟩⟨ψ|(I+U^*)|k⟩ \\
+%     &= \frac{1}{4} ∑ₖ |⟨k|(I+U)|ψ⟩|².
+%   \end{aligned}
+% \end{equation}
+
+% We recover the result for abelian anyons by letting $U = e^{iθ}$,
+% \begin{equation}
+%   \begin{aligned}
+%     ⟨0|ρ_ψᴮ|0⟩_B
+%     &= \frac{1}{4} ∑ₖ |⟨k|(I+U)|ψ⟩|² \\
+%     &= \frac{1}{4} ∑ₖ |1+e^{iθ}|² |⟨k|ψ⟩|² \\
+%     &= \frac{1}{2} (1+\cosθ),
+%   \end{aligned}
+% \end{equation}
+% where $∑ₖ |⟨k|ψ⟩|² = 1$ due to normalization of $|ψ⟩$.
+
+The dependence of the measurement probability on the exchange operator $U$ can be rather involved. Assuming that we have control of the state $|ψ⟩$, with an appropriate set of choices for $|ψ⟩$ the elements of $U$ can be deduced by repeating the interference measurement.
+
+If we work in the eigenbasis of $U$ we have $U = \operatorname{diag} (e^{iθ₁}, …, e^{iθₖ})$ and write $|ψ⟩ = ∑_{j=0}^{k-1} cⱼ|j⟩$, then
+\begin{equation}
+  \begin{aligned}
+    \frac{1}{4} \big‖(I+U)ψ\big‖²
+    &= \frac{1}{4} ∑ⱼ \abs*{(1+e^{iθⱼ}) cⱼ}² \\
+    &= \frac{1}{2} ∑ⱼ |cⱼ|² \big( 1 + \cos(θⱼ) \big).
+  \end{aligned}
+\end{equation}
 
 \begin{example}
   Let $ℋ_A$ be two-dimensional. We can then write
@@ -773,15 +799,15 @@ For general $U$ it is difficult to say much more than this. The dependence of th
   Thus we have
   \begin{equation}
     \begin{aligned}
-      ⟨0|ρ_ψᴮ|0⟩_B
-      &= \frac{1}{4} \left( |(u_{00}+1)c₀ + u_{01}c₁|² + |u_{10}c₀ + (u_{11}+1)c₁|² \right) \\
-      &= \frac{1}{4} \left( |(a+1)c₀ + bc₁|² + |-e^{iθ}b^*c₀ + (e^{iθ}a^*+1)c₁|² \right).
+      \frac{1}{4} \big‖(I+U)ψ\big‖²
+      &= \frac{1}{4} \left( \big|(u_{00}+1)c₀ + u_{01}c₁\big|² + \big|u_{10}c₀ + (u_{11}+1)c₁\big|² \right) \\
+      &= \frac{1}{4} \left( \big|(a+1)c₀ + bc₁\big|² + \big|-e^{iθ}b^*c₀ + (e^{iθ}a^*+1)c₁\big|² \right).
     \end{aligned}
   \end{equation}
   Determining $U$ amounts to determining four real parameters, $\operatorname{arg}(a)$, $\operatorname{arg}(b)$, $|a|$ and $θ$. For example, the choice $|ψ⟩=|0⟩$ gives
   \begin{equation}
     \begin{aligned}
-      ⟨0|ρ_ψᴮ|0⟩_B
+      \frac{1}{4} \big‖(I+U)ψ\big‖²
       &= \frac{1}{4} \left( |a+1|² + |-e^{iθ}b|² \right) \\
       &= \frac{1}{4} \left( |a|² + 1 + 2\operatorname{Re}(a) + |b|² \right) \\
       &= \frac{1}{2} \left( 1 + \cos(\operatorname{arg}(a)) \right),
@@ -789,24 +815,11 @@ For general $U$ it is difficult to say much more than this. The dependence of th
   \end{equation}
   allowing measurements of $\operatorname{arg}(a)$.
   Similarly, the other parameters of $U$ can be determined by appropriately choosing the state $|ψ⟩$.
-
-  If we work in the eigenbasis of $U$ we have
-  \begin{equation}
-    U =
-    \begin{pmatrix}
-      e^{iθ₁} & 0 \\
-      0 & e^{iθ₂}
-    \end{pmatrix}
-  \end{equation}
-  and then
-  \begin{equation}
-    ⟨0|ρ_ψᴮ|0⟩_B = \frac{1}{2} \left( |c₀|²(1+\cos(θ₁)) + |c₁|²(1+\cos(θ₂)) \right).
-  \end{equation}
 \end{example}
 
 This procedure can be straight-forward extended to let the state $|ψ⟩$ represent more than two anyons, and thus allow the operator $\widetilde{U}$ to introduce a more complex braid. In this way, truly non-abelian properties of a larger system of anyons can in principle be probed.
 
-Other methods of anyonic interferometry is discussed in \cite{bonderson}. Note that as one anyon is taken around one or several other anyons, the introduced phase can only be measured after one full loop as been traversed and the phase can be compared to another anyon. Thus, it is not physical to say that the phase continuously (or in any other way) changes during the exchange. That is, how the phase is affected before the particles meet is non-physical, we are free to choose this as long as the choice respects the result of a complete winding of particles; this illustrates the gauge invariance of the anyonic phase during braiding.
+Other methods of anyonic interferometry are discussed in \cite{bonderson}. Note that as one anyon is taken around one or several other anyons, the introduced phase can only be measured after one full loop has been traversed and the phase can be compared to another anyon. Thus, it is not physical to say that the phase continuously (or in any other way) changes during the exchange. That is, how the phase is affected before the particles meet is non-physical, we are free to choose this as long as the choice respects the result of a complete winding of particles; this illustrates the gauge invariance of the anyonic phase during braiding.
 
 
 
@@ -850,14 +863,14 @@ Other methods of anyonic interferometry is discussed in \cite{bonderson}. Note t
 
 \section{Anyon models and physical realizability}\label{sec:models and realizability}
 
-This thesis focuses primarily on the mathematical aspects of anyons, however, in this section we give a short account of possible physical realizations for anyons. This topic is further discussed in for instance \cite{nayak,topological quantum compiling,slingerland bais}.
+This thesis focuses primarily on the mathematical aspects of anyons, however, in this section we give a short account of possible physical realizations for anyons. This topic is further discussed in for instance \cite{nayak,topological quantum compiling,slingerland bais,stern}.
 
-Abelian anyons have been claimed to have been detected in the fractional quantum hall (FQH) effect \cite{abelian fqh}. These results are not unambiguous and total consensus does not exist in the scientific community. Furthermore, it has only been conjectured that non-abelian anyons can be realized in FQH liquids at the filling fractions $\nu = 5/2$, where anyons known as the Ising anyons are thought to exist \cite{wang book}. Partial experimental results exist which support the existence of non-abelian anyons \cite{non-abelian experimental}. The Fibonacci anyon model which is studied in \cref{fibonacci anyons} has support from the topological quantum field theory $SU(2)₃$ Chern-Simons-Witten (CSW). \cite{nayak}
+Abelian anyons have been claimed to have been detected in the fractional quantum hall (FQH) effect \cite{abelian fqh,fractional angular momentum}. These results are not unambiguous and total consensus does not exist in the scientific community. Furthermore, it has only been conjectured that non-abelian anyons can be realized in FQH liquids at the filling fractions $ν = 5/2$, where anyons known as the Ising anyons are thought to exist and experimental results exist which partially support the existence of non-abelian anyons in the $ν = 12/5$ Read-Rezayi state \cite{wang book,non-abelian experimental}.
 
-There are different attempts to identify whether particles obey anyonic statistics. Interferometry methods have been developed, as in \cite{bonderson}. Another approach is to study the wave function density, as outlined in \cite{lundholm-rougerie,fractional angular momentum}. An unambiguous argument for abelian anyons in the context of FQH is given in \cite{lundholm-rougerie}. The benefit of using interferometry is that it is a direct way to identify braid statistics, while the wave function density is an indirect effect of the statistics. However, anyonic interferometry is in practice difficult to achieve, it can be argued that wave function density is easier to measure.
+There are different attempts to identify whether particles obey anyonic statistics. Interferometry methods have been developed, as in \cite{bonderson}. Another approach is to study the wave function density, as outlined in \cite{lundholm-rougerie,fractional angular momentum}. An unambiguous argument for abelian anyons in the context of FQH is given in \cite{lundholm-rougerie}. The benefit of using interferometry is that it is a direct way to identify braid statistics, while the wave function density is an indirect effect of the statistics. However, anyonic interferometry is in practice difficult to achieve; it can be argued that wave function density is easier to measure.
 
 In the literature one generally encounters two types of anyons.
 \begin{enumerate}
-  \item Anyons with quantum dynamics, giving rise to anyonic particle statistics, i.e.\ braid statistics. Such particles must necessarily be allowed to move freely in space, such as in a gas. This is the type of anyons that one has in mind when discussion statistical repulsion.
+  \item Anyons with quantum dynamics, giving rise to anyonic particle statistics, i.e.\ braid statistics. Such particles must necessarily be allowed to move freely in space, such as in a gas. This is the type of anyons that one has in mind when discussing statistical repulsion.
   \item Anyons with fixed or controlled coordinates. In the strict sense this can be any quantum system that is governed by a representation of the braid group. This is the type of anyons that one has in mind when discussing the use of anyons for topological quantum computation. The anyons need to be fixed so that controlled braiding can be performed. In principle this can be achieved by forcing the position of dynamical anyons by placing each anyon in a deep potential that can be externally controlled.
 \end{enumerate}

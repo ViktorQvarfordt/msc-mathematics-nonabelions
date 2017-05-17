@@ -2,7 +2,7 @@
 
 \chapter{Statistical repulsion}\label{chap:statistical repulsion}
 
-In this chapter we give a lower bound for the kinetic energy of free anyons. This gives rise to what is known as statistical repulsion, an essentially geometric effect of the exchange operator that causes an effective repulsion of identical particles. This has consequences for the density of the wave function, and might thus be measured. This chapter is in part based on \cite{methmmp,lundholm-solovej,mancarella}.
+In this chapter we give a lower bound for the kinetic energy of free anyons. This gives rise to what is known as statistical repulsion, an essentially geometric effect of the exchange operator that causes an effective repulsion of indistinguishable particles. This has consequences for the density of the wave function, and might thus be measured. This chapter is in part based on \cite{methmmp,lundholm-solovej,mancarella}. See also \cite{larson-lundholm} for the case of what is known as extended abelian anyons.
 
 
 A quantum system is generally determined by a Hamiltonian $\hat{H} = \hat{T} + \hat{V}$ where $\hat{T} = \hat{p}⋅\hat{p} = -∇²$ is the kinetic energy operator, $\hat{p} = -i∇$ is the momentum operator, and $\hat{V}$ is the potential energy operator. We shall consider free particles, i.e.\ $\hat{V} = 0.$
@@ -20,16 +20,16 @@ Recall that the exchange operator is the braid group representation of a simple 
 \end{equation}
 For fermions, this leads to the well-known Pauli exclusion principle. Simply stated, if $x₁ = x_2$ it immediately follows that $ψ(x₁, x₁) = 0$, the particles cannot occupy the same position. More generally, the anti-symmetry of the fermionic wave function causes the kinetic energy to increase as the particles tend closer to each other. This is an effective repulsion due to the particle statistics. We shall now see this in more detail.
 
-Consider $n$ identical particles on $ℝᵈ$. Let $x₁, …, x_n$ be the coordinates of the particles, i.e.\ $xⱼ ∈ ℝᵈ$. This collection of particles is described by an $n$-particle wave function $ψ(x₁, …, x_n) ∈ L^2(ℝ^{dn})$, i.e.\ a square integrable complex-valued function on $ℝ^{dn}$. The kinetic energy $T$ of this system is defined as
+Consider $n$ indistinguishable particles on $ℝᵈ$. Let $x₁, …, x_n$ be the coordinates of the particles, i.e.\ $xⱼ ∈ ℝᵈ$. This collection of particles is described by an $n$-particle wave function $ψ(x₁, …, x_n) ∈ L^2(ℝ^{dn})$, i.e.\ a square integrable complex-valued function on $ℝ^{dn}$. The kinetic energy $T$ of this system is defined as
 \begin{equation}
   T ≔ ⟨ψ|\hat{T}|ψ⟩ = ∑_{j=1}^n ∫_{ℝ^{dn}} |∇ⱼ ψ|^2 dx.
 \end{equation}
-In the present discussion we shall simply assume that $ψ$ is in the domain of the operator.
+In the present discussion we shall assume that $ψ$ is normalized and in the domain of the operator. A detailed discussion for abelian anyons can be found in \cite{larson-lundholm} and \cite{lundholm-solovejAHP}, see also \cite{dellantonio}.
 
-Let the particles be fermions, i.e.\ $ψ ∈ L_\text{asym}^2(ℝ^{dn})$. This is the subspace of functions $ψ$ in $L^2(ℝ^{dn})$ such that $ψ(…, xⱼ, …, xₖ, …) = - ψ(…, xₖ, …, xⱼ, …)$ for $j \ne k$. In this case, we have the following theorem. \cite{hoholt,methmmp}
+Let the particles be fermions, i.e.\ $ψ ∈ L_\text{asym}^2(ℝ^{dn})$. This is the subspace of functions $ψ$ in $L^2(ℝ^{dn})$ such that $ψ(…, xⱼ, …, xₖ, …) = - ψ(…, xₖ, …, xⱼ, …)$ for $j \ne k$. In this case, we have the following theorem \cite{hoholt,methmmp}.
 
 \begin{theorem}[Many-body Hardy inequality for fermions]\label{thm:hardy fermion}
-  In the described setting with $ψ$ being an $n$-particle wave function, the following lower bound for the kinetic energy holds
+  In the described setting with $ψ$ being an $n$-particle fermionic wave function, the following lower bound for the kinetic energy holds
   \begin{equation}\label{eq:fermion ineq}
     ∫_{ℝ^{dn}} ∑_{j=1}^n |∇ⱼψ|^2 dx \ge
     \frac{d²}{n} ∫_{ℝ^{dn}} ∑_{1≤j<k≤n} \frac{|ψ|^2}{|xⱼ-xₖ|^2} dx +
@@ -77,7 +77,7 @@ We give an outline of the proof.
   from which the result follows.
 \end{proof}
 
-In the outline of the proof we skipped the details of the last step. To obtain a similar inequality for anyons, it is exactly this step that shall be important, and we now look into this in more detail.
+In the outline of the proof we skipped the details of the last step. To obtain a similar inequality for anyons, it is exactly this step that shall be important, and we now look into this in more detail in the case $d = 2$.
 
 
 
@@ -99,21 +99,21 @@ In the proof outline of \cref{thm:hardy fermion}, the assumption that $ψ$ is an
   ∫_{ℝᵈ} \left|∇_{x_{jk}^\text{rel}} u(x) \right|^2 dx_{jk}^\text{rel}
 \end{equation}
 is considered. We now extend this to the more general case with
-\begin{equation}
+\begin{equation}\label{eq:rel boundary cond}
   u(-x_{jk}^\text{rel}, x_{jk}^\text{cm}) = U_γ u(x_{jk}^\text{rel}, x_{jk}^\text{cm})
 \end{equation}
-for general anyons with simple exchange represented by $U_γ$. This implicitly assumes $d = 2$ so that $U_γ$ determines braid statistics. Generally $U_γ$ may denote simple exchange around a number of inner anyons, we shall return to this detail later.
+for general anyons with simple exchange represented by $U_γ$. This implicitly assumes $d = 2$ so that $U_γ$ determines braid statistics. Generally, $U_γ$ may denote simple exchange around a number of inner anyons, i.e.\ $γ$ denotes a loop in configuration space, enclosing a number of fixed anyons. We shall return to the details of this later.
 
-In relative coordinates $x_{jk}^\text{rel} = (r, φ)$ we have
+In polar coordinates $x_{jk}^\text{rel} = (r, φ)$ we have
 \begin{equation}
   ∫_{ℝ²} \left|∇_{x_{jk}^\text{rel}} u \right|^2 dx_{jk}^\text{rel} =
-  ∫_{r=0}^∞ ∫_{φ=0}^{2π} \left( \left|∂ᵣu\right|^2 + \frac{\left|∂_φu\right|²}{r²} \right) r dr dφ.
+  ∫_{r=0}^∞ ∫_{φ=0}^{2π} \left( \left|∂ᵣu\right|^2 + \frac{\left|∂_φu\right|²}{r²} \right) r dφ dr.
 \end{equation}
 It is the angular derivative term that gives the contribution of the exchange statistics. Thus, we only consider this integral
 \begin{equation}
   ∫₀^{2π} \left|∂_φu\right|² dφ.
 \end{equation}
-Since we consider $r$ fixed, we may write $u(φ) ≔ u(r,φ)$. The boundary condition is then simply $u(π) = U_γ u(0)$. Furthermore,
+Since we consider $r$ fixed, we define $u(φ) ≔ u(r,φ)$. In this way, the loop $γ = γᵣ$ is determined by $r$ and the number of encircled fixed anyons varies with $r$. Loops with different number of encircled fixed anyons are not homotopically equivalent and thus the exchange operator $U_{γᵣ}$ depends on $r$. The boundary condition \cref{eq:rel boundary cond} may thus be written as $u(π) = U_{γᵣ} u(0)$. Furthermore,
 \begin{equation}
   \begin{aligned}
     ∫₀^{2π} \left|∂_φu\right|² dφ
@@ -122,7 +122,7 @@ Since we consider $r$ fixed, we may write $u(φ) ≔ u(r,φ)$. The boundary cond
     ∫₀^π \left|∂_φu(π+φ)\right|² dφ \\
     &=
     ∫₀^π \left|∂_φu(φ)\right|² dφ +
-    ∫₀^π \left|∂_φU_γu(φ)\right|² dφ \\
+    ∫₀^π \left|∂_φU_{γᵣ}u(φ)\right|² dφ \\
     &=
     2∫₀^π \left|∂_φu\right|² dφ
   \end{aligned}
@@ -131,9 +131,9 @@ since unitary operators are norm preserving.
 
 Define the operator
 \begin{equation}\label{eq:D}
-  D = -i∂_φ, \quad 0≤φ≤π, \quad \operatorname{Dom}D = \{u : u(π) = U_γu(0)\}.
+  D = -i∂_φ, \quad \operatorname{Dom}D = \{u : u, ∂_φ u ∈ L²([0,π]), u(π) = U_{γᵣ}u(0)\}.
 \end{equation}
-The expectation value of $D²$,
+The expectation value of $D²$ with $\operatorname{dom} D² = \{ u : u, Du ∈ \operatorname{dom}D \}$,
 \begin{equation}
   \begin{aligned}
     ⟨u|D²|u⟩
@@ -143,21 +143,21 @@ The expectation value of $D²$,
     &= ∫₀^π |∂_φu|² dφ
   \end{aligned}
 \end{equation}
-is precisely the integral we are considering. In the above calculation, the boundary term vanishes since $U_γ$ is unitary,
+is precisely the integral we are considering. In the above calculation, the boundary term vanishes since $U_{γᵣ}$ is unitary,
 \begin{equation}
   \begin{aligned}
     \overline{u}∂_φu\Big|₀^π
     &= \overline{u}(π)∂_φu(π) - \overline{u}(0)∂_φu(0) \\
-    &= U_γ^*\overline{u}(0)U_γ∂_φu(0) - \overline{u}(0)∂_φu(0) \\
-    &= (U_γ^*U_γ - I)\overline{u}(0)∂_φu(0) \\
+    &= U_{γᵣ}^*\overline{u}(0)U_{γᵣ}∂_φu(0) - \overline{u}(0)∂_φu(0) \\
+    &= (U_{γᵣ}^*U_{γᵣ} - I)\overline{u}(0)∂_φu(0) \\
     &= 0.
   \end{aligned}
 \end{equation}
 Similarly, one shows that $D$ is self-adjoint. Thus, also $D²$ is self-adjoint, so the Rayleigh quotient of $D²$ can be used to obtain a lower bound by the min-max theorem,
 \begin{equation}
-  ∫₀^π |∂_φu|² dφ = ⟨u|D²|u⟩ ≥ \inf σ(D²) ≕ λ₀,
+  ∫₀^π |∂_φu|² dφ = ⟨u|D²|u⟩ ≥ \inf σ(D²) ≕ λ_{0,γᵣ}²,
 \end{equation}
-where we by convention assume $u$ to be normalized.
+where we assume that $u$ is normalized in $L²[0,π]$.
 
 By the spectral theorem we have
 \begin{equation}
@@ -168,54 +168,51 @@ The spectrum of $D$ is straight forward to compute.
 \begin{lemma}
   The spectrum of $D$ is given by
   \begin{equation}
-    σ(D) = \{ λ : e^{iλπ} \text{ is an eigenvalue of $U_γ$} \}
+    σ(D) = \{ λ : e^{iλπ} \text{ is an eigenvalue of $U_{γᵣ}$} \}
   \end{equation}
 \end{lemma}
 \begin{proof}
   The eigenequation for $D$ gives
   \begin{equation}
-    Du = λu ⟺ -u' = λu ⟺ u(φ) = C e^{iλφ}
+    Du = λu ⟺ -iu' = λu ⟺ u(φ) = C e^{iλφ}
   \end{equation}
-  for constant $C ∈ ℂᵏ$. Moreover, the boundary condition \cref{eq:D} implies
+  for a non-zero constant vector $C ∈ ℂᵏ$. Moreover, the boundary condition \cref{eq:D} implies
   \begin{equation}
-    u(π) = U_γ u(0) ⟹ Ce^{iλπ} = U_γC,
+    u(π) = U_{γᵣ} u(0) ⟹ Ce^{iλπ} = U_{γᵣ}C,
   \end{equation}
-  i.e.\ $e^{iλπ}$ is an eigenvalue of $U_γ$.
+  i.e.\ $e^{iλπ}$ is an eigenvalue of $U_{γᵣ}$, with eigenvector $C$.
 \end{proof}
 
 Thus, we have a lower bound for the angular term, carrying the contribution of the anyonic statistics leading to statistical repulsion.
 
 \begin{theorem}\label{thm:inf spec bound}
-  Anyons with exchange operator $U_γ$ satisfy the inequality
+  Anyons with exchange operator $U_{γᵣ}$ satisfy the inequality
   \begin{equation}
-    ∫₀^π |∂_φu|² dφ ≥ \inf \, \{ λ² : e^{iλπ} \text{ is an eigenvalue of $U_γ$} \}.
+    ∫₀^π |∂_φu|² dφ ≥ \inf \, \{ λ² : e^{iλπ} \text{ is an eigenvalue of $U_{γᵣ}$} \} = λ_{0,γᵣ}².
   \end{equation}
 \end{theorem}
 
 \begin{remark}
-  Each eigenvalue of $U_γ$ is on the form $e^{iαπ}$ with $0≤α<2$ since $U_γ$ is unitary. By the theorem, each eigenvalue gives rise to a family of possible energy levels
+  Each eigenvalue of $U_{γᵣ}$ is on the form $e^{iαπ}$ with $0≤α<2$ since $U_{γᵣ}$ is unitary. By the theorem, each eigenvalue gives rise to a family of possible energy levels
   \begin{equation}
     \{ (α+2q)² : q ∈ ℤ \}
   \end{equation}
   for the angular Hamiltonian $H = D²$, with corresponding eigenfunctions
   \begin{equation}
-    u_q(φ) = C₁e^{i(α+2q)φ} + C₂e^{-i(α+2q)φ}.\qedhere
+    u_q(φ) = C₁e^{i(α+2q)φ}.\qedhere
   \end{equation}
 \end{remark}
 
 
 \begin{remark}
-  Instead of introducing anyonic exchange as the condition $u(π) = U_γ u(0)$ one can use the framework of fiber bundles to model anyons by changing the kinetic energy operator from
-  \begin{equation}
-   \widehat{T} = ∑_{j=1}^n -∇ⱼ^2
-  \end{equation}
-  to
-  \begin{equation}
-   \widehat{T}_A = ∑_{j=1}^n \left( -i ∇ⱼ + Aⱼ \right)^2,
-  \end{equation}
-  where $A$ is a connection one-form on the bundle of which the wave function is a section. In this way the wave function is periodic $u(π)=u(0)$, i.e.\ the anyonic exchange is completely captured $Aⱼ$. \cite{nakahara}
+  Instead of introducing anyonic exchange as the condition $u(π) = U_{γᵣ} u(0)$ one can use the framework of fiber bundles to model anyons by changing the kinetic energy operator from
+  \begin{flalign}
+    &\text{\textit{Anyon gauge:}} & \widehat{T} &= ∑_{j=1}^n -∇ⱼ^2 &
+  \intertext{to}
+    &\text{\textit{Magnetic gauge:}} & \widehat{T}_A &= ∑_{j=1}^n \left( -i ∇ⱼ + Aⱼ \right)^2,&
+  \end{flalign}
+  where $A$ is a connection one-form on the bundle of which the wave function is a section. In this way the wave function may be chosen periodic $u(π)=u(0)$, i.e.\ the anyonic exchange is then completely captured by $Aⱼ$ and $ψ$ is bosonic \cite{nakahara}.
   % TODO: The following example illustrates this.
-
   % \begin{example}
   %   Skriv ner fr. tidigare anteckningar: Två abelska anyoner. Connection $Aⱼ = α ∑_{j≠k} \frac{(xⱼ-xₖ)^⟂}{|xⱼ-xₖ|²}$.
   % \end{example}
@@ -238,20 +235,23 @@ Thus, we have a lower bound for the angular term, carrying the contribution of t
 
 \section{Separating the state space}
 
-In the above discussion, the exchange operator $U_γ$ is defined to be a simple exchange of the pair $(xⱼ,xₖ)$, possibly around $p$ other anyons. We started by considering the expression
+In the above discussion, the exchange operator $U_{γᵣ}$ is defined to be a simple exchange of the pair $(xⱼ,xₖ)$, possibly around $p$ other anyons. We started by considering the expression
 \begin{equation}
   ∫_{ℝ^{2(n-2)}} ∫_{ℝ² \times ℝ²} \left|∇_{x_{jk}^\text{rel}}u\right|^2  2 dx_{jk}^\text{rel}dx_{jk}^\text{cm} dx'.
 \end{equation}
 The inner integral concerns anyons $j$ and $k$ with the remaining $n-2$ considered fixed. The inner integral is rewritten as
 \begin{equation}
-  ∫_{ℝ²} \left|∇_{x_{jk}^\text{rel}} u \right|^2 dx_{jk}^\text{rel} =
-  ∫_{r=0}^∞ ∫_{φ=0}^{2π} \left( \left|∂ᵣu\right|^2 + \frac{\left|∂_φu\right|²}{r²} \right) r dr dφ
+  \begin{aligned}
+    ∫_{ℝ²} \left|∇_{x_{jk}^\text{rel}} u \right|^2 dx_{jk}^\text{rel}
+    &= ∫_{r=0}^∞ ∫_{φ=0}^{2π} \left( \left|∂ᵣu\right|^2 + \frac{\left|∂_φu\right|²}{r²} \right) r dφ dr \\
+    &≥ ∫_{r=0}^∞ ∫_{φ=0}^{2π} \left( \left|∂ᵣu\right|^2 + λ_{0,γᵣ}²\frac{\left|u\right|²}{r²} \right) r dφ dr
+  \end{aligned}
 \end{equation}
-and we assume $u$ satisfies the anyonic boundary condition $u(π) = U_γ u(0)$. The exchange operator $U_γ$ may depend on $r$ since the number of encircled anyons may affect the exchange operator $U_γ$. To make this precise we separate the state space into open annuli (regions between two concentric circles) centered at $x_{jk}^\text{cm}$, such that none of the fixed $n-2$ anyons are at the interior of an annulus, cf.\ \cref{fig:annuli}. This gives a separation of $ℝ^2$ into regions with increasing number $p$ of the $n-2$ fixed anyons. Let $r₁ \le r₂ \le … \le r_{n-2}$ be the radial coordinate of the $n-2$ fixed anyons. The innermost annulus is an open disk (degenerate annulus) with radius $r₁$, the second innermost annulus is the region between circles of radius $r₁$ and $r_2$, etc. Note that the circles with radii $r₁, r₂, …, r_{n-2}$ are not contained in any annuli, since the anyons cannot pass through each other, and we are considering angular motion. If the radii of two fixed anyons coincide, then there is no annulus separating them. The removal of these circles removes more points than $\bbDelta$, however this is no issue since the circles of radius $rⱼ$ have measure zero.
+and we assume $u$ satisfies the anyonic boundary condition $u(π) = U_{γᵣ} u(0)$. The exchange operator $U_{γᵣ}$ may depend on $r$ since the number of encircled anyons in the loop $γᵣ$ may affect the exchange operator $U_{γᵣ}$. To make this precise we separate the state space into open annuli (regions between two concentric circles) centered at $x_{jk}^\text{cm}$, such that none of the fixed $n-2$ anyons are at the interior of an annulus, cf.\ \cref{fig:annuli}. This gives a separation of $ℝ^2$ into regions with increasing number $p$ of the $n-2$ fixed anyons. Let $r₁ \le r₂ \le … \le r_{n-2}$ be the radial coordinate of the $n-2$ fixed anyons. The innermost annulus is an open disk (degenerate annulus) with radius $r₁$, the second innermost annulus is the region between circles of radius $r₁$ and $r_2$, etc. Note that the circles with radii $r₁, r₂, …, r_{n-2}$ are not contained in any annuli, since the anyons cannot pass through each other, and we are considering angular motion. If the radii of two fixed anyons coincide, then there is no annulus separating them. The removal of these circles removes more points than $\bbDelta$, however this is no issue since the circles of radius $rⱼ$ have measure zero.
 
-In this way, exchange of particles $j$ and $k$ depend on $r$, i.e.\ $U_γ = U_γ(r)$ and $D = Dₚ$. Since the dependence on $r$ is exclusively due th the $p$ number of enclosed fixed anyons, we introduce the notation
+In this way, exchange of particles $j$ and $k$ depend on $r$, i.e.\ $U_{γᵣ} = U_{γᵣ}(r)$. Since the dependence on $r$ is exclusively due to the $p$ number of encircled fixed anyons, we introduce the notation
 \begin{equation}
-  Uₚ ≔ U_γ(r), \quad r_{p-1} < r < rₚ,
+  Uₚ ≔ U_{γᵣ}(r), \quad r_{p-1} < r < rₚ,
 \end{equation}
 with $r₀ = 0$ and $r_{n-1} = ∞$. This is precisely the exchange braid introduced in \cref{def:exchange braid}. The exchange corresponding to $Uₚ$ is visualized in \cref{fig:Up exchange}.
 
@@ -274,7 +274,7 @@ with $r₀ = 0$ and $r_{n-1} = ∞$. This is precisely the exchange braid introd
     \node at (2.25, -0.2) {$r_2$};
     \node at (3.25, -0.2) {$r_3$};
   \end{tikzpicture}
-  \caption{Illustration of annuli separating $ℝ^2$ into regions with increasing number $p$ of contained anyons. A blob $\bullet$ denotes a fixed anyon. In each annulus, exchange of the two free anyons, i.e.\ as $φ$ increases from $0$ to $π$, a given number $p$ of fixed anyons will be enclosed.}
+  \caption{Illustration of annuli separating $ℝ^2$ into regions with increasing number $p$ of contained anyons. A blob $\bullet$ denotes a fixed anyon. In each annulus, exchange of the two free anyons, i.e.\ as $φ$ increases from $0$ to $π$, a given number $p$ of fixed anyons will be encircled.}
   \label{fig:annuli}
 \end{figure}
 
@@ -300,7 +300,7 @@ Abelian anyons have an exchange operator on the form $U₀ = e^{iαπ}$ for $0�
 \end{equation}
 In this case, the spectrum for $D²$ is given by
 \begin{equation}
-  σ(Dₚ²) = \{ \left( (2p+1)α + 2q \right)² : p,q ∈ ℤ \}
+  σ(D²) = \{ \left( (2p+1)α + 2q \right)² : q ∈ ℤ \}
 \end{equation}
 and thus \cref{thm:inf spec bound} yields the following result for $n → ∞$.
 
@@ -308,7 +308,8 @@ and thus \cref{thm:inf spec bound} yields the following result for $n → ∞$.
   Abelian anyons with exchange operator $U₀ = e^{iαπ}$ satisfy the lower bound
   \begin{equation}
     \begin{gathered}
-      ∫₀^π |∂_φu|² dφ ≥ \inf_{p,q ∈ ℤ} \left( (1+2p)α + 2q \right)² = \\
+      ∫₀^π |∂_φu|² dφ ≥ λ_{0,γᵣ}² = \\
+      % \inf_{p,q ∈ ℤ} \left( (1+2p)α + 2q \right)² = \\
       = \begin{cases}
         \frac{1}{ν^2}, & \text{if $α = \frac{μ}{ν}$ with $μ ∈ ℤ, ν ∈ ℕ₊$ relatively prime and $μ$ odd}, \\
         0, & \text{otherwise}
@@ -326,16 +327,16 @@ From this we have an immediate corollary for bosons ($α = 0$) and fermions ($α
   \begin{equation}
     U_p = e^{i(1+2p)απ} = 1
   \end{equation}
-  for all $p$, i.e.\ bosons do not ``see'' each other, and they have no statistical repulsion.
+  for all $p$, i.e.\ bosons do not ``see'' each other, and they have no statistical repulsion; $\inf σ(D²) = 0$.
 
   With $α = 1$, the exchange operator is
   \begin{equation}
     U_p = e^{i(2p+1)απ} = -1
   \end{equation}
-  for all $p$, i.e.\ fermions do not ``see'' the enclosed the enclosed $p$ fermions. However, that the particles in the exchange pair do ``see'' each other, in the sense that their wave function changes sign after they have been exchanged, as expected. This gives a non-zero statistical repulsion, $\inf σ(D²) = 1$.
+  for all $p$, i.e.\ fermions do not ``see'' the encircled $p$ fermions. However, the particles in the exchange pair do ``see'' each other, in the sense that their wave function changes sign after they have been exchanged, as expected. This gives a non-zero statistical repulsion, $\inf σ(D²) = λ_{0,γᵣ}² = 1$ for all $γᵣ$.
 \end{corollary}
 
-
+The effects of the statistical repulsion may have consequences for the wave function density, e.g. the wave function may be forced to vanish on $\bbDelta$; as particles get close to each other. As we have discussed, the density may be measured. Thus, understanding the effects of the statistical repulsion may help in the experimental search for anyons. It may also affect the free energy and the stability of anyonic many-body systems, see \cite{lundholm-solovej,many-anyon trial states,lundholm-solovejAHP}.
 
 
 
@@ -346,18 +347,18 @@ From this we have an immediate corollary for bosons ($α = 0$) and fermions ($α
 
 The exchange operator $Uₚ$ of non-abelian anyons cannot be characterized in a straight forward way as for abelian anyons, essentially due to $ρ(σⱼ)$ and $ρ(σ_{j+1})$ not commuting. Because of this, determining the spectrum $σ(Uₚ)$ and thus the lower bound
 \begin{equation}
-    ∫₀^π |∂_φu|² dφ ≥ \inf \, \{ λ² : e^{iλπ} ∈ σ(Uₚ) \},
+    ∫₀^π |∂_φu|² dφ ≥ λ_{0,γᵣ}² = \inf \, \{ λ² : e^{iλπ} ∈ σ(Uₚ) \},
 \end{equation}
 becomes problematic. In light of this, we must better understand how the non-abelian exchange operator $Uₚ$ arises. To do this, we introduce the general framework of abstract anyon models in the following chapter. First we make the following general observation.
 
 \begin{remark}
-  The abelian part of $U ∈ U(k)$, i.e.\ the $U(1)$ part in the factorization $U(k) = U(1) × SU(k)$, is given by $(\det U)^{1/k}$, since
+  The abelian part of $U ∈ U(k)$, i.e.\ the $U(1)$ part in the factorization $U(k) = U(1) × SU(k)$, is given by $e^{iθ}$ such that
   \begin{equation}
-    U = (\det U)^{1/k} \left( (\det U)^{-1/k} U \right)
+    U = e^{iθ} U₀
   \end{equation}
-  and
+  where $\det U₀ = 1$. Note the relation
   \begin{equation}
-    \det \left( (\det U)^{-1/k} U \right) = (\det U)^{-k/k} (\det U) = 1.
+    \det U = \det(e^{iθ}U_0) = e^{ikθ}.
   \end{equation}
-  Write the abelian part as $e^{iφ}$, then $U = e^{iφ}U'$ with $\det U' = 1$. Varying the abelian phase $φ$ can be seen as shifting the eigenvalues of $U$ uniformly along the complex unit circle. In particular, with $U'$ diagonalized as $U' = \operatorname{diag}(e^{iθ₁}, …, e^{iθₖ})$, changing the abelian phase according to $e^{iφ} ↦ e^{-iθⱼ}$ gives $U$ a zero eigenvalue. Thus, implying zero statistical repulsion. However, the abelian part can generally not be decoupled and controlled independently.
+  Varying the abelian phase $θ$ can be seen as shifting the eigenvalues of $U$ uniformly along the complex unit circle. In particular, with $U₀$ diagonalized as $U₀ = \operatorname{diag}(e^{iθ₁}, …, e^{iθₖ})$, changing the abelian phase according to $e^{iθ} ↦ e^{-iθⱼ}$ gives $U$ a zero eigenvalue. Thus, implying zero statistical repulsion. However, the abelian part can generally not be decoupled and controlled independently.
 \end{remark}
