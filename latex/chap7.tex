@@ -369,16 +369,16 @@ as shown in \cref{res:fibonacci qubit braiding}, where
 \begin{equation}
   R =
   \begin{pmatrix}
-    e^{-4πi/5} & 0 \\
-    0 & e^{3πi/5}
+    e^{4πi/5} & 0 \\
+    0 & e^{-3πi/5}
   \end{pmatrix}, \quad
-  B =
+  B = F^{-1} R F =
   \begin{pmatrix}
-    φ^{-1}e^{-4πi/5} & φe^{3πi/5} \\
-    φe^{3πi/5} & - φ^{-1}
+    φ^{-1} e^{-4πi/5} & φ ^{-1/2} e^{3πi/5} \\
+    φ^{-1/2} e^{3πi/5} & -φ^{-1}
   \end{pmatrix}
 \end{equation}
-and $φ = (1+\sqrt{5})/2$ is the golden ratio. Sometimes one works with the mirror image of this model by substituting $e^{-4πi/5} \mapsto e^{4πi/5}$ and $e^{3πi/5} \mapsto e^{-3πi/5}$, these two models are essentially the same. Thus, in this setup there are essentially four single-qubit gates, $R$ and $B$ and their inverses $R^{-1}$ and $B^{-1}$. It is clear that the fusion space $V_{τ^3}^τ$ has the two braid group generators $σ_1 = R$ and $σ_2 = B$, making it clear that one can work with either one of these fusion spaces for Fibonacci qubits. Furthermore, this shows that braiding the fourth Fibonacci anyon gives nothing new, it suffices to work with $σ_1$ and $σ_2$.
+and $φ = (1+\sqrt{5})/2$ is the golden ratio. Sometimes one works with the mirror image of this model by substituting $e^{4πi/5} \mapsto e^{-4πi/5}$ and $e^{-3πi/5} \mapsto e^{3πi/5}$, these two models are essentially the same. In this setup there are essentially four single-qubit gates, $R$ and $B$ and their inverses $R^{-1}$ and $B^{-1}$. It is clear that the fusion space $V_{τ^3}^τ$ has the two braid group generators $σ_1 = R$ and $σ_2 = B$, making it clear that one can work with either one of these fusion spaces for Fibonacci qubits. Furthermore, this shows that braiding the fourth Fibonacci anyon gives nothing new, it suffices to work with $σ_1$ and $σ_2$.
 
 As discussed in \cref{sec:gates and universality}, in order to be able to perform general quantum computation the set of quantum gates must be universal. The set of quantum gates $\{R,R^{-1},B,B^{-1}\}$ for a Fibonacci qubit is indeed universal \cite{nayak,wang book,freedman kitaev larsen wang}. Thus, braiding of Fibonacci anyons is rich enough to model single qubits. However, note that the universality result only implies that there are braids that approximate any element of $SU(2)$ to arbitrary non-zero error. To achieve higher precision, longer braids are needed. It is not known if there exists a braid that exactly represents the Pauli $x$-matrix up to a global phase \cite[sec.\ 1.5]{wang book}.
 
