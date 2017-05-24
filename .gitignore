@@ -4,5 +4,7 @@
 *.toc
 *.fdb_latexmk
 *.out
+*.snm
+*.nav
 *.synctex.gz
 _minted*
